@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStats : NetworkBehaviour
+public class Network_PlayerStats : NetworkBehaviour
 {
     [SerializeField] float maxHealth = 100;
 

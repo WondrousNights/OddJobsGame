@@ -74,7 +74,7 @@ public class NetworkEnemyShooting : NetworkBehaviour
             if (hit.transform.gameObject.tag == "Player")
             {
                 Debug.Log("Enemy just shot the player");
-                hit.transform.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
+                hit.transform.gameObject.GetComponent<Network_PlayerStats>().TakeDamage(damage);
                 StartCoroutine("MuzzleFlash", 0.1f);
                 
             }

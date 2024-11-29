@@ -5,15 +5,15 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputController : NetworkBehaviour
+public class Network_PlayerInputController : NetworkBehaviour
 {
-    private PlayerInput playerInput;
-    private PlayerInput.OnFootActions onFoot;
+    private PlayerInputActions playerInput;
+    private PlayerInputActions.OnFootActions onFoot;
 
-    private PlayerMovement playerMovement;
-    private PlayerLook look;
-    private PlayerGunHandler gunHandler;
-    private PlayerStats playerStats;
+    private Network_PlayerMovement playerMovement;
+    private Network_PlayerLook look;
+    private Network_PlayerGunHandler gunHandler;
+    private Network_PlayerStats playerStats;
 
     [SerializeField] Camera mycam;
     [SerializeField] GameObject myVisuals;
@@ -28,14 +28,14 @@ public class PlayerInputController : NetworkBehaviour
     {
 
 
-        playerInput = new PlayerInput();
+        playerInput = new PlayerInputActions();
         onFoot = playerInput.OnFoot;
         onFoot.Enable();
 
-        playerMovement = GetComponent<PlayerMovement>();
-        look = GetComponent<PlayerLook>();
-        gunHandler = GetComponent<PlayerGunHandler>();
-        playerStats = GetComponent<PlayerStats>();
+        playerMovement = GetComponent<Network_PlayerMovement>();
+        look = GetComponent<Network_PlayerLook>();
+        gunHandler = GetComponent<Network_PlayerGunHandler>();
+        playerStats = GetComponent<Network_PlayerStats>();
 
 
         myListener = GetComponent<AudioListener>();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerMovement : NetworkBehaviour
+public class Network_PlayerMovement : NetworkBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -13,12 +13,12 @@ public class PlayerMovement : NetworkBehaviour
 
     [SerializeField] NetworkAnimationController networkAnimationController;
 
-    PlayerInputController inputController;
+    Network_PlayerInputController inputController;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        inputController = GetComponent<PlayerInputController>();
+        inputController = GetComponent<Network_PlayerInputController>();
         //networkAnimationController = GetComponentInChildren<NetworkAnimationController>();
     }
 

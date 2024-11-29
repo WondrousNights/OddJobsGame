@@ -6,12 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Colony/Scenes/Lobby.unity
+    path: Assets/_OddJobs/Scenes/Lobby.unity
     guid: c87b7825de51c5641b4b3479654d4086
   - enabled: 1
-    path: Assets/_Colony/Scenes/Base.unity
+    path: Assets/_OddJobs/Scenes/Base.unity
     guid: 7286bf2237b182d4a86f7875890e1b01
   - enabled: 1
-    path: Assets/_Colony/Scenes/Zone.unity
+    path: Assets/_OddJobs/Scenes/Zone.unity
     guid: 82f475670050c2b4592b935b2b4e465c
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 14ebaa926e05d4242a662e8338f7603a,
+      type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 6f4435eefd53f1a4184190a3f38a56b2,
+      type: 3}
+  m_UseUCBPForAssetBundles: 0

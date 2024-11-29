@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerLook : NetworkBehaviour
+public class Network_PlayerLook : NetworkBehaviour
 {
     [SerializeField] Camera cam;
 
@@ -12,11 +12,11 @@ public class PlayerLook : NetworkBehaviour
     public float xSensitivity = 30f;
     public float ySensitivity = 30f;
 
-    PlayerInputController inputController;
+    Network_PlayerInputController inputController;
 
     private void Start()
     {
-        inputController = GetComponent<PlayerInputController>();
+        inputController = GetComponent<Network_PlayerInputController>();
     }
     public void ProcessLook(Vector2 input)
     {
