@@ -12,10 +12,14 @@ public class Local_PlayerInputController : MonoBehaviour
     private Local_PlayerLook look;
     private Local_PlayerGunHandler gunHandler;
     private Local_PlayerStats playerStats;
+    
+    [SerializeField] RagdollEnabler ragdollEnabler;
 
     [SerializeField] Camera mycam;
+    [SerializeField] Camera thirdPersonCam;
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject myCanvas;
+    [SerializeField] Transform hipPosition;
 
     AudioListener myListener;
     public bool hasSpawned = false;
@@ -29,11 +33,16 @@ public class Local_PlayerInputController : MonoBehaviour
     Vector2 moveInput;
     Vector2 lookInput;
 
+    bool isRagdoll = false;
+    
+
     //Player Mask
     [SerializeField] LayerMask player1Mask;
     [SerializeField]LayerMask player2Mask;
     [SerializeField]LayerMask player3Mask;
     [SerializeField]LayerMask player4Mask;
+
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -125,11 +134,15 @@ public class Local_PlayerInputController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isRagdoll)
+        {
+            moveInput = new Vector2(0, 0);
+        }
         playerMovement.ProcessMove(moveInput);
     }
     void LateUpdate()
     {
-        if (!playerStats.isDead)
+        if (!playerStats.isDead || !isRagdoll)
         {
             look.ProcessLook(lookInput);
         }
@@ -137,16 +150,21 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public void ProcessMove(CallbackContext context)
     {
+        if(isRagdoll) return;
+        
+         
         moveInput = context.ReadValue<Vector2>();
         playerMovement.ProcessAnimations(context.ReadValue<Vector2>());
     }
     public void ProcessLook(CallbackContext context)
     {
+        if(isRagdoll) return;
         lookInput = context.ReadValue<Vector2>();
     }
 
     public void ProcessJump(CallbackContext context)
     {
+        if(isRagdoll) return;
         if(context.performed)
         {
             playerMovement.Jump();
@@ -156,6 +174,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public void ProcessShoot(CallbackContext context)
     {
+        if(isRagdoll) return;
         if(context.performed)
         {
             gunHandler.Shoot();
@@ -165,11 +184,45 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public void ProcessReload(CallbackContext context)
     {
+        if(isRagdoll) return;
         if(context.performed)
         {
             gunHandler.Reload();
         }
         
+    }
+
+    public void ProcessRagdoll(CallbackContext context)
+    {
+        if(isRagdoll) return;
+
+       
+        if(context.performed)
+        {
+             Debug.Log("Ragdoll!!");
+            StartCoroutine("ProcessRagdollAnimation", 3f);
+        }
+    }
+
+
+    IEnumerator ProcessRagdollAnimation(float duration)
+    {
+    isRagdoll = true;
+       ragdollEnabler.EnableRagdoll();
+       thirdPersonCam.enabled = true;
+       mycam.enabled = false;
+
+       Debug.Log("Ragdoll enabled");
+       
+       yield return new WaitForSeconds(duration);
+
+     transform.position = hipPosition.position;
+       ragdollEnabler.EnableAnimator();
+       thirdPersonCam.enabled = false;
+       mycam.enabled = true;
+       isRagdoll = false;
+       
+
     }
 
 
