@@ -12,11 +12,12 @@ public class Local_PlayerInputController : MonoBehaviour
     private Local_PlayerLook look;
     private Local_PlayerGunHandler gunHandler;
     private Local_PlayerStats playerStats;
+    private Local_PlayerInteractionManager playerInteractionManager;
     
     [SerializeField] RagdollEnabler ragdollEnabler;
     [SerializeField] WeaponSway weaponSway;
 
-    [SerializeField] Camera mycam;
+    public Camera mycam;
     [SerializeField] Camera thirdPersonCam;
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject myCanvas;
@@ -35,6 +36,7 @@ public class Local_PlayerInputController : MonoBehaviour
     Vector2 lookInput;
 
     bool isRagdoll = false;
+    bool isInteracting = false;
     
 
     //Player Mask
@@ -163,6 +165,7 @@ public class Local_PlayerInputController : MonoBehaviour
         }
     }
 
+
     public void ProcessMove(CallbackContext context)
     {
         if(isRagdoll) return;
@@ -218,6 +221,8 @@ public class Local_PlayerInputController : MonoBehaviour
             StartCoroutine("ProcessRagdollAnimation", 3f);
         }
     }
+
+    
 
 
     IEnumerator ProcessRagdollAnimation(float duration)

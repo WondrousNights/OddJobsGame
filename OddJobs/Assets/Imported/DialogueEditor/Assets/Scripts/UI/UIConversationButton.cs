@@ -89,24 +89,24 @@ namespace DialogueEditor
         //--------------------------------------
         // Input Events
         //--------------------------------------
-
+        
         public void OnHover(bool hovering)
         {
-            if (!ConversationManager.Instance.AllowMouseInteraction) { return; }
+            //if (!ConversationManager.Instance.AllowMouseInteraction) { return; }
 
             if (hovering)
             {
-                ConversationManager.Instance.AlertHover(this);
+                //ConversationManager.Instance.AlertHover(this);
             }
             else
             {
-                ConversationManager.Instance.AlertHover(null);
+                //ConversationManager.Instance.AlertHover(null);
             }
         }
 
         public void OnClick()
         {
-            if (!ConversationManager.Instance.AllowMouseInteraction) { return; }
+           // if (!ConversationManager.Instance.AllowMouseInteraction) { return; }
 
             DoClickBehaviour();
         }
@@ -213,15 +213,15 @@ namespace DialogueEditor
             switch (m_buttonType)
             {
                 case eButtonType.Speech:
-                    ConversationManager.Instance.SpeechSelected(m_node as SpeechNode);
+                    //ConversationManager.Instance.SpeechSelected(m_node as SpeechNode);
                     break;
 
                 case eButtonType.Option:
-                    ConversationManager.Instance.OptionSelected(m_node as OptionNode);
+                    //ConversationManager.Instance.OptionSelected(m_node as OptionNode);
                     break;
 
                 case eButtonType.End:
-                    ConversationManager.Instance.EndButtonSelected();
+                    //ConversationManager.Instance.EndButtonSelected();
                     break;
             }
         }

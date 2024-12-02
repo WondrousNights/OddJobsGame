@@ -10,7 +10,6 @@ public class WeaponSway : MonoBehaviour
 
     public void WeaponSwayAnimation(Vector2 lookInput)
     {
-        Debug.Log("I am swaying" + lookInput.x + lookInput.y);
         float mouseX = lookInput.x * multiplier;
         float mouseY = lookInput.y * multiplier;
 

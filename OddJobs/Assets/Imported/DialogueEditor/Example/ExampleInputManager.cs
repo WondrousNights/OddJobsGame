@@ -10,6 +10,7 @@ namespace DialogueEditor
         public KeyCode m_DownKey;
         public KeyCode m_SelectKey;
 
+        /*
         private void Update()
         {
             if (ConversationManager.Instance != null)
@@ -30,5 +31,6 @@ namespace DialogueEditor
                     ConversationManager.Instance.PressSelectedOption();
             }
         }
+        */
     }
 }

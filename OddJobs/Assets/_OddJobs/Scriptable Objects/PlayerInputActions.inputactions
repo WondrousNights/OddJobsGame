@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "d6d8b154-39c3-401c-89a3-69d36f6e81a4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -208,10 +217,21 @@
                     "name": "",
                     "id": "382f3ebd-b6c2-44bd-858c-cfa534904b56",
                     "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": ";Controller",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c6265d0-1b16-4bf9-83d4-b2a3f99178bd",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "Ragdoll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -223,6 +243,28 @@
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Ragdoll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "603e8355-937b-413c-884e-5e6db2546247",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ea4b0cf-9f19-4446-b9f6-b173135aa898",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
