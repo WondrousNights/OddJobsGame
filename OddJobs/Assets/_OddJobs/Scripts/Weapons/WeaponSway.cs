@@ -8,13 +8,12 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float smooth;
     [SerializeField] private float multiplier;
 
-    private void Update()
+    public void WeaponSwayAnimation(Vector2 lookInput)
     {
-        // get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier;
+        Debug.Log("I am swaying" + lookInput.x + lookInput.y);
+        float mouseX = lookInput.x * multiplier;
+        float mouseY = lookInput.y * multiplier;
 
-        // calculate target rotation
         Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
         Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
 

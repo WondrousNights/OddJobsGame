@@ -14,6 +14,7 @@ public class Local_PlayerInputController : MonoBehaviour
     private Local_PlayerStats playerStats;
     
     [SerializeField] RagdollEnabler ragdollEnabler;
+    [SerializeField] WeaponSway weaponSway;
 
     [SerializeField] Camera mycam;
     [SerializeField] Camera thirdPersonCam;
@@ -105,9 +106,22 @@ public class Local_PlayerInputController : MonoBehaviour
             foreach (Transform child in myVisuals.transform)
             {
                 child.gameObject.layer = 11;
+
+                foreach (Transform nestedChild in child.transform)
+                {
+                    nestedChild.gameObject.layer = 11;
+
+                    foreach(Transform muzzleFlash in nestedChild.transform)
+                    {
+                        muzzleFlash.gameObject.layer = 11;
+                    }
+                }
             }
 
-            GetComponentInChildren<WeaponSway>().gameObject.layer = 11;
+            foreach (Transform child in gunHandler.currentGun.transform)
+            {
+                child.gameObject.layer = 15;
+            }
             mycam.cullingMask = player2Mask;
         }
         if(playerInput.playerIndex == 2)
@@ -145,6 +159,7 @@ public class Local_PlayerInputController : MonoBehaviour
         if (!playerStats.isDead || !isRagdoll)
         {
             look.ProcessLook(lookInput);
+            weaponSway.WeaponSwayAnimation(lookInput);
         }
     }
 

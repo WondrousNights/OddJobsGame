@@ -7949,6 +7949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollEnabler: {fileID: 3939830325332375898}
+  weaponSway: {fileID: 2067224874714771139}
   mycam: {fileID: 9094701647203173809}
   thirdPersonCam: {fileID: 2614149727011848809}
   myVisuals: {fileID: 5710266452690481227}
@@ -7981,7 +7982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   gravity: -9.8
-  jumpHeight: 3
+  jumpHeight: 1
   localAnimationController: {fileID: 8663306857005548584}
 --- !u!114 &2039499361602112838
 MonoBehaviour:
@@ -7996,8 +7997,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 9094701647203173809}
-  xSensitivity: 30
-  ySensitivity: 30
+  xSensitivity: 45
+  ySensitivity: 45
 --- !u!114 &3440133442227482351
 MonoBehaviour:
   m_ObjectHideFlags: 0
