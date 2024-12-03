@@ -8296,6 +8296,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d6d8b154-39c3-401c-89a3-69d36f6e81a4
     m_ActionName: 'OnFoot/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3857600603138177893}
+        m_TargetAssemblyTypeName: Local_PlayerInteractionManager, Assembly-CSharp
+        m_MethodName: ProcessNextOption
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ec792995-944c-4f6e-88da-d61a6089b2b5
+    m_ActionName: 'OnFoot/UI_Next[/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3857600603138177893}
+        m_TargetAssemblyTypeName: Local_PlayerInteractionManager, Assembly-CSharp
+        m_MethodName: ProcessPreviousOption
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5952a2fa-2351-424d-80a9-f46c826be652
+    m_ActionName: 'OnFoot/UI_Previous[/Keyboard/leftArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3857600603138177893}
+        m_TargetAssemblyTypeName: Local_PlayerInteractionManager, Assembly-CSharp
+        m_MethodName: ProcessPressOption
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 81d19976-75d6-4ba9-9260-a92252918456
+    m_ActionName: 'OnFoot/UI_Select[/Keyboard/downArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: OnFoot

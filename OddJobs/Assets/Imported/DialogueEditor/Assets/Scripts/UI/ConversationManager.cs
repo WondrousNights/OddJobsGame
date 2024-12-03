@@ -25,8 +25,8 @@ namespace DialogueEditor
         public delegate void ConversationStartEvent();
         public delegate void ConversationEndEvent();
 
-        public static ConversationStartEvent OnConversationStarted;
-        public static ConversationEndEvent OnConversationEnded;
+        public ConversationStartEvent OnConversationStarted;
+        public ConversationEndEvent OnConversationEnded;
 
         // User-Facing options
         // Drawn by custom inspector
@@ -743,6 +743,7 @@ namespace DialogueEditor
         private UIConversationButton CreateButton()
         {
             UIConversationButton button = GameObject.Instantiate(ButtonPrefab, OptionsPanel);
+            button.myConversationManager = this;
             m_uiOptions.Add(button);
             return button;
         }

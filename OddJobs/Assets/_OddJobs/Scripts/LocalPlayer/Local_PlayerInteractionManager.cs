@@ -10,6 +10,9 @@ public class Local_PlayerInteractionManager : MonoBehaviour
     [SerializeField] LayerMask interactionLayerMask;
 
     bool interact;
+    bool nextOption = false;
+    bool previousOption = false;
+    bool pressOption = false;
 
     Camera cam;
     private Local_PlayerUI playerUI;
@@ -34,11 +37,36 @@ public class Local_PlayerInteractionManager : MonoBehaviour
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                 playerUI.UpdateText(hitInfo.collider.GetComponent<Interactable>().promptMessage);
 
-                if(interact == true)
+
+                //UI Interactions
+                if(interactable.isUI)
                 {
+                    NPCUI_Interactable uiInteractable = interactable.GetComponent<NPCUI_Interactable>();
+                    if(nextOption == true)
+                    {
+                        uiInteractable.SelectNextOption();
+                        nextOption = false;
+                    }
+                    if(previousOption == true)
+                    {
+                        uiInteractable.SelectPreviousOption();
+                        previousOption = false;
+                    }
+                    if(pressOption == true)
+                    {
+                        uiInteractable.PressSelectedOption();
+                        pressOption = false;
+                    }
+                }
+                else
+                {
+                    if(interact == true)
+                    {   
                     interactable.BaseInteract();
                     interact = false;
+                    } 
                 }
+
             }
         }
     }
@@ -49,6 +77,32 @@ public class Local_PlayerInteractionManager : MonoBehaviour
         if(context.performed)
         {
             interact = true;
+        }
+    }
+
+    //UI Interactions
+
+    public void ProcessNextOption(CallbackContext context)
+    {
+        if(context.performed)
+        {
+            nextOption = true;
+        }
+    }
+
+    public void ProcessPreviousOption(CallbackContext context)
+    {
+        if(context.performed)
+        {
+            previousOption = true;
+        }
+    }
+
+    public void ProcessPressOption(CallbackContext context)
+    {
+        if(context.performed)
+        {
+            pressOption = true;
         }
     }
 }
