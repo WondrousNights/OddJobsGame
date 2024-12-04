@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Local_EnemyDetection : MonoBehaviour {
-    private Transform target;
+public class TargetDetector : MonoBehaviour {
+    public GameObject currentTarget;
 
-    public float distanceToSpot;
+    [SerializeField] float distanceToSpot;
 
-    public LayerMask playerMask;
+    [SerializeField] LayerMask playerMask;
 
 
     void Update()
@@ -23,14 +23,9 @@ public class Local_EnemyDetection : MonoBehaviour {
 
             if (closesetCollider != null)
             {
-                target = closesetCollider.gameObject.transform;
+                currentTarget = closesetCollider.gameObject;
             }
         }
-    }
-
-    public Transform GetCurrentTarget()
-    {
-        return target;
     }
 
     Collider GetClosestPlayer(Vector3 myPos, Collider[] colliders)
@@ -51,4 +46,4 @@ public class Local_EnemyDetection : MonoBehaviour {
         Debug.Log(closestCollider.gameObject.name);
         return closestCollider;
     }
-    }
+}

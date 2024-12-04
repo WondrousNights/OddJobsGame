@@ -1593,7 +1593,7 @@ MonoBehaviour:
   m_BlackboardVariableOverridesList:
   - rid: 1428897912616911215
   - rid: 1428897912616911216
-  - rid: 1428897913661293058
+  - rid: 1428897917242704103
   NetcodeRunOnlyOnOwner: 0
   references:
     version: 2
@@ -1619,15 +1619,15 @@ MonoBehaviour:
         - {fileID: 1350267477}
         - {fileID: 943855870}
         - {fileID: 1545551292}
-    - rid: 1428897913661293058
-      type: {class: 'BlackboardVariable`1[[Local_EnemyDetection, Assembly-CSharp]]',
-        ns: Unity.Behavior, asm: Unity.Behavior}
+    - rid: 1428897917242704103
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 14504329061411190027
-          m_Value1: 482584122642404130
-        Name: Enemy Detector
-        m_Value: {fileID: 7504665091273012139}
+          m_Value0: 9182008862762511807
+          m_Value1: 412730941256385874
+        Name: Melee Range
+        m_Value: 1.06
 --- !u!114 &7504665091273012139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1640,6 +1640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bfc3aa6f0d3b64d87d125298f66e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
   distanceToSpot: 10.22
   playerMask:
     serializedVersion: 2
