@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -15,11 +16,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     [SerializeField] GameObject bulletHoleVisual;
 
 
-    AudioSource audioSource;
+    MultiAudioSource audioSource;
     Network_PlayerStats playerStats;
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<MultiAudioSource>();
         playerStats = GetComponent<Network_PlayerStats>();
     }
 
@@ -44,8 +45,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
            
             Destroy(holeVisual, 1f);
             GunVisuals();
-            audioSource.clip = currentGun.shotsfx;
+            audioSource.AudioObject = currentGun.shotsfx;
             audioSource.Play();
+
             ShootServerRpc();
 
         }
@@ -90,7 +92,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if (IsOwner) return;
 
         StartCoroutine("MuzzleFlash", 0.1f);
-        audioSource.clip = currentGun.shotsfx;
+        audioSource.AudioObject = currentGun.shotsfx;
         audioSource.Play();
     }
 

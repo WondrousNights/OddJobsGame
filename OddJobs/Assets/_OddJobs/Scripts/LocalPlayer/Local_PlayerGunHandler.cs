@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -15,11 +16,11 @@ public class Local_PlayerGunHandler : MonoBehaviour
     [SerializeField] GameObject bulletHoleVisual;
 
 
-    AudioSource audioSource;
+    MultiAudioSource audioSource;
     Local_PlayerStats playerStats;
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<MultiAudioSource>();
         playerStats = GetComponent<Local_PlayerStats>();
     }
 
@@ -44,9 +45,8 @@ public class Local_PlayerGunHandler : MonoBehaviour
            
             Destroy(holeVisual, 1f);
             GunVisuals();
-            
-            audioSource.clip = currentGun.shotsfx;
-            audioSource.Play();
+
+            MultiAudioManager.PlayAudioObject(currentGun.shotsfx, transform.position);
 
         }
     }

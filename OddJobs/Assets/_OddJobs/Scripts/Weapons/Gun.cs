@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AlmenaraGames;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class Gun : MonoBehaviour
     [SerializeField] int maxAmmo;
     public int currentAmmo;
 
-    public AudioClip shotsfx;
+    public AudioObject shotsfx;
 
     float currentRecoil = 0;
     [SerializeField] float maxRecoil;
