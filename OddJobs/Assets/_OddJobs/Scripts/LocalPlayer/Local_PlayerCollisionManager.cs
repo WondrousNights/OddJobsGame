@@ -4,10 +4,11 @@ public class Local_PlayerCollisionManager : MonoBehaviour
 {
 
     Local_PlayerInputController playerInputController;
+    Local_PlayerHealthManager playerHealthManager;
 
     void Start()
     {
-        playerInputController = GetComponent<Local_PlayerInputController>();
+        playerHealthManager = GetComponent<Local_PlayerHealthManager>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -19,7 +20,17 @@ public class Local_PlayerCollisionManager : MonoBehaviour
 
             if(weapon.isAttacking)
             {
-                playerInputController.TakeDamage();
+
+                //Ragdoll physics hit information
+                Vector3 forceDirection = this.transform.position - weapon.transform.position;
+                forceDirection.y = 1;
+                forceDirection.Normalize();
+
+                Vector3 collisionPoint = other.transform.position;
+
+                Vector3 force = weapon.ragdollForceMagnitude * forceDirection;
+
+                playerHealthManager.TakeDamage(force, collisionPoint);
             }
         }
     }

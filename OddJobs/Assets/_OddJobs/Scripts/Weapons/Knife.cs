@@ -7,7 +7,7 @@ public class Knife : Weapon
     protected override void Attack()
     {
         Debug.Log("Attacking!");
-        StartCoroutine("ProccessAttackBool", 0.1f);
+        StartCoroutine("ProccessAttackBool", 1f);
     }
 
 

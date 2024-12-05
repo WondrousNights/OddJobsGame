@@ -15,13 +15,13 @@ public class Local_PlayerInputController : MonoBehaviour
     private Local_PlayerGunHandler gunHandler;
     private Local_PlayerStats playerStats;
     private Local_PlayerInteractionManager playerInteractionManager;
+    private Local_PlayerHealthManager playerHealthManager;
     
-    [SerializeField] RagdollEnabler ragdollEnabler;
     [SerializeField] WeaponSway weaponSway;
 
     public Camera mycam;
-    [SerializeField] Transform firstPersonCamPos;
-    [SerializeField] Transform thirdPersonCamPos;
+    public Transform firstPersonCamPos;
+    public Transform thirdPersonCamPos;
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject myCanvas;
     [SerializeField] Transform hipPosition;
@@ -38,7 +38,6 @@ public class Local_PlayerInputController : MonoBehaviour
     UnityEngine.Vector2 moveInput;
     UnityEngine.Vector2 lookInput;
 
-    bool isRagdoll = false;
     bool isInteracting = false;
     
 
@@ -48,7 +47,7 @@ public class Local_PlayerInputController : MonoBehaviour
     [SerializeField]LayerMask player3Mask;
     [SerializeField]LayerMask player4Mask;
 
-    [SerializeField] LayerMask nohudLayerMask;
+    public LayerMask nohudLayerMask;
 
 
     private void Awake()
@@ -58,6 +57,7 @@ public class Local_PlayerInputController : MonoBehaviour
         look = GetComponent<Local_PlayerLook>();
         gunHandler = GetComponent<Local_PlayerGunHandler>();
         playerStats = GetComponent<Local_PlayerStats>();
+        playerHealthManager = GetComponent<Local_PlayerHealthManager>();
 
 
         myListener = GetComponent<AudioListener>();
@@ -155,7 +155,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(isRagdoll)
+        if(playerHealthManager.isRagdoll)
         {
             moveInput = new UnityEngine.Vector2(0, 0);
         }
@@ -163,14 +163,14 @@ public class Local_PlayerInputController : MonoBehaviour
     }
     void LateUpdate()
     {
-        if (!playerStats.isDead || !isRagdoll)
+        if (!playerStats.isDead || !playerHealthManager.isRagdoll)
         {
             look.ProcessLook(lookInput);
             weaponSway.WeaponSwayAnimation(lookInput);
         }
     }
 
-    void ResetSetCameraLayerMask()
+    public void ResetSetCameraLayerMask()
     {
          if(playerInput.playerIndex == 0)
          {
@@ -193,7 +193,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public void ProcessMove(CallbackContext context)
     {
-        if(isRagdoll) return;
+        if(playerHealthManager.isRagdoll) return;
         
          
         moveInput = context.ReadValue<UnityEngine.Vector2>();
@@ -201,13 +201,13 @@ public class Local_PlayerInputController : MonoBehaviour
     }
     public void ProcessLook(CallbackContext context)
     {
-        if(isRagdoll) return;
+        if(playerHealthManager.isRagdoll) return;
         lookInput = context.ReadValue<UnityEngine.Vector2>();
     }
 
     public void ProcessJump(CallbackContext context)
     {
-        if(isRagdoll) return;
+        if(playerHealthManager.isRagdoll) return;
         if(context.performed)
         {
             playerMovement.Jump();
@@ -217,7 +217,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public void ProcessShoot(CallbackContext context)
     {
-        if(isRagdoll) return;
+        if(playerHealthManager.isRagdoll) return;
         if(context.performed)
         {
             gunHandler.Shoot();
@@ -227,7 +227,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public void ProcessReload(CallbackContext context)
     {
-        if(isRagdoll) return;
+        if(playerHealthManager.isRagdoll) return;
         if(context.performed)
         {
             gunHandler.Reload();
@@ -235,55 +235,23 @@ public class Local_PlayerInputController : MonoBehaviour
         
     }
 
+    
     public void ProcessRagdoll(CallbackContext context)
     {
-        if(isRagdoll) return;
+        if(playerHealthManager.isRagdoll) return;
 
        
         if(context.performed)
         {
-            Debug.Log("Ragdoll!!");
-            StartCoroutine("ProcessRagdollAnimation", 2f);
+            playerHealthManager.TakeDamage(transform.up, this.transform.position);
         }    
-    }
-
- 
-
-    
-
-
-    IEnumerator ProcessRagdollAnimation(float duration)
-    {
-       isRagdoll = true;
-       ragdollEnabler.EnableRagdoll();
-
-       mycam.cullingMask = nohudLayerMask;
-        mycam.transform.position = thirdPersonCamPos.transform.position;
-       Debug.Log("Ragdoll enabled");
-       
-       
-       yield return new WaitForSeconds(duration);
-        
-        ragdollEnabler.EnableAnimator();
-       transform.position = hipPosition.position;
-       mycam.transform.position = firstPersonCamPos.transform.position;
-     
-       isRagdoll = false;
-       ResetSetCameraLayerMask();
-       
-
     }
 
 
 //Old Death System - Need to rework
 
    //Just a test
-    public void TakeDamage()
-    {
-        Debug.Log("Ragdoll!!");
-        StartCoroutine("ProcessRagdollAnimation", 3f);
-    }
-    private void HandlePlayerDeathEvent(object sender, EventArgs e)
+        private void HandlePlayerDeathEvent(object sender, EventArgs e)
     {
  
             myVisuals.SetActive(false);
