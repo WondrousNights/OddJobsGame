@@ -3136,7 +3136,7 @@ namespace AlmenaraGames{
 
             #if UNITY_EDITOR
 
-            DrawAudioObjectName((AudioObject!=null?AudioObject.name:"NONE") + (clamped?"\n(CLAMPED)":(Mute?"\n(MUTED)":(LocalPause ? "\n(PAUSED)":(smoothOcclude>0.01f && OccludeSound?"\n(OCCLUDED)":"")))),(Application.isPlaying? emitterTransform.position:transform.position)-Vector3.up*0.35f,new Color(0.7f,0.7f,0.7f,1f));
+            //DrawAudioObjectName((AudioObject!=null?AudioObject.name:"NONE") + (clamped?"\n(CLAMPED)":(Mute?"\n(MUTED)":(LocalPause ? "\n(PAUSED)":(smoothOcclude>0.01f && OccludeSound?"\n(OCCLUDED)":"")))),(Application.isPlaying? emitterTransform.position:transform.position)-Vector3.up*0.35f,new Color(0.7f,0.7f,0.7f,1f));
 
             if (Application.isPlaying && usingShape)
             {
