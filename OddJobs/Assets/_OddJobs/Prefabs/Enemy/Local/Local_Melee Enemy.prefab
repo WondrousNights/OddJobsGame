@@ -4196,6 +4196,10 @@ GameObject:
   - component: {fileID: 1356971176698502442}
   - component: {fileID: 4061429453098894910}
   - component: {fileID: 960774151176040461}
+  - component: {fileID: 5763590893687788180}
+  - component: {fileID: 4511608764601946218}
+  - component: {fileID: 4605157207659888655}
+  - component: {fileID: 1443037762741567961}
   m_Layer: 0
   m_Name: Local_Melee Enemy
   m_TagString: Untagged
@@ -4211,7 +4215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8462979640210121836}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9992739, z: -0, w: 0.03810218}
+  m_LocalRotation: {x: 0, y: -0.9992739, z: 0, w: 0.03810014}
   m_LocalPosition: {x: 15.871321, y: 0, z: 33.511143}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4559,7 +4563,7 @@ Animator:
   m_GameObject: {fileID: 8462979640210121836}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1b8f3f34252d9ee44823ab05504b31a8, type: 3}
-  m_Controller: {fileID: 9100000, guid: 73dfba487f63297498cf4b2ae53f6fb5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 65568eeec28435848af8e3147d769a62, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4587,6 +4591,120 @@ MonoBehaviour:
   - m_Rig: {fileID: 919284388273659624}
     m_Active: 1
   m_Effectors: []
+--- !u!195 &5763590893687788180
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462979640210121836}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 6.29
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &4511608764601946218
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462979640210121836}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.29
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.98, z: 0}
+--- !u!114 &4605157207659888655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462979640210121836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: -7088340829222149653, guid: e016d57c5ec52b449ba1937195badf5d,
+    type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 1428897912616911215
+  - rid: 1428897912616911216
+  - rid: 1428897917242704103
+  NetcodeRunOnlyOnOwner: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1428897912616911215
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 8462979640210121836}
+    - rid: 1428897912616911216
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]',
+        ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15615743925735312069
+          m_Value1: 9877565075100365989
+        Name: Waypoints
+        m_Value:
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
+    - rid: 1428897917242704103
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9182008862762511807
+          m_Value1: 412730941256385874
+        Name: Melee Range
+        m_Value: 1.06
+--- !u!114 &1443037762741567961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462979640210121836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bfc3aa6f0d3b64d87d125298f66e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
+  distanceToSpot: 10.22
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 15368
 --- !u!1 &8468583281213229799
 GameObject:
   m_ObjectHideFlags: 0

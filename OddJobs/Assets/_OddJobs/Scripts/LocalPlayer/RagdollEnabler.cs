@@ -71,7 +71,7 @@ public class RagdollEnabler : MonoBehaviour
             rigidbody.useGravity = false;
         }
     }
-
+    
 
     
 }

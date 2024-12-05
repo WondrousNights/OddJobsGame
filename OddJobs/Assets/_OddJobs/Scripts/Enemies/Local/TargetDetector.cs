@@ -11,6 +11,16 @@ public class TargetDetector : MonoBehaviour {
     void Update()
     {
         CheckForTarget();
+
+
+        if(currentTarget != null)
+        {
+            if(Vector3.Distance(this.transform.position, currentTarget.transform.position) < distanceToSpot)
+            {
+                currentTarget = null;
+            }
+        }
+        
     }
     
     public void CheckForTarget()
