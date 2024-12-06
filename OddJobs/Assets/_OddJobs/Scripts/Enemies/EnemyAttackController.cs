@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyAttackController : MonoBehaviour
 {
 
-    [SerializeField] Weapon weapon;
+    [SerializeField] EnemyWeapon weapon;
 
     public void AttackEvent()
     {

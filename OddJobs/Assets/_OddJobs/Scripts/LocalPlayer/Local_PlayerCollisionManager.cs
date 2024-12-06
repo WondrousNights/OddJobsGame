@@ -16,7 +16,7 @@ public class Local_PlayerCollisionManager : MonoBehaviour
         // Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "MeleeWeapon")
         {
-            Weapon weapon = other.gameObject.GetComponent<Weapon>();
+            EnemyWeapon weapon = other.gameObject.GetComponent<EnemyWeapon>();
 
             if(weapon.isAttacking)
             {

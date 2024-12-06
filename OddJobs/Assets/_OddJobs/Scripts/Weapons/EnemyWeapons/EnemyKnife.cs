@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Knife : Weapon
+public class EnemyKnife : EnemyWeapon
 {
     
     protected override void Attack()
