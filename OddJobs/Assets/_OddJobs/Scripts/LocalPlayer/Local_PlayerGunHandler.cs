@@ -9,7 +9,7 @@ public class Local_PlayerGunHandler : MonoBehaviour
 
     [SerializeField] int hitForce = 1000;
     [SerializeField] bool autoReload = true;
-    [SerializeField] float reloadDelay = 0.5f;
+    [SerializeField] float autoReloadDelay = 0.4f;
 
     [SerializeField] Camera cam;
     public Gun currentGun;
@@ -64,7 +64,7 @@ public class Local_PlayerGunHandler : MonoBehaviour
         }
 
         if (autoReload && currentGun.currentAmmo <= 0) {
-            Invoke("Reload", reloadDelay);
+            Invoke("Reload", autoReloadDelay);
         }
     }
 

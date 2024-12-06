@@ -53,7 +53,7 @@ public class TargetDetector : MonoBehaviour {
                 closestCollider = obj;
             }
         }
-        Debug.Log(closestCollider.gameObject.name);
+        // Debug.Log(closestCollider.gameObject.name);
         return closestCollider;
     }
 }
