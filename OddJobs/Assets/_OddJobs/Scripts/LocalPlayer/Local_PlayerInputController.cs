@@ -40,7 +40,7 @@ public class Local_PlayerInputController : MonoBehaviour
     UnityEngine.Vector2 lookInput;
 
     bool isInteracting = false;
-    
+    bool isShooting = false;
 
     //Player Mask
     [SerializeField] LayerMask player1Mask;
@@ -105,6 +105,12 @@ public class Local_PlayerInputController : MonoBehaviour
             look.ProcessLook(lookInput);
             weaponSway.WeaponSwayAnimation(lookInput);
         }
+
+        if(isShooting) 
+        {
+            gunHandler.ShootCurrentGun();
+        }
+         
     }
 
     public void ResetSetCameraLayerMask()
@@ -157,7 +163,13 @@ public class Local_PlayerInputController : MonoBehaviour
         if(playerHealthManager.isRagdoll) return;
         if(context.performed)
         {
-            gunHandler.ShootCurrentGun();
+            isShooting = true;
+           
+        }
+
+        if(context.canceled)
+        {
+            isShooting = false;
         }
         
     }

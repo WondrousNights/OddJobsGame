@@ -4,18 +4,42 @@ using UnityEngine;
 public class MuzzleFlash : MonoBehaviour
 {
     [SerializeField] GameObject muzzleFlash;
+
+    bool muzzleFlashShowing = false;
+
+    float timeToShow = 0.1f;
+    float count = 0;
     public void Play()
     {
-        StartCoroutine("MuzzleFlashTimer", 0.1f);
+        muzzleFlashShowing = true;
+        count = 0;
     }
 
-    IEnumerator MuzzleFlashTimer(float duration)
+
+    void Update()
     {
-        muzzleFlash.SetActive(true);
+        count += Time.deltaTime;
+        if(count <= timeToShow)
+        {
+            muzzleFlashShowing = true;
+        }
+        else{
+            muzzleFlashShowing = false;
+        }
+        
 
-        yield return new WaitForSeconds(duration);
+        if(muzzleFlashShowing)
+        {
+            muzzleFlash.SetActive(true);
+        }
+        else
+        {
+            muzzleFlash.SetActive(false);
+        }
 
-        muzzleFlash.SetActive(false);
+
     }
 
+    
+    
 }
