@@ -137,7 +137,7 @@ namespace AlmenaraGames{
 					GameObject _MultiAudioManager = new GameObject ("MultiAudioManager");
 					_MultiAudioManager.AddComponent<MultiAudioManager> ();
 
-					foreach (var item in GameObject.FindObjectsOfType (typeof(AudioListener))) {
+					foreach (var item in GameObject.FindObjectsOfType(typeof(AudioListener))) {
 						Destroy (item as AudioListener);
 					}
 
