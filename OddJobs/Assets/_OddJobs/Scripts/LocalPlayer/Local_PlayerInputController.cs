@@ -159,6 +159,10 @@ public class Local_PlayerInputController : MonoBehaviour
         {
             moveInput = new UnityEngine.Vector2(0, 0);
         }
+        
+    }
+    void LateUpdate()
+    {
         playerMovement.ProcessMove(moveInput);
     }
     void Update()

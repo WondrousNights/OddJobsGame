@@ -30,8 +30,8 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        muzzleFlash.SetActive(false);
-        lineParticleEffect.SetActive(false);
+        if (muzzleFlash) muzzleFlash.SetActive(false);
+        if (lineParticleEffect) lineParticleEffect.SetActive(false);
     }
 
     public void Reload()

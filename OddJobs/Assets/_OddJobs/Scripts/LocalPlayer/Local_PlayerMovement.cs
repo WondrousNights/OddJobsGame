@@ -9,9 +9,9 @@ public class Local_PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
-    public float speed;
-    public float gravity = -9.8f;
-    public float jumpHeight = 3;
+    [SerializeField] private float speed = 5.2f;
+    [SerializeField] private float gravity = -9.8f;
+    [SerializeField] private float jumpHeight = 3;
 
     [SerializeField] Local_AnimationController localAnimationController;
 
@@ -26,13 +26,18 @@ public class Local_PlayerMovement : MonoBehaviour
 
     public void ProcessMove(Vector2 input)
     {
-
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
 
-        
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        // Normalize movement direction
+        if (moveDirection.magnitude > 1f)
+        {
+            moveDirection.Normalize();
+        }
+
+        Vector3 targetVelocity = transform.TransformDirection(moveDirection) * speed;
+        controller.Move(targetVelocity * Time.deltaTime);
 
         playerVelocity.y += gravity * Time.deltaTime;
         if (controller.isGrounded && playerVelocity.y < 0)
@@ -40,7 +45,6 @@ public class Local_PlayerMovement : MonoBehaviour
             playerVelocity.y = -2f;
         }        
         controller.Move(playerVelocity * Time.deltaTime);
-
     }
     public void ProcessAnimations(Vector2 input)
     {
