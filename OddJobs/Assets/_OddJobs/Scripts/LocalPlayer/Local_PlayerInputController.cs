@@ -12,7 +12,7 @@ public class Local_PlayerInputController : MonoBehaviour
 {
     private Local_PlayerMovement playerMovement;
     private Local_PlayerLook look;
-    private Local_PlayerGunHandler gunHandler;
+    private PlayerGunSelector gunHandler;
     private Local_PlayerStats playerStats;
     private Local_PlayerInteractionManager playerInteractionManager;
     private Local_PlayerHealthManager playerHealthManager;
@@ -23,6 +23,7 @@ public class Local_PlayerInputController : MonoBehaviour
     public Transform firstPersonCamPos;
     public Transform thirdPersonCamPos;
     [SerializeField] GameObject myVisuals;
+    [SerializeField] GameObject gunHolder;
     [SerializeField] GameObject myCanvas;
     [SerializeField] Transform hipPosition;
 
@@ -39,7 +40,7 @@ public class Local_PlayerInputController : MonoBehaviour
     UnityEngine.Vector2 lookInput;
 
     bool isInteracting = false;
-    
+    bool isShooting = false;
 
     //Player Mask
     [SerializeField] LayerMask player1Mask;
@@ -55,7 +56,7 @@ public class Local_PlayerInputController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerMovement = GetComponent<Local_PlayerMovement>();
         look = GetComponent<Local_PlayerLook>();
-        gunHandler = GetComponent<Local_PlayerGunHandler>();
+        gunHandler = GetComponent<PlayerGunSelector>();
         playerStats = GetComponent<Local_PlayerStats>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
 
@@ -63,8 +64,8 @@ public class Local_PlayerInputController : MonoBehaviour
         myListener = GetComponent<AudioListener>();
         //Event Subscription
 
-        playerStats.OnPlayerDeath += HandlePlayerDeathEvent;
-        playerStats.OnPlayerRevive += HandlePlayerReviveEvent;
+        //playerStats.OnPlayerDeath += HandlePlayerDeathEvent;
+        //playerStats.OnPlayerRevive += HandlePlayerReviveEvent;
  
 
     }
@@ -81,76 +82,8 @@ public class Local_PlayerInputController : MonoBehaviour
             mainCam.gameObject.SetActive(false);
         }
 
-        //Set Layers so we can disable player visuals accordingly
-        //Camera is set to only render other player visuals, not our own
-        // Debug.Log("My player index is :" + playerInput.playerIndex);
-        if(playerInput.playerIndex == 0)
-        {
-
-            foreach (Transform child in myVisuals.transform)
-            {
-                child.gameObject.layer = 10;
-
-                foreach (Transform nestedChild in child.transform)
-                {
-                    nestedChild.gameObject.layer = 10;
-
-                    foreach(Transform muzzleFlash in nestedChild.transform)
-                    {
-                        muzzleFlash.gameObject.layer = 10;
-                    }
-                }
-            }
-
-            foreach (Transform child in gunHandler.currentGun.transform)
-            {
-                child.gameObject.layer = 14;
-            }
-            mycam.cullingMask = player1Mask;
-        }
-        if(playerInput.playerIndex == 1)
-        {
-            foreach (Transform child in myVisuals.transform)
-            {
-                child.gameObject.layer = 11;
-
-                foreach (Transform nestedChild in child.transform)
-                {
-                    nestedChild.gameObject.layer = 11;
-
-                    foreach(Transform muzzleFlash in nestedChild.transform)
-                    {
-                        muzzleFlash.gameObject.layer = 11;
-                    }
-                }
-            }
-
-            foreach (Transform child in gunHandler.currentGun.transform)
-            {
-                child.gameObject.layer = 15;
-            }
-            mycam.cullingMask = player2Mask;
-        }
-        if(playerInput.playerIndex == 2)
-        {
-            foreach (Transform child in myVisuals.transform)
-            {
-                child.gameObject.layer = 12;
-            }
-            GetComponentInChildren<WeaponSway>().gameObject.layer = 12;
-            mycam.cullingMask = player3Mask;
-        }
-        if(playerInput.playerIndex == 3)
-        {
-            foreach (Transform child in myVisuals.transform)
-            {
-                child.gameObject.layer = 13;
-            }
-            myVisuals.gameObject.layer = 13;
-            GetComponentInChildren<WeaponSway>().gameObject.layer = 13;
-            mycam.cullingMask = player4Mask;
-        }
-
+       
+        SetLayers();
     }
 
     void FixedUpdate()
@@ -172,6 +105,12 @@ public class Local_PlayerInputController : MonoBehaviour
             look.ProcessLook(lookInput);
             weaponSway.WeaponSwayAnimation(lookInput);
         }
+
+        if(isShooting) 
+        {
+            gunHandler.ShootCurrentGun();
+        }
+         
     }
 
     public void ResetSetCameraLayerMask()
@@ -224,7 +163,13 @@ public class Local_PlayerInputController : MonoBehaviour
         if(playerHealthManager.isRagdoll) return;
         if(context.performed)
         {
-            gunHandler.Shoot();
+            isShooting = true;
+           
+        }
+
+        if(context.canceled)
+        {
+            isShooting = false;
         }
         
     }
@@ -234,7 +179,7 @@ public class Local_PlayerInputController : MonoBehaviour
         if(playerHealthManager.isRagdoll) return;
         if(context.performed)
         {
-            gunHandler.Reload();
+           // gunHandler.Reload();
         }
         
     }
@@ -252,31 +197,72 @@ public class Local_PlayerInputController : MonoBehaviour
     }
 
 
-//Old Death System - Need to rework
 
-   //Just a test
-        private void HandlePlayerDeathEvent(object sender, EventArgs e)
-    {
- 
-            myVisuals.SetActive(false);
-
-            mycam.gameObject.SetActive(false);
-            this.gameObject.transform.position = GameObject.FindGameObjectWithTag("PlayerSpawn").transform.position;
-        
-
-    }
-
-    private void HandlePlayerReviveEvent(object sender, EventArgs e)
-    {
-        
-            myVisuals.SetActive(true);
-        
-
-            mycam.gameObject.SetActive(true);
-            gunHandler.currentGun.isReloading = false;
-        
-
-    }
   
+    //Utils
 
+    public void SetLayers()
+    {
+        //Set Layers so we can disable player visuals accordingly
+        //Camera is set to only render other player visuals, not our own
+        if(playerInput.playerIndex == 0)
+        {
+
+            foreach (Transform child in myVisuals.transform)
+            {
+                child.gameObject.layer = 10;
+
+                foreach (Transform nestedChild in child.transform)
+                {
+                    nestedChild.gameObject.layer = 10;
+
+                    foreach(Transform muzzleFlash in nestedChild.transform)
+                    {
+                        muzzleFlash.gameObject.layer = 10;
+                    }
+                }
+            }
+
+            foreach (Transform child in gunHolder.transform)
+            {
+                child.gameObject.layer = 14;
+                
+                foreach (Transform nestedChild in child.transform)
+                {
+                    nestedChild.gameObject.layer = 14;
+                }   
+            }
+            mycam.cullingMask = player1Mask;
+        }
+        
+        
+        if(playerInput.playerIndex == 1)
+        {
+            foreach (Transform child in myVisuals.transform)
+            {
+                child.gameObject.layer = 11;
+
+                foreach (Transform nestedChild in child.transform)
+                {
+                    nestedChild.gameObject.layer = 11;
+
+                    foreach(Transform muzzleFlash in nestedChild.transform)
+                    {
+                        muzzleFlash.gameObject.layer = 11;
+                    }
+                }
+            }
+
+            foreach (Transform child in gunHolder.transform)
+            {
+                child.gameObject.layer = 15;
+                foreach (Transform nestedChild in child.transform)
+                {
+                    nestedChild.gameObject.layer = 15;
+                }   
+            }
+            mycam.cullingMask = player2Mask;
+        }
+       
+    }
 }
