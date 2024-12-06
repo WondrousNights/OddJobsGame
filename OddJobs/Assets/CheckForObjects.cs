@@ -10,6 +10,7 @@ public class CheckForObjects : MonoBehaviour
         stepOffset = controller.stepOffset;
     }
 
+
     private void OnTriggerStay(Collider other) {
         if (other.GetComponent<Rigidbody>() != null) {
             controller.stepOffset = 0;
