@@ -45,7 +45,8 @@ public class Local_PlayerGunHandler : MonoBehaviour
 
             // rotate the hole visual to shoot away from the mesh it hits
             holeVisual.transform.position = hit.point + (hit.normal * 0.01f);
-            holeVisual.transform.rotation = Quaternion.LookRotation(-hit.normal);
+            if (Quaternion.LookRotation(-hit.normal) != null)
+                holeVisual.transform.rotation = Quaternion.LookRotation(-hit.normal);
            
             Destroy(holeVisual, 1f);
             GunVisuals();
