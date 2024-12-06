@@ -22,16 +22,18 @@ public class Gun : MonoBehaviour
     Quaternion targetRotation;
 
     [SerializeField] GameObject muzzleFlash;
+    [SerializeField] GameObject particleEffect;
+    [SerializeField] GameObject lineParticleEffect;
 
     public bool isReloading;
-
-
 
 
     private void Start()
     {
         muzzleFlash.SetActive(false);
+        lineParticleEffect.SetActive(false);
     }
+
     public void Reload()
     {
         isReloading = true;
@@ -39,10 +41,23 @@ public class Gun : MonoBehaviour
     
         StartCoroutine("Rotate", 0.25f);
     }
-    public void GunVisuals()
+
+    public void GunVisuals(Vector3 target)
     {
-        StartCoroutine("MuzzleFlash", 0.1f);
         StartCoroutine("Kickback", 0.1f);
+        
+        if (muzzleFlash)
+            StartCoroutine("MuzzleFlash", 0.1f);
+
+        if (lineParticleEffect)
+            StartCoroutine("LineParticle", target);
+
+        if (particleEffect )
+        {
+            particleEffect.SetActive(true);
+            particleEffect.GetComponent<ParticleSystem>().Play();
+        }
+
     }
 
     IEnumerator Rotate(float duration)
@@ -64,6 +79,24 @@ public class Gun : MonoBehaviour
             yield return null;
         }
         
+    }
+
+    IEnumerator LineParticle(Vector3 target)
+    {
+        lineParticleEffect.transform.localPosition = muzzleFlash.transform.localPosition;
+        lineParticleEffect.SetActive(true);
+
+        // yield return new WaitForSeconds(0.1f);
+
+        if (target != null) {
+            lineParticleEffect.transform.position = target;
+        } else {
+            lineParticleEffect.transform.position = transform.position + (transform.forward * -30f);
+        }
+
+        yield return new WaitForSeconds(lineParticleEffect.GetComponent<TrailRenderer>().time);
+        
+        lineParticleEffect.SetActive(false);
     }
 
 

@@ -7,17 +7,18 @@ using UnityEngine;
 public class Local_PlayerGunHandler : MonoBehaviour
 {
 
+    [SerializeField] int hitForce = 1000;
+    [SerializeField] bool autoReload = true;
+    [SerializeField] float reloadDelay = 0.5f;
+
     [SerializeField] Camera cam;
-
     public Gun currentGun;
-
-    [SerializeField] GameObject visaulGunMuzzleEffect;
 
     [SerializeField] GameObject bulletHoleVisual;
 
-
     MultiAudioSource audioSource;
     Local_PlayerStats playerStats;
+
     private void Start()
     {
         audioSource = GetComponent<MultiAudioSource>();
@@ -26,7 +27,7 @@ public class Local_PlayerGunHandler : MonoBehaviour
 
     public void Shoot()
     {
-        if (playerStats.isDead) return;
+        if (playerStats && playerStats.isDead) return;
 
         if (currentGun.currentAmmo > 0 && !currentGun.isReloading)
         {
@@ -39,31 +40,33 @@ public class Local_PlayerGunHandler : MonoBehaviour
                 {
                     //hit.transform.GetComponent<NetworkEnemyStats>().TakeDamage(currentGun.damage);
                 }
+                if (hit.transform.GetComponent<Rigidbody>())
+                {
+                    hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hit.point);
+                } 
+                else {
+                    GameObject holeVisual = Instantiate(bulletHoleVisual, hit.point, Quaternion.identity);
+
+                    // rotate the hole visual to shoot away from the mesh it hits
+                    holeVisual.transform.position = hit.point + (hit.normal * 0.01f);
+                    if (hit.normal != Vector3.zero)
+                        holeVisual.transform.rotation = Quaternion.LookRotation(-hit.normal);
+                
+                    Destroy(holeVisual, 10f);
+                }
+
+                currentGun.GunVisuals(hit.point);
             }
             currentGun.currentAmmo -= 1;
-            GameObject holeVisual = Instantiate(bulletHoleVisual, hit.point, Quaternion.identity);
-
-            // rotate the hole visual to shoot away from the mesh it hits
-            holeVisual.transform.position = hit.point + (hit.normal * 0.01f);
-            if (hit.normal != Vector3.zero)
-                holeVisual.transform.rotation = Quaternion.LookRotation(-hit.normal);
-           
-            Destroy(holeVisual, 1f);
-            GunVisuals();
 
             MultiAudioManager.PlayAudioObject(currentGun.shotsfx, transform.position);
 
         }
-    }
 
-   
-    public void GunVisuals()
-    {
-        currentGun.GunVisuals();
-        StartCoroutine("MuzzleFlash", 0.1f);
+        if (autoReload && currentGun.currentAmmo <= 0) {
+            Invoke("Reload", reloadDelay);
+        }
     }
-
- 
 
     public void Reload()
     {
@@ -71,16 +74,4 @@ public class Local_PlayerGunHandler : MonoBehaviour
 
         if(currentGun.isReloading == false) currentGun.Reload();
     }
-
-     IEnumerator MuzzleFlash(float duration)
-    {
-        visaulGunMuzzleEffect.SetActive(true);
-
-        yield return new WaitForSeconds(duration);
-
-        visaulGunMuzzleEffect.SetActive(false);
-    }
-
-
-
 }

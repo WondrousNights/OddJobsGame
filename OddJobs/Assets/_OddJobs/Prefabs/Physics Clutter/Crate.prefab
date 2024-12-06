@@ -42,7 +42,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2154636704855020262}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 7
   m_Drag: 0.01
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3772ba6af6415f1488818b75febc2405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioObject: {fileID: 11400000, guid: 650b5067e08106a4f8d9afac1f4c075e, type: 2}
+  audioObject: {fileID: 11400000, guid: 0d7c34af31e6d9b4a989e1a7c5bdebf0, type: 2}
 --- !u!1 &7093771114522875218
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7093771114522875218}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -8224526672483129421, guid: 1eefb8483eba4ea4993f558a5fb6d108, type: 3}
 --- !u!23 &762336973062434527
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -180,5 +180,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.87, y: 0.87, z: 0.87}
+  m_Center: {x: 0, y: 0.43, z: 0}

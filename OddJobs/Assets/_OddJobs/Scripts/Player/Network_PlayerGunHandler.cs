@@ -76,7 +76,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
     public void GunVisuals()
     {
-        currentGun.GunVisuals();
+        // currentGun.GunVisuals();
         GunVisualsServerRpc();
     }
 

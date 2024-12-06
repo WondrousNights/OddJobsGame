@@ -161,7 +161,7 @@ public class Local_PlayerInputController : MonoBehaviour
         }
         playerMovement.ProcessMove(moveInput);
     }
-    void LateUpdate()
+    void Update()
     {
         if (!playerStats.isDead || !playerHealthManager.isRagdoll)
         {

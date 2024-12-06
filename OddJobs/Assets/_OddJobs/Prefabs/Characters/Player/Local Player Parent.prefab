@@ -1620,7 +1620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smooth: 8
-  multiplier: 10
+  multiplier: 1
 --- !u!1 &2784041985476597263
 GameObject:
   m_ObjectHideFlags: 0
@@ -6729,9 +6729,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a688e995008492419141defafe2f1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitForce: 1000
+  autoReload: 1
+  reloadDelay: 0.5
   cam: {fileID: 9094701647203173809}
   currentGun: {fileID: 8678386982588737250}
-  visaulGunMuzzleEffect: {fileID: 1637807499179664868}
   bulletHoleVisual: {fileID: 8882886379892811467, guid: 11be7a7ec34aee24da74bc872f633f7c,
     type: 3}
 --- !u!114 &7590913267778446134
@@ -7835,12 +7837,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f544ff3925581e4fb14cf011415515a, type: 3}
---- !u!1 &1637807499179664868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9111323752429288693, guid: 6f544ff3925581e4fb14cf011415515a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7551205701741402385}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5173306514691176273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3386710554471231040, guid: 6f544ff3925581e4fb14cf011415515a,
