@@ -83,7 +83,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
         //Set Layers so we can disable player visuals accordingly
         //Camera is set to only render other player visuals, not our own
-        Debug.Log("My player index is :" + playerInput.playerIndex);
+        // Debug.Log("My player index is :" + playerInput.playerIndex);
         if(playerInput.playerIndex == 0)
         {
 
