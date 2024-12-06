@@ -13,7 +13,7 @@ public class Local_PlayerCollisionManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+        // Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "MeleeWeapon")
         {
             Weapon weapon = other.gameObject.GetComponent<Weapon>();

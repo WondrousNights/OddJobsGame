@@ -62,8 +62,8 @@ public class Local_PlayerInteractionManager : MonoBehaviour
                 {
                     if(interact == true)
                     {   
-                    interactable.BaseInteract();
-                    interact = false;
+                        interactable.BaseInteract();
+                        interact = false;
                     } 
                 }
 

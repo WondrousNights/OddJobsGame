@@ -34,7 +34,7 @@ public class Local_PlayerGunHandler : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("I just hit" + hit.transform.name);
+                // Debug.Log("I just hit" + hit.transform.name);
                 if (hit.transform.gameObject.tag == "Enemy")
                 {
                     //hit.transform.GetComponent<NetworkEnemyStats>().TakeDamage(currentGun.damage);
@@ -42,6 +42,10 @@ public class Local_PlayerGunHandler : MonoBehaviour
             }
             currentGun.currentAmmo -= 1;
             GameObject holeVisual = Instantiate(bulletHoleVisual, hit.point, Quaternion.identity);
+
+            // rotate the hole visual to shoot away from the mesh it hits
+            holeVisual.transform.position = hit.point + (hit.normal * 0.01f);
+            holeVisual.transform.rotation = Quaternion.LookRotation(-hit.normal);
            
             Destroy(holeVisual, 1f);
             GunVisuals();
