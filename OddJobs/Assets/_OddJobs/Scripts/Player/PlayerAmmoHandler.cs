@@ -6,39 +6,39 @@ public class PlayerAmmoHandler : MonoBehaviour
     public int mediumAmmo;
     public int heavyAmmo;
 
-    public int currentAmmo;
+    public int[] currentAmmo;
 
 
     //HOW DO I MAKE THIS BETTER?
-    public void ReloadAmmo(int clipSize, AmmoType ammoType)
+    public void ReloadAmmo(int clipSize, AmmoType ammoType, int gunIndex)
     {
         Debug.Log("Reloading Ammo");
 
         if(ammoType == AmmoType.Light)
         {
             int MaxReloadAmount = Mathf.Min(clipSize, lightAmmo);
-            int availableBulletsInCurrentClip = clipSize - currentAmmo;
+            int availableBulletsInCurrentClip = clipSize - currentAmmo[gunIndex];
             int reloadAmount = Mathf.Min(MaxReloadAmount, availableBulletsInCurrentClip);
 
-            currentAmmo = currentAmmo + reloadAmount;
+            currentAmmo[gunIndex] = currentAmmo[gunIndex] + reloadAmount;
             lightAmmo -= reloadAmount;
         }
         if(ammoType == AmmoType.Medium)
         {
             int MaxReloadAmount = Mathf.Min(clipSize, mediumAmmo);
-            int availableBulletsInCurrentClip = clipSize - currentAmmo;
+            int availableBulletsInCurrentClip = clipSize - currentAmmo[gunIndex];
             int reloadAmount = Mathf.Min(MaxReloadAmount, availableBulletsInCurrentClip);
 
-            currentAmmo = currentAmmo + reloadAmount;
+            currentAmmo[gunIndex] = currentAmmo[gunIndex] + reloadAmount;
             mediumAmmo -= reloadAmount;
         }
         if(ammoType == AmmoType.Heavy)
         {
             int MaxReloadAmount = Mathf.Min(clipSize, heavyAmmo);
-            int availableBulletsInCurrentClip = clipSize - currentAmmo;
+            int availableBulletsInCurrentClip = clipSize - currentAmmo[gunIndex];
             int reloadAmount = Mathf.Min(MaxReloadAmount, availableBulletsInCurrentClip);
 
-            currentAmmo = currentAmmo + reloadAmount;
+            currentAmmo[gunIndex] = currentAmmo[gunIndex] + reloadAmount;
             heavyAmmo -= reloadAmount;
         }
     }

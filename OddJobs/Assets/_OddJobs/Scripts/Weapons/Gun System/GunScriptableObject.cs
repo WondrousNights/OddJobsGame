@@ -50,13 +50,12 @@ public class GunScriptableObject : ScriptableObject
     public void Despawn()
     {
         // We do a bunch of other stuff on the same frame, so we really want it to be immediately destroyed, not at Unity's convenience.
-        Model.gameObject.SetActive(false);
-        Destroy(Model);
+
         TrailPool.Clear();
         ShootSystem = null;
     }
 
-    public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler)
+    public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
     {
         if (Time.time > ShootConfig.FireRate + LastShootTime)
         {
@@ -67,7 +66,7 @@ public class GunScriptableObject : ScriptableObject
             Ray ray = shootCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hit;
 
-            ammoHandler.currentAmmo -= 1;
+            ammoHandler.currentAmmo[gunIndex] -= 1;
 
             Vector3 shootDirection = shootCam.transform.forward;
             if (Physics.Raycast(ray, out hit))

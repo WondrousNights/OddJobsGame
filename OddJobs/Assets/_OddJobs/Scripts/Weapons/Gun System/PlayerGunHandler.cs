@@ -77,7 +77,7 @@ public class PlayerGunHandler : MonoBehaviour
         if(ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
         {
             isReloading = true;
-            ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType);
+            ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
             gunEffects.ReloadRotation(this);
         }
     }
@@ -86,6 +86,8 @@ public class PlayerGunHandler : MonoBehaviour
     public void DespawnActiveGun()
     {
         ActiveGun.Despawn();
+        gunEffects.gameObject.SetActive(false);
+        Destroy(gunEffects.gameObject);
     }
 
     public void PickupGun(GunScriptableObject gun)
@@ -99,6 +101,7 @@ public class PlayerGunHandler : MonoBehaviour
         }
         else
         {
+           currentGunIndex = 1;
            SetupGun(gun, 1);
         }
       
@@ -108,12 +111,13 @@ public class PlayerGunHandler : MonoBehaviour
     {
         if(ActiveGun == null) return;
 
-        if(ammoHandler.currentAmmo > 0 && !isReloading)
+        if(ammoHandler.currentAmmo[currentGunIndex] > 0 && !isReloading)
         {
             ActiveGun.Shoot(
             playerInputController.mycam, 
             GunParent.GetComponentInChildren<MuzzleFlash>(),
-            ammoHandler
+            ammoHandler,
+            currentGunIndex
             );
 
             gunEffects.KickbackAdjustment(0.1f);
@@ -129,7 +133,7 @@ public class PlayerGunHandler : MonoBehaviour
         if(ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
         {
         isReloading = true;
-        ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType);
+        ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
         gunEffects.ReloadRotation(this);
         }
         else
@@ -157,7 +161,7 @@ public class PlayerGunHandler : MonoBehaviour
         ActiveGun.Spawn(GunParent, this);
         gunEffects = GunParent.GetComponentInChildren<GunEffects>();
 
-        ammoHandler.currentAmmo = ActiveGun.AmmoClipSize;
+        
 
         
     }
