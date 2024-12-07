@@ -197,6 +197,16 @@ public class Local_PlayerInputController : MonoBehaviour
         }    
     }
 
+    public void ProcessSwitchGun(CallbackContext context)
+    {
+        if(playerHealthManager.isRagdoll) return;
+
+        if(context.performed)
+        {
+            gunHandler.SwitchWeapon();
+        }
+    }
+
 
 
   

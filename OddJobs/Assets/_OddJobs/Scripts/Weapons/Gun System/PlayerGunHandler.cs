@@ -19,6 +19,10 @@ public class PlayerGunHandler : MonoBehaviour
     [Header("Runtime Filled")]
     public GunScriptableObject ActiveGun;
 
+    public GunScriptableObject[] GunInventory;
+
+    [SerializeField] int currentGunIndex = 0;
+
     /// <summary>
     /// [SerializeField] GameObject ActiveGunGameObject;
     /// </summary>
@@ -45,6 +49,8 @@ public class PlayerGunHandler : MonoBehaviour
     {
         playerInputController = GetComponent<Local_PlayerInputController>();
         ammoHandler = GetComponent<PlayerAmmoHandler>();
+
+
         GunScriptableObject gun = Guns.Find(gun => gun.Type == Gun);
 
         if (gun == null)
@@ -53,11 +59,7 @@ public class PlayerGunHandler : MonoBehaviour
             return;
         }
 
-        ActiveGun = gun;
-        gun.Spawn(GunParent, this);
-        gunEffects = GunParent.GetComponentInChildren<GunEffects>();
-
-        ammoHandler.currentAmmo = ActiveGun.AmmoClipSize;
+        SetupGun(gun, currentGunIndex);
         // some magic for IK
         //Transform[] allChildren = GunParent.GetComponentsInChildren<Transform>();
         //InverseKinematics.LeftElbowIKTarget = allChildren.FirstOrDefault(child => child.name == "LeftElbow");
@@ -65,7 +67,42 @@ public class PlayerGunHandler : MonoBehaviour
        // InverseKinematics.LeftHandIKTarget = allChildren.FirstOrDefault(child => child.name == "LeftHand");
         //InverseKinematics.RightHandIKTarget = allChildren.FirstOrDefault(child => child.name == "RightHand");
     }
+    public void SetupGun(GunScriptableObject gun, int gunIndex)
+    {
+        GunInventory[gunIndex] = gun;
+        ActiveGun = GunInventory[gunIndex];
+        gun.Spawn(GunParent, this);
+        gunEffects = GunParent.GetComponentInChildren<GunEffects>();
 
+        if(ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
+        {
+            isReloading = true;
+            ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType);
+            gunEffects.ReloadRotation(this);
+        }
+    }
+
+
+    public void DespawnActiveGun()
+    {
+        ActiveGun.Despawn();
+    }
+
+    public void PickupGun(GunScriptableObject gun)
+    {
+        
+        DespawnActiveGun();
+
+        if(GunInventory[1] != null)
+        {
+            SetupGun(gun, currentGunIndex);
+        }
+        else
+        {
+           SetupGun(gun, 1);
+        }
+      
+    }
 
     public void ShootCurrentGun()
     {
@@ -102,7 +139,28 @@ public class PlayerGunHandler : MonoBehaviour
         
     }
 
- 
+    public void SwitchWeapon()
+    {
+        if(GunInventory[1] == null) return;
+
+        if(currentGunIndex == 0)
+        {
+            currentGunIndex = 1;
+        }
+        else
+        {
+            currentGunIndex = 0;
+        }
+
+        DespawnActiveGun();
+        ActiveGun = GunInventory[currentGunIndex];
+        ActiveGun.Spawn(GunParent, this);
+        gunEffects = GunParent.GetComponentInChildren<GunEffects>();
+
+        ammoHandler.currentAmmo = ActiveGun.AmmoClipSize;
+
+        
+    }
 
 
 

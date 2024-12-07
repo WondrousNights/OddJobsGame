@@ -47,6 +47,15 @@ public class GunScriptableObject : ScriptableObject
         parent = Parent;
     }
 
+    public void Despawn()
+    {
+        // We do a bunch of other stuff on the same frame, so we really want it to be immediately destroyed, not at Unity's convenience.
+        Model.gameObject.SetActive(false);
+        Destroy(Model);
+        TrailPool.Clear();
+        ShootSystem = null;
+    }
+
     public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler)
     {
         if (Time.time > ShootConfig.FireRate + LastShootTime)

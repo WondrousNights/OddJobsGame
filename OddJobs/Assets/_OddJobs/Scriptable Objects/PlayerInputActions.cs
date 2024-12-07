@@ -116,6 +116,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef8c5ecd-d10b-470d-9535-7c8b0e2b9971"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -382,6 +391,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""UI_Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f446ed48-3f2a-4128-9c5c-5af8a6fb0040"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""SwitchGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a567bc7d-8220-47a4-ab32-d44aed047308"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""SwitchGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -428,6 +459,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_OnFoot_UI_Next = m_OnFoot.FindAction("UI_Next", throwIfNotFound: true);
         m_OnFoot_UI_Previous = m_OnFoot.FindAction("UI_Previous", throwIfNotFound: true);
         m_OnFoot_UI_Select = m_OnFoot.FindAction("UI_Select", throwIfNotFound: true);
+        m_OnFoot_SwitchGun = m_OnFoot.FindAction("SwitchGun", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -504,6 +536,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_UI_Next;
     private readonly InputAction m_OnFoot_UI_Previous;
     private readonly InputAction m_OnFoot_UI_Select;
+    private readonly InputAction m_OnFoot_SwitchGun;
     public struct OnFootActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -518,6 +551,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @UI_Next => m_Wrapper.m_OnFoot_UI_Next;
         public InputAction @UI_Previous => m_Wrapper.m_OnFoot_UI_Previous;
         public InputAction @UI_Select => m_Wrapper.m_OnFoot_UI_Select;
+        public InputAction @SwitchGun => m_Wrapper.m_OnFoot_SwitchGun;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -557,6 +591,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI_Select.started += instance.OnUI_Select;
             @UI_Select.performed += instance.OnUI_Select;
             @UI_Select.canceled += instance.OnUI_Select;
+            @SwitchGun.started += instance.OnSwitchGun;
+            @SwitchGun.performed += instance.OnSwitchGun;
+            @SwitchGun.canceled += instance.OnSwitchGun;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -591,6 +628,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI_Select.started -= instance.OnUI_Select;
             @UI_Select.performed -= instance.OnUI_Select;
             @UI_Select.canceled -= instance.OnUI_Select;
+            @SwitchGun.started -= instance.OnSwitchGun;
+            @SwitchGun.performed -= instance.OnSwitchGun;
+            @SwitchGun.canceled -= instance.OnSwitchGun;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -638,5 +678,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnUI_Next(InputAction.CallbackContext context);
         void OnUI_Previous(InputAction.CallbackContext context);
         void OnUI_Select(InputAction.CallbackContext context);
+        void OnSwitchGun(InputAction.CallbackContext context);
     }
 }

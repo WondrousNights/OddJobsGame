@@ -6645,6 +6645,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 81d19976-75d6-4ba9-9260-a92252918456
     m_ActionName: 'OnFoot/UI_Select[/Keyboard/downArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 288364461639065573}
+        m_TargetAssemblyTypeName: Local_PlayerInputController, Assembly-CSharp
+        m_MethodName: ProcessSwitchGun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ef8c5ecd-d10b-470d-9535-7c8b0e2b9971
+    m_ActionName: 'OnFoot/SwitchGun[/Keyboard/1]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: OnFoot
@@ -6750,6 +6766,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   ammoHandler: {fileID: 0}
+  gunHandler: {fileID: 0}
 --- !u!114 &-7292656696071531124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6821,12 +6838,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b6c25d8cf55ce4fbfae00f393c0b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gun: 2
+  Gun: 0
   GunParent: {fileID: 2590870033671176749}
   Guns:
   - {fileID: 11400000, guid: 7ac156eb0d786e94fbe6380a251a83f3, type: 2}
   - {fileID: 11400000, guid: 3a2c822232af12d4f95a1071a7625143, type: 2}
   ActiveGun: {fileID: 0}
+  GunInventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  currentGunIndex: 0
   isReloading: 0
 --- !u!114 &8181365394615560530
 MonoBehaviour:

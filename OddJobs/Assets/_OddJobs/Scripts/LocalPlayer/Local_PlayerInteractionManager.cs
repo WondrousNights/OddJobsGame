@@ -19,6 +19,7 @@ public class Local_PlayerInteractionManager : MonoBehaviour
 
 
     public PlayerAmmoHandler ammoHandler;
+    public PlayerGunHandler gunHandler;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class Local_PlayerInteractionManager : MonoBehaviour
         playerUI = GetComponent<Local_PlayerUI>();
 
         ammoHandler = GetComponent<PlayerAmmoHandler>();
+        gunHandler = GetComponent<PlayerGunHandler>();
     }
     
     void Update()
