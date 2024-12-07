@@ -132,7 +132,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         else
         {
             mycam.gameObject.SetActive(true);
-            gunHandler.currentGun.isReloading = false;
+            //gunHandler.currentGun.isReloading = false;
         }
 
     }

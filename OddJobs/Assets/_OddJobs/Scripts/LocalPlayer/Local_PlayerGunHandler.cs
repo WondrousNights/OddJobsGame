@@ -12,13 +12,14 @@ public class Local_PlayerGunHandler : MonoBehaviour
     [SerializeField] float autoReloadDelay = 0.4f;
 
     [SerializeField] Camera cam;
-    public Gun currentGun;
+    public GunEffects currentGun;
 
     [SerializeField] GameObject bulletHoleVisual;
 
     MultiAudioSource audioSource;
     Local_PlayerStats playerStats;
 
+/*
     private void Start()
     {
         audioSource = GetComponent<MultiAudioSource>();
@@ -74,4 +75,5 @@ public class Local_PlayerGunHandler : MonoBehaviour
 
         if(currentGun.isReloading == false) currentGun.Reload();
     }
+    */
 }

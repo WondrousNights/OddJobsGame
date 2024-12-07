@@ -19,8 +19,10 @@ public class PlayerGunHandler : MonoBehaviour
     [Header("Runtime Filled")]
     public GunScriptableObject ActiveGun;
 
-    public GameObject ActiveGunGameObject;
-
+    /// <summary>
+    /// [SerializeField] GameObject ActiveGunGameObject;
+    /// </summary>
+    GunEffects gunEffects;
     
 
     private Local_PlayerInputController playerInputController;
@@ -51,7 +53,7 @@ public class PlayerGunHandler : MonoBehaviour
 
         ActiveGun = gun;
         gun.Spawn(GunParent, this);
-        ActiveGunGameObject = GunParent.GetComponentInChildren<Transform>().gameObject;
+        gunEffects = GunParent.GetComponentInChildren<GunEffects>();
 
         // some magic for IK
         //Transform[] allChildren = GunParent.GetComponentsInChildren<Transform>();
@@ -60,77 +62,38 @@ public class PlayerGunHandler : MonoBehaviour
        // InverseKinematics.LeftHandIKTarget = allChildren.FirstOrDefault(child => child.name == "LeftHand");
         //InverseKinematics.RightHandIKTarget = allChildren.FirstOrDefault(child => child.name == "RightHand");
     }
-    private void FixedUpdate()
-    {
-        targetRotation.eulerAngles = new Vector3(ActiveGunGameObject.transform.localEulerAngles.x + currentRecoil, ActiveGunGameObject.transform.localEulerAngles.z, ActiveGunGameObject.transform.localEulerAngles.z);
-        ActiveGunGameObject.transform.localRotation = Quaternion.Lerp(ActiveGunGameObject.transform.localRotation, targetRotation, Time.deltaTime * 10);
-        ActiveGunGameObject.transform.localPosition = Vector3.Lerp(ActiveGunGameObject.transform.localPosition, new Vector3(ActiveGun.SpawnPoint.x, ActiveGun.SpawnPoint.y, ActiveGun.SpawnPoint.z + currentKickback), Time.deltaTime * 10);
-    }
 
 
     public void ShootCurrentGun()
     {
         if(ActiveGun == null) return;
 
-        if(currentAmmo > 0 && !isReloading)
-        {
+       
             ActiveGun.Shoot(
             playerInputController.mycam, 
             GunParent.GetComponentInChildren<MuzzleFlash>()
             );
-            StartCoroutine("Kickback", 0.1f);
 
-            currentAmmo -= 1;
+            gunEffects.KickbackAdjustment(0.1f);
+
             return;
-        }
+        
         
     }
 
-
-    IEnumerator Kickback(float duration)
-    {
-        currentRecoil += ActiveGun.ShootConfig.maxRecoil;
-        currentKickback += ActiveGun.ShootConfig.maxKickback;
-        
-        yield return new WaitForSeconds(duration);
-
-        currentRecoil -= ActiveGun.ShootConfig.maxRecoil;
-        currentKickback -= ActiveGun.ShootConfig.maxKickback;
-    }
 
     
     public void Reload()
     {
-        if(!isReloading)
-        {
-            isReloading = true;
+
             currentAmmo = 600;
     
-            StartCoroutine("Rotate", ActiveGun.ShootConfig.reloadTime);
-        }
+            gunEffects.ReloadRotation();
+        
         
     }
 
-    IEnumerator Rotate(float duration)
-    {
-        float startRotation = ActiveGunGameObject.transform.eulerAngles.x;
-        float endRotation = startRotation - 360.0f;
-        float t = 0.0f;
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-            float xRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
-            ActiveGunGameObject.transform.eulerAngles = new Vector3(xRotation, ActiveGunGameObject.transform.eulerAngles.y, ActiveGunGameObject.transform.eulerAngles.z);
-
-            if (t >= duration)
-            {
-                ActiveGunGameObject.transform.eulerAngles = new Vector3(0, ActiveGunGameObject.transform.eulerAngles.y, ActiveGunGameObject.transform.eulerAngles.z);
-                isReloading = false;
-            }
-            yield return null;
-        }
-        
-    }
+ 
 
 
 

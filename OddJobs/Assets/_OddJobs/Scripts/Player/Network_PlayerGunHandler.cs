@@ -9,7 +9,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
     [SerializeField] Camera cam;
 
-    public Gun currentGun;
+    //public Gun currentGun;
 
     [SerializeField] GameObject visaulGunMuzzleEffect;
 
@@ -28,7 +28,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     {
         if (!IsOwner || playerStats.isDead) return;
 
-        if (currentGun.currentAmmo > 0 && !currentGun.isReloading)
+        //if (currentGun.currentAmmo > 0 && !currentGun.isReloading)
         {
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hit;
@@ -37,15 +37,15 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                 Debug.Log("I just hit" + hit.transform.name);
                 if (hit.transform.gameObject.tag == "Enemy")
                 {
-                    hit.transform.GetComponent<NetworkEnemyStats>().TakeDamage(currentGun.damage);
+                    //hit.transform.GetComponent<NetworkEnemyStats>().TakeDamage(currentGun.damage);
                 }
             }
-            currentGun.currentAmmo -= 1;
+            //currentGun.currentAmmo -= 1;
             GameObject holeVisual = Instantiate(bulletHoleVisual, hit.point, Quaternion.identity);
            
             Destroy(holeVisual, 1f);
             GunVisuals();
-            audioSource.AudioObject = currentGun.shotsfx;
+            //audioSource.AudioObject = currentGun.shotsfx;
             audioSource.Play();
 
             ShootServerRpc();
@@ -92,7 +92,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if (IsOwner) return;
 
         StartCoroutine("MuzzleFlash", 0.1f);
-        audioSource.AudioObject = currentGun.shotsfx;
+        //audioSource.AudioObject = currentGun.shotsfx;
         audioSource.Play();
     }
 
@@ -100,7 +100,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     {
         if (!IsOwner || playerStats.isDead) return;
 
-        if(currentGun.isReloading == false) currentGun.Reload();
+        //if(currentGun.isReloading == false) currentGun.Reload();
     }
 
     IEnumerator MuzzleFlash(float duration)
@@ -111,5 +111,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
         visaulGunMuzzleEffect.SetActive(false);
     }
+
+    
 
 }
