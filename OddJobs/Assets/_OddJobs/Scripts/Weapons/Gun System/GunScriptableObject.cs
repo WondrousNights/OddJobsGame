@@ -139,4 +139,5 @@ public class GunScriptableObject : ScriptableObject
         return trail;
     }
 
+
 }

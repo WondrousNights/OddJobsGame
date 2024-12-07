@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using JetBrains.Annotations;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,7 +13,7 @@ public class Local_PlayerInputController : MonoBehaviour
 {
     private Local_PlayerMovement playerMovement;
     private Local_PlayerLook look;
-    private PlayerGunSelector gunHandler;
+    private PlayerGunHandler gunHandler;
     private Local_PlayerStats playerStats;
     private Local_PlayerInteractionManager playerInteractionManager;
     private Local_PlayerHealthManager playerHealthManager;
@@ -56,7 +57,7 @@ public class Local_PlayerInputController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerMovement = GetComponent<Local_PlayerMovement>();
         look = GetComponent<Local_PlayerLook>();
-        gunHandler = GetComponent<PlayerGunSelector>();
+        gunHandler = GetComponent<PlayerGunHandler>();
         playerStats = GetComponent<Local_PlayerStats>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
 
@@ -179,7 +180,7 @@ public class Local_PlayerInputController : MonoBehaviour
         if(playerHealthManager.isRagdoll) return;
         if(context.performed)
         {
-           // gunHandler.Reload();
+           gunHandler.Reload();
         }
         
     }
@@ -265,4 +266,6 @@ public class Local_PlayerInputController : MonoBehaviour
         }
        
     }
+
+ 
 }

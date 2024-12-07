@@ -609,6 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 197464724}
   - component: {fileID: 197464723}
+  - component: {fileID: 197464725}
   m_Layer: 0
   m_Name: LocalPlayerManager
   m_TagString: Untagged
@@ -628,20 +629,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 197464725}
+        m_TargetAssemblyTypeName: LocalPlayerSplitScreenManager, Assembly-CSharp
+        m_MethodName: OnPlayerJoined
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 6bb7b2b8-42b3-45e6-aadf-b08aeb452a63
@@ -676,6 +689,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &197464725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197464722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5c05782c167b149a5f40d13bc19746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInputs: []
 --- !u!1001 &212749036
 PrefabInstance:
   m_ObjectHideFlags: 0
