@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad33be9235ae79a46989bde03792f0ae, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  ImpactType: {fileID: 11400000, guid: 03275abd837b56344a198e451851aadf, type: 2}
   Type: 0
+  AmmoType: 0
   Name: Pistol
   ModelPrefab: {fileID: 1694449805434718, guid: 6f1a7354265853f44b0ed5e2e43676ad,
     type: 3}
@@ -21,3 +21,4 @@ MonoBehaviour:
   SpawnRotation: {x: 0, y: -180.646, z: 0}
   ShootConfig: {fileID: 11400000, guid: 779bef79cd3d2314b81b601fc08446c2, type: 2}
   TrailConfig: {fileID: 11400000, guid: fe86c54f2f2f9344e9e4fa2f79bda734, type: 2}
+  AmmoClipSize: 7

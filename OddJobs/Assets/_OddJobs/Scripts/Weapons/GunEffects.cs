@@ -19,9 +19,9 @@ public class GunEffects : MonoBehaviour
     
     [SerializeField] GunScriptableObject myGunProperties;
     
-    public void ReloadRotation()
+    public void ReloadRotation(PlayerGunHandler gunHandler)
     {
-        StartCoroutine("Rotate", myGunProperties.ShootConfig.reloadTime);
+        StartCoroutine(Rotate(myGunProperties.ShootConfig.reloadTime, gunHandler) );
     }
 
     public void KickbackAdjustment(float duration)
@@ -29,7 +29,7 @@ public class GunEffects : MonoBehaviour
         StartCoroutine(Kickback(duration, myGunProperties.ShootConfig.maxRecoil, myGunProperties.ShootConfig.maxKickback));
     }
 
-    IEnumerator Rotate(float duration)
+    IEnumerator Rotate(float duration, PlayerGunHandler gunHandler)
     {
         float startRotation = transform.localEulerAngles.x;
         float endRotation = startRotation - 360.0f;
@@ -42,6 +42,7 @@ public class GunEffects : MonoBehaviour
 
             if (t >= duration)
             {
+                gunHandler.isReloading = false;
                 transform.localEulerAngles = new Vector3(myGunProperties.SpawnRotation.x, myGunProperties.SpawnRotation.y, myGunProperties.SpawnRotation.z);
             }
             yield return null;

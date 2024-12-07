@@ -25,7 +25,7 @@ public class NPC_Interactable : Interactable
 
         uiBoxCollider.enabled = false;
     }
-    protected override void Interact()
+    protected override void Interact(Local_PlayerInteractionManager playerInteracting)
     {
         Debug.Log("Interacted with" + gameObject.name);
         conversationManager.StartConversation(conversation);

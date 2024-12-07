@@ -26,13 +26,14 @@ public class PlayerGunHandler : MonoBehaviour
     
 
     private Local_PlayerInputController playerInputController;
+    private PlayerAmmoHandler ammoHandler;
 
 
     float currentRecoil = 0;
     float currentKickback = 0;
     Quaternion targetRotation;
 
-    private bool isReloading;
+    public bool isReloading = false;
 
 
     //Replace with Ammo Handler
@@ -43,6 +44,7 @@ public class PlayerGunHandler : MonoBehaviour
     private void Start()
     {
         playerInputController = GetComponent<Local_PlayerInputController>();
+        ammoHandler = GetComponent<PlayerAmmoHandler>();
         GunScriptableObject gun = Guns.Find(gun => gun.Type == Gun);
 
         if (gun == null)
@@ -55,6 +57,7 @@ public class PlayerGunHandler : MonoBehaviour
         gun.Spawn(GunParent, this);
         gunEffects = GunParent.GetComponentInChildren<GunEffects>();
 
+        ammoHandler.currentAmmo = ActiveGun.AmmoClipSize;
         // some magic for IK
         //Transform[] allChildren = GunParent.GetComponentsInChildren<Transform>();
         //InverseKinematics.LeftElbowIKTarget = allChildren.FirstOrDefault(child => child.name == "LeftElbow");
@@ -68,28 +71,34 @@ public class PlayerGunHandler : MonoBehaviour
     {
         if(ActiveGun == null) return;
 
-       
+        if(ammoHandler.currentAmmo > 0 && !isReloading)
+        {
             ActiveGun.Shoot(
             playerInputController.mycam, 
-            GunParent.GetComponentInChildren<MuzzleFlash>()
+            GunParent.GetComponentInChildren<MuzzleFlash>(),
+            ammoHandler
             );
 
             gunEffects.KickbackAdjustment(0.1f);
-
-            return;
+        }
+            
         
         
     }
 
-
-    
     public void Reload()
     {
 
-            currentAmmo = 600;
-    
-            gunEffects.ReloadRotation();
-        
+        if(ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
+        {
+        isReloading = true;
+        ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType);
+        gunEffects.ReloadRotation(this);
+        }
+        else
+        {
+            Debug.Log("No AMMO! PLAY SFX TO NOTIFY PLAYER");
+        }
         
     }
 

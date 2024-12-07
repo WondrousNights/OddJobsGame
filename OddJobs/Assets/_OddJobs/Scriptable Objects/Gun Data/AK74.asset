@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AK74
   m_EditorClassIdentifier: 
   Type: 2
+  AmmoType: 1
   Name: AK74
   ModelPrefab: {fileID: 1487774384131766, guid: ee329c3cd08e58645834d20702d7f6c6,
     type: 3}
@@ -20,3 +21,4 @@ MonoBehaviour:
   SpawnRotation: {x: -2.411, y: 178.336, z: -0.349}
   ShootConfig: {fileID: 11400000, guid: 04ede1996902c244fa622dd6678d4d32, type: 2}
   TrailConfig: {fileID: 11400000, guid: fe86c54f2f2f9344e9e4fa2f79bda734, type: 2}
+  AmmoClipSize: 40

@@ -11,6 +11,7 @@ public class GunScriptableObject : ScriptableObject
 {
     
     public GunType Type;
+    public AmmoType AmmoType;
     public string Name;
     public GameObject ModelPrefab;
     public Vector3 SpawnPoint;
@@ -18,6 +19,8 @@ public class GunScriptableObject : ScriptableObject
 
     public ShootConfigScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;
+
+    public int AmmoClipSize;
 
     private MonoBehaviour ActiveMonoBehaviour;
     private GameObject Model;
@@ -44,7 +47,7 @@ public class GunScriptableObject : ScriptableObject
         parent = Parent;
     }
 
-    public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash)
+    public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler)
     {
         if (Time.time > ShootConfig.FireRate + LastShootTime)
         {
@@ -54,6 +57,8 @@ public class GunScriptableObject : ScriptableObject
             MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
             Ray ray = shootCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             RaycastHit hit;
+
+            ammoHandler.currentAmmo -= 1;
 
             Vector3 shootDirection = shootCam.transform.forward;
             if (Physics.Raycast(ray, out hit))

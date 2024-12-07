@@ -17,10 +17,15 @@ public class Local_PlayerInteractionManager : MonoBehaviour
     Camera cam;
     private Local_PlayerUI playerUI;
 
+
+    public PlayerAmmoHandler ammoHandler;
+
     void Start()
     {
         cam = GetComponent<Local_PlayerInputController>().mycam;
         playerUI = GetComponent<Local_PlayerUI>();
+
+        ammoHandler = GetComponent<PlayerAmmoHandler>();
     }
     
     void Update()
@@ -62,7 +67,7 @@ public class Local_PlayerInteractionManager : MonoBehaviour
                 {
                     if(interact == true)
                     {   
-                        interactable.BaseInteract();
+                        interactable.BaseInteract(this);
                         interact = false;
                     } 
                 }

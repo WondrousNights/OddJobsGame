@@ -6404,6 +6404,7 @@ GameObject:
   - component: {fileID: 7801973606537394173}
   - component: {fileID: -4991034178908729443}
   - component: {fileID: 197025337377271024}
+  - component: {fileID: 8181365394615560530}
   m_Layer: 3
   m_Name: Local Player Parent
   m_TagString: Player
@@ -6672,16 +6673,16 @@ MonoBehaviour:
   hasSpawned: 0
   player1Mask:
     serializedVersion: 2
-    m_Bits: 30847
+    m_Bits: 30975
   player2Mask:
     serializedVersion: 2
-    m_Bits: 46207
+    m_Bits: 46335
   player3Mask:
     serializedVersion: 2
-    m_Bits: 76927
+    m_Bits: 77055
   player4Mask:
     serializedVersion: 2
-    m_Bits: 138367
+    m_Bits: 400639
   nohudLayerMask:
     serializedVersion: 2
     m_Bits: 277759
@@ -6748,6 +6749,7 @@ MonoBehaviour:
   interactionLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  ammoHandler: {fileID: 0}
 --- !u!114 &-7292656696071531124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6825,7 +6827,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ac156eb0d786e94fbe6380a251a83f3, type: 2}
   - {fileID: 11400000, guid: 3a2c822232af12d4f95a1071a7625143, type: 2}
   ActiveGun: {fileID: 0}
-  ActiveGunGameObject: {fileID: 0}
+  isReloading: 0
+--- !u!114 &8181365394615560530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812313864751850106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fda6de691e13fe49894f44a3c9e90b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightAmmo: 0
+  mediumAmmo: 120
+  heavyAmmo: 0
+  currentAmmo: 0
 --- !u!1 &7849503409469734107
 GameObject:
   m_ObjectHideFlags: 0
