@@ -16,7 +16,6 @@ public class GunScriptableObject : ScriptableObject
     public GameObject ModelPrefab;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation;
-    public int hitForce = 1000;
 
     public ShootConfigScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;
@@ -72,15 +71,13 @@ public class GunScriptableObject : ScriptableObject
             Vector3 shootDirection = shootCam.transform.forward;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.GetComponent<Rigidbody>())
-                {
-                    hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hit.point);
-                }
+                
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
                         shootCam.transform.position,
                         hit.point,
-                        hit
+                        hit,
+                        shootCam.transform.position
                     )
                 );
             }
@@ -90,14 +87,15 @@ public class GunScriptableObject : ScriptableObject
                     PlayTrail(
                         shootCam.transform.position,
                         shootCam.transform.position + (shootDirection * TrailConfig.MissDistance),
-                        new RaycastHit()
+                        new RaycastHit(),
+                        shootCam.transform.position
                     )
                 );
             }
         }
     }
 
-    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit)
+    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit, Vector3 shootPos)
     {
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
@@ -124,6 +122,7 @@ public class GunScriptableObject : ScriptableObject
 
         if (Hit.collider != null)
         {
+            //Particle
             GameObject impactParticle = Instantiate(ShootConfig.impactParticle, Hit.point, Quaternion.identity);
 
             // rotate the hole visual to shoot away from the mesh it hits
@@ -133,6 +132,18 @@ public class GunScriptableObject : ScriptableObject
             impactParticle.transform.parent = Hit.collider.transform; // make the bullethole move with the thing it hit
                 
             Destroy(impactParticle, 10f);
+
+            if(Hit.collider.TryGetComponent(out IDamageable damageable))
+            {
+                Debug.Log("HIT DAMAGEABLE");
+                damageable.TakeDamage(Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
+            }
+            /*
+            if (Hit.transform.GetComponent<Rigidbody>())
+            {
+                Hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hit.point);
+            }
+            */
         }
 
         yield return new WaitForSeconds(TrailConfig.Duration);
