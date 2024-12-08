@@ -3056,6 +3056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MaxHealth: 100
   _Health: 0
+  ragdollRoot: {fileID: 1582498542}
 --- !u!1001 &988805649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4791,6 +4792,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126d3f1b78d64614387c275d1a517db9, type: 3}
+--- !u!1 &1582498542 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4541520990185260214, guid: 64021ec063ddf5a4391fc44b44d0de1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2406039269050635143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1607837816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6518,6 +6525,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 382635667845699080, guid: 64021ec063ddf5a4391fc44b44d0de1a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 589895249784894596, guid: 64021ec063ddf5a4391fc44b44d0de1a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140457674854334207, guid: 64021ec063ddf5a4391fc44b44d0de1a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4605157207659888655, guid: 64021ec063ddf5a4391fc44b44d0de1a,
         type: 3}
       propertyPath: managedReferences[1428897917242704103].m_Value

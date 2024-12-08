@@ -18,11 +18,16 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
 
     private bool isRagdoll;
+    bool isDead;
 
     RagdollEnabler ragdollEnabler;
+
+    [SerializeField] GameObject ragdollRoot;
+    [SerializeField] CapsuleCollider capsuleCollider;
     void Start()
     {
         ragdollEnabler = GetComponent<RagdollEnabler>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void OnEnable()
@@ -35,29 +40,36 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage(Vector3 positionOfAttacker, float Damage, float force, Vector3 collisionPoint)
     {
-        float damageTaken = Mathf.Clamp(Damage, 0, CurrentHealth);
+        
 
-        CurrentHealth -= damageTaken;
+        CurrentHealth -= Damage;
 
-        if(damageTaken != 0)
+        HandleDamageResponse(positionOfAttacker, force, collisionPoint);
+
+        if(CurrentHealth <= 0)
         {
-            //Damage
-            HandleDamageResponse(positionOfAttacker, force, collisionPoint);
+            HandleDeath();
         }
+  
+    }
 
-        if(CurrentHealth == 0 && damageTaken != 0)
+    private void HandleDeath()
+    {
+        if(!isDead)
         {
-            //Death
+        ragdollEnabler.EnableRagdoll();
+        isDead = true;
         }
     }
 
-
-     void HandleDamageResponse(Vector3 positionOfAttacker, float force, Vector3 collisionPoint)
+    void HandleDamageResponse(Vector3 positionOfAttacker, float force, Vector3 collisionPoint)
     {
-        StartCoroutine("ProcessRagdollAnimation", 3f);
 
-
-
+        if(!isDead)
+        {
+            StartCoroutine("ProcessRagdollAnimation", 3f);
+        }
+        
         Vector3 forceDirection = this.transform.position - positionOfAttacker;
                 forceDirection.y = 1;
                 forceDirection.Normalize();
@@ -75,9 +87,20 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         isRagdoll = true;
        ragdollEnabler.EnableRagdoll();
+       capsuleCollider.enabled = false;
        yield return new WaitForSeconds(duration);
+
+
+        if(!isDead)
+        {
+        transform.position = ragdollRoot.transform.position;
+        capsuleCollider.enabled = true;
        ragdollEnabler.EnableAnimator();
        isRagdoll = false;
+        }
+     
+
+       
     }
     
 

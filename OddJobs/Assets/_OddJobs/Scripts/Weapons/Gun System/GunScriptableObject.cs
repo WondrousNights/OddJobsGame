@@ -138,6 +138,13 @@ public class GunScriptableObject : ScriptableObject
                 Debug.Log("HIT DAMAGEABLE");
                 damageable.TakeDamage(Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
             }
+            else if(Hit.transform.GetComponentInParent<IDamageable>() != null)
+            {
+                //This is for ragdolls
+                Hit.transform.GetComponentInParent<IDamageable>().TakeDamage(Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
+                
+                
+            }
             /*
             if (Hit.transform.GetComponent<Rigidbody>())
             {

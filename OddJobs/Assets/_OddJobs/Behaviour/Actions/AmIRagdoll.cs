@@ -5,7 +5,7 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "AmIRagdoll", story: "Am [I] Not [Ragdoll]", category: "Action", id: "0943acc667cbd372ff114e484ae54e0e")]
+[NodeDescription(name: "AmIRagdoll", story: "Am [I] [Ragdoll]", category: "Action", id: "0943acc667cbd372ff114e484ae54e0e")]
 public partial class AmIRagdollAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> I;
@@ -25,11 +25,11 @@ public partial class AmIRagdollAction : Action
 
         if(Ragdoll.Value == true)
         {
-            return Status.Failure;
+            return Status.Success;
         }
         else
         {
-            return Status.Success;
+            return Status.Running;
         }
     }
 
