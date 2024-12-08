@@ -135,7 +135,7 @@ public class PlayerGunHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log("No AMMO! PLAY SFX TO NOTIFY PLAYER");
+            // Debug.Log("No AMMO! PLAY SFX TO NOTIFY PLAYER");
         }
         
     }
