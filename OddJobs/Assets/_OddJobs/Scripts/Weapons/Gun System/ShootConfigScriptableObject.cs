@@ -10,9 +10,9 @@ public class ShootConfigScriptableObject : ScriptableObject
     public AudioObject shootSfx;
     public GameObject impactParticle;
 
-     public float maxRecoil;
+    public float maxRecoil;
     public float maxKickback;
-
+    public float hitForce;
     public float reloadTime;
     
 }

@@ -16,6 +16,7 @@ public class GunScriptableObject : ScriptableObject
     public GameObject ModelPrefab;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation;
+    public int hitForce = 1000;
 
     public ShootConfigScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;
@@ -71,6 +72,10 @@ public class GunScriptableObject : ScriptableObject
             Vector3 shootDirection = shootCam.transform.forward;
             if (Physics.Raycast(ray, out hit))
             {
+                if (hit.transform.GetComponent<Rigidbody>())
+                {
+                    hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hit.point);
+                }
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
                         shootCam.transform.position,
@@ -119,12 +124,13 @@ public class GunScriptableObject : ScriptableObject
 
         if (Hit.collider != null)
         {
-             GameObject impactParticle = Instantiate(ShootConfig.impactParticle, Hit.point, Quaternion.identity);
+            GameObject impactParticle = Instantiate(ShootConfig.impactParticle, Hit.point, Quaternion.identity);
 
             // rotate the hole visual to shoot away from the mesh it hits
             impactParticle.transform.position = Hit.point + (Hit.normal * 0.01f);
             if (Hit.normal != Vector3.zero)
             impactParticle.transform.rotation = Quaternion.LookRotation(-Hit.normal);
+            impactParticle.transform.parent = Hit.collider.transform; // make the bullethole move with the thing it hit
                 
             Destroy(impactParticle, 10f);
         }

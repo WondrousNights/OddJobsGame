@@ -122,9 +122,6 @@ public class PlayerGunHandler : MonoBehaviour
 
             gunEffects.KickbackAdjustment(0.1f);
         }
-            
-        
-        
     }
 
     public void Reload()
@@ -132,9 +129,9 @@ public class PlayerGunHandler : MonoBehaviour
 
         if(ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
         {
-        isReloading = true;
-        ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
-        gunEffects.ReloadRotation(this);
+            isReloading = true;
+            ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
+            gunEffects.ReloadRotation(this);
         }
         else
         {
