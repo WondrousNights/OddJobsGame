@@ -6,34 +6,30 @@ public class DestructableObject : MonoBehaviour, IDamageable
     [SerializeField] private GameObject brokenObjectPrefab;
     [SerializeField] private float breakForce = 2;
     [SerializeField] private bool debug = false;
+    [SerializeField] private float _maxHealth = 1;
 
     private Rigidbody rb;
     private bool broken = false;
     private GameObject brokenObject;
 
 
+    
     [SerializeField]
-    private float _MaxHealth = 1;
-    [SerializeField]
-    private float _Health;
-    public float CurrentHealth {get => _Health; private set => _Health = value;}
+    private float _health;
+    public float CurrentHealth {get => _health; private set => _health = value;}
 
-    public float MaxHealth {get => _MaxHealth; private set => _MaxHealth = value;}
+    public float MaxHealth {get => _maxHealth; private set => _maxHealth = value;}
 
 
     public void TakeDamage(Ray ray, Vector3 positionOfAttacker, float Damage, float hitForce, Vector3 collisionPoint)
     {
-       rb.AddForceAtPosition(ray.direction * hitForce, collisionPoint, ForceMode.Impulse);
+        rb.AddForceAtPosition(ray.direction * hitForce, collisionPoint, ForceMode.Impulse);
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-    }
-
-    void Start()
-    {
-        _Health = _MaxHealth;
+        _health = _maxHealth;
     }
 
     private void BreakObject()
