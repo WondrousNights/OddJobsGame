@@ -23,25 +23,25 @@ public class NPC_Interactable : Interactable
         conversationManager.OnConversationStarted += ConversationStart;
         conversationManager.OnConversationEnded += ConversationEnd;
 
-        uiBoxCollider.enabled = false;
+        if (uiBoxCollider) uiBoxCollider.enabled = false;
     }
     protected override void Interact(Local_PlayerInteractionManager playerInteracting)
     {
-        Debug.Log("Interacted with" + gameObject.name);
+        // Debug.Log("Interacted with" + gameObject.name);
         conversationManager.StartConversation(conversation);
-        
+
     }
 
     private void ConversationStart()
     {
         checkForPlayer = true;
-        uiBoxCollider.enabled = true;
+        if (uiBoxCollider) uiBoxCollider.enabled = true;
         npcBoxCollider.enabled = false;
     }
     private void ConversationEnd()
     {
         checkForPlayer = false;
-        uiBoxCollider.enabled = false;
+        if (uiBoxCollider) uiBoxCollider.enabled = false;
         npcBoxCollider.enabled = true;
     }
 

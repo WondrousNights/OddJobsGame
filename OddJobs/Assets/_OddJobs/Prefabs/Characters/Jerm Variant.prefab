@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3728254724862537845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3664343879314900132, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: json
+      value: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":false,"xPos":-41.83362,"yPos":204.000015},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"We
+        are home.","parentUIDs":[0],"SpeechUID":-1},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":5}],"EditorInfo":{"isRoot":false,"xPos":-49.83362,"yPos":64.99992},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"How
+        should I know?","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":true,"xPos":-304.8333,"yPos":107.999985},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Hey.
+        Let''s bounce soon. What are the directions to get back home?","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Jerm","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":180.166473,"yPos":183.999985},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"Whatever
+        man, stop being weird.","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Jerm","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":183.166473,"yPos":45.99994},"ID":5,"ParamActions":[],"TMPFontGUID":null,"Text":"Uhh,
+        because you drove us here? Is your memory that bad?","parentUIDs":[4],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Jerm","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664343879314900132, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: DefaultName
+      value: Jerm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664343879314900132, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: 'NodeSerializedDataList.Array.data[5]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664343879314900132, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: 'NodeSerializedDataList.Array.data[6]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664343879314900132, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: 'NodeSerializedDataList.Array.data[7]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664343879314900132, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: 'NodeSerializedDataList.Array.data[8]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664343879314900132, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: 'NodeSerializedDataList.Array.data[9]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768043564695213729, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: promptMessage
+      value: Talk to Jerm
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121602972208513714, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_Name
+      value: Jerm Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.014000058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8940871
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.44789326
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 53.217
+      objectReference: {fileID: 0}
+    - target: {fileID: 7316226829716307257, guid: 79fc08aae3913ae4dac251cebf2f201d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4087780874151683117, guid: 79fc08aae3913ae4dac251cebf2f201d, type: 3}
+    - {fileID: 530991659091821244, guid: 79fc08aae3913ae4dac251cebf2f201d, type: 3}
+    - {fileID: 8970571369154577379, guid: 79fc08aae3913ae4dac251cebf2f201d, type: 3}
+    - {fileID: 2748824233383032713, guid: 79fc08aae3913ae4dac251cebf2f201d, type: 3}
+    - {fileID: 2220756095824006469, guid: 79fc08aae3913ae4dac251cebf2f201d, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 79fc08aae3913ae4dac251cebf2f201d, type: 3}
