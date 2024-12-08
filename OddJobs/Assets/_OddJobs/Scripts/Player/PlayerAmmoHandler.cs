@@ -12,7 +12,7 @@ public class PlayerAmmoHandler : MonoBehaviour
     //HOW DO I MAKE THIS BETTER?
     public void ReloadAmmo(int clipSize, AmmoType ammoType, int gunIndex)
     {
-        Debug.Log("Reloading Ammo");
+        // Debug.Log("Reloading Ammo");
 
         if(ammoType == AmmoType.Light)
         {

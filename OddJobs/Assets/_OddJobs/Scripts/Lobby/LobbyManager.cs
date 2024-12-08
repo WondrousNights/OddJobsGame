@@ -24,9 +24,9 @@ public class LobbyManager : MonoBehaviour
 
 
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
-    public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
-    public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
-    public event EventHandler<LobbyEventArgs> OnLobbyGameModeChanged;
+    // public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
+    // public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
+    // public event EventHandler<LobbyEventArgs> OnLobbyGameModeChanged;
 
     public Lobby GetJoinedLobby()
     {

@@ -33,16 +33,16 @@ public class PlayerGunHandler : MonoBehaviour
     private PlayerAmmoHandler ammoHandler;
 
 
-    float currentRecoil = 0;
-    float currentKickback = 0;
+    // float currentRecoil = 0;
+    // float currentKickback = 0;
     Quaternion targetRotation;
 
     public bool isReloading = false;
 
 
     //Replace with Ammo Handler
-    int currentAmmo = 30;
-    int maxAmmo = 30;
+    // int currentAmmo = 30;
+    // int maxAmmo = 30;
 
 
     private void Start()

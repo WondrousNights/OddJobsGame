@@ -5,6 +5,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
+using UnityEditor.Build;
 
 namespace AlmenaraGames
 {
@@ -130,14 +131,14 @@ namespace AlmenaraGames
 
         public static void ForceRebuild()
         {
-            string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(
-                EditorUserBuildSettings.selectedBuildTargetGroup);
+            string definesString = PlayerSettings.GetScriptingDefineSymbols(
+                NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup));
             if (!definesString.Contains("MLPAS"))
             {
                 definesString += ";MLPAS";
 
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(
-                    EditorUserBuildSettings.selectedBuildTargetGroup,
+                PlayerSettings.SetScriptingDefineSymbols(
+                    NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup),
                     definesString);
             }
 
@@ -185,14 +186,14 @@ namespace AlmenaraGames
 
         public static void Revert()
         {
-            string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(
-               EditorUserBuildSettings.selectedBuildTargetGroup);
+            string definesString = PlayerSettings.GetScriptingDefineSymbols(
+                NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup));
             if (definesString.Contains(";MLPAS"))
             {
                 definesString = definesString.Replace(";MLPAS", "");
 
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(
-                    EditorUserBuildSettings.selectedBuildTargetGroup,
+                PlayerSettings.SetScriptingDefineSymbols(
+                    NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup),
                     definesString);
             }
         }

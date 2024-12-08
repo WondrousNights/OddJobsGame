@@ -4,20 +4,21 @@ using AlmenaraGames;
 using Unity.Netcode;
 using UnityEngine;
 
+// obsolete
 public class Local_PlayerGunHandler : MonoBehaviour
 {
 
-    [SerializeField] int hitForce = 1000;
-    [SerializeField] bool autoReload = true;
-    [SerializeField] float autoReloadDelay = 0.4f;
+    // [SerializeField] int hitForce = 1000;
+    // [SerializeField] bool autoReload = true;
+    // // [SerializeField] float autoReloadDelay = 0.4f;
 
-    [SerializeField] Camera cam;
-    public GunEffects currentGun;
+    // [SerializeField] Camera cam;
+    // public GunEffects currentGun;
 
-    [SerializeField] GameObject bulletHoleVisual;
+    // [SerializeField] GameObject bulletHoleVisual;
 
-    MultiAudioSource audioSource;
-    Local_PlayerStats playerStats;
+    // MultiAudioSource audioSource;
+    // Local_PlayerStats playerStats;
 
 /*
     private void Start()

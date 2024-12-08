@@ -25,13 +25,13 @@ public class Local_PlayerInputController : MonoBehaviour
     public Transform thirdPersonCamPos;
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject gunHolder;
-    [SerializeField] GameObject myCanvas;
-    [SerializeField] Transform hipPosition;
+    // [SerializeField] GameObject myCanvas;
+    // [SerializeField] Transform hipPosition;
 
     AudioListener myListener;
     public bool hasSpawned = false;
 
-    float count = 0;
+    // float count = 0;
 
 
 
@@ -40,7 +40,7 @@ public class Local_PlayerInputController : MonoBehaviour
     UnityEngine.Vector2 moveInput;
     UnityEngine.Vector2 lookInput;
 
-    bool isInteracting = false;
+    // bool isInteracting = false;
     bool isShooting = false;
 
     //Player Mask

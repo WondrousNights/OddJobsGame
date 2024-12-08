@@ -22,7 +22,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     AudioListener myListener;
     public bool hasSpawned = false;
 
-    float count = 0;
+    // float count = 0;
 
     private void Awake()
     {

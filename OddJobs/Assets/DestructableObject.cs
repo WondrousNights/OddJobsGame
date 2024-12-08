@@ -19,21 +19,39 @@ public class DestructableObject : MonoBehaviour
 
     private void BreakObject()
     {
-        if (brokenObjectPrefab != null && !broken)
+        if (!broken)
         {
             broken = true; // this is hacky but must be done to prevent double breaking
-            brokenObject = Instantiate(brokenObjectPrefab, transform.position, transform.rotation);
-            foreach (var rb in brokenObject.GetComponentsInChildren<Rigidbody>())
+            if (!brokenObjectPrefab) // throw error if broken object prefab is not set
             {
-                rb.AddExplosionForce(breakForce, transform.position, 10f);
+                Debug.LogError("Attempted to break destructable object, but broken object prefab is not set for " + name);
+            }
+            else
+            {
+                // instantiate broken object
+                brokenObject = Instantiate(brokenObjectPrefab, transform.position, transform.rotation);
+                // make all rigidbodies in the broken object inheret the velocity of the parent
+                foreach (var brokenRb in brokenObject.GetComponentsInChildren<Rigidbody>())
+                {
+                    brokenRb.linearVelocity = rb.linearVelocity;
+                }
             }
         }
         Destroy(gameObject);
     }
 
+    private void FixedUpdate()
+    {
+        if (health <= 0)
+        {
+            if (debug) Debug.Log("Breaking object " + name + " due to health depletion");
+            BreakObject();
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
     {
-        if (other.relativeVelocity.magnitude >= breakForce || health <= 0)
+        if (other.relativeVelocity.magnitude >= breakForce)
         {
             if (debug) Debug.Log("Breaking object from a force of " + other.relativeVelocity.magnitude);
             BreakObject();

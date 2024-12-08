@@ -137,8 +137,8 @@ namespace AlmenaraGames{
 					GameObject _MultiAudioManager = new GameObject ("MultiAudioManager");
 					_MultiAudioManager.AddComponent<MultiAudioManager> ();
 
-					foreach (var item in GameObject.FindObjectsOfType(typeof(AudioListener))) {
-						Destroy (item as AudioListener);
+					foreach (var item in GameObject.FindObjectsByType(typeof(AudioListener), FindObjectsSortMode.None)) {
+						Destroy (item as AudioListener); 
 					}
 
 					_MultiAudioManager.AddComponent<AudioListener> ();
@@ -269,9 +269,9 @@ namespace AlmenaraGames{
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 
-			foreach (var item in GameObject.FindObjectsOfType (typeof(AudioListener))) {
-				if ((item as AudioListener).gameObject!=this.gameObject)
-				Destroy (item as AudioListener);
+			foreach (var item in GameObject.FindObjectsByType(typeof(AudioListener), FindObjectsSortMode.None)) {
+				if ((item as AudioListener).gameObject != this.gameObject)
+					Destroy(item as AudioListener);
 			}
 
 	}
