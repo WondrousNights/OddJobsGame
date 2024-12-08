@@ -1,20 +1,39 @@
 using UnityEngine;
 using System.Linq;
 
-public class DestructableObject : MonoBehaviour
+public class DestructableObject : MonoBehaviour, IDamageable
 {
     [SerializeField] private GameObject brokenObjectPrefab;
     [SerializeField] private float breakForce = 2;
-    [SerializeField] private float health = 1f;
     [SerializeField] private bool debug = false;
 
     private Rigidbody rb;
     private bool broken = false;
     private GameObject brokenObject;
 
+
+    [SerializeField]
+    private float _MaxHealth = 1;
+    [SerializeField]
+    private float _Health;
+    public float CurrentHealth {get => _Health; private set => _Health = value;}
+
+    public float MaxHealth {get => _MaxHealth; private set => _MaxHealth = value;}
+
+
+    public void TakeDamage(Ray ray, Vector3 positionOfAttacker, float Damage, float hitForce, Vector3 collisionPoint)
+    {
+       rb.AddForceAtPosition(ray.direction * hitForce, collisionPoint, ForceMode.Impulse);
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    void Start()
+    {
+        _Health = _MaxHealth;
     }
 
     private void BreakObject()
@@ -42,7 +61,7 @@ public class DestructableObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (health <= 0)
+        if (CurrentHealth <= 0)
         {
             if (debug) Debug.Log("Breaking object " + name + " due to health depletion");
             BreakObject();

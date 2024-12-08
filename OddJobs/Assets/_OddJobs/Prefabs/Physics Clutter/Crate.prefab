@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3964333617572007496}
   - component: {fileID: 9024327086632817935}
   - component: {fileID: 693006708407563288}
+  - component: {fileID: 3527049452760195909}
   m_Layer: 0
   m_Name: Crate
   m_TagString: Untagged
@@ -74,6 +75,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioObject: {fileID: 11400000, guid: 0d7c34af31e6d9b4a989e1a7c5bdebf0, type: 2}
+--- !u!114 &3527049452760195909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154636704855020262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3900cce34b926744db3222bcc177031b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brokenObjectPrefab: {fileID: 0}
+  breakForce: 2
+  debug: 0
+  _MaxHealth: 100
+  _Health: 100
 --- !u!1 &7093771114522875218
 GameObject:
   m_ObjectHideFlags: 0

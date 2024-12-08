@@ -38,13 +38,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
   
 
-    public void TakeDamage(Vector3 positionOfAttacker, float Damage, float force, Vector3 collisionPoint)
+    public void TakeDamage(Ray ray, Vector3 positionOfAttacker, float Damage, float force, Vector3 collisionPoint)
     {
         
 
         CurrentHealth -= Damage;
 
-        HandleDamageResponse(positionOfAttacker, force, collisionPoint);
+        HandleDamageResponse(ray, positionOfAttacker, force, collisionPoint);
 
         if(CurrentHealth <= 0)
         {
@@ -62,23 +62,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-    void HandleDamageResponse(Vector3 positionOfAttacker, float force, Vector3 collisionPoint)
+    void HandleDamageResponse(Ray ray, Vector3 positionOfAttacker, float force, Vector3 collisionPoint)
     {
 
-        if(!isDead)
+        if(!isDead && !isRagdoll)
         {
             StartCoroutine("ProcessRagdollAnimation", 3f);
         }
         
-        Vector3 forceDirection = this.transform.position - positionOfAttacker;
-                forceDirection.y = 1;
-                forceDirection.Normalize();
-        Vector3 forceAdjusment = force * forceDirection;
-
-
+  
        Rigidbody hitRigidbody = FindHitRigidbody(collisionPoint);
 
-       hitRigidbody.AddForceAtPosition(forceAdjusment, collisionPoint, ForceMode.Impulse);
+       hitRigidbody.AddForceAtPosition(ray.direction * force, collisionPoint, ForceMode.Impulse);
     }
 
 

@@ -71,13 +71,14 @@ public class GunScriptableObject : ScriptableObject
             Vector3 shootDirection = shootCam.transform.forward;
             if (Physics.Raycast(ray, out hit))
             {
-                
+                //Why are we throwing two shootcam positions?
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
                         shootCam.transform.position,
                         hit.point,
                         hit,
-                        shootCam.transform.position
+                        shootCam.transform.position,
+                        ray
                     )
                 );
             }
@@ -88,14 +89,15 @@ public class GunScriptableObject : ScriptableObject
                         shootCam.transform.position,
                         shootCam.transform.position + (shootDirection * TrailConfig.MissDistance),
                         new RaycastHit(),
-                        shootCam.transform.position
+                        shootCam.transform.position,
+                        ray
                     )
                 );
             }
         }
     }
 
-    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit, Vector3 shootPos)
+    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit, Vector3 shootPos, Ray ray)
     {
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
@@ -136,12 +138,12 @@ public class GunScriptableObject : ScriptableObject
             if(Hit.collider.TryGetComponent(out IDamageable damageable))
             {
                 Debug.Log("HIT DAMAGEABLE");
-                damageable.TakeDamage(Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
+                damageable.TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
             }
             else if(Hit.transform.GetComponentInParent<IDamageable>() != null)
             {
                 //This is for ragdolls
-                Hit.transform.GetComponentInParent<IDamageable>().TakeDamage(Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
+                Hit.transform.GetComponentInParent<IDamageable>().TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
                 
                 
             }
