@@ -183,6 +183,13 @@ namespace DialogueEditor
             button.OnButtonPressed();
         }
 
+        // hotkey one of the options
+        public void PressOption(int index)
+        {
+            m_currentSelectedIndex = index;
+            PressSelectedOption();
+        }
+
         public void AlertHover(UIConversationButton button)
         {
             for (int i = 0; i < m_uiOptions.Count; i++)

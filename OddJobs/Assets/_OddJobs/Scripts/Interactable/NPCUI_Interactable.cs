@@ -2,9 +2,9 @@ using UnityEngine;
 using DialogueEditor;
 public class NPCUI_Interactable : Interactable
 {
-     ConversationManager conversationManager;
+    ConversationManager conversationManager;
 
-     void Start()
+    void Start()
     {
         conversationManager = GetComponent<ConversationManager>();
     }
@@ -21,5 +21,8 @@ public class NPCUI_Interactable : Interactable
     {
         conversationManager.PressSelectedOption();
     }
-    
+    public void PressOption(int index)
+    {
+        conversationManager.PressOption(index);
+    }
 }
