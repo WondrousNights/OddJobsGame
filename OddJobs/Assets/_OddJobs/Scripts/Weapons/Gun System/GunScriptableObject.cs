@@ -139,21 +139,23 @@ public class GunScriptableObject : ScriptableObject
             bulletHoleDecal.transform.rotation = normalRotation * Quaternion.Euler(0, 0, Random.Range(0, 360)); // Add random rotation around that
             Destroy(bulletHoleDecal, 60f);
 
+            // elias: note to self, need to use hit.transform here instead of hit.collider because the collider is not always the parent of the object hit
+            // If the object hit has a rigidbody, apply a force to it
+            if (hit.transform.GetComponent<Rigidbody>())
+            {
+                hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * ShootConfig.hitForce, hit.point, ForceMode.Impulse);
+            }
+
             // If the object hit has a damageable component, apply damage to it
-            if(hit.collider.TryGetComponent(out IDamageable damageable))
+            if(hit.transform.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
             }
-            // If the object hit has a damageable component in its parent, apply damage to it
-            if(hit.collider.GetComponentInParent<IDamageable>() != null)
-            {
-                hit.collider.GetComponentInParent<IDamageable>().TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
-            }
 
-            // If the object hit has a rigidbody, apply a force to it
-            if (hit.collider.GetComponent<Rigidbody>())
+            // If the object hit has a damageable component in its parent, apply damage to it
+            if(hit.transform.GetComponentInParent<IDamageable>() != null)
             {
-                hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * ShootConfig.hitForce, hit.point);
+                hit.transform.GetComponentInParent<IDamageable>().TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
             }
         }
 

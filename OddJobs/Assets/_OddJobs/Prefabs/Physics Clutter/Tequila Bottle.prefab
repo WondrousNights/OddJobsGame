@@ -64,8 +64,7 @@ MonoBehaviour:
     type: 3}
   breakForce: 6
   debug: 0
-  _MaxHealth: 1
-  _Health: 0
+  _maxHealth: 1
 --- !u!54 &7731346540762160191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74,8 +73,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7630888276880384548}
   serializedVersion: 4
-  m_Mass: 10
-  m_Drag: 0
+  m_Mass: 4
+  m_Drag: 0.01
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

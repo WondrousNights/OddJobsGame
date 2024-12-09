@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5046311096174655664}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.996, y: -0.622, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 7218950409408870714}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3740003, y: 1.053, z: 3.3769999}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.28513697, y: 0.28513697, z: 0.28513697}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -226,5 +226,5 @@ MonoBehaviour:
   brokenObjectPrefab: {fileID: 9008638233752101208, guid: 4ced16632b9070f44b726646e6deef6a,
     type: 3}
   breakForce: 6
-  health: 1
   debug: 0
+  _maxHealth: 1
