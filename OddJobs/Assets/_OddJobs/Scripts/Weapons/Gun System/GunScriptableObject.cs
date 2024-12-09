@@ -57,7 +57,7 @@ public class GunScriptableObject : ScriptableObject
 
     public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
     {
-        if (Time.time > ShootConfig.FireRate + LastShootTime)
+        if (Time.time > ShootConfig.fireRate + LastShootTime)
         {
             LastShootTime = Time.time;
             ShootSystem.Play();
@@ -97,7 +97,7 @@ public class GunScriptableObject : ScriptableObject
         }
     }
 
-    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit, Vector3 shootPos, Ray ray)
+    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Vector3 shootPos, Ray ray)
     {
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
@@ -122,37 +122,39 @@ public class GunScriptableObject : ScriptableObject
 
         instance.transform.position = EndPoint;
 
-        if (Hit.collider != null)
+        // if the bullet hit something, spawn a bullet hole and apply damage/force
+        if (hit.collider)
         {
-            //Particle
-            GameObject impactParticle = Instantiate(ShootConfig.impactParticle, Hit.point, Quaternion.identity);
-
-            // rotate the hole visual to shoot away from the mesh it hits
-            impactParticle.transform.position = Hit.point + (Hit.normal * 0.01f);
-            if (Hit.normal != Vector3.zero)
-            impactParticle.transform.rotation = Quaternion.LookRotation(-Hit.normal);
-            impactParticle.transform.parent = Hit.collider.transform; // make the bullethole move with the thing it hit
-                
+            // spawn hit particle effects, rotating it to face away from the surface it hit
+            GameObject impactParticle = Instantiate(ShootConfig.impactParticle, hit.point, Quaternion.identity);
+            impactParticle.transform.position = hit.point + (hit.normal * 0.01f);
+            if (hit.normal != Vector3.zero) impactParticle.transform.rotation = Quaternion.LookRotation(-hit.normal);
             Destroy(impactParticle, 10f);
 
-            if(Hit.collider.TryGetComponent(out IDamageable damageable))
+            // spawn bullet hole decal
+            GameObject bulletHoleDecal = Instantiate(ShootConfig.bulletHoleDecal, hit.point, Quaternion.identity);
+            bulletHoleDecal.transform.position = hit.point + (hit.normal * 0.01f);
+            bulletHoleDecal.transform.parent = hit.collider.transform; // make the bullethole decal move with the thing it hit
+            Quaternion normalRotation = Quaternion.LookRotation(-hit.normal); // Create rotation that faces away from the surface
+            bulletHoleDecal.transform.rotation = normalRotation * Quaternion.Euler(0, 0, Random.Range(0, 360)); // Add random rotation around that
+            Destroy(bulletHoleDecal, 60f);
+
+            // If the object hit has a damageable component, apply damage to it
+            if(hit.collider.TryGetComponent(out IDamageable damageable))
             {
-                Debug.Log("HIT DAMAGEABLE");
-                damageable.TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
+                damageable.TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
             }
-            else if(Hit.transform.GetComponentInParent<IDamageable>() != null)
+            // If the object hit has a damageable component in its parent, apply damage to it
+            if(hit.collider.GetComponentInParent<IDamageable>() != null)
             {
-                //This is for ragdolls
-                Hit.transform.GetComponentInParent<IDamageable>().TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, Hit.point);
-                
-                
+                hit.collider.GetComponentInParent<IDamageable>().TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
             }
-            /*
-            if (Hit.transform.GetComponent<Rigidbody>())
+
+            // If the object hit has a rigidbody, apply a force to it
+            if (hit.collider.GetComponent<Rigidbody>())
             {
-                Hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hit.point);
+                hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * ShootConfig.hitForce, hit.point);
             }
-            */
         }
 
         yield return new WaitForSeconds(TrailConfig.Duration);
@@ -177,6 +179,4 @@ public class GunScriptableObject : ScriptableObject
 
         return trail;
     }
-
-
 }
