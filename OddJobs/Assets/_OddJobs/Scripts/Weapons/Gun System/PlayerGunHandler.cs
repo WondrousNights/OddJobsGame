@@ -113,7 +113,7 @@ public class PlayerGunHandler : MonoBehaviour
 
     public void ShootCurrentGun()
     {
-        if(ActiveGun == null) return;
+        if(ActiveGun == null || playerInputController.playerHealthManager.isRagdoll) return;
 
         if(ammoHandler.currentAmmo[currentGunIndex] > 0 && !isReloading)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShootConfigScriptableObject : ScriptableObject
 {
     public LayerMask hitMask;
-    public Vector3 spread = new Vector3(0.1f, 0.1f, 0.1f);
+    public Vector3 enemySpread = new Vector3(0.1f, 0.1f, 0.1f);
     public float fireRate = 0.25f;
     public AudioObject shootSfx;
     public GameObject impactParticle;

@@ -16,7 +16,7 @@ public class Local_PlayerInputController : MonoBehaviour
     private PlayerGunHandler gunHandler;
     private Local_PlayerStats playerStats;
     private Local_PlayerInteractionManager playerInteractionManager;
-    private Local_PlayerHealthManager playerHealthManager;
+    public Local_PlayerHealthManager playerHealthManager;
     public Local_PlayerUI playerUI;
     
     [SerializeField] WeaponSway weaponSway;

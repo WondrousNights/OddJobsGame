@@ -38,6 +38,23 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 
     public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint)
     {
+        CurrentHealth -= damage;
+       inputController.playerUI.UpdateHealthImage(CurrentHealth, MaxHealth);
+
+         if(CurrentHealth <= 0)
+        {
+            HandleDeath();
+        }
+        if(!isDead)
+        {
+            count = 0;
+
+            if(!isRagdoll)
+            {
+                ProcessRagdollAnimation();
+            }
+            
+        }
         Rigidbody hitRigidbody = FindHitRigidbody(collisionPoint);
         hitRigidbody.AddForceAtPosition(ray.direction * hitForce, collisionPoint, ForceMode.Impulse);
     }

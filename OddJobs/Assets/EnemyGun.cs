@@ -1,83 +1,68 @@
 using System.Collections;
-using System.Numerics;
 using AlmenaraGames;
 using UnityEngine;
 using UnityEngine.Pool;
-using Vector3 = UnityEngine.Vector3;
-using Quaternion = UnityEngine.Quaternion;
 
-[CreateAssetMenu(fileName = "Gun", menuName = "Guns/Gun", order = 0)]
-public class GunScriptableObject : ScriptableObject
+public class EnemyGun : EnemyWeapon
 {
-    
-    public GunType Type;
-    public AmmoType AmmoType;
-    public string Name;
-    public GameObject ModelPrefab;
-    public Vector3 SpawnPoint;
-    public Vector3 SpawnRotation;
 
     public ShootConfigScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;
 
-    public int AmmoClipSize;
 
-    private MonoBehaviour ActiveMonoBehaviour;
-    private GameObject Model;
     private float LastShootTime;
-    private ParticleSystem ShootSystem;
+    [SerializeField] ParticleSystem ShootSystem;
     private ObjectPool<TrailRenderer> TrailPool;
 
-    private Transform parent;
+    [SerializeField] MuzzleFlash muzzleFlash;
 
-    public void Spawn(Transform Parent, MonoBehaviour ActiveMonoBehaviour)
+
+    void Start()
     {
-        this.ActiveMonoBehaviour = ActiveMonoBehaviour;
         LastShootTime = 0; // in editor this will not be properly reset, in build it's fine
         TrailPool = new ObjectPool<TrailRenderer>(CreateTrail);
-
-        Model = Instantiate(ModelPrefab);
-        Model.transform.SetParent(Parent, false);
-        Model.transform.localPosition = SpawnPoint;
-        Model.transform.localRotation = Quaternion.Euler(SpawnRotation);
-        
-        ShootSystem = Model.GetComponentInChildren<ParticleSystem>();
-
-
-        parent = Parent;
     }
 
-    public void Despawn()
+
+     protected override void Attack()
     {
-        // We do a bunch of other stuff on the same frame, so we really want it to be immediately destroyed, not at Unity's convenience.
-
-        TrailPool.Clear();
-        ShootSystem = null;
+       Shoot();
     }
 
-    public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
+    public void Shoot()
     {
         if (Time.time > ShootConfig.fireRate + LastShootTime)
         {
             LastShootTime = Time.time;
             ShootSystem.Play();
             muzzleFlash.Play();
-            MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
-            Ray ray;
-           
-            ray = shootCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-            
+            MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, gameObject.transform.position);
+
+            Vector3 shootDirection = ShootSystem.transform.forward
+                + new Vector3(
+                    Random.Range(
+                        -ShootConfig.enemySpread.x,
+                        ShootConfig.enemySpread.x
+                    ),
+                    Random.Range(
+                        -ShootConfig.enemySpread.y,
+                        ShootConfig.enemySpread.y
+                    ),
+                    Random.Range(
+                        -ShootConfig.enemySpread.z,
+                        ShootConfig.enemySpread.z
+                    )
+                );
+            shootDirection.Normalize();
           
+
+            Ray ray = new Ray(ShootSystem.transform.position, shootDirection);
             RaycastHit hit;
-
-            ammoHandler.currentAmmo[gunIndex] -= 1;
-
-            Vector3 shootDirection = shootCam.transform.forward;
-            if (Physics.Raycast(ray, out hit))
+             if (Physics.Raycast(ray, out hit))
             {
-                ActiveMonoBehaviour.StartCoroutine(
+                this.StartCoroutine(
                     PlayTrail(
-                        shootCam.transform.position,
+                        ShootSystem.transform.position,
                         hit.point,
                         hit,
                         ray
@@ -86,19 +71,20 @@ public class GunScriptableObject : ScriptableObject
             }
             else
             {
-                ActiveMonoBehaviour.StartCoroutine(
+                this.StartCoroutine(
                     PlayTrail(
-                        shootCam.transform.position,
-                        shootCam.transform.position + (shootDirection * TrailConfig.MissDistance),
+                        ShootSystem.transform.position,
+                        ShootSystem.transform.position + (shootDirection * TrailConfig.MissDistance),
                         new RaycastHit(),
                         ray
                     )
                 );
             }
+
         }
     }
 
-    
+
 
     private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Ray ray)
     {
@@ -146,6 +132,7 @@ public class GunScriptableObject : ScriptableObject
             // If the object hit has a rigidbody, apply a force to it
             if (hit.transform.GetComponent<Rigidbody>())
             {
+              
                 hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * ShootConfig.hitForce, hit.point, ForceMode.Impulse);
             }
 

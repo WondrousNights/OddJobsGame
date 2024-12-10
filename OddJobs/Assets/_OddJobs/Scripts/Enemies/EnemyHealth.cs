@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     float count;
     private bool isRagdoll;
-    bool isDead;
+    public bool isDead;
 
     RagdollEnabler ragdollEnabler;
 

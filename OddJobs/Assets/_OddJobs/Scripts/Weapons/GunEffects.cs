@@ -19,19 +19,25 @@ public class GunEffects : MonoBehaviour
     
     [SerializeField] GunScriptableObject myGunProperties;
     public MeshRenderer[] meshRenderers;
+
+
+    [SerializeField] bool isEnemyWeapon = false;
     
     public void ReloadRotation(PlayerGunHandler gunHandler)
     {
+        if(isEnemyWeapon) return;
         StartCoroutine(Rotate(myGunProperties.ShootConfig.reloadTime, gunHandler) );
     }
 
     public void KickbackAdjustment(float duration)
     {
+        if(isEnemyWeapon) return;
         StartCoroutine(Kickback(duration, myGunProperties.ShootConfig.maxRecoil, myGunProperties.ShootConfig.maxKickback));
     }
 
     IEnumerator Rotate(float duration, PlayerGunHandler gunHandler)
     {
+        
         float startRotation = transform.localEulerAngles.x;
         float endRotation = startRotation - 360.0f;
         float t = 0.0f;
@@ -65,6 +71,7 @@ public class GunEffects : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(isEnemyWeapon) return;
         targetRotation.eulerAngles = new Vector3(currentRecoil, transform.localEulerAngles.y, transform.localEulerAngles.z);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * 10);
        transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0f, 0f, currentKickback), Time.deltaTime * 10);
