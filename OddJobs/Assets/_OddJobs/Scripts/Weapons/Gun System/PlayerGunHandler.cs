@@ -21,7 +21,7 @@ public class PlayerGunHandler : MonoBehaviour
 
     public GunScriptableObject[] GunInventory;
 
-    [SerializeField] int currentGunIndex = 0;
+    public int currentGunIndex = 0;
 
     /// <summary>
     //GameObject ActiveGunGameObject;
@@ -82,6 +82,8 @@ public class PlayerGunHandler : MonoBehaviour
             ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
             gunEffects.ReloadRotation(this);
         }
+
+         ammoHandler.UpdateAmmoText(gunIndex, ActiveGun.AmmoType);
     }
 
 
@@ -123,6 +125,9 @@ public class PlayerGunHandler : MonoBehaviour
             );
 
             gunEffects.KickbackAdjustment(0.1f);
+
+             ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
+            
         }
     }
 
@@ -133,6 +138,7 @@ public class PlayerGunHandler : MonoBehaviour
         {
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
+             ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
             gunEffects.ReloadRotation(this);
         }
         else
@@ -159,6 +165,7 @@ public class PlayerGunHandler : MonoBehaviour
         ActiveGun = GunInventory[currentGunIndex];
         ActiveGun.Spawn(GunParent, this);
         gunEffects = GunParent.GetComponentInChildren<GunEffects>();
+        ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
 
     
     }

@@ -49,7 +49,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
         CurrentHealth -= damage;
 
 
-       
+       inputController.playerUI.UpdateHealthImage(CurrentHealth, MaxHealth);
 
         if(CurrentHealth <= 0)
         {
@@ -82,6 +82,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 
     private void HandleDeath()
     {
+        isDead = true;
         if(!isRagdoll)
         {
             ProcessRagdollAnimation();
@@ -111,6 +112,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
        inputController.mycam.cullingMask = inputController.nohudLayerMask;
        inputController.mycam.transform.localPosition = inputController.thirdPersonCamPos.transform.localPosition;
        inputController.mycam.transform.localRotation = inputController.thirdPersonCamPos.transform.localRotation;
+
        Debug.Log("Ragdoll enabled");
        triggerCollider.enabled = false;
        characterController.enabled = false;
@@ -123,7 +125,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
             gameObject.transform.position = inputController.hipPosition.transform.position;
             
 
-            
+        
             inputController.mycam.transform.localPosition = inputController.firstPersonCamPos.transform.localPosition;
             inputController.mycam.transform.localRotation = inputController.firstPersonCamPos.transform.localRotation;
             ragdollEnabler.EnableAnimator();

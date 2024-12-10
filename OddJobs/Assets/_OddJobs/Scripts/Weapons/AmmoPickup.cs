@@ -8,6 +8,7 @@ public class AmmoPickup : Interactable
     protected override void Interact(Local_PlayerInteractionManager playerInteracting)
     {
         playerInteracting.ammoHandler.AddAmmo(ammoType, amount);
+        playerInteracting.ammoHandler.UpdateAmmoText(playerInteracting.gunHandler.currentGunIndex, ammoType);
         Destroy(this.gameObject);
     }   
 }

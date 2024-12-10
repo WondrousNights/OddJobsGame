@@ -17,12 +17,14 @@ public class Local_PlayerInputController : MonoBehaviour
     private Local_PlayerStats playerStats;
     private Local_PlayerInteractionManager playerInteractionManager;
     private Local_PlayerHealthManager playerHealthManager;
+    public Local_PlayerUI playerUI;
     
     [SerializeField] WeaponSway weaponSway;
 
     public Camera mycam;
     public Transform firstPersonCamPos;
     public Transform thirdPersonCamPos;
+
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject gunHolder;
     // [SerializeField] GameObject myCanvas;
@@ -60,6 +62,7 @@ public class Local_PlayerInputController : MonoBehaviour
         gunHandler = GetComponent<PlayerGunHandler>();
         playerStats = GetComponent<Local_PlayerStats>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
+        playerUI = GetComponent<Local_PlayerUI>();
 
 
         myListener = GetComponent<AudioListener>();
@@ -105,11 +108,16 @@ public class Local_PlayerInputController : MonoBehaviour
     }
     void Update()
     {
+        if(playerHealthManager.isRagdoll)
+        {
+            lookInput = new UnityEngine.Vector2(0, 0);
+        }
         if (!playerStats.isDead || !playerHealthManager.isRagdoll)
         {
             look.ProcessLook(lookInput);
             weaponSway.WeaponSwayAnimation(lookInput);
         }
+        
 
         if(isShooting) 
         {

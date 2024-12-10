@@ -8,7 +8,7 @@ public class MuzzleFlash : MonoBehaviour
     bool muzzleFlashShowing = false;
 
     float timeToShow = 0.1f;
-    float count = 0;
+    float count = 10;
 
     void Awake()
     {
