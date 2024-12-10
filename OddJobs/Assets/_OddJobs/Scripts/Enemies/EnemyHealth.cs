@@ -9,9 +9,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 {
 
     [SerializeField]
-    private float _MaxHealth = 100;
+    private float _MaxHealth = 10;
     [SerializeField]
-    private float _Health;
+    private float _Health = 10;
     public float CurrentHealth {get => _Health; private set => _Health = value;}
 
     public float MaxHealth {get => _MaxHealth; private set => _MaxHealth = value;}
@@ -34,9 +34,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        CurrentHealth = MaxHealth;
         count = 0;
-
     }
 
     void Update()

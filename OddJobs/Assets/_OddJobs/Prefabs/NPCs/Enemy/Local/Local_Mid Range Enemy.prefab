@@ -191,7 +191,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.14125372, y: 0.0000002330379, z: 0.00000006515649, w: 0.9899734}
   m_LocalPosition: {x: -6.267209e-14, y: 0.08705419, z: 0.00000004004687}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95727825, y: 0.95727825, z: 0.95727825}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2347379699498501787}
@@ -564,7 +564,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300008, guid: f019d09ecbb343f4eae1412ba83ab1af, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ec53eba6a90aa4a42a35bc62dc833b79, type: 3}
   m_Bones:
   - {fileID: 5982925790123446510}
   - {fileID: 2758395489044008141}
@@ -619,9 +619,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   - 0
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
@@ -935,54 +935,54 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
+  - 44.673424
+  - 38.672237
+  - 10.036795
+  - 0
+  - 9.044546
+  - 51.64758
+  - 39.367622
+  - -10.766071
+  - 0
+  - -36.05484
+  - 5.99164
+  - 22.311909
+  - 35.81067
+  - 0
+  - 0
+  - 0
+  - 65.12991
+  - 21.784855
+  - -13.845318
+  - 0
+  - 24.590797
+  - -22.347252
+  - 0
+  - 0
+  - 0.84746933
+  - 41.325817
+  - -19.606703
+  - 0
+  - -33.92627
+  - 0
+  - -28.893234
+  - 0
+  - 0
+  - -45.896057
+  - 42.336723
+  - 23.350018
+  - 0
+  - 0
+  - 0
+  - 12.363242
+  - 0
+  - 3.7703552
   - 0
   - 0
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 5.1481566
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.00005986169, y: 0.7044536, z: -0.09442213}
@@ -1390,7 +1390,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2317815008215249038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1486,9 +1486,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.000019408762, y: -0.5844079, z: 0.051002525}
@@ -1629,9 +1629,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: -0.000090159476, y: 0.46731088, z: -0.08683036}
@@ -1847,7 +1847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2386496666495027579
 Transform:
   m_ObjectHideFlags: 0
@@ -1911,7 +1911,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: 22e96424c8244c94c9e181ff91150a70, type: 3}
+  m_Mesh: {fileID: 0}
   m_Bones:
   - {fileID: 5982925790123446510}
   - {fileID: 2758395489044008141}
@@ -1966,7 +1966,7 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
+  - 1.2324963
   - 0
   - 0
   - 0
@@ -2117,7 +2117,7 @@ MonoBehaviour:
   - name: STOMACH
     skinnedMesh:
     - {fileID: 5554172489003527773}
-  prefabPath: Assets/_OddJobs/Prefabs/Enemy/Local/Local_EnemyVisuals.prefab
+  prefabPath: Assets/_OddJobs/Prefabs/NPCs/Enemy/Local/Local_Mid Range Enemy.prefab
   instanceStatus: 1
   originHip: {fileID: 8705006120116183200}
   headHip: {fileID: 6114886531833221753}
@@ -2142,30 +2142,30 @@ MonoBehaviour:
     - {fileID: 6290110618633596389}
   animator: {fileID: 7760775420330310051}
   characterSelectedElements:
-    Hair: -1
-    Beard: 9
-    Hat: 0
-    Shirt: 9
-    Pants: 1
-    Shoes: 9
-    Accessory: -1
+    Hair: 7
+    Beard: 2
+    Hat: -1
+    Shirt: 13
+    Pants: 6
+    Shoes: 4
+    Accessory: 4
     Item1: -1
-  heightValue: 0
-  headSizeValue: 0
+  heightValue: 0.019165136
+  headSizeValue: -0.04272172
   feetOffset: 0
   characterBlendshapeDatas:
   - blendshapeName: Fat
     type: 0
     group: 0
-    value: 0
+    value: 44.673424
   - blendshapeName: Muscles
     type: 1
     group: 0
-    value: 0
+    value: 38.672237
   - blendshapeName: Thin
     type: 3
     group: 0
-    value: 0
+    value: 10.036795
   - blendshapeName: Neck_Width
     type: 5
     group: 1
@@ -2173,19 +2173,19 @@ MonoBehaviour:
   - blendshapeName: Ear_Size
     type: 6
     group: 1
-    value: 0
+    value: 9.044546
   - blendshapeName: Ear_Angle
     type: 7
     group: 1
-    value: 0
+    value: 51.64758
   - blendshapeName: Jaw_Width
     type: 8
     group: 1
-    value: 0
+    value: 39.367622
   - blendshapeName: Jaw_Offset
     type: 9
     group: 1
-    value: 0
+    value: -10.766071
   - blendshapeName: Jaw_Shift
     type: 10
     group: 1
@@ -2193,19 +2193,19 @@ MonoBehaviour:
   - blendshapeName: Cheek_Size
     type: 11
     group: 1
-    value: 0
+    value: -36.05484
   - blendshapeName: Chin_Offset
     type: 12
     group: 1
-    value: 0
+    value: 5.99164
   - blendshapeName: Eye_Width
     type: 13
     group: 1
-    value: 0
+    value: 22.311909
   - blendshapeName: Eye_Form
     type: 14
     group: 1
-    value: 0
+    value: 35.81067
   - blendshapeName: Eye_InnerCorner
     type: 15
     group: 1
@@ -2221,7 +2221,7 @@ MonoBehaviour:
   - blendshapeName: Eye_Offset
     type: 18
     group: 1
-    value: 0
+    value: -22.347252
   - blendshapeName: Eye_OffsetH
     type: 19
     group: 1
@@ -2229,15 +2229,15 @@ MonoBehaviour:
   - blendshapeName: Eye_ScaleX
     type: 20
     group: 1
-    value: 0
+    value: 65.12991
   - blendshapeName: Eye_ScaleY
     type: 21
     group: 1
-    value: 0
+    value: 21.784855
   - blendshapeName: Eye_Size
     type: 22
     group: 1
-    value: 0
+    value: -13.845318
   - blendshapeName: Eye_Close
     type: 23
     group: 1
@@ -2245,7 +2245,7 @@ MonoBehaviour:
   - blendshapeName: Eye_Height
     type: 24
     group: 1
-    value: 0
+    value: 24.590797
   - blendshapeName: Brow_Height
     type: 25
     group: 1
@@ -2253,15 +2253,15 @@ MonoBehaviour:
   - blendshapeName: Brow_Shape
     type: 26
     group: 1
-    value: 0
+    value: 0.84746933
   - blendshapeName: Brow_Thickness
     type: 27
     group: 1
-    value: 0
+    value: 41.325817
   - blendshapeName: Brow_Length
     type: 28
     group: 1
-    value: 0
+    value: -19.606703
   - blendshapeName: Nose_Length
     type: 29
     group: 1
@@ -2269,7 +2269,7 @@ MonoBehaviour:
   - blendshapeName: Nose_Size
     type: 30
     group: 1
-    value: 0
+    value: -33.92627
   - blendshapeName: Nose_Angle
     type: 31
     group: 1
@@ -2277,7 +2277,7 @@ MonoBehaviour:
   - blendshapeName: Nose_Offset
     type: 32
     group: 1
-    value: 0
+    value: -28.893234
   - blendshapeName: Nose_Bridge
     type: 33
     group: 1
@@ -2289,15 +2289,15 @@ MonoBehaviour:
   - blendshapeName: Mouth_Offset
     type: 35
     group: 1
-    value: 0
+    value: -45.896057
   - blendshapeName: Mouth_Width
     type: 36
     group: 1
-    value: 0
+    value: 42.336723
   - blendshapeName: Mouth_Size
     type: 37
     group: 1
-    value: 0
+    value: 23.350018
   - blendshapeName: Mouth_Open
     type: 38
     group: 1
@@ -2313,7 +2313,7 @@ MonoBehaviour:
   - blendshapeName: Face_Form
     type: 41
     group: 1
-    value: 0
+    value: 12.363242
   - blendshapeName: Chin_Width
     type: 42
     group: 1
@@ -2321,11 +2321,11 @@ MonoBehaviour:
   - blendshapeName: Chin_Form
     type: 43
     group: 1
-    value: 0
+    value: 3.7703552
   - blendshapeName: Head_Offset
     type: 44
     group: 2
-    value: 0
+    value: 5.1481566
   - blendshapeName: Smile
     type: 45
     group: 1
@@ -2350,9 +2350,9 @@ MonoBehaviour:
     type: 50
     group: 2
     value: 100
-  Skin: {r: 0.8679245, g: 0.5573327, b: 0.45443213, a: 1}
-  Eye: {r: 0.22588101, g: 0.2618088, b: 0.33962256, a: 0}
-  Hair: {r: 0.17924523, g: 0.17924523, b: 0.17924523, a: 0}
+  Skin: {r: 0.7924135, g: 0.5104419, b: 0.41711196, a: 1}
+  Eye: {r: 0.24895291, g: 0.3996626, b: 0.28537622, a: 0}
+  Hair: {r: 0.13247563, g: 0.20239592, b: 0.32281417, a: 0}
   Underpants: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   OralCavity: {r: 0.6901961, g: 0.29019603, b: 0.30196074, a: 0}
   Teeth: {r: 0.8, g: 0.8, b: 0.8, a: 0}
@@ -2581,9 +2581,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9262548cb19ad624086daa14c66e712d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxHealth: 100
-  _Health: 0
-  timeToGetUp: 1
+  _MaxHealth: 80
+  _Health: 20
+  timeToGetUp: 1.1
   isDead: 0
   ragdollRoot: {fileID: 6436129931885659441}
   capsuleCollider: {fileID: 0}
@@ -2642,7 +2642,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3623118020020442531}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2738,9 +2738,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.000020235777, y: 0.51200753, z: -0.08347772}
@@ -2881,9 +2881,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.0000009834766, y: -0.8535756, z: 0.053219263}
@@ -2969,7 +2969,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300018, guid: 182a52564125e7043a9c544a753905ce, type: 3}
+  m_Mesh: {fileID: 4300004, guid: 182a52564125e7043a9c544a753905ce, type: 3}
   m_Bones:
   - {fileID: 5982925790123446510}
   - {fileID: 2758395489044008141}
@@ -3024,23 +3024,23 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
+  - 39.367622
+  - -10.766071
+  - 0
+  - -36.05484
+  - 5.99164
+  - 12.363242
+  - 0
+  - 0
+  - 3.7703552
+  - 5.1481566
+  - 23.219633
   - 0
   - 0
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 1.2324963
   - 0
   - 0
   - 0
@@ -3476,9 +3476,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: -0.00000082701445, y: -0.9497491, z: 0.13739944}
@@ -3531,7 +3531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6386402314620725471
 Transform:
   m_ObjectHideFlags: 0
@@ -3571,7 +3571,6 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3f3d17836a87ae942ac524d7020ac829, type: 2}
-  - {fileID: 2100000, guid: a4d90c6a694253e4380dd8ad8aca9b32, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3596,7 +3595,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300002, guid: 9f708d8618ebd254389d50caf98f9cae, type: 3}
   m_Bones:
   - {fileID: 5982925790123446510}
   - {fileID: 2758395489044008141}
@@ -3651,9 +3650,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 5.1481566
+  - -8.312775
+  - -4.6231537
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.000000005122274, y: 0.01935458, z: -0.022495536}
@@ -3818,7 +3817,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300004, guid: 22e96424c8244c94c9e181ff91150a70, type: 3}
+  m_Mesh: {fileID: 4300004, guid: c5b2e1a01aa0b7147ab8fa5202e559d9, type: 3}
   m_Bones:
   - {fileID: 5982925790123446510}
   - {fileID: 2758395489044008141}
@@ -3873,9 +3872,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.000000005122274, y: 0.01935458, z: -0.022495536}
@@ -4004,7 +4003,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5710447426661859105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4100,9 +4099,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: -0.0000119283795, y: -0.23799074, z: 0.040889487}
@@ -4469,9 +4468,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: -0.000034734607, y: 0.060842223, z: -0.0015941262}
@@ -4775,7 +4774,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6879253938032130576}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4871,9 +4870,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.00000031292439, y: 0.5177808, z: -0.10335331}
@@ -5077,9 +5076,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.000000022351742, y: 0.27644622, z: -0.032933265}
@@ -5370,7 +5369,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0136894, y: 1.0191652, z: 1.0191652}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5982925790123446510}
@@ -5511,9 +5510,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: -0.00000014901161, y: 0.5201516, z: -0.0008071214}
@@ -5762,7 +5761,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300002, guid: f019d09ecbb343f4eae1412ba83ab1af, type: 3}
+  m_Mesh: {fileID: 4300006, guid: 4b3d6be02d496cc4ba6547ed6122d614, type: 3}
   m_Bones:
   - {fileID: 5982925790123446510}
   - {fileID: 2758395489044008141}
@@ -5817,9 +5816,9 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
+  - 44.673424
+  - 38.672237
+  - 10.036795
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.000000005122274, y: 0.01935458, z: -0.022495536}
@@ -6131,7 +6130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7393542559905133822
 Transform:
   m_ObjectHideFlags: 0
@@ -6195,7 +6194,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300002, guid: c5b2e1a01aa0b7147ab8fa5202e559d9, type: 3}
   m_Bones:
   - {fileID: 5982925790123446510}
   - {fileID: 2758395489044008141}
@@ -6250,7 +6249,7 @@ SkinnedMeshRenderer:
   - {fileID: 46818145156021613}
   - {fileID: 8102590423863565881}
   m_BlendShapeWeights:
-  - 0
+  - 5.1481566
   m_RootBone: {fileID: 5982925790123446510}
   m_AABB:
     m_Center: {x: 0.000000022351742, y: 0.76750654, z: -0.12188481}
@@ -6493,6 +6492,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2896057742998421084}
+    - targetCorrespondingSourceObject: {fileID: 2791684382786154025, guid: 3e5df584a6f79484998321970d03ad4e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1473645047034916133}
   m_SourcePrefab: {fileID: 100100000, guid: 3e5df584a6f79484998321970d03ad4e, type: 3}
 --- !u!114 &167505158470761809 stripped
 MonoBehaviour:
@@ -6537,6 +6540,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 576562526135252042}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3368220520103189091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2791684382786154025, guid: 3e5df584a6f79484998321970d03ad4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 576562526135252042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1473645047034916133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368220520103189091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!198 &9183953138612770863 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8607408205234891877, guid: 3e5df584a6f79484998321970d03ad4e,
@@ -6619,7 +6651,40 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6752659567253115049}
+    - targetCorrespondingSourceObject: {fileID: 2791684382786154025, guid: 3e5df584a6f79484998321970d03ad4e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 469578047049211997}
   m_SourcePrefab: {fileID: 100100000, guid: 3e5df584a6f79484998321970d03ad4e, type: 3}
+--- !u!1 &1864668848915824000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2791684382786154025, guid: 3e5df584a6f79484998321970d03ad4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4566276565950026665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &469578047049211997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864668848915824000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!4 &2761904413129909151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1804515433199792182, guid: 3e5df584a6f79484998321970d03ad4e,

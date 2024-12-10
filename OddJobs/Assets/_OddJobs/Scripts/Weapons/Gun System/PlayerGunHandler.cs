@@ -98,6 +98,7 @@ public class PlayerGunHandler : MonoBehaviour
             // remove the gun from the inventory
             DeEquipCurrentGun();
             Inventory[currentGunIndex] = null;
+            ActiveGun = null;
         }    
     }
 
@@ -158,20 +159,28 @@ public class PlayerGunHandler : MonoBehaviour
                 currentGunIndex
                 );
 
-            gunEffects.KickbackAdjustment(0.1f);
+                // play shooting related effects
+                gunEffects.KickbackAdjustment(0.1f);
+                ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
             }
         }
-        else {
-            if (ammoHandler.HasAmmoToReload(ActiveGun.AmmoType) && autoReload && !isReloading)
+        else
+        {
+            // if we have ammo to reload and auto reload is enabled, reload the gun
+            if (ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
             {
-                Reload();
+                if (autoReload && !isReloading) {
+                    Reload();
+                }
+                else
+                {
+                    // FAIL, NEED TO RELOAD!
+                }
             }
-            if (!ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
+            else
             {
-                // no ammo or clip left, play failed shooting sound
+                // FAIL, NEED AMMO!
             }
-            ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
-            
         }
     }
 
@@ -183,7 +192,7 @@ public class PlayerGunHandler : MonoBehaviour
         {
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
-             ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
+            ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
             gunEffects.ReloadRotation(this);
         }
         else

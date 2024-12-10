@@ -5247,7 +5247,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 9094701647203173809}
-  m_PlaneDistance: 0.08
+  m_PlaneDistance: 0.57
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -7082,6 +7082,7 @@ MonoBehaviour:
   Inventory:
   - {fileID: 0}
   - {fileID: 0}
+  currentGunIndex: 0
   isReloading: 0
   isEquipping: 0
 --- !u!114 &8181365394615560530
@@ -7096,9 +7097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fda6de691e13fe49894f44a3c9e90b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAmmo: 20
-  mediumAmmo: 10
-  heavyAmmo: 10
+  lightAmmo: 10
+  mediumAmmo: 30
+  heavyAmmo: 40
   currentAmmo: 000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &7849503409469734107
 GameObject:
