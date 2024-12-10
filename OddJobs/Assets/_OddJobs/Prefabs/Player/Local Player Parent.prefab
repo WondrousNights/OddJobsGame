@@ -6843,6 +6843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22511487fba22f044bd676a270335db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealthManager: {fileID: 0}
   playerUI: {fileID: 0}
   weaponSway: {fileID: 2067224874714771139}
   mycam: {fileID: 9094701647203173809}
@@ -7032,8 +7033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fda6de691e13fe49894f44a3c9e90b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAmmo: 60
-  mediumAmmo: 40
+  lightAmmo: 20
+  mediumAmmo: 10
   heavyAmmo: 10
   currentAmmo: 0000000000000000
 --- !u!1 &7849503409469734107

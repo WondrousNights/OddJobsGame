@@ -5701,7 +5701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  distanceToSpot: 10.22
+  distanceToSpot: 25.22
   playerMask:
     serializedVersion: 2
     m_Bits: 15368
@@ -5760,6 +5760,7 @@ MonoBehaviour:
   _MaxHealth: 100
   _Health: 0
   timeToGetUp: 1
+  isDead: 0
   ragdollRoot: {fileID: 4541520990185260214}
   capsuleCollider: {fileID: 0}
 --- !u!114 &2912516716935597106
