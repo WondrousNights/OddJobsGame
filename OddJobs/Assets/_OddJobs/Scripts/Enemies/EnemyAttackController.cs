@@ -7,7 +7,7 @@ public class EnemyAttackController : MonoBehaviour
 
     public void AttackEvent()
     {
-        Debug.Log("Attack event fired!");
+        //Debug.Log("Attack event fired!");
         weapon.BaseAttack();
     }
     

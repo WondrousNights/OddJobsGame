@@ -18,6 +18,7 @@ public class GunEffects : MonoBehaviour
     Vector3 startRot;
     
     [SerializeField] GunScriptableObject myGunProperties;
+    public MeshRenderer[] meshRenderers;
     
     public void ReloadRotation(PlayerGunHandler gunHandler)
     {

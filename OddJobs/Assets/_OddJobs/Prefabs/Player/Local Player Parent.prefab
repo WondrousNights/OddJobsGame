@@ -4320,13 +4320,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4615460085036802058}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: -3.73}
+  m_LocalRotation: {x: 0.115696676, y: -0, z: -0, w: 0.9932846}
+  m_LocalPosition: {x: 0, y: 3.58, z: -7.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6200274179733969214}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.288, y: 0, z: 0}
 --- !u!1 &4708850658512492577
 GameObject:
   m_ObjectHideFlags: 0
@@ -6681,27 +6681,27 @@ MonoBehaviour:
   weaponSway: {fileID: 2067224874714771139}
   mycam: {fileID: 9094701647203173809}
   firstPersonCamPos: {fileID: 2207837780299864464}
-  thirdPersonCamPos: {fileID: 3963971890901531650}
+  thirdPersonCamPos: {fileID: 4676085678605703177}
   myVisuals: {fileID: 5710266452690481227}
   gunHolder: {fileID: 2739669307900164629}
-  myCanvas: {fileID: 6035501271838365447}
-  hipPosition: {fileID: 7269119586076548972}
+  hipPosition: {fileID: 250687055078301375}
   hasSpawned: 0
+  playerInput: {fileID: 0}
   player1Mask:
     serializedVersion: 2
-    m_Bits: 30975
+    m_Bits: 2095359
   player2Mask:
     serializedVersion: 2
-    m_Bits: 46335
+    m_Bits: 2094335
   player3Mask:
     serializedVersion: 2
-    m_Bits: 77055
+    m_Bits: 2092287
   player4Mask:
     serializedVersion: 2
-    m_Bits: 400639
+    m_Bits: 2088191
   nohudLayerMask:
     serializedVersion: 2
-    m_Bits: 277759
+    m_Bits: 1850623
 --- !u!114 &970160351578811567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6826,6 +6826,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRagdoll: 0
+  _MaxHealth: 100
+  _Health: 0
+  timeToGetUp: 1
 --- !u!114 &197025337377271024
 MonoBehaviour:
   m_ObjectHideFlags: 0

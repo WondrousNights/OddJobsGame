@@ -14,6 +14,7 @@ public class PlayerAmmoHandler : MonoBehaviour
     {
         // Debug.Log("Reloading Ammo");
 
+
         if(ammoType == AmmoType.Light)
         {
             int MaxReloadAmount = Mathf.Min(clipSize, lightAmmo);
@@ -72,6 +73,7 @@ public class PlayerAmmoHandler : MonoBehaviour
         }
         
     }
+
 
 
     public void AddAmmo(AmmoType ammoType, int amount)

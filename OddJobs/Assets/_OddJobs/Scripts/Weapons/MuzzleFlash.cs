@@ -9,6 +9,11 @@ public class MuzzleFlash : MonoBehaviour
 
     float timeToShow = 0.1f;
     float count = 0;
+
+    void Awake()
+    {
+        muzzleFlashShowing = false;
+    }
     public void Play()
     {
         muzzleFlashShowing = true;

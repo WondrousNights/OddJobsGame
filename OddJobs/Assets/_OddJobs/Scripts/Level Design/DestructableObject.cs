@@ -23,13 +23,15 @@ public class DestructableObject : MonoBehaviour, IDamageable
         _health = _maxHealth;
     }
 
-    public void TakeDamage(Ray ray, Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collisionPoint)
+    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint)
     {
         _health -= damage;
         if (debug) Debug.Log(name + " took " + damage + " damage, current health: " + _health);
 
         // rb.AddForceAtPosition(ray.direction * hitForce, collisionPoint, ForceMode.Impulse);
     }
+
+    
 
     private void Update()
     {
@@ -76,5 +78,11 @@ public class DestructableObject : MonoBehaviour, IDamageable
         Destroy(gameObject);
 
         yield return null;
+    }
+
+
+    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint)
+    {
+        throw new System.NotImplementedException();
     }
 }

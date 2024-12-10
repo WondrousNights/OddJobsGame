@@ -77,7 +77,6 @@ public class GunScriptableObject : ScriptableObject
                         shootCam.transform.position,
                         hit.point,
                         hit,
-                        shootCam.transform.position,
                         ray
                     )
                 );
@@ -89,7 +88,6 @@ public class GunScriptableObject : ScriptableObject
                         shootCam.transform.position,
                         shootCam.transform.position + (shootDirection * TrailConfig.MissDistance),
                         new RaycastHit(),
-                        shootCam.transform.position,
                         ray
                     )
                 );
@@ -97,7 +95,7 @@ public class GunScriptableObject : ScriptableObject
         }
     }
 
-    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Vector3 shootPos, Ray ray)
+    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Ray ray)
     {
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
@@ -149,13 +147,13 @@ public class GunScriptableObject : ScriptableObject
             // If the object hit has a damageable component, apply damage to it
             if(hit.transform.TryGetComponent(out IDamageable damageable))
             {
-                damageable.TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
+                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
             }
 
             // If the object hit has a damageable component in its parent, apply damage to it
             if(hit.transform.GetComponentInParent<IDamageable>() != null)
             {
-                hit.transform.GetComponentInParent<IDamageable>().TakeDamage(ray, Model.transform.position, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
+                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
             }
         }
 

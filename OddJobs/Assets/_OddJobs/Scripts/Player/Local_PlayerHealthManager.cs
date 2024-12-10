@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class Local_PlayerHealthManager : MonoBehaviour
+public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 {
     
     public bool isRagdoll;
@@ -14,7 +15,18 @@ public class Local_PlayerHealthManager : MonoBehaviour
     BoxCollider triggerCollider;
 
    
+    [SerializeField]
+    private float _MaxHealth = 100;
+    [SerializeField]
+    private float _Health;
+    public float CurrentHealth {get => _Health; private set => _Health = value;}
 
+    public float MaxHealth {get => _MaxHealth; private set => _MaxHealth = value;}
+
+    [SerializeField] float timeToGetUp;
+    float count;
+
+    bool isDead;
 
     void Start()
     {
@@ -24,43 +36,104 @@ public class Local_PlayerHealthManager : MonoBehaviour
         triggerCollider = GetComponent<BoxCollider>();
     }
 
-  
-    public void TakeDamage(Vector3 force, Vector3 hitPoint)
+    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint)
     {
-        Debug.Log("Ragdoll!!");
-        StartCoroutine("ProcessRagdollAnimation", 3f);
+        Rigidbody hitRigidbody = FindHitRigidbody(collisionPoint);
+        hitRigidbody.AddForceAtPosition(ray.direction * hitForce, collisionPoint, ForceMode.Impulse);
+    }
 
 
-       Rigidbody hitRigidbody = FindHitRigidbody(hitPoint);
+    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint)
+    {
 
-       hitRigidbody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
+        CurrentHealth -= damage;
+
 
        
+
+        if(CurrentHealth <= 0)
+        {
+            HandleDeath();
+        }
+
+        if(!isDead)
+        {
+            count = 0;
+
+            if(!isRagdoll)
+            {
+                ProcessRagdollAnimation();
+            }
+            
+        }
+        
+
+
+        Vector3 forceDirection = this.transform.position - positionOfAttacker;
+                forceDirection.y = 1;
+                forceDirection.Normalize();
+
+        Vector3 force = hitForce * forceDirection;
+
+
+        Rigidbody hitRigidbody = FindHitRigidbody(collsionPoint);
+        hitRigidbody.AddForceAtPosition(force, collsionPoint, ForceMode.Impulse);
+    }
+
+    private void HandleDeath()
+    {
+        if(!isRagdoll)
+        {
+            ProcessRagdollAnimation();
+        }
+    }
+
+    void Update()
+    {
+        if(isRagdoll && !isDead)
+        {
+            count += Time.deltaTime;
+
+            if(count >= timeToGetUp)
+            {
+                ProcessGetUp();
+            }
+        }
     }
 
 
 
-    IEnumerator ProcessRagdollAnimation(float duration)
+    void ProcessRagdollAnimation()
     {
-       isRagdoll = true;
+        isRagdoll = true;
        ragdollEnabler.EnableRagdoll();
 
        inputController.mycam.cullingMask = inputController.nohudLayerMask;
-       inputController.mycam.transform.position = inputController.thirdPersonCamPos.transform.position;
+       inputController.mycam.transform.localPosition = inputController.thirdPersonCamPos.transform.localPosition;
+       inputController.mycam.transform.localRotation = inputController.thirdPersonCamPos.transform.localRotation;
        Debug.Log("Ragdoll enabled");
        triggerCollider.enabled = false;
-       
-       yield return new WaitForSeconds(duration);
-        
-        ragdollEnabler.EnableAnimator();
-       inputController.mycam.transform.position = inputController.firstPersonCamPos.transform.position;
-     
-       isRagdoll = false;
-       inputController.ResetSetCameraLayerMask();
-       triggerCollider.enabled = true;
-       
-
+       characterController.enabled = false;
     }
+
+     private void ProcessGetUp()
+    {
+        if(!isDead)
+        {
+            gameObject.transform.position = inputController.hipPosition.transform.position;
+            
+
+            
+            inputController.mycam.transform.localPosition = inputController.firstPersonCamPos.transform.localPosition;
+            inputController.mycam.transform.localRotation = inputController.firstPersonCamPos.transform.localRotation;
+            ragdollEnabler.EnableAnimator();
+            inputController.ResetSetCameraLayerMask();
+            triggerCollider.enabled = true;
+            isRagdoll = false;
+            characterController.enabled = true;
+        }
+    }
+
 
 
     private Rigidbody FindHitRigidbody(Vector3 hitPoint)
@@ -81,5 +154,6 @@ public class Local_PlayerHealthManager : MonoBehaviour
 
         return closestRigidbody;
     }
+
     
 }

@@ -26,7 +26,7 @@ public class Local_PlayerInputController : MonoBehaviour
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject gunHolder;
     // [SerializeField] GameObject myCanvas;
-    // [SerializeField] Transform hipPosition;
+    public GameObject hipPosition;
 
     AudioListener myListener;
     public bool hasSpawned = false;
@@ -35,7 +35,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
 
 
-    PlayerInput playerInput;
+    public PlayerInput playerInput;
     //Input Values
     UnityEngine.Vector2 moveInput;
     UnityEngine.Vector2 lookInput;
@@ -97,7 +97,11 @@ public class Local_PlayerInputController : MonoBehaviour
     }
     void LateUpdate()
     {
-        playerMovement.ProcessMove(moveInput);
+        if(!playerHealthManager.isRagdoll)
+        {
+            playerMovement.ProcessMove(moveInput);
+        }
+       
     }
     void Update()
     {
@@ -193,7 +197,7 @@ public class Local_PlayerInputController : MonoBehaviour
        
         if(context.performed)
         {
-            playerHealthManager.TakeDamage(transform.up, this.transform.position);
+            playerHealthManager.TakeDamageFromMelee(this.transform.position, 0, 100f, this.transform.position);
         }    
     }
 
@@ -216,6 +220,7 @@ public class Local_PlayerInputController : MonoBehaviour
     {
         //Set Layers so we can disable player visuals accordingly
         //Camera is set to only render other player visuals, not our own
+        //Need to use getcomponents in children for this!!!
         if(playerInput.playerIndex == 0)
         {
 
@@ -234,15 +239,7 @@ public class Local_PlayerInputController : MonoBehaviour
                 }
             }
 
-            foreach (Transform child in gunHolder.transform)
-            {
-                child.gameObject.layer = 14;
-                
-                foreach (Transform nestedChild in child.transform)
-                {
-                    nestedChild.gameObject.layer = 14;
-                }   
-            }
+            
             mycam.cullingMask = player1Mask;
         }
         
@@ -264,14 +261,7 @@ public class Local_PlayerInputController : MonoBehaviour
                 }
             }
 
-            foreach (Transform child in gunHolder.transform)
-            {
-                child.gameObject.layer = 15;
-                foreach (Transform nestedChild in child.transform)
-                {
-                    nestedChild.gameObject.layer = 15;
-                }   
-            }
+            
             mycam.cullingMask = player2Mask;
         }
        

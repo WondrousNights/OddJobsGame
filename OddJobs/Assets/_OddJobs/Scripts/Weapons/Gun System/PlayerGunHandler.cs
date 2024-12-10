@@ -24,13 +24,14 @@ public class PlayerGunHandler : MonoBehaviour
     [SerializeField] int currentGunIndex = 0;
 
     /// <summary>
-    /// [SerializeField] GameObject ActiveGunGameObject;
+    //GameObject ActiveGunGameObject;
     /// </summary>
     GunEffects gunEffects;
     
 
     private Local_PlayerInputController playerInputController;
     private PlayerAmmoHandler ammoHandler;
+    private Local_PlayerHealthManager playerHealthManager;
 
 
     // float currentRecoil = 0;
@@ -48,6 +49,7 @@ public class PlayerGunHandler : MonoBehaviour
     private void Start()
     {
         playerInputController = GetComponent<Local_PlayerInputController>();
+        playerHealthManager = GetComponent<Local_PlayerHealthManager>();
         ammoHandler = GetComponent<PlayerAmmoHandler>();
 
 
@@ -158,12 +160,31 @@ public class PlayerGunHandler : MonoBehaviour
         ActiveGun.Spawn(GunParent, this);
         gunEffects = GunParent.GetComponentInChildren<GunEffects>();
 
-        
-
-        
+    
     }
 
 
 
+
+
+
+    ///NEED A PERFORMANCE UPDATE HEREE! THis is way too much for this functionality
+    void Update()
+    {
+        if(playerHealthManager.isRagdoll)
+        {
+            foreach(MeshRenderer render in gunEffects.meshRenderers)
+            {
+                render.enabled = false;
+            }
+        }
+        else
+        {
+            foreach(MeshRenderer render in gunEffects.meshRenderers)
+            {
+                render.enabled = true;
+            }
+        }
+    }
 
 }

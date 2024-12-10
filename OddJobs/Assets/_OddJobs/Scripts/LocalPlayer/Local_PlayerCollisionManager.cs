@@ -13,24 +13,15 @@ public class Local_PlayerCollisionManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Debug.Log(other.gameObject.tag);
+        //Debug.Log(other.name);
         if(other.gameObject.tag == "MeleeWeapon")
         {
+            Debug.Log("Got hit from melee weapon");
             EnemyWeapon weapon = other.gameObject.GetComponent<EnemyWeapon>();
 
             if(weapon.isAttacking)
             {
-
-                //Ragdoll physics hit information
-                Vector3 forceDirection = this.transform.position - weapon.transform.position;
-                forceDirection.y = 1;
-                forceDirection.Normalize();
-
-                Vector3 collisionPoint = other.transform.position;
-
-                Vector3 force = weapon.ragdollForceMagnitude * forceDirection;
-
-                playerHealthManager.TakeDamage(force, collisionPoint);
+                playerHealthManager.TakeDamageFromMelee(weapon.transform.position, weapon.damage, weapon.ragdollForceMagnitude, other.transform.position);
             }
         }
     }
