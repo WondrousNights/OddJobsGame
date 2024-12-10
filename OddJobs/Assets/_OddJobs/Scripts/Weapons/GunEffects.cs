@@ -6,15 +6,9 @@ using UnityEngine;
 
 public class GunEffects : MonoBehaviour
 {
-
     float currentRecoil = 0;
- 
-
     float currentKickback = 0;
-
-
     Quaternion targetRotation;
-
     Vector3 startRot;
     
     [SerializeField] GunScriptableObject myGunProperties;
@@ -66,7 +60,7 @@ public class GunEffects : MonoBehaviour
     {
         targetRotation.eulerAngles = new Vector3(currentRecoil, transform.localEulerAngles.y, transform.localEulerAngles.z);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * 10);
-       transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0f, 0f, currentKickback), Time.deltaTime * 10);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0f, 0f, currentKickback), Time.deltaTime * 10);
     }
 
 }

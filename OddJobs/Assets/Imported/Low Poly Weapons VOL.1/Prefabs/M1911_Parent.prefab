@@ -182,6 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4952727429218122}
   - component: {fileID: -2637866394976253482}
+  - component: {fileID: 665978048929670669}
   m_Layer: 0
   m_Name: M1911_Parent
   m_TagString: Untagged
@@ -204,7 +205,7 @@ Transform:
   m_Children:
   - {fileID: 4827498857130004}
   - {fileID: 75783866225150548}
-  - {fileID: 5083653706995941560}
+  - {fileID: 4740095393674797745}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2637866394976253482
@@ -220,6 +221,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myGunProperties: {fileID: 11400000, guid: 7ac156eb0d786e94fbe6380a251a83f3, type: 2}
+--- !u!114 &665978048929670669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694449805434718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09339fedd9a5a9a458df388ef461e053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleFlash: {fileID: 4740095393674837649}
 --- !u!1 &1748277932983872
 GameObject:
   m_ObjectHideFlags: 0
@@ -5315,59 +5329,13 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1 &8841712640775162772
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5083653706995941560}
-  - component: {fileID: 5322956485349341268}
-  m_Layer: 0
-  m_Name: MuzzleFlash
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5083653706995941560
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8841712640775162772}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4740095393674797745}
-  m_Father: {fileID: 4952727429218122}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5322956485349341268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8841712640775162772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09339fedd9a5a9a458df388ef461e053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzleFlash: {fileID: 4740095393674837649}
 --- !u!1001 &4740095393674934325
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5083653706995941560}
+    m_TransformParent: {fileID: 4952727429218122}
     m_Modifications:
     - target: {fileID: 100004, guid: 510e0a736e5e66243b242a076c59611a, type: 3}
       propertyPath: m_Name

@@ -1,6 +1,15 @@
 using UnityEngine;
 using DialogueEditor;
 using Unity.VisualScripting;
+
+// public enum DialogueCanvasType
+
+// {
+//     WorldSpace,
+//     CameraSpace, 
+//     ScreenSpace
+// }
+
 public class NPC_Interactable : Interactable
 {
 

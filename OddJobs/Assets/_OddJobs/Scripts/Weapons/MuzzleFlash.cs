@@ -19,27 +19,18 @@ public class MuzzleFlash : MonoBehaviour
     void Update()
     {
         count += Time.deltaTime;
-        if(count <= timeToShow)
-        {
+        if(count <= timeToShow) {
             muzzleFlashShowing = true;
         }
         else{
             muzzleFlashShowing = false;
         }
         
-
-        if(muzzleFlashShowing)
-        {
+        if(muzzleFlashShowing) {
             muzzleFlash.SetActive(true);
         }
-        else
-        {
+        else {
             muzzleFlash.SetActive(false);
         }
-
-
     }
-
-    
-    
 }

@@ -6649,7 +6649,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 288364461639065573}
         m_TargetAssemblyTypeName: Local_PlayerInputController, Assembly-CSharp
-        m_MethodName: ProcessSwitchGun
+        m_MethodName: ProcessSwitchItemNext
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6661,6 +6661,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ef8c5ecd-d10b-470d-9535-7c8b0e2b9971
     m_ActionName: 'OnFoot/SwitchGun[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 288364461639065573}
+        m_TargetAssemblyTypeName: Local_PlayerInputController, Assembly-CSharp
+        m_MethodName: ProcessSwitchItemPrevious
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 48fd9e97-3ff3-4180-bb9e-c61ed69ffe83
+    m_ActionName: 'OnFoot/SwitchWeaponPrevious[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f8f790b-89bd-418a-a308-2790e25bac14
+    m_ActionName: UI/Point
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3141412c-8285-4aa1-ab55-ad2cd453c4bd
+    m_ActionName: UI/Navigate
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 04d875a5-2ef6-4d07-921b-287f2ce64cfb
+    m_ActionName: UI/Submit
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5308571f-3da3-4a07-a447-8e119714bb3b
+    m_ActionName: UI/Cancel
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4231a518-4dde-4f0f-828b-8195a38456aa
+    m_ActionName: UI/MiddleClick
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78352a9b-db9b-403d-b214-fc1d9660f809
+    m_ActionName: UI/Click
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 18f254d9-b8e6-4c38-8cb6-fc04a8975083
+    m_ActionName: UI/RightClick
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c4d8b386-d67c-424c-a306-321d410ce4c9
+    m_ActionName: UI/ScrollWheel
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 288364461639065573}
+        m_TargetAssemblyTypeName: Local_PlayerInputController, Assembly-CSharp
+        m_MethodName: ProcessDropItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d0470c08-9938-4338-808c-86e511f73d00
+    m_ActionName: 'OnFoot/DropItem[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: OnFoot
@@ -6684,8 +6748,6 @@ MonoBehaviour:
   thirdPersonCamPos: {fileID: 3963971890901531650}
   myVisuals: {fileID: 5710266452690481227}
   gunHolder: {fileID: 2739669307900164629}
-  myCanvas: {fileID: 6035501271838365447}
-  hipPosition: {fileID: 7269119586076548972}
   hasSpawned: 0
   player1Mask:
     serializedVersion: 2
@@ -6838,17 +6900,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b6c25d8cf55ce4fbfae00f393c0b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gun: 0
-  GunParent: {fileID: 2590870033671176749}
-  Guns:
-  - {fileID: 11400000, guid: 7ac156eb0d786e94fbe6380a251a83f3, type: 2}
-  - {fileID: 11400000, guid: 3a2c822232af12d4f95a1071a7625143, type: 2}
+  debug: 0
+  autoReload: 1
+  itemDropForce: 5
+  weaponHolder: {fileID: 2590870033671176749}
   ActiveGun: {fileID: 0}
-  GunInventory:
+  Inventory:
   - {fileID: 0}
   - {fileID: 0}
-  currentGunIndex: 0
   isReloading: 0
+  isEquipping: 0
 --- !u!114 &8181365394615560530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6864,7 +6925,7 @@ MonoBehaviour:
   lightAmmo: 60
   mediumAmmo: 40
   heavyAmmo: 10
-  currentAmmo: 0000000000000000
+  currentAmmo: 000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &7849503409469734107
 GameObject:
   m_ObjectHideFlags: 0

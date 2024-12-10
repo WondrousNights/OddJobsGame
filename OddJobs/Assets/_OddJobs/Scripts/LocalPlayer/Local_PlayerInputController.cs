@@ -45,9 +45,9 @@ public class Local_PlayerInputController : MonoBehaviour
 
     //Player Mask
     [SerializeField] LayerMask player1Mask;
-    [SerializeField]LayerMask player2Mask;
-    [SerializeField]LayerMask player3Mask;
-    [SerializeField]LayerMask player4Mask;
+    [SerializeField] LayerMask player2Mask;
+    [SerializeField] LayerMask player3Mask;
+    [SerializeField] LayerMask player4Mask;
 
     public LayerMask nohudLayerMask;
 
@@ -184,7 +184,6 @@ public class Local_PlayerInputController : MonoBehaviour
         }
         
     }
-
     
     public void ProcessRagdoll(CallbackContext context)
     {
@@ -197,13 +196,42 @@ public class Local_PlayerInputController : MonoBehaviour
         }    
     }
 
-    public void ProcessSwitchGun(CallbackContext context)
+    // public void ProcessSwitchGun(CallbackContext context)
+    // {
+    //     if(playerHealthManager.isRagdoll) return;
+
+    //     if(context.performed)
+    //     {
+    //         gunHandler.SwitchWeaponNext();
+    //     }
+    // }
+
+    public void ProcessSwitchItemNext(CallbackContext context)
     {
         if(playerHealthManager.isRagdoll) return;
 
         if(context.performed)
         {
-            gunHandler.SwitchWeapon();
+            gunHandler.SwitchWeaponNext();
+        }
+    }
+
+    public void ProcessSwitchItemPrevious(CallbackContext context)
+    {
+        if(playerHealthManager.isRagdoll) return;
+
+        if(context.performed)
+        {
+            gunHandler.SwitchWeaponPrevious();
+        }
+    }
+    public void ProcessDropItem(CallbackContext context)
+    {
+        if(playerHealthManager.isRagdoll) return;
+
+        if(context.performed)
+        {
+            gunHandler.DropCurrentGun();
         }
     }
 

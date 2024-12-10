@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50a63b358e82d544c8f9d76f1200875d, type: 3}
-  m_Name: PhysicalBottle
+  m_Name: WeaponReload
   m_EditorClassIdentifier: 
-  identifier: 
+  identifier: WeaponReload
   clips:
-  - {fileID: 8300000, guid: 640b6006b7d34a04da798ff31876326a, type: 3}
-  - {fileID: 8300000, guid: 85fab6952377769449968053e248642f, type: 3}
-  - {fileID: 8300000, guid: fa1c6082b3eef45488baae4c6b92e969, type: 3}
-  - {fileID: 8300000, guid: 145a2033c7cfe2c4a9d55443660b9fb8, type: 3}
+  - {fileID: 8300000, guid: 68a834fa16e1e244ab9c10f2cc1b66e1, type: 3}
   avoidPlayingSameClipTwice: 0
   volume: 1
   spread: 0
@@ -26,14 +23,14 @@ MonoBehaviour:
   stereoPan: 0
   loop: 0
   playClipsSequentially: 0
-  priority: 200
+  priority: 80
   maxSources: 0
   minDistance: 1
   maxDistance: 20
-  minPitchMultiplier: 0.85
-  maxPitchMultiplier: 1.147
-  minVolumeMultiplier: 1
-  maxVolumeMultiplier: 1
+  minPitchMultiplier: 0.9
+  maxPitchMultiplier: 1.1
+  minVolumeMultiplier: 0.8
+  maxVolumeMultiplier: 1.2
   reverbZoneMix: 1
   dopplerLevel: 0.25
   volumeRolloff: 1

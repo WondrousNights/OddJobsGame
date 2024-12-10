@@ -10,29 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50a63b358e82d544c8f9d76f1200875d, type: 3}
-  m_Name: PhysicalBook
+  m_Name: WeaponShotHeavy
   m_EditorClassIdentifier: 
-  identifier: 
+  identifier: WeaponShotHeavy
   clips:
-  - {fileID: 8300000, guid: 2ccc56d807084cd4da42202a840bad62, type: 3}
-  - {fileID: 8300000, guid: 3edcc96fe2f905d4a8c3f2b1a521129d, type: 3}
-  - {fileID: 8300000, guid: d52bb9c03465bd049932ec986e6ef362, type: 3}
+  - {fileID: 8300000, guid: 68a834fa16e1e244ab9c10f2cc1b66e1, type: 3}
   avoidPlayingSameClipTwice: 0
-  volume: 0.010000133
+  volume: 1
   spread: 0
   pitch: 1
   spatialMode2D: 0
   stereoPan: 0
   loop: 0
   playClipsSequentially: 0
-  priority: 200
+  priority: 80
   maxSources: 0
   minDistance: 1
   maxDistance: 20
-  minPitchMultiplier: 0.85
-  maxPitchMultiplier: 1.147
-  minVolumeMultiplier: 1
-  maxVolumeMultiplier: 1
+  minPitchMultiplier: 0.9
+  maxPitchMultiplier: 1.1
+  minVolumeMultiplier: 0.8
+  maxVolumeMultiplier: 1.2
   reverbZoneMix: 1
   dopplerLevel: 0.25
   volumeRolloff: 1

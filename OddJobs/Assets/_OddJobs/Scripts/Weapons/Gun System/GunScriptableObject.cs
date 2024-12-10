@@ -16,6 +16,7 @@ public class GunScriptableObject : ScriptableObject
     public GameObject ModelPrefab;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation;
+    public GameObject droppedModelPrefab;
 
     public ShootConfigScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;

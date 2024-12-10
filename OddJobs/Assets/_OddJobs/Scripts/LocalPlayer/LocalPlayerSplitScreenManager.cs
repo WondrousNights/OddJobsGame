@@ -23,7 +23,5 @@ public class LocalPlayerSplitScreenManager : MonoBehaviour
             playerInputs[0].camera.rect = new Rect(0, 0.5f, 1f, 0.5f);
             playerInputs[1].camera.rect = new Rect(0, 0, 1, 0.5f);
         }
-
-        
     }
 }

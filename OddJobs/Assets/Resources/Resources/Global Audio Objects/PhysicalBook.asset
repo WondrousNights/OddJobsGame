@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50a63b358e82d544c8f9d76f1200875d, type: 3}
-  m_Name: AmmoPickup
+  m_Name: PhysicalBook
   m_EditorClassIdentifier: 
-  identifier: AmmoPickup
+  identifier: PhysicalBook
   clips:
-  - {fileID: 8300000, guid: d48ffbfce31b7494b9607ea6e8957c27, type: 3}
+  - {fileID: 8300000, guid: 2ccc56d807084cd4da42202a840bad62, type: 3}
+  - {fileID: 8300000, guid: 3edcc96fe2f905d4a8c3f2b1a521129d, type: 3}
+  - {fileID: 8300000, guid: d52bb9c03465bd049932ec986e6ef362, type: 3}
   avoidPlayingSameClipTwice: 0
   volume: 1
   spread: 0
@@ -23,14 +25,14 @@ MonoBehaviour:
   stereoPan: 0
   loop: 0
   playClipsSequentially: 0
-  priority: 128
+  priority: 200
   maxSources: 0
   minDistance: 1
   maxDistance: 20
-  minPitchMultiplier: 0.9
-  maxPitchMultiplier: 1.1
-  minVolumeMultiplier: 0.8
-  maxVolumeMultiplier: 1.2
+  minPitchMultiplier: 0.85
+  maxPitchMultiplier: 1.147
+  minVolumeMultiplier: 1
+  maxVolumeMultiplier: 1
   reverbZoneMix: 1
   dopplerLevel: 0.25
   volumeRolloff: 1
@@ -58,6 +60,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 243052860578643906, guid: afd35b94d3bbbd243b04402c431e6e25,
+    type: 2}
   spatialize: 0
   isBGM: 0
