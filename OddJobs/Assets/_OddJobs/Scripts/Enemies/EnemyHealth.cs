@@ -16,9 +16,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public float MaxHealth {get => _MaxHealth; private set => _MaxHealth = value;}
 
+    [SerializeField] float timeToGetUp;
 
+    float count;
     private bool isRagdoll;
-    bool isDead;
+    public bool isDead;
 
     RagdollEnabler ragdollEnabler;
 
@@ -33,18 +35,30 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         CurrentHealth = MaxHealth;
+        count = 0;
 
     }
 
-  
-
-    public void TakeDamage(Ray ray, Vector3 positionOfAttacker, float Damage, float force, Vector3 collisionPoint)
+    void Update()
     {
-        
+        if(isRagdoll && !isDead)
+        {
+            count += Time.deltaTime;
 
+            if(count >= timeToGetUp)
+            {
+                ProcessGetUp();
+            }
+        }
+    }
+
+   
+
+    public void TakeDamageFromGun(Ray ray, float Damage, float force, Vector3 collisionPoint)
+    {
         CurrentHealth -= Damage;
 
-        HandleDamageResponse(ray, positionOfAttacker, force, collisionPoint);
+        HandleDamageResponse(ray, force, collisionPoint);
 
         if(CurrentHealth <= 0)
         {
@@ -62,12 +76,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-    void HandleDamageResponse(Ray ray, Vector3 positionOfAttacker, float force, Vector3 collisionPoint)
+    void HandleDamageResponse(Ray ray, float force, Vector3 collisionPoint)
     {
 
-        if(!isDead && !isRagdoll)
+        if(!isDead)
         {
-            StartCoroutine("ProcessRagdollAnimation", 3f);
+            count = 0;
+
+            if(!isRagdoll)
+            {
+                ProcessRagdollAnimation();
+            }
+            
         }
         
   
@@ -78,24 +98,22 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
 
 
-    IEnumerator ProcessRagdollAnimation(float duration)
+    void ProcessRagdollAnimation()
     {
         isRagdoll = true;
        ragdollEnabler.EnableRagdoll();
        capsuleCollider.enabled = false;
-       yield return new WaitForSeconds(duration);
+    }
 
-
+     private void ProcessGetUp()
+    {
         if(!isDead)
         {
         transform.position = ragdollRoot.transform.position;
         capsuleCollider.enabled = true;
-       ragdollEnabler.EnableAnimator();
-       isRagdoll = false;
+        ragdollEnabler.EnableAnimator();
+        isRagdoll = false;
         }
-     
-
-       
     }
     
 
@@ -125,4 +143,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     }
 
     
+
+    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint)
+    {
+        Debug.Log("Now implemented yet");
+    }
 }

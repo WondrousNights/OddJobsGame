@@ -15,10 +15,13 @@ public class TargetDetector : MonoBehaviour {
 
         if(currentTarget != null)
         {
+
+            /*
             if(Vector3.Distance(this.transform.position, currentTarget.transform.position) < distanceToSpot)
             {
                 currentTarget = null;
             }
+            */
         }
         
     }

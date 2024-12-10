@@ -44,13 +44,20 @@ public class RagdollEnabler : MonoBehaviour
         }
         foreach (Collider collider in Colliders)
         {
-            collider.enabled = true;
+            if(collider.gameObject.tag != "MeleeWeapon")
+            {
+                collider.enabled = true;
+            }
         }
         foreach (Rigidbody rigidbody in Rigidbodies)
         {
-            rigidbody.linearVelocity = Vector3.zero;
-            rigidbody.detectCollisions = true;
-            rigidbody.useGravity = true;
+            if(rigidbody.gameObject.tag != "MeleeWeapon")
+            {
+                rigidbody.linearVelocity = Vector3.zero;
+                rigidbody.detectCollisions = true;
+                rigidbody.useGravity = true;
+            }
+           
         }
     }
 
@@ -63,12 +70,18 @@ public class RagdollEnabler : MonoBehaviour
         }
         foreach (Collider collider in Colliders)
         {
-            collider.enabled = false;
+            if(collider.gameObject.tag != "MeleeWeapon")
+            {
+                collider.enabled = false;
+            }
         }
         foreach (Rigidbody rigidbody in Rigidbodies)
         {
-            rigidbody.detectCollisions = false;
-            rigidbody.useGravity = false;
+            if(rigidbody.gameObject.tag != "MeleeWeapon")
+            {
+                rigidbody.detectCollisions = false;
+                rigidbody.useGravity = false;
+            }
         }
     }
     

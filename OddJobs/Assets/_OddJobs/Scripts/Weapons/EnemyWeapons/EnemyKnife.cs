@@ -3,23 +3,26 @@ using UnityEngine;
 
 public class EnemyKnife : EnemyWeapon
 {
-    
+    float count;
+    float countToStopConsiderAttacking = 1f;
+
     protected override void Attack()
     {
-        Debug.Log("Attacking!");
-        StartCoroutine("ProccessAttackBool", 1f);
+        count += countToStopConsiderAttacking;
     }
 
-
-
-    IEnumerator ProccessAttackBool(float duration)
+    void Update()
     {
-       isAttacking = true;
-       
-       yield return new WaitForSeconds(duration);
 
-        isAttacking = false;
-
+        if(count <= 0)
+        {
+            isAttacking = false;
+        }
+        else
+        {
+            count -= Time.deltaTime;
+            isAttacking = true;
+        }
     }
 
 }

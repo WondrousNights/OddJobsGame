@@ -23,13 +23,17 @@ public class PlayerGunHandler : MonoBehaviour
     [Header("Runtime Filled")]
     public GunScriptableObject ActiveGun;
     public GunScriptableObject[] Inventory;
-    private int currentGunIndex = 0; 
-    GunEffects gunEffects;
-    
-    
+    public int currentGunIndex = 0;
+
+    /// <summary>
+    //GameObject ActiveGunGameObject;
+    /// </summary>
+    private GunEffects gunEffects;
     private Local_PlayerInputController playerInputController;
     private PlayerAmmoHandler ammoHandler;
     private HeldItemInteraction heldItem;
+    private Local_PlayerHealthManager playerHealthManager;
+
     Quaternion targetRotation;
     public bool isReloading = false;
     public bool isEquipping = false; // not used
@@ -37,6 +41,7 @@ public class PlayerGunHandler : MonoBehaviour
     private void Start()
     {
         playerInputController = GetComponent<Local_PlayerInputController>();
+        playerHealthManager = GetComponent<Local_PlayerHealthManager>();
         ammoHandler = GetComponent<PlayerAmmoHandler>();
 
         GunScriptableObject gun = Inventory[0];
@@ -135,7 +140,7 @@ public class PlayerGunHandler : MonoBehaviour
 
     public void ShootCurrentGun()
     {
-        if (!ActiveGun) return;
+        if(ActiveGun == null || playerInputController.playerHealthManager.isRagdoll) return;
 
         if (heldItem) heldItem.Interact(this);
 
@@ -165,6 +170,8 @@ public class PlayerGunHandler : MonoBehaviour
             {
                 // no ammo or clip left, play failed shooting sound
             }
+            ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
+            
         }
     }
 
@@ -176,6 +183,7 @@ public class PlayerGunHandler : MonoBehaviour
         {
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
+             ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
             gunEffects.ReloadRotation(this);
         }
         else
@@ -222,7 +230,25 @@ public class PlayerGunHandler : MonoBehaviour
         EquipGunFromInventory(currentGunIndex);
     }
 
-    public bool ContainsGun(GunScriptableObject gun) {
-        return Inventory.Contains(gun);
+
+
+    ///NEED A PERFORMANCE UPDATE HEREE! THis is way too much for this functionality
+    void Update()
+    {
+        if(playerHealthManager.isRagdoll)
+        {
+            foreach(MeshRenderer render in gunEffects.meshRenderers)
+            {
+                render.enabled = false;
+            }
+        }
+        else
+        {
+            foreach(MeshRenderer render in gunEffects.meshRenderers)
+            {
+                render.enabled = true;
+            }
+        }
     }
+
 }

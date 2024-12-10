@@ -16,17 +16,19 @@ public class Local_PlayerInputController : MonoBehaviour
     private PlayerGunHandler gunHandler;
     private Local_PlayerStats playerStats;
     private Local_PlayerInteractionManager playerInteractionManager;
-    private Local_PlayerHealthManager playerHealthManager;
+    public Local_PlayerHealthManager playerHealthManager;
+    public Local_PlayerUI playerUI;
     
     [SerializeField] WeaponSway weaponSway;
 
     public Camera mycam;
     public Transform firstPersonCamPos;
     public Transform thirdPersonCamPos;
+
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject gunHolder;
     // [SerializeField] GameObject myCanvas;
-    // [SerializeField] Transform hipPosition;
+    public GameObject hipPosition;
 
     AudioListener myListener;
     public bool hasSpawned = false;
@@ -35,7 +37,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
 
 
-    PlayerInput playerInput;
+    public PlayerInput playerInput;
     //Input Values
     UnityEngine.Vector2 moveInput;
     UnityEngine.Vector2 lookInput;
@@ -60,6 +62,7 @@ public class Local_PlayerInputController : MonoBehaviour
         gunHandler = GetComponent<PlayerGunHandler>();
         playerStats = GetComponent<Local_PlayerStats>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
+        playerUI = GetComponent<Local_PlayerUI>();
 
 
         myListener = GetComponent<AudioListener>();
@@ -97,15 +100,24 @@ public class Local_PlayerInputController : MonoBehaviour
     }
     void LateUpdate()
     {
-        playerMovement.ProcessMove(moveInput);
+        if(!playerHealthManager.isRagdoll)
+        {
+            playerMovement.ProcessMove(moveInput);
+        }
+       
     }
     void Update()
     {
+        if(playerHealthManager.isRagdoll)
+        {
+            lookInput = new UnityEngine.Vector2(0, 0);
+        }
         if (!playerStats.isDead || !playerHealthManager.isRagdoll)
         {
             look.ProcessLook(lookInput);
             weaponSway.WeaponSwayAnimation(lookInput);
         }
+        
 
         if(isShooting) 
         {
@@ -192,7 +204,7 @@ public class Local_PlayerInputController : MonoBehaviour
        
         if(context.performed)
         {
-            playerHealthManager.TakeDamage(transform.up, this.transform.position);
+            playerHealthManager.TakeDamageFromMelee(this.transform.position, 0, 100f, this.transform.position);
         }    
     }
 
@@ -244,6 +256,7 @@ public class Local_PlayerInputController : MonoBehaviour
     {
         //Set Layers so we can disable player visuals accordingly
         //Camera is set to only render other player visuals, not our own
+        //Need to use getcomponents in children for this!!!
         if(playerInput.playerIndex == 0)
         {
 
@@ -262,15 +275,7 @@ public class Local_PlayerInputController : MonoBehaviour
                 }
             }
 
-            foreach (Transform child in gunHolder.transform)
-            {
-                child.gameObject.layer = 14;
-                
-                foreach (Transform nestedChild in child.transform)
-                {
-                    nestedChild.gameObject.layer = 14;
-                }   
-            }
+            
             mycam.cullingMask = player1Mask;
         }
         
@@ -292,14 +297,7 @@ public class Local_PlayerInputController : MonoBehaviour
                 }
             }
 
-            foreach (Transform child in gunHolder.transform)
-            {
-                child.gameObject.layer = 15;
-                foreach (Transform nestedChild in child.transform)
-                {
-                    nestedChild.gameObject.layer = 15;
-                }   
-            }
+            
             mycam.cullingMask = player2Mask;
         }
        

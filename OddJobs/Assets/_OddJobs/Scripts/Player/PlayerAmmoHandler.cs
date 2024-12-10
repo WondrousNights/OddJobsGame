@@ -9,10 +9,18 @@ public class PlayerAmmoHandler : MonoBehaviour
     public int[] currentAmmo;
 
 
+    Local_PlayerInputController inputController;
+
+    void Awake()
+    {
+        inputController = GetComponent<Local_PlayerInputController>();
+    }
+
     //HOW DO I MAKE THIS BETTER?
     public void ReloadAmmo(int clipSize, AmmoType ammoType, int gunIndex)
     {
         // Debug.Log("Reloading Ammo");
+
 
         if(ammoType == AmmoType.Light)
         {
@@ -74,6 +82,7 @@ public class PlayerAmmoHandler : MonoBehaviour
     }
 
 
+
     public void AddAmmo(AmmoType ammoType, int amount)
     {
         if(ammoType == AmmoType.Light)
@@ -88,6 +97,25 @@ public class PlayerAmmoHandler : MonoBehaviour
         {
             heavyAmmo += amount;
         }
+    }
+
+
+    public void UpdateAmmoText(int gunIndex, AmmoType ammoType)
+    {
+        if(ammoType == AmmoType.Light)
+        {
+            inputController.playerUI.UpdateAmmoText(currentAmmo[gunIndex], lightAmmo);
+        }
+        if(ammoType == AmmoType.Medium)
+        {
+            inputController.playerUI.UpdateAmmoText(currentAmmo[gunIndex], mediumAmmo);
+        }
+        if(ammoType == AmmoType.Heavy)
+        {
+            inputController.playerUI.UpdateAmmoText(currentAmmo[gunIndex], heavyAmmo);
+        }
+
+        
     }
     
    

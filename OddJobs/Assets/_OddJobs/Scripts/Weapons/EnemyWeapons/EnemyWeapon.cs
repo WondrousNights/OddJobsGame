@@ -5,6 +5,9 @@ public class EnemyWeapon : MonoBehaviour
 
    public float ragdollForceMagnitude;
    public bool isAttacking;
+
+   public float damage;
+
    public void BaseAttack()
     {
         Attack();
