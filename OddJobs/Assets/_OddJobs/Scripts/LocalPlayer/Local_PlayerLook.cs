@@ -20,14 +20,15 @@ public class Local_PlayerLook : MonoBehaviour
     }
     public void ProcessLook(Vector2 input)
     {
+        // Scale input by screen resolution to make sensitivity consistent
+        float mouseX = input.x / Screen.width;
+        float mouseY = input.y / Screen.height;
 
-        float mouseX = input.x;
-        float mouseY = input.y;
+        // Apply sensitivity scaling
+        xRotation -= (mouseY * ySensitivity);
+        xRotation = Mathf.Clamp(xRotation, -85f, 85f);
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
-        xRotation = Mathf.Clamp(xRotation, -85, 85f);
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
+        transform.Rotate(Vector3.up * (mouseX * xSensitivity));
     }
 }

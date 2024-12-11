@@ -102,21 +102,7 @@ public class PlayerAmmoHandler : MonoBehaviour
 
     public void UpdateAmmoText(int gunIndex, AmmoType ammoType)
     {
-        if(ammoType == AmmoType.Light)
-        {
-            inputController.playerUI.UpdateAmmoText(currentAmmo[gunIndex], lightAmmo);
-        }
-        if(ammoType == AmmoType.Medium)
-        {
-            inputController.playerUI.UpdateAmmoText(currentAmmo[gunIndex], mediumAmmo);
-        }
-        if(ammoType == AmmoType.Heavy)
-        {
-            inputController.playerUI.UpdateAmmoText(currentAmmo[gunIndex], heavyAmmo);
-        }
-
-        
+        inputController.playerUI.UpdateAmmoText(GetComponent<PlayerGunHandler>().ActiveGun, currentAmmo[gunIndex], lightAmmo, mediumAmmo, heavyAmmo);
     }
     
-   
 }

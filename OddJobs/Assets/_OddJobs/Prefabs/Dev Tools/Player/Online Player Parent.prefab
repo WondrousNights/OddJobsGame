@@ -67,8 +67,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 150
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2491040060
+  GlobalObjectIdHash: 3028923606
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -597,7 +597,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 8063142032296580880}
-  currentGun: {fileID: 3311619902711904640}
   visaulGunMuzzleEffect: {fileID: 972169079292062516}
   bulletHoleVisual: {fileID: 8882886379892811467, guid: 11be7a7ec34aee24da74bc872f633f7c,
     type: 3}
@@ -2082,18 +2081,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6801524699304221170}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3311619902711904640 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8329093518334320754, guid: a35b8c32acba1334b9b31dfe8cdbc9be,
-    type: 3}
-  m_PrefabInstance: {fileID: 6801524699304221170}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9866cd9c8db9f2042be940be646e3116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7514774350354248089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2105,7 +2092,7 @@ PrefabInstance:
     - target: {fileID: -3491663863892580116, guid: 50edda753b85eb94fb3c331b6ae8763f,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1923707424
+      value: 3028923606
       objectReference: {fileID: 0}
     - target: {fileID: 2744658638998259613, guid: 50edda753b85eb94fb3c331b6ae8763f,
         type: 3}

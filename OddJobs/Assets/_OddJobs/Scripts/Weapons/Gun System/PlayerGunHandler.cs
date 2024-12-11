@@ -67,6 +67,8 @@ public class PlayerGunHandler : MonoBehaviour
         ActiveGun.Spawn(weaponHolder, this);
         gunEffects = weaponHolder.GetComponentInChildren<GunEffects>();
         heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
+        ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
+        
         if (ammoHandler.currentAmmo[currentGunIndex] == 0) Reload();
     }
 
@@ -99,6 +101,7 @@ public class PlayerGunHandler : MonoBehaviour
             DeEquipCurrentGun();
             Inventory[currentGunIndex] = null;
             ActiveGun = null;
+            ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
         }    
     }
 
@@ -244,6 +247,11 @@ public class PlayerGunHandler : MonoBehaviour
     ///NEED A PERFORMANCE UPDATE HEREE! THis is way too much for this functionality
     void Update()
     {
+        RagdollUpdate();
+    }
+
+    private void RagdollUpdate() 
+    {
         if(playerHealthManager.isRagdoll)
         {
             foreach(MeshRenderer render in gunEffects.meshRenderers)
@@ -253,10 +261,14 @@ public class PlayerGunHandler : MonoBehaviour
         }
         else
         {
-            foreach(MeshRenderer render in gunEffects.meshRenderers)
+            if (gunEffects)
             {
-                render.enabled = true;
+                foreach(MeshRenderer render in gunEffects.meshRenderers)
+                {
+                    render.enabled = true;
+                }
             }
+                
         }
     }
 
