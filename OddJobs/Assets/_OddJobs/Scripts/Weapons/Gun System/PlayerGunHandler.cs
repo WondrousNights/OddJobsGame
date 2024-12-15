@@ -67,9 +67,11 @@ public class PlayerGunHandler : MonoBehaviour
         ActiveGun.Spawn(weaponHolder, this);
         gunEffects = weaponHolder.GetComponentInChildren<GunEffects>();
         heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
-        ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
         
-        if (ammoHandler.currentAmmo[currentGunIndex] == 0) Reload();
+        if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
+            Reload();
+
+        UpdateAmmoText();
     }
 
     public void DeEquipCurrentGun()
@@ -92,6 +94,7 @@ public class PlayerGunHandler : MonoBehaviour
             GameObject droppedModel = Instantiate(ActiveGun.droppedModelPrefab);
             droppedModel.transform.position = weaponHolder.position;
             droppedModel.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), 0);
+            droppedModel.GetComponent<ItemPickup>().ammoInClip = ammoHandler.currentClipAmmo[currentGunIndex];
 
             // add throwing force to the weapon
             Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
@@ -101,14 +104,13 @@ public class PlayerGunHandler : MonoBehaviour
             DeEquipCurrentGun();
             Inventory[currentGunIndex] = null;
             ActiveGun = null;
-            ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
+            ammoHandler.currentClipAmmo[currentGunIndex] = 0;
+            UpdateAmmoText();
         }    
     }
 
-    public void PickupGun(GunScriptableObject gun, GameObject pickupObject = null)
+    public void PickupGun(GunScriptableObject gun, GameObject pickupObject)
     {
-        if (pickupObject) Destroy(pickupObject);
-
         // find the next empty slot in the inventory
         int nextFreeIndex = -1;
         for (int i = 0; i < Inventory.Length; i++)
@@ -122,22 +124,25 @@ public class PlayerGunHandler : MonoBehaviour
         }
 
         // if there's an empty slot, add the gun to the inventory there
-        if (nextFreeIndex != -1) {
-            AddGunToInventory(gun, nextFreeIndex);
+        if (nextFreeIndex != -1)
+        {
+            AddGunToInventory(gun, nextFreeIndex, true, pickupObject);
         } 
-        // if there's no empty slot, throw the current weapon and replace the current gun with the new gun
         else
         {
             DropCurrentGun(); // throw current weapon
-            AddGunToInventory(gun, currentGunIndex); // add the gun to the inventory
+            AddGunToInventory(gun, currentGunIndex, true, pickupObject); // add the gun to the inventory
         }
+
+        Destroy(pickupObject);
 
         if (debug) Debug.Log("Picked up gun: " + gun.name);
     }
 
-    public void AddGunToInventory(GunScriptableObject gun, int gunIndex, bool equipImmediately = true)
+    public void AddGunToInventory(GunScriptableObject gun, int gunIndex, bool equipImmediately = true, GameObject pickupObject = null)
     {
         Inventory[gunIndex] = gun;
+        if (pickupObject) ammoHandler.currentClipAmmo[gunIndex] = pickupObject.GetComponent<ItemPickup>().ammoInClip;
         // if (equipImmediately) 
         EquipGunFromInventory(gunIndex);
     }
@@ -149,7 +154,7 @@ public class PlayerGunHandler : MonoBehaviour
         if (heldItem) heldItem.Interact(this);
 
         // if the gun has ammo in clip
-        if(ammoHandler.currentAmmo[currentGunIndex] > 0)
+        if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
         {
             // and we're not reloading
             if (!isReloading)
@@ -164,7 +169,7 @@ public class PlayerGunHandler : MonoBehaviour
 
                 // play shooting related effects
                 gunEffects.KickbackAdjustment(0.1f);
-                ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
+                UpdateAmmoText();
             }
         }
         else
@@ -195,7 +200,7 @@ public class PlayerGunHandler : MonoBehaviour
         {
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
-            ammoHandler.UpdateAmmoText(currentGunIndex, ActiveGun.AmmoType);
+            UpdateAmmoText();
             gunEffects.ReloadRotation(this);
         }
         else
@@ -240,6 +245,11 @@ public class PlayerGunHandler : MonoBehaviour
         }
 
         EquipGunFromInventory(currentGunIndex);
+    }
+
+    public void UpdateAmmoText()
+    {
+        playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
     }
 
 

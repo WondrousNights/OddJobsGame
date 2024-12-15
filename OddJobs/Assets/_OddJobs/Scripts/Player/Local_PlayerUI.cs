@@ -26,37 +26,21 @@ public class Local_PlayerUI : MonoBehaviour
         promptText.text = promptMessage;
     }
 
-    public void UpdateAmmoText(GunScriptableObject gun, int inClip = -1, int lightAmmoSupply = -1, int mediumAmmoSupply = -1, int heavyAmmoSupply = -1)
+    public void UpdateAmmoText(GunScriptableObject gun = null, int inClip = -1, int lightAmmoSupply = -1, int mediumAmmoSupply = -1, int heavyAmmoSupply = -1)
     {
         if (gun)
         {
             currentItemText.text = gun.name;
-
-            if (gun.AmmoType == AmmoType.Light)
-            {
-                ammoInClipText.text = "Clip: " + inClip.ToString() + " / " + lightAmmoSupply;
-            }
-            else if (gun.AmmoType == AmmoType.Medium)
-            {
-                ammoInClipText.text = "Clip: " + inClip.ToString() + " / " + mediumAmmoSupply;
-            }
-            else if (gun.AmmoType == AmmoType.Heavy)
-            {
-                ammoInClipText.text = "Clip: " + inClip.ToString() + " / " + heavyAmmoSupply;
-            }
-
-            lightAmmoSupplyText.text = "Light: " + lightAmmoSupply.ToString();
-            mediumAmmoSupplyText.text = "Medium: " + mediumAmmoSupply.ToString();
-            heavyAmmoSupplyText.text = "Heavy: " + heavyAmmoSupply.ToString();
+            ammoInClipText.text = inClip.ToString() + " / " + gun.AmmoClipSize;
         }
         else
         {
             currentItemText.text = "";
             ammoInClipText.text = "";
-            lightAmmoSupplyText.text = "";
-            mediumAmmoSupplyText.text = "";
-            heavyAmmoSupplyText.text = "";
         }
+        lightAmmoSupplyText.text = "Light ammo: " + lightAmmoSupply.ToString();
+        mediumAmmoSupplyText.text = "Medium ammo: " + mediumAmmoSupply.ToString();
+        heavyAmmoSupplyText.text = "Heavy ammo: " + heavyAmmoSupply.ToString();
     }
 
     public void UpdateHealthImage(float currentHealth, float MaxHealth)

@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Local_PlayerLook : MonoBehaviour
 {
     [SerializeField] Camera cam;
+    [SerializeField] PlayerInput playerInput;
 
+    [SerializeField] private float gamepadMultiplier = 100f;
+    public float xSensitivity = 40f;
+    public float ySensitivity = 40f;
+    private bool isGamepad;
     private float xRotation = 0f;
-
-    public float xSensitivity = 30f;
-    public float ySensitivity = 30f;
 
     Local_PlayerInputController inputController;
 
@@ -23,6 +26,11 @@ public class Local_PlayerLook : MonoBehaviour
         // Scale input by screen resolution to make sensitivity consistent
         float mouseX = input.x / Screen.width;
         float mouseY = input.y / Screen.height;
+
+        if (isGamepad = playerInput.currentControlScheme == "Controller") {
+            mouseX *= gamepadMultiplier;
+            mouseY *= gamepadMultiplier;
+        }
 
         // Apply sensitivity scaling
         xRotation -= (mouseY * ySensitivity);

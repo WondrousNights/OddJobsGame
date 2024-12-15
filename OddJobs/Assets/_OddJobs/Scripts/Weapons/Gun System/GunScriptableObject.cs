@@ -71,7 +71,7 @@ public class GunScriptableObject : ScriptableObject
           
             RaycastHit hit;
 
-            ammoHandler.currentAmmo[gunIndex] -= 1;
+            ammoHandler.currentClipAmmo[gunIndex] -= 1;
 
             Vector3 shootDirection = shootCam.transform.forward;
             if (Physics.Raycast(ray, out hit))

@@ -5,16 +5,8 @@ public class PlayerAmmoHandler : MonoBehaviour
     public int lightAmmo;
     public int mediumAmmo;
     public int heavyAmmo;
+    public int[] currentClipAmmo;
 
-    public int[] currentAmmo;
-
-
-    Local_PlayerInputController inputController;
-
-    void Awake()
-    {
-        inputController = GetComponent<Local_PlayerInputController>();
-    }
 
     //HOW DO I MAKE THIS BETTER?
     public void ReloadAmmo(int clipSize, AmmoType ammoType, int gunIndex)
@@ -25,28 +17,28 @@ public class PlayerAmmoHandler : MonoBehaviour
         if(ammoType == AmmoType.Light)
         {
             int MaxReloadAmount = Mathf.Min(clipSize, lightAmmo);
-            int availableBulletsInCurrentClip = clipSize - currentAmmo[gunIndex];
+            int availableBulletsInCurrentClip = clipSize - currentClipAmmo[gunIndex];
             int reloadAmount = Mathf.Min(MaxReloadAmount, availableBulletsInCurrentClip);
 
-            currentAmmo[gunIndex] = currentAmmo[gunIndex] + reloadAmount;
+            currentClipAmmo[gunIndex] += reloadAmount;
             lightAmmo -= reloadAmount;
         }
         if(ammoType == AmmoType.Medium)
         {
             int MaxReloadAmount = Mathf.Min(clipSize, mediumAmmo);
-            int availableBulletsInCurrentClip = clipSize - currentAmmo[gunIndex];
+            int availableBulletsInCurrentClip = clipSize - currentClipAmmo[gunIndex];
             int reloadAmount = Mathf.Min(MaxReloadAmount, availableBulletsInCurrentClip);
 
-            currentAmmo[gunIndex] = currentAmmo[gunIndex] + reloadAmount;
+            currentClipAmmo[gunIndex] += reloadAmount;
             mediumAmmo -= reloadAmount;
         }
         if(ammoType == AmmoType.Heavy)
         {
             int MaxReloadAmount = Mathf.Min(clipSize, heavyAmmo);
-            int availableBulletsInCurrentClip = clipSize - currentAmmo[gunIndex];
+            int availableBulletsInCurrentClip = clipSize - currentClipAmmo[gunIndex]    ;
             int reloadAmount = Mathf.Min(MaxReloadAmount, availableBulletsInCurrentClip);
 
-            currentAmmo[gunIndex] = currentAmmo[gunIndex] + reloadAmount;
+            currentClipAmmo[gunIndex] += reloadAmount;
             heavyAmmo -= reloadAmount;
         }
     }
@@ -78,10 +70,7 @@ public class PlayerAmmoHandler : MonoBehaviour
         {
             return false;
         }
-        
     }
-
-
 
     public void AddAmmo(AmmoType ammoType, int amount)
     {
@@ -97,12 +86,6 @@ public class PlayerAmmoHandler : MonoBehaviour
         {
             heavyAmmo += amount;
         }
-    }
-
-
-    public void UpdateAmmoText(int gunIndex, AmmoType ammoType)
-    {
-        inputController.playerUI.UpdateAmmoText(GetComponent<PlayerGunHandler>().ActiveGun, currentAmmo[gunIndex], lightAmmo, mediumAmmo, heavyAmmo);
     }
     
 }
