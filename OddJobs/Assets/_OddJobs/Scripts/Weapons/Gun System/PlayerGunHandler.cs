@@ -7,6 +7,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [DisallowMultipleComponent]
+
+// this script might be getting too bloated, but who cares! -elias
+// TODO: move ragdoll control (and reloading?) to a separate script
+
 public class PlayerGunHandler : MonoBehaviour
 {
     [SerializeField]
@@ -17,6 +21,8 @@ public class PlayerGunHandler : MonoBehaviour
     private float itemDropForce = 10;
     [SerializeField]
     private Transform weaponHolder;
+    [SerializeField]
+    private InventoryUI inventoryUI;
 
     [SerializeField]
     [Space]
@@ -227,6 +233,7 @@ public class PlayerGunHandler : MonoBehaviour
         }
 
         EquipGunFromInventory(currentGunIndex);
+        inventoryUI.UpdateInventoryUI();
     }
     public void SwitchWeaponPrevious()
     {
@@ -245,6 +252,7 @@ public class PlayerGunHandler : MonoBehaviour
         }
 
         EquipGunFromInventory(currentGunIndex);
+        inventoryUI.UpdateInventoryUI();
     }
 
     public void UpdateAmmoText()
