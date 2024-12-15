@@ -47,11 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c904c77824c8f946a7272c87bf39bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: Pick up Rifle
+  promptMessage: Pick up AK74
   isUI: 0
   sfxToPlay: {fileID: 11400000, guid: 1d398fe3c31ec8948a642f48e6499f20, type: 2}
   autoPickup: 0
   gun: {fileID: 11400000, guid: 3a2c822232af12d4f95a1071a7625143, type: 2}
+  ammoInClip: -1
 --- !u!54 &8432020744872610588
 Rigidbody:
   m_ObjectHideFlags: 0

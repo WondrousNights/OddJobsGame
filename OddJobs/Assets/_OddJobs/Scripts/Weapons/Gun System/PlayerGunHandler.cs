@@ -70,7 +70,7 @@ public class PlayerGunHandler : MonoBehaviour
             currentGunIndex = index;
         }
         ActiveGun = Inventory[currentGunIndex];
-        ActiveGun.Spawn(weaponHolder, this);
+        ActiveGun?.Spawn(weaponHolder, this);
         gunEffects = weaponHolder.GetComponentInChildren<GunEffects>();
         heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
         
@@ -78,6 +78,7 @@ public class PlayerGunHandler : MonoBehaviour
             Reload();
 
         UpdateAmmoText();
+        inventoryUI.UpdateInventoryUI(Inventory);
     }
 
     public void DeEquipCurrentGun()
@@ -91,6 +92,8 @@ public class PlayerGunHandler : MonoBehaviour
             gunEffects.gameObject.SetActive(false);
             Destroy(gunEffects.gameObject);
         }
+        
+        inventoryUI.UpdateInventoryUI(Inventory);
     }
 
     public void DropCurrentGun()
@@ -111,7 +114,9 @@ public class PlayerGunHandler : MonoBehaviour
             Inventory[currentGunIndex] = null;
             ActiveGun = null;
             ammoHandler.currentClipAmmo[currentGunIndex] = 0;
+
             UpdateAmmoText();
+            inventoryUI.UpdateInventoryUI(Inventory);
         }    
     }
 
@@ -233,7 +238,7 @@ public class PlayerGunHandler : MonoBehaviour
         }
 
         EquipGunFromInventory(currentGunIndex);
-        inventoryUI.UpdateInventoryUI();
+        inventoryUI.UpdateInventoryUI(Inventory);
     }
     public void SwitchWeaponPrevious()
     {
@@ -252,17 +257,17 @@ public class PlayerGunHandler : MonoBehaviour
         }
 
         EquipGunFromInventory(currentGunIndex);
-        inventoryUI.UpdateInventoryUI();
+        inventoryUI.UpdateInventoryUI(Inventory);
     }
 
+    // TODO: this should really be consolidated into a general UI update function
     public void UpdateAmmoText()
     {
         playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
     }
 
 
-
-    ///NEED A PERFORMANCE UPDATE HEREE! THis is way too much for this functionality
+    // TODO: NEED A PERFORMANCE UPDATE! This is way too much for this functionality
     void Update()
     {
         RagdollUpdate();

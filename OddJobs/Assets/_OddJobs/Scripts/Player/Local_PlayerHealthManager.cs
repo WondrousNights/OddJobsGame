@@ -124,15 +124,15 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
     void ProcessRagdollAnimation()
     {
         isRagdoll = true;
-       ragdollEnabler.EnableRagdoll();
+        ragdollEnabler.EnableRagdoll();
 
-       inputController.mycam.cullingMask = inputController.nohudLayerMask;
-       inputController.mycam.transform.localPosition = inputController.thirdPersonCamPos.transform.localPosition;
-       inputController.mycam.transform.localRotation = inputController.thirdPersonCamPos.transform.localRotation;
+        inputController.mycam.cullingMask = inputController.nohudLayerMask;
+        inputController.mycam.transform.localPosition = inputController.thirdPersonCamPos.transform.localPosition;
+        inputController.mycam.transform.localRotation = inputController.thirdPersonCamPos.transform.localRotation;
 
-       if(debugLogs) Debug.Log("Ragdoll enabled");
-       triggerCollider.enabled = false;
-       characterController.enabled = false;
+        if(debugLogs) Debug.Log("Ragdoll enabled");
+        triggerCollider.enabled = false;
+        characterController.enabled = false;
     }
 
      private void ProcessGetUp()

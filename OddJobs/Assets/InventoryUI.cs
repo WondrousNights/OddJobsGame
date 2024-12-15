@@ -1,49 +1,68 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private bool debug = false;
     [SerializeField] private float spacing = 100f;
+    [SerializeField] private float showDuration = 2.2f;
     [SerializeField] private PlayerGunHandler playerGunHandler;
-    // [SerializeField] private GameObject itemSlotPrefab;
+    [SerializeField] private GameObject inventorySlotsParent;
     [SerializeField] private GameObject[] itemSlots;
+    [Tooltip("if we ever increase inventory size we have to manually update this")]
 
-    // private void Awake() {
-    //     itemSlots = new GameObject[playerGunHandler.Inventory.Length];
-    //     for (int i = 0; i < playerGunHandler.Inventory.Length; i++) {
-    //         itemSlots[i] = Instantiate(itemSlotPrefab, transform);
-    //     }
-    // }
+    private void Start()
+    {
+        HideInventorySlots();
+    }
 
-    public void UpdateInventoryUI() {
+    public void UpdateInventoryUI(GunScriptableObject[] inventory)
+    {
         if (debug) Debug.Log("Updating inventory UI");
 
-        for (int i = 0; i < itemSlots.Length; i++) {
-            TMPro.TextMeshProUGUI slotText = itemSlots[i].GetComponentInChildren<TMPro.TextMeshProUGUI>();
-            if (slotText) {
-                // if theres a gun in the slot, set the name in the itemslot
-                if (playerGunHandler.Inventory[i]) {
-                    itemSlots[i].SetActive(true);
-                    slotText.text = playerGunHandler.Inventory[i].GetComponent<GunScriptableObject>().name;
-                } else {
-                    // if there's no gun in the slot, hide the item slot
-                    itemSlots[i].SetActive(false);
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            if (debug) Debug.Log(inventory[i]);
+            if (inventory[i] == null) {
+                itemSlots[i].SetActive(false);
+            }
+            else {
+                itemSlots[i].SetActive(true);
+
+                TMPro.TextMeshProUGUI slotText = itemSlots[i].GetComponentInChildren<TMPro.TextMeshProUGUI>();
+                if (slotText) slotText.text = inventory[i].name;
+                
+                Image slotBG = itemSlots[i].GetComponent<Image>();
+                if (slotBG)
+                {
+                    if (playerGunHandler.currentGunIndex == i)
+                    {
+                        slotBG.color = new Color(slotBG.color.r, slotBG.color.g, slotBG.color.b, 1f);
+                    }
+                    else
+                    {
+                        slotBG.color = new Color(slotBG.color.r, slotBG.color.g, slotBG.color.b, 0.2f);
+                    }
                 }
             }
         }
 
         StartCoroutine(LerpInventoryPosition());
+
+        CancelInvoke(nameof(HideInventorySlots));
+        ShowInventorySlots();
+        Invoke(nameof(HideInventorySlots), showDuration);
     }
 
     private IEnumerator LerpInventoryPosition()
     {
-        RectTransform rectTransform = GetComponent<RectTransform>();
+        RectTransform rectTransform = inventorySlotsParent.GetComponent<RectTransform>();
         float startX = rectTransform.anchoredPosition.x;
         float targetX = -spacing * playerGunHandler.currentGunIndex;
         float elapsedTime = 0f;
-        float lerpDuration = 0.2f;
+        float lerpDuration = 0.15f;
 
         while (elapsedTime < lerpDuration)
         {
@@ -60,5 +79,11 @@ public class InventoryUI : MonoBehaviour
         yield return null;
     }
 
+    private void ShowInventorySlots() {
+        inventorySlotsParent.SetActive(true);
+    }
+    private void HideInventorySlots() {
+        inventorySlotsParent.SetActive(false);
+    }
     
 }

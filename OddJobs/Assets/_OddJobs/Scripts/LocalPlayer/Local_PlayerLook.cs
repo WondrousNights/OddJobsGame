@@ -8,11 +8,9 @@ public class Local_PlayerLook : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] PlayerInput playerInput;
-
     [SerializeField] private float gamepadMultiplier = 100f;
     public float xSensitivity = 40f;
     public float ySensitivity = 40f;
-    private bool isGamepad;
     private float xRotation = 0f;
 
     Local_PlayerInputController inputController;
@@ -21,22 +19,22 @@ public class Local_PlayerLook : MonoBehaviour
     {
         inputController = GetComponent<Local_PlayerInputController>();
     }
-    public void ProcessLook(Vector2 input)
+    public void ProcessLook(Vector2 input = default)
     {
-        // Scale input by screen resolution to make sensitivity consistent
+        // Scale input by screen resolution to make sensitivity consistent across resolutions
         float mouseX = input.x / Screen.width;
         float mouseY = input.y / Screen.height;
 
-        if (isGamepad = playerInput.currentControlScheme == "Controller") {
+        // Make controller sensitivity similar to mouse sensitivity
+        if (playerInput.currentControlScheme == "Controller" || playerInput.currentControlScheme == "Gamepad") {
             mouseX *= gamepadMultiplier;
             mouseY *= gamepadMultiplier;
         }
 
-        // Apply sensitivity scaling
-        xRotation -= (mouseY * ySensitivity);
+        // Apply sensitivity
+        xRotation -= mouseY * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, -85f, 85f);
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
         transform.Rotate(Vector3.up * (mouseX * xSensitivity));
     }
 }
