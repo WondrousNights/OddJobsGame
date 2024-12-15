@@ -2,5 +2,6 @@ public enum GunType
 {
     Pistol,
     Shotgun,
-    AK74
+    AK74,
+    Uzi
 }
