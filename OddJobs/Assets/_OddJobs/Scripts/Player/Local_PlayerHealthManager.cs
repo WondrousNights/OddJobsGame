@@ -6,7 +6,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 {
-    
+    [SerializeField] private bool debugLogs = false;
     public bool isRagdoll;
 
     RagdollEnabler ragdollEnabler;
@@ -130,7 +130,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
        inputController.mycam.transform.localPosition = inputController.thirdPersonCamPos.transform.localPosition;
        inputController.mycam.transform.localRotation = inputController.thirdPersonCamPos.transform.localRotation;
 
-       Debug.Log("Ragdoll enabled");
+       if(debugLogs) Debug.Log("Ragdoll enabled");
        triggerCollider.enabled = false;
        characterController.enabled = false;
     }

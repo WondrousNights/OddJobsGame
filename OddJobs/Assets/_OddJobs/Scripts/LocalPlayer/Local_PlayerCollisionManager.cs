@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Local_PlayerCollisionManager : MonoBehaviour
 {
-
+    [SerializeField] private bool debugLogs = false;
     Local_PlayerInputController playerInputController;
     Local_PlayerHealthManager playerHealthManager;
 
@@ -13,10 +13,10 @@ public class Local_PlayerCollisionManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.name);
+        if(debugLogs) Debug.Log(other.name);
         if(other.gameObject.tag == "MeleeWeapon")
         {
-            Debug.Log("Got hit from melee weapon");
+            if(debugLogs) Debug.Log("Got hit from melee weapon");
             EnemyWeapon weapon = other.gameObject.GetComponent<EnemyWeapon>();
 
             if(weapon.isAttacking)
