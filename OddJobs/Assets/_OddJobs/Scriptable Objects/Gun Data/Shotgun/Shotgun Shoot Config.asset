@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec70632dd0990a34c8e0b78d8b1c3560, type: 3}
+  m_Name: Shotgun Shoot Config
+  m_EditorClassIdentifier: 
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerSpread: {x: 0.1, y: 0.1, z: 0}
+  enemySpread: {x: 0.03, y: 0.03, z: 0.03}
+  fireRate: 1
+  bulletsPerShot: 6
+  shootSfx: {fileID: 11400000, guid: 573703a1271ea6f4091979a90951e628, type: 2}
+  impactParticle: {fileID: 8882886379892811467, guid: 11be7a7ec34aee24da74bc872f633f7c,
+    type: 3}
+  bulletHoleDecal: {fileID: 8003860584087294457, guid: 14478e071f2698742820230c384ec487,
+    type: 3}
+  maxRecoil: 0.25
+  maxKickback: -0.005
+  hitForce: 80
+  reloadTime: 1
+  Damage: 4

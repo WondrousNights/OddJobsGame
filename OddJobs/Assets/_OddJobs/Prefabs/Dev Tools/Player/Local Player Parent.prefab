@@ -1423,6 +1423,37 @@ Transform:
   - {fileID: 6254886540720324453}
   m_Father: {fileID: 397062639466553278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1882804044441881484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 270293840021580938}
+  m_Layer: 0
+  m_Name: Shoot Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &270293840021580938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882804044441881484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.378}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3056751836360097887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1887350931414192644
 GameObject:
   m_ObjectHideFlags: 0
@@ -4917,6 +4948,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2590870033671176749}
+  - {fileID: 270293840021580938}
   m_Father: {fileID: 6200274179733969214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &9094701647203173809
@@ -7754,6 +7786,7 @@ MonoBehaviour:
   thirdPersonCamPos: {fileID: 4676085678605703177}
   myVisuals: {fileID: 5710266452690481227}
   gunHolder: {fileID: 2739669307900164629}
+  shootPoint: {fileID: 270293840021580938}
   hipPosition: {fileID: 250687055078301375}
   hasSpawned: 0
   playerInput: {fileID: 0}

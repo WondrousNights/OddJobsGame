@@ -56,7 +56,7 @@ public class GunScriptableObject : ScriptableObject
         ShootSystem = null;
     }
 
-    public void Shoot(Camera shootCam, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
+    public void Shoot(Transform shootPoint, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
     {
         if (Time.time > ShootConfig.fireRate + LastShootTime)
         {
@@ -64,26 +64,42 @@ public class GunScriptableObject : ScriptableObject
             ShootSystem.Play();
             muzzleFlash.Play();
             MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
-            Ray ray;
-           
-            ray = shootCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             
-            ray.origin += new Vector3(
-                Random.Range(-ShootConfig.playerSpread.x, ShootConfig.playerSpread.x), 
-                Random.Range(-ShootConfig.playerSpread.y, ShootConfig.playerSpread.y), 
-                0
-            );
+            ammoHandler.currentClipAmmo[gunIndex] -= 1;
+
+
+            for(int i = 0; i < ShootConfig.bulletsPerShot; i++)
+            {
+
+
+            Ray ray = new Ray(shootPoint.position, shootPoint.forward);
+
+
+
+            Vector3 offset = new Vector3(shootPoint.position.x, shootPoint.position.y, shootPoint.position.z);
+            ray.origin = offset
+                += new Vector3(
+                    Random.Range(
+                        -ShootConfig.playerSpread.x,
+                        ShootConfig.playerSpread.x
+                    ),
+                    Random.Range(
+                        -ShootConfig.playerSpread.y,
+                        ShootConfig.playerSpread.y
+                    ),
+                    0
+                );
+
           
             RaycastHit hit;
 
-            ammoHandler.currentClipAmmo[gunIndex] -= 1;
 
-            Vector3 shootDirection = shootCam.transform.forward;
+        
             if (Physics.Raycast(ray, out hit))
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        shootCam.transform.position,
+                        shootPoint.transform.position,
                         hit.point,
                         hit,
                         ray
@@ -94,13 +110,15 @@ public class GunScriptableObject : ScriptableObject
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        shootCam.transform.position,
-                        shootCam.transform.position + (shootDirection * TrailConfig.MissDistance),
+                        shootPoint.transform.position,
+                        shootPoint.transform.position + (shootPoint.transform.forward * TrailConfig.MissDistance),
                         new RaycastHit(),
                         ray
                     )
                 );
             }
+            }
+            
         }
     }
 

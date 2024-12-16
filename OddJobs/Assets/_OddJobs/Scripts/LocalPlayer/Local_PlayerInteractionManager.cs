@@ -75,6 +75,10 @@ public class Local_PlayerInteractionManager : MonoBehaviour
                 }
 
             }
+            else if(interact == true)
+            {
+                interact = false;
+            }
         }
     }
 
@@ -84,6 +88,10 @@ public class Local_PlayerInteractionManager : MonoBehaviour
         if(context.performed)
         {
             interact = true;
+        }
+        if(context.canceled)
+        {
+            interact = false;
         }
     }
 

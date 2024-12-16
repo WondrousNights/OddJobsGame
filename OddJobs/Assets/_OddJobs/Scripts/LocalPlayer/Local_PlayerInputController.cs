@@ -20,14 +20,17 @@ public class Local_PlayerInputController : MonoBehaviour
     public Local_PlayerHealthManager playerHealthManager;
     public Local_PlayerUI playerUI;
     
+    
     [SerializeField] WeaponSway weaponSway;
 
     public Camera mycam;
+
     public Transform firstPersonCamPos;
     public Transform thirdPersonCamPos;
 
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject gunHolder;
+    public Transform shootPoint;
     // [SerializeField] GameObject myCanvas;
     public GameObject hipPosition;
 
@@ -129,6 +132,7 @@ public class Local_PlayerInputController : MonoBehaviour
         if(playerHealthManager.isRagdoll)
         {
             lookInput = new UnityEngine.Vector2(0, 0);
+            isShooting = false;
         }
         if (!playerStats.isDead || !playerHealthManager.isRagdoll)
         {

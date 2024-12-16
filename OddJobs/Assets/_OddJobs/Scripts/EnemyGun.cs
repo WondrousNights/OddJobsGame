@@ -38,7 +38,10 @@ public class EnemyGun : EnemyWeapon
             muzzleFlash.Play();
             MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, gameObject.transform.position);
 
-            Vector3 shootDirection = ShootSystem.transform.forward
+
+            for(int i = 0; i < ShootConfig.bulletsPerShot; i++)
+            {
+ Vector3 shootDirection = ShootSystem.transform.forward
                 + new Vector3(
                     Random.Range(
                         -ShootConfig.enemySpread.x,
@@ -80,6 +83,8 @@ public class EnemyGun : EnemyWeapon
                     )
                 );
             }
+            }
+           
 
         }
     }

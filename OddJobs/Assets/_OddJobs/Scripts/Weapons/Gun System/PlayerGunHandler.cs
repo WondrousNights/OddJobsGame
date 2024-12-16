@@ -172,7 +172,7 @@ public class PlayerGunHandler : MonoBehaviour
             {
                 // shoot the gun
                 ActiveGun.Shoot(
-                playerInputController.mycam, 
+                playerInputController.shootPoint, 
                 weaponHolder.GetComponentInChildren<MuzzleFlash>(),
                 ammoHandler,
                 currentGunIndex

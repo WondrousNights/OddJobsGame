@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 public class NPC_Interactable : Interactable
 {
 
-    ConversationManager conversationManager;
+    public ConversationManager conversationManager;
     NPCConversation conversation;
 
     [SerializeField] BoxCollider uiBoxCollider;
@@ -22,6 +22,8 @@ public class NPC_Interactable : Interactable
     bool checkForPlayer;
     [SerializeField] float checkForPlayerRadius;
     [SerializeField] LayerMask playerLayerMask;
+
+    public bool canInteract = true;
 
     void Start()
     {
@@ -36,8 +38,12 @@ public class NPC_Interactable : Interactable
     }
     protected override void Interact(Local_PlayerInteractionManager playerInteracting)
     {
-        // Debug.Log("Interacted with" + gameObject.name);
+        if(canInteract)
+        {
         conversationManager.StartConversation(conversation);
+        }
+        // Debug.Log("Interacted with" + gameObject.name);
+        
 
     }
 
