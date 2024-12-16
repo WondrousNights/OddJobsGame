@@ -68,6 +68,11 @@ public class GunScriptableObject : ScriptableObject
            
             ray = shootCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
             
+            ray.origin += new Vector3(
+                Random.Range(-ShootConfig.playerSpread.x, ShootConfig.playerSpread.x), 
+                Random.Range(-ShootConfig.playerSpread.y, ShootConfig.playerSpread.y), 
+                0
+            );
           
             RaycastHit hit;
 

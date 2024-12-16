@@ -268,6 +268,7 @@ public class PlayerGunHandler : MonoBehaviour
 
 
     // TODO: NEED A PERFORMANCE UPDATE! This is way too much for this functionality
+    // shits nullrefs whenever the player ragdolls line 281
     void Update()
     {
         RagdollUpdate();
@@ -277,7 +278,7 @@ public class PlayerGunHandler : MonoBehaviour
     {
         if(playerHealthManager.isRagdoll)
         {
-            foreach(MeshRenderer render in gunEffects.meshRenderers)
+            foreach(MeshRenderer render in gunEffects?.meshRenderers)
             {
                 render.enabled = false;
             }
@@ -286,7 +287,7 @@ public class PlayerGunHandler : MonoBehaviour
         {
             if (gunEffects)
             {
-                foreach(MeshRenderer render in gunEffects.meshRenderers)
+                foreach(MeshRenderer render in gunEffects?.meshRenderers)
                 {
                     render.enabled = true;
                 }

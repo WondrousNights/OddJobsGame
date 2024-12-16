@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class ItemPickup : Interactable
 {
-
-    [SerializeField] private bool autoPickup = false;
     [SerializeField] GunScriptableObject gun;
+    [SerializeField] private bool autoPickup = false;
     public int ammoInClip = -1;
     [Tooltip("Set to -1 to use the gun's default ammo clip size")]
+    // [SerializeField] private int timeToRespawn = -1;
+    // [Tooltip("Set to -1 to never respawn")]
 
     protected override void Interact(Local_PlayerInteractionManager playerInteracting)
     {
