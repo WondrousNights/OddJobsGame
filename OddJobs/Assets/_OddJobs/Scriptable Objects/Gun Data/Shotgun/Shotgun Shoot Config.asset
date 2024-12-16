@@ -15,8 +15,8 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 0
-  playerSpread: {x: 0.1, y: 0.1, z: 0}
-  enemySpread: {x: 0.03, y: 0.03, z: 0.03}
+  playerSpread: {x: 0.5, y: 0.5, z: 0.5}
+  enemySpread: {x: 0.5, y: 0.5, z: 0.5}
   fireRate: 1
   bulletsPerShot: 6
   shootSfx: {fileID: 11400000, guid: 573703a1271ea6f4091979a90951e628, type: 2}
