@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using Unity.Netcode;
 using UnityEngine;
@@ -53,6 +54,9 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public LayerMask nohudLayerMask;
 
+    bool isSpawned = false;
+
+    CharacterController cc;
 
     private void Awake()
     {
@@ -63,9 +67,12 @@ public class Local_PlayerInputController : MonoBehaviour
         playerStats = GetComponent<Local_PlayerStats>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
         playerUI = GetComponent<Local_PlayerUI>();
+        cc = GetComponent<CharacterController>();
 
 
         myListener = GetComponent<AudioListener>();
+
+        cc.enabled = false;
         //Event Subscription
 
         //playerStats.OnPlayerDeath += HandlePlayerDeathEvent;
@@ -74,8 +81,12 @@ public class Local_PlayerInputController : MonoBehaviour
 
     }
 
+
+
     private void Start()
     {
+
+        
         Cursor.lockState = CursorLockMode.Locked;
         //Application.targetFrameRate = 60;
         //Camera Controls
@@ -86,8 +97,15 @@ public class Local_PlayerInputController : MonoBehaviour
             mainCam.gameObject.SetActive(false);
         }
 
-       
+        Spawn();
         SetLayers();
+    }
+
+    void Spawn()
+    {
+        transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
+        isSpawned = true;
+        cc.enabled =  true;
     }
 
     void FixedUpdate()
@@ -149,7 +167,7 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public void ProcessMove(CallbackContext context)
     {
-        if(playerHealthManager.isRagdoll) return;
+        if(playerHealthManager.isRagdoll || !isSpawned) return;
         
          
         moveInput = context.ReadValue<UnityEngine.Vector2>();
@@ -157,7 +175,7 @@ public class Local_PlayerInputController : MonoBehaviour
     }
     public void ProcessLook(CallbackContext context)
     {
-        if(playerHealthManager.isRagdoll) return;
+        if(playerHealthManager.isRagdoll || !isSpawned) return;
         lookInput = context.ReadValue<UnityEngine.Vector2>();
     }
 
