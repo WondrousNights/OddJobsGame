@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Numerics;
+using Unity.Behavior;
 using Unity.Mathematics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -26,10 +27,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     [SerializeField] GameObject ragdollRoot;
     [SerializeField] CapsuleCollider capsuleCollider;
+
+    BehaviorGraphAgent behaviorGraphAgent;
     void Start()
     {
         ragdollEnabler = GetComponent<RagdollEnabler>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
     }
 
     private void OnEnable()
@@ -69,8 +73,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if(!isDead)
         {
-        ragdollEnabler.EnableRagdoll();
-        isDead = true;
+            ragdollEnabler.EnableRagdoll();
+            isDead = true;
+            behaviorGraphAgent.enabled = false;
         }
     }
 

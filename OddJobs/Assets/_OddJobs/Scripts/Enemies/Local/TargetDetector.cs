@@ -7,9 +7,11 @@ public class TargetDetector : MonoBehaviour {
 
     [SerializeField] LayerMask playerMask;
 
+    [SerializeField] bool checkForTargets = true;
 
     void Update()
     {
+        if(!checkForTargets) return;
         CheckForTarget();
 
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -7,22 +8,32 @@ public class EnemyManager : MonoBehaviour
 
     NPC_Interactable interactable;
 
+    [SerializeField] GameObject gunGameobject;
     void Start()
     {
         if(hasConverstaion)
         {
             interactable = GetComponent<NPC_Interactable>();
         }
+
+        if(isHostile)
+        {
+            gunGameobject.SetActive(true);
+        }
+        else
+        {
+            gunGameobject.SetActive(false);
+        }
     }
 
     public void SetHostile()
     {
-        isHostile = true;
+        StartCoroutine(SetHostileBool(2f));
 
         if(hasConverstaion)
         {
             interactable.canInteract = false;
-            interactable.conversationManager.EndConversation();
+            Destroy(interactable.conversationManager.gameObject, 2f);
         }
     }
 
@@ -30,5 +41,13 @@ public class EnemyManager : MonoBehaviour
     public void SetNotHostile()
     {
         isHostile = false;
+    }
+
+
+    IEnumerator SetHostileBool(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        gunGameobject.SetActive(true);
+        isHostile = true;
     }
 }

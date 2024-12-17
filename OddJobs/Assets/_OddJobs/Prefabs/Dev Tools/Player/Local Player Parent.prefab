@@ -5089,13 +5089,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4615460085036802058}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11569668, y: -0, z: -0, w: 0.9932846}
-  m_LocalPosition: {x: 0, y: 5.28, z: -12.22}
+  m_LocalRotation: {x: 0.07843069, y: -0, z: -0, w: 0.9969196}
+  m_LocalPosition: {x: 0, y: 1.999, z: -1.484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6200274179733969214}
-  m_LocalEulerAnglesHint: {x: 13.288, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 8.997, y: 0, z: 0}
 --- !u!54 &6552434963743537476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7441,6 +7441,7 @@ GameObject:
   - component: {fileID: -4991034178908729443}
   - component: {fileID: 197025337377271024}
   - component: {fileID: 8181365394615560530}
+  - component: {fileID: 7647228287817704888}
   m_Layer: 3
   m_Name: Local Player Parent
   m_TagString: Player
@@ -7939,8 +7940,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLogs: 0
   isRagdoll: 0
-  _MaxHealth: 100
-  _Health: 100
+  _MaxHealth: 1256.2
+  _Health: 1256.2
   timeToGetUp: 2
 --- !u!114 &197025337377271024
 MonoBehaviour:
@@ -7982,6 +7983,19 @@ MonoBehaviour:
   mediumAmmo: 30
   heavyAmmo: 0
   currentClipAmmo: 0000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &7647228287817704888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812313864751850106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076fcadc469cc844b9bbbcd6f9661eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posOffset: {x: 0, y: 1.8, z: -1.25}
 --- !u!1 &7849503409469734107
 GameObject:
   m_ObjectHideFlags: 0

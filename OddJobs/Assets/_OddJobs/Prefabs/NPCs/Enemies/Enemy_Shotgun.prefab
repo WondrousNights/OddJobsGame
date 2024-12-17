@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1804515433199792182}
   - component: {fileID: 1840622710860600911}
+  - component: {fileID: 7051217923690442462}
   m_Layer: 0
   m_Name: Enemy_Shotgun
   m_TagString: Untagged
@@ -52,6 +53,25 @@ MonoBehaviour:
   myGunProperties: {fileID: 11400000, guid: ecac69c7ea6fad74a917cb8acefd2579, type: 2}
   meshRenderers: []
   isEnemyWeapon: 1
+--- !u!114 &7051217923690442462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273049537955193298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b179304c7daaa4e819fe296a57e3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdollForceMagnitude: 0
+  isAttacking: 0
+  damage: 0
+  ShootConfig: {fileID: 0}
+  TrailConfig: {fileID: 0}
+  ShootSystem: {fileID: 0}
+  muzzleFlash: {fileID: 0}
 --- !u!1 &1489552802969878433
 GameObject:
   m_ObjectHideFlags: 0

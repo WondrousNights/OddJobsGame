@@ -14,6 +14,8 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
     CharacterController characterController;
     BoxCollider triggerCollider;
 
+    Local_PlayerCameraController cameraController;
+
    
     [SerializeField]
     private float _MaxHealth = 100;
@@ -34,6 +36,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
         inputController = GetComponent<Local_PlayerInputController>();
         characterController = GetComponent<CharacterController>();
         triggerCollider = GetComponent<BoxCollider>();
+        cameraController = GetComponent<Local_PlayerCameraController>();
     }
 
     public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint)
@@ -126,9 +129,8 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
         isRagdoll = true;
         ragdollEnabler.EnableRagdoll();
 
-        inputController.mycam.cullingMask = inputController.nohudLayerMask;
-        inputController.mycam.transform.localPosition = inputController.thirdPersonCamPos.transform.localPosition;
-        inputController.mycam.transform.localRotation = inputController.thirdPersonCamPos.transform.localRotation;
+        cameraController.SetRagdollCamera();
+        
 
         if(debugLogs) Debug.Log("Ragdoll enabled");
         triggerCollider.enabled = false;
@@ -142,9 +144,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
             gameObject.transform.position = inputController.hipPosition.transform.position;
             
 
-        
-            inputController.mycam.transform.localPosition = inputController.firstPersonCamPos.transform.localPosition;
-            inputController.mycam.transform.localRotation = inputController.firstPersonCamPos.transform.localRotation;
+            cameraController.SetNormalCamera();
             ragdollEnabler.EnableAnimator();
             inputController.ResetSetCameraLayerMask();
             triggerCollider.enabled = true;

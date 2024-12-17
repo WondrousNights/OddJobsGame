@@ -17,7 +17,7 @@ public class NPC_Interactable : Interactable
     NPCConversation conversation;
 
     [SerializeField] BoxCollider uiBoxCollider;
-    BoxCollider npcBoxCollider;
+    Collider npcCollider;
 
     bool checkForPlayer;
     [SerializeField] float checkForPlayerRadius;
@@ -25,11 +25,12 @@ public class NPC_Interactable : Interactable
 
     public bool canInteract = true;
 
+    
     void Start()
     {
         conversationManager = GetComponentInChildren<ConversationManager>();
         conversation = GetComponent<NPCConversation>();
-        npcBoxCollider = GetComponent<BoxCollider>();
+        npcCollider = GetComponent<Collider>();
 
         conversationManager.OnConversationStarted += ConversationStart;
         conversationManager.OnConversationEnded += ConversationEnd;
@@ -51,13 +52,15 @@ public class NPC_Interactable : Interactable
     {
         checkForPlayer = true;
         if (uiBoxCollider) uiBoxCollider.enabled = true;
-        npcBoxCollider.enabled = false;
+        npcCollider.enabled = false;
     }
-    private void ConversationEnd()
+    public void ConversationEnd()
     {
         checkForPlayer = false;
         if (uiBoxCollider) uiBoxCollider.enabled = false;
-        npcBoxCollider.enabled = true;
+        npcCollider.enabled = true;
+
+        
     }
 
     void Update()
@@ -69,4 +72,6 @@ public class NPC_Interactable : Interactable
             conversationManager.EndConversation();
         }
     }
+
+    
 }
