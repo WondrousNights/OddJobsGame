@@ -44,6 +44,8 @@ public class PlayerGunHandler : MonoBehaviour
     public bool isReloading = false;
     public bool isEquipping = false; // not used
 
+    public bool isHoldingObject = false;
+
     private void Start()
     {
         playerInputController = GetComponent<Local_PlayerInputController>();
@@ -160,11 +162,12 @@ public class PlayerGunHandler : MonoBehaviour
 
     public void ShootCurrentGun()
     {
+        if(isHoldingObject) return;
         if(ActiveGun == null || playerInputController.playerHealthManager.isRagdoll) return;
 
-        if (heldItem) heldItem.Interact(this);
 
-        // if the gun has ammo in clip
+
+        // if the gun has ammo in clip //I think this might be causing bugs?
         if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
         {
             // and we're not reloading
@@ -296,5 +299,7 @@ public class PlayerGunHandler : MonoBehaviour
                 
         }
     }
+
+
 
 }

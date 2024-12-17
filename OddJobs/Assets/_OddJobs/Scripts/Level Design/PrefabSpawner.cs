@@ -7,6 +7,7 @@ public class PrefabSpawner : MonoBehaviour
     [SerializeField] private float spawnRadius = 1f;
     [SerializeField] private bool spawn = true;
 
+
     private float timer = 0f;
 
     private void Update()
@@ -20,8 +21,10 @@ public class PrefabSpawner : MonoBehaviour
         SpawnPrefab();
     }
 
-    private void SpawnPrefab()
+    public void SpawnPrefab()
     {
+       
         Instantiate(prefab, transform.position + Random.insideUnitSphere * spawnRadius, Quaternion.identity);
+
     }
 }

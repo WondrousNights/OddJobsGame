@@ -21,6 +21,8 @@ public class Local_PlayerInteractionManager : MonoBehaviour
     public PlayerAmmoHandler ammoHandler;
     public PlayerGunHandler gunHandler;
 
+    public Transform grabPoint;
+
     void Start()
     {
         cam = GetComponent<Local_PlayerInputController>().mycam;
