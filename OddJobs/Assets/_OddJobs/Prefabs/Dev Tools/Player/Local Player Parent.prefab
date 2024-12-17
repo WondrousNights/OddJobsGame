@@ -5089,13 +5089,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4615460085036802058}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07843069, y: -0, z: -0, w: 0.9969196}
+  m_LocalRotation: {x: 0.53346694, y: 0, z: 0, w: 0.84582096}
   m_LocalPosition: {x: 0, y: 1.999, z: -1.484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6200274179733969214}
-  m_LocalEulerAnglesHint: {x: 8.997, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 64.48, y: 0, z: 0}
 --- !u!54 &6552434963743537476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7788,7 +7788,7 @@ MonoBehaviour:
   myVisuals: {fileID: 5710266452690481227}
   gunHolder: {fileID: 2739669307900164629}
   shootPoint: {fileID: 270293840021580938}
-  hipPosition: {fileID: 250687055078301375}
+  hipPosition: {fileID: 1820013308104162956}
   hasSpawned: 0
   playerInput: {fileID: 0}
   player1Mask:
@@ -7940,8 +7940,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLogs: 0
   isRagdoll: 0
-  _MaxHealth: 1256.2
-  _Health: 1256.2
+  _MaxHealth: 100
+  _Health: 100
   timeToGetUp: 2
 --- !u!114 &197025337377271024
 MonoBehaviour:
@@ -7995,7 +7995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 076fcadc469cc844b9bbbcd6f9661eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posOffset: {x: 0, y: 1.8, z: -1.25}
+  posOffset: {x: 0, y: 1.8, z: -1.53}
 --- !u!1 &7849503409469734107
 GameObject:
   m_ObjectHideFlags: 0

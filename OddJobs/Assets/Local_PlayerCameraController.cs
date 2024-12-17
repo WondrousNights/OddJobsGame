@@ -37,8 +37,8 @@ public class Local_PlayerCameraController : MonoBehaviour
     {
         if(isRagdollCamera)
         {
-            playerCamera.transform.localPosition = ragdollRoot.transform.position + posOffset;
-            
+            playerCamera.transform.position = ragdollRoot.transform.position + posOffset;
+            playerCamera.transform.rotation = inputController.thirdPersonCamPos.rotation;
         }
     }
 

@@ -30,6 +30,8 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 
     bool isDead;
 
+    bool damageProtection;
+
     void Start()
     {
         ragdollEnabler = GetComponentInChildren<RagdollEnabler>();
@@ -41,6 +43,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 
     public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint)
     {
+        if(damageProtection) return;
         CurrentHealth -= damage;
        inputController.playerUI.UpdateHealthImage(CurrentHealth, MaxHealth);
 
@@ -65,7 +68,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 
     public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint)
     {
-
+        if(damageProtection) return;
         CurrentHealth -= damage;
 
 
@@ -111,14 +114,23 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
 
     void Update()
     {
+        count += Time.deltaTime;
+
+
         if(isRagdoll && !isDead)
         {
-            count += Time.deltaTime;
+            damageProtection = true;
 
             if(count >= timeToGetUp)
             {
                 ProcessGetUp();
             }
+        }
+
+        if(count >= timeToGetUp + 0.5f)
+        {
+
+            damageProtection = false;
         }
     }
 
