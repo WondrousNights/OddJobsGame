@@ -2012,6 +2012,7 @@ GameObject:
   - component: {fileID: 4152331525192814239}
   - component: {fileID: 5040249205139825735}
   - component: {fileID: 2452254631446083760}
+  - component: {fileID: 6216818826215414406}
   m_Layer: 19
   m_Name: Local_Mid Range Enemy
   m_TagString: Enemy
@@ -2465,7 +2466,6 @@ MonoBehaviour:
     type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 1428897912616911215
-  - rid: 1428897912616911216
   - rid: 1428897917242704103
   - rid: 1428898050631008802
   NetcodeRunOnlyOnOwner: 0
@@ -2481,18 +2481,6 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 3603551074659233117}
-    - rid: 1428897912616911216
-      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]',
-        ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 15615743925735312069
-          m_Value1: 9877565075100365989
-        Name: Waypoints
-        m_Value:
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
     - rid: 1428897917242704103
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
         asm: Unity.Behavior}
@@ -2528,6 +2516,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 15368
+  checkForTargets: 1
 --- !u!114 &7822939179552459401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2602,6 +2591,24 @@ MonoBehaviour:
   RagdollRoot: {fileID: 8705006120116183200}
   StartRagdoll: 0
   Rigidbodies: []
+--- !u!114 &6216818826215414406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603551074659233117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec96deda0d31a3f44b0a8f4a1a48fff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHostile: 1
+  hasConverstaion: 0
+  gunGameobject: {fileID: 4365322074424816251}
+  OnDamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3623118020020442531
 GameObject:
   m_ObjectHideFlags: 0

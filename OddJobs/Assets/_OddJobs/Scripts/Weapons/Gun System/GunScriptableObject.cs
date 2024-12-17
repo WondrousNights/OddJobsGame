@@ -148,7 +148,7 @@ public class GunScriptableObject : ScriptableObject
         }
 
         instance.transform.position = EndPoint;
-
+        yield return new WaitForSeconds(0.25f);
         // if the bullet hit something, spawn a bullet hole and apply damage/force
         if (hit.collider)
         {
@@ -176,13 +176,13 @@ public class GunScriptableObject : ScriptableObject
             // If the object hit has a damageable component, apply damage to it
             if(hit.transform.TryGetComponent(out IDamageable damageable))
             {
-                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
+                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject);
             }
 
             // If the object hit has a damageable component in its parent, apply damage to it
             if(hit.transform.GetComponentInParent<IDamageable>() != null)
             {
-                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point);
+                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject);
             }
         }
 

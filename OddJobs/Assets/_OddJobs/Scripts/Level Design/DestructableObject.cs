@@ -23,7 +23,7 @@ public class DestructableObject : MonoBehaviour, IDamageable
         _health = _maxHealth;
     }
 
-    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint)
+    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender)
     {
         _health -= damage;
         if (debug) Debug.Log(name + " took " + damage + " damage, current health: " + _health);

@@ -41,7 +41,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
         cameraController = GetComponent<Local_PlayerCameraController>();
     }
 
-    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint)
+    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender)
     {
         if(damageProtection) return;
         CurrentHealth -= damage;

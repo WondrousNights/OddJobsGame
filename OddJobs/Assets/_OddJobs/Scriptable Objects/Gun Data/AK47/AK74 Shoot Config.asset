@@ -15,8 +15,10 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 0
+  playerSpread: {x: 0.01, y: 0.01, z: 0.01}
   enemySpread: {x: 0.12, y: 0.12, z: 0.12}
   fireRate: 0.12
+  bulletsPerShot: 1
   shootSfx: {fileID: 11400000, guid: 85f9c1ddc4d61c34faed3bd6c68b3fdb, type: 2}
   impactParticle: {fileID: 8882886379892811467, guid: 11be7a7ec34aee24da74bc872f633f7c,
     type: 3}
@@ -26,4 +28,4 @@ MonoBehaviour:
   maxKickback: -0.005
   hitForce: 80
   reloadTime: 1
-  Damage: 8
+  Damage: 2

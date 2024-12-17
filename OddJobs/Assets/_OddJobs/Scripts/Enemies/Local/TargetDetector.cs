@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TargetDetector : MonoBehaviour {
@@ -9,11 +10,13 @@ public class TargetDetector : MonoBehaviour {
 
     [SerializeField] bool checkForTargets = true;
 
+    [SerializeField] float fieldOfView = 85;
+
     void Update()
     {
         if(!checkForTargets) return;
         CheckForTarget();
-
+        CanSeeTarget();
 
         if(currentTarget != null)
         {
@@ -60,5 +63,28 @@ public class TargetDetector : MonoBehaviour {
         }
         // Debug.Log(closestCollider.gameObject.name);
         return closestCollider;
+    }
+
+    public bool CanSeeTarget()
+    {
+        if(currentTarget != null)
+        {
+            Vector3 targetDirection = currentTarget.transform.position - transform.position;
+            float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
+            if(angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
+            {
+                Ray ray = new Ray(transform.position, targetDirection);
+                RaycastHit hitInfo = new RaycastHit();
+
+                if(Physics.Raycast(ray, out hitInfo))
+                {
+                    if(hitInfo.transform.gameObject == currentTarget)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

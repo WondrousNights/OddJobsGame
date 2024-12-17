@@ -269,6 +269,7 @@ public class PlayerGunHandler : MonoBehaviour
 
     // TODO: NEED A PERFORMANCE UPDATE! This is way too much for this functionality
     // shits nullrefs whenever the player ragdolls line 281
+    //Will handle with events and possibly just despawning gun
     void Update()
     {
         RagdollUpdate();

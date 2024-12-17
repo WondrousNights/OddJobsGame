@@ -4,6 +4,7 @@ using System.Numerics;
 using Unity.Behavior;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using Vector3 = UnityEngine.Vector3;
 
 public class EnemyHealth : MonoBehaviour, IDamageable
@@ -28,12 +29,23 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] GameObject ragdollRoot;
     [SerializeField] CapsuleCollider capsuleCollider;
 
-    BehaviorGraphAgent behaviorGraphAgent;
+    TargetDetector targetDetector;
+
+    //Events
+    public event EventHandler OnDeath;
+    public event EventHandler<OnDamagedEventArgs> OnDamaged;
+    public class OnDamagedEventArgs : EventArgs
+    {
+        public GameObject Sender;
+    }
+
+
     void Start()
     {
         ragdollEnabler = GetComponent<RagdollEnabler>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
+        targetDetector = GetComponent<TargetDetector>();
+
     }
 
     private void OnEnable()
@@ -56,16 +68,26 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
    
 
-    public void TakeDamageFromGun(Ray ray, float Damage, float force, Vector3 collisionPoint)
+    public void TakeDamageFromGun(Ray ray, float Damage, float force, Vector3 collisionPoint, GameObject sender)
     {
+
+        if(CurrentHealth == MaxHealth)
+        {
+            OnDamaged.Invoke(this, new OnDamagedEventArgs { Sender = sender});
+            targetDetector.currentTarget = sender;
+        }
         CurrentHealth -= Damage;
 
         HandleDamageResponse(ray, force, collisionPoint);
+
 
         if(CurrentHealth <= 0)
         {
             HandleDeath();
         }
+
+    
+
   
     }
 
@@ -73,9 +95,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if(!isDead)
         {
+            OnDeath.Invoke(this, EventArgs.Empty);
+
             ragdollEnabler.EnableRagdoll();
             isDead = true;
-            behaviorGraphAgent.enabled = false;
         }
     }
 
