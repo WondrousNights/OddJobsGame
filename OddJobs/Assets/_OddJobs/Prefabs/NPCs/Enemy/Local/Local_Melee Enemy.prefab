@@ -5190,6 +5190,7 @@ GameObject:
   - component: {fileID: 4274763529445085800}
   - component: {fileID: 1466883375767568510}
   - component: {fileID: 2912516716935597106}
+  - component: {fileID: 6754767860536745259}
   m_Layer: 19
   m_Name: Local_Melee Enemy
   m_TagString: Enemy
@@ -5705,6 +5706,8 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 15368
+  checkForTargets: 1
+  fieldOfView: 85
 --- !u!114 &3577061267200053676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5757,8 +5760,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9262548cb19ad624086daa14c66e712d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxHealth: 100
-  _Health: 0
+  _MaxHealth: 20
+  _Health: 20
   timeToGetUp: 1
   isDead: 0
   ragdollRoot: {fileID: 4541520990185260214}
@@ -5779,6 +5782,29 @@ MonoBehaviour:
   RagdollRoot: {fileID: 8048283575289856870}
   StartRagdoll: 0
   Rigidbodies: []
+--- !u!114 &6754767860536745259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462979640210121836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec96deda0d31a3f44b0a8f4a1a48fff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHostile: 1
+  reportToSquad: 1
+  squadDistance: 14.82
+  squadMask:
+    serializedVersion: 2
+    m_Bits: 524288
+  hasConverstaion: 0
+  gunGameobject: {fileID: 0}
+  OnDamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8468583281213229799
 GameObject:
   m_ObjectHideFlags: 0
@@ -6427,32 +6453,32 @@ PrefabInstance:
     - target: {fileID: 5920628141422906895, guid: c1ab9abedc9d80f4a9109fe99b4ea8d4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5920628141422906895, guid: c1ab9abedc9d80f4a9109fe99b4ea8d4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5920628141422906895, guid: c1ab9abedc9d80f4a9109fe99b4ea8d4,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5920628141422906895, guid: c1ab9abedc9d80f4a9109fe99b4ea8d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.016
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 5920628141422906895, guid: c1ab9abedc9d80f4a9109fe99b4ea8d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.068
+      value: 0.069
       objectReference: {fileID: 0}
     - target: {fileID: 5920628141422906895, guid: c1ab9abedc9d80f4a9109fe99b4ea8d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.013
+      value: -0.008
       objectReference: {fileID: 0}
     - target: {fileID: 5920628141422906895, guid: c1ab9abedc9d80f4a9109fe99b4ea8d4,
         type: 3}
@@ -6562,8 +6588,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.32, y: 0.66, z: 0.38}
-  m_Center: {x: -0.0000031824254, y: 0.123351604, z: -0.000000011832648}
+  m_Size: {x: 0.25, y: 0.69, z: 0.2}
+  m_Center: {x: -0.0000031824254, y: 0.24, z: -0.000000011832648}
 --- !u!54 &1960982563495276745
 Rigidbody:
   m_ObjectHideFlags: 0

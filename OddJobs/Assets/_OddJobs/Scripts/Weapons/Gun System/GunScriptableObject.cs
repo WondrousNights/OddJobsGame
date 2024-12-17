@@ -99,7 +99,7 @@ public class GunScriptableObject : ScriptableObject
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        shootPoint.transform.position,
+                        ray.origin,
                         hit.point,
                         hit,
                         ray
@@ -110,8 +110,8 @@ public class GunScriptableObject : ScriptableObject
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        shootPoint.transform.position,
-                        shootPoint.transform.position + (shootPoint.transform.forward * TrailConfig.MissDistance),
+                        ray.origin,
+                        ray.origin + (shootPoint.transform.forward * TrailConfig.MissDistance),
                         new RaycastHit(),
                         ray
                     )
@@ -148,7 +148,7 @@ public class GunScriptableObject : ScriptableObject
         }
 
         instance.transform.position = EndPoint;
-        yield return new WaitForSeconds(0.25f);
+
         // if the bullet hit something, spawn a bullet hole and apply damage/force
         if (hit.collider)
         {
