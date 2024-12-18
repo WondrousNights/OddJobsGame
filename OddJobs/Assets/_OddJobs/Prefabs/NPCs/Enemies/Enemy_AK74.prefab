@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1804515433199792182}
   - component: {fileID: 1840622710860600911}
+  - component: {fileID: -887789966466181713}
+  - component: {fileID: 8742781238185455517}
   m_Layer: 0
   m_Name: Enemy_AK74
   m_TagString: Untagged
@@ -57,6 +59,39 @@ MonoBehaviour:
   - {fileID: 8273767943673703404}
   - {fileID: 5679990925190416155}
   isEnemyWeapon: 1
+--- !u!114 &-887789966466181713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273049537955193298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b179304c7daaa4e819fe296a57e3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdollForceMagnitude: 50
+  isAttacking: 0
+  damage: 4
+  recoveryTime: 1
+  ShootConfig: {fileID: 11400000, guid: 04ede1996902c244fa622dd6678d4d32, type: 2}
+  TrailConfig: {fileID: 11400000, guid: d87c2951f687c234eadaba23e77f2ded, type: 2}
+  ShootSystem: {fileID: 8607408205234891877}
+  muzzleFlash: {fileID: 8742781238185455517}
+--- !u!114 &8742781238185455517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273049537955193298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09339fedd9a5a9a458df388ef461e053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleFlash: {fileID: 4412088085132601267}
 --- !u!1 &632858599880756377
 GameObject:
   m_ObjectHideFlags: 0
