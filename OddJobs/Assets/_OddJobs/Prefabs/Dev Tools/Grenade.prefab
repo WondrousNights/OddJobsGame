@@ -117,8 +117,8 @@ Transform:
   m_GameObject: {fileID: 4165545133260164784}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 252.51352, y: 0.05111841, z: 737.9052}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5931887322357453699}
@@ -194,10 +194,10 @@ MonoBehaviour:
   explosionEffect: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
   explosionTimer: 1
   timeToExplode: 3
-  explosionRadius: 0
-  explosionForce: 0
-  damage: 0
-  recoveryTime: 0
+  explosionRadius: 10
+  explosionForce: 500
+  damage: 10
+  recoveryTime: 5
 --- !u!54 &-1343045792867443511
 Rigidbody:
   m_ObjectHideFlags: 0

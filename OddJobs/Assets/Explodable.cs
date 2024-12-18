@@ -26,43 +26,69 @@ public class Explodable : MonoBehaviour, IDamageable
 
 
 
+
     float count;
 
-    bool hasExploded = false;
+    public bool hasExploded = false;
     
 
     public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender, float recoveryTime)
     {
+        if(_Health <= 0) return;
+        if(hasExploded) return;
        _Health -= damage;
 
        if(_Health <= 0)
        {
-         Explode();
+            if(hasExploded) return;
+            Explode();
+            hasExploded = true;
        }
     }
 
     private void Explode()
     {
+        if(hasExploded) return;
         Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach(Collider nearbyObject in colliders)
         {
-            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-            if(rb!= null)
+            if(nearbyObject.gameObject != this.gameObject)
             {
-                rb.AddExplosionForce(explosionForce,transform.position, explosionRadius);
-            }
+                Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+                if(rb!= null)
+                {
+                    rb.AddExplosionForce(explosionForce,transform.position, explosionRadius);
+                }
+                
 
-            IDamageable damageable = nearbyObject.GetComponent<IDamageable>();
+                IDamageable damageable = nearbyObject.GetComponent<IDamageable>();
+                if(damageable != null)
+                {      
+                    Explodable explodable = nearbyObject.GetComponent<Explodable>();
+                    if(explodable != null)
+                    {
+                        if(explodable.hasExploded)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            explodable.TakeDamageFromMelee(transform.position, damage, explosionForce, gameObject.transform.position, recoveryTime);
+                        }
+                    }
+                    else
+                    {
+                        damageable.TakeDamageFromMelee(transform.position, damage, explosionForce, gameObject.transform.position, recoveryTime);
+                    }
 
-            if(damageable != null)
-            {
-                damageable.TakeDamageFromMelee(transform.position, damage, explosionForce, gameObject.transform.position, recoveryTime);
-            }
+                }
+                }
+           
         }
-
+        hasExploded = true;
         Destroy(gameObject);
     }
 
@@ -99,6 +125,15 @@ public class Explodable : MonoBehaviour, IDamageable
 
     public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint, float recoveryTime)
     {
-        //Probably don't need this
+        if(_Health <= 0) return;
+        if(hasExploded) return;
+        _Health -= damage;
+
+       if(_Health <= 0)
+       {
+          if(hasExploded) return;
+            Explode();
+            hasExploded = true;
+       }
     }
 }

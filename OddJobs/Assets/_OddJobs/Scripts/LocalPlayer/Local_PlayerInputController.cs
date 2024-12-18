@@ -20,7 +20,7 @@ public class Local_PlayerInputController : MonoBehaviour
     public Local_PlayerHealthManager playerHealthManager;
     public Local_PlayerUI playerUI;
     
-    private PlayerGrenadeHandler grenadeHandler;
+    public PlayerGrenadeHandler grenadeHandler;
     
     
     [SerializeField] WeaponSway weaponSway;

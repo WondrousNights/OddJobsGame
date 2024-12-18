@@ -71,7 +71,6 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
     {
         if(damageProtection) return;
         CurrentHealth -= damage;
-
         timeToGetUp = recoveryTime;
 
        inputController.playerUI.UpdateHealthImage(CurrentHealth, MaxHealth);

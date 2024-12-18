@@ -15,7 +15,7 @@ public class PlayerGrenadeHandler : MonoBehaviour
             GameObject grenade = Instantiate(grenadePrefab, grenadeThrowTransform.position, grenadeThrowTransform.rotation);
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
 
-            rb.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
+            rb.AddForce(grenadeThrowTransform.forward * throwForce, ForceMode.VelocityChange);
             grenadeCount -= 1;
         }
     }

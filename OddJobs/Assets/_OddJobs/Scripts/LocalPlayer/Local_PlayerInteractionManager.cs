@@ -17,6 +17,7 @@ public class Local_PlayerInteractionManager : MonoBehaviour
     Camera cam;
     private Local_PlayerUI playerUI;
 
+    public Local_PlayerInputController playerInputController;
 
     public PlayerAmmoHandler ammoHandler;
     public PlayerGunHandler gunHandler;
@@ -25,6 +26,7 @@ public class Local_PlayerInteractionManager : MonoBehaviour
 
     void Start()
     {
+        playerInputController = GetComponent<Local_PlayerInputController>();
         cam = GetComponent<Local_PlayerInputController>().mycam;
         playerUI = GetComponent<Local_PlayerUI>();
 
