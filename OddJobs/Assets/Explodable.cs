@@ -24,6 +24,9 @@ public class Explodable : MonoBehaviour, IDamageable
     [SerializeField] float recoveryTime;
 
 
+    public bool explodeOnHit = true;
+
+
 
 
 
@@ -34,16 +37,25 @@ public class Explodable : MonoBehaviour, IDamageable
 
     public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender, float recoveryTime)
     {
-        if(_Health <= 0) return;
-        if(hasExploded) return;
-       _Health -= damage;
 
-       if(_Health <= 0)
-       {
+        if(explodeOnHit)
+        {
+            if(_Health <= 0) return;
+            if(hasExploded) return;
+            _Health -= damage;
+
+            if(_Health <= 0)
+            {
             if(hasExploded) return;
             Explode();
             hasExploded = true;
-       }
+            }
+        }
+        else
+        {
+            explosionTimer = true;
+        }
+        
     }
 
     private void Explode()
@@ -125,7 +137,9 @@ public class Explodable : MonoBehaviour, IDamageable
 
     public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint, float recoveryTime)
     {
-        if(_Health <= 0) return;
+        if(explodeOnHit)
+        {
+if(_Health <= 0) return;
         if(hasExploded) return;
         _Health -= damage;
 
@@ -135,5 +149,13 @@ public class Explodable : MonoBehaviour, IDamageable
             Explode();
             hasExploded = true;
        }
+        }
+        
+
+       else
+        {
+            explosionTimer = true;
+        }
+        
     }
 }

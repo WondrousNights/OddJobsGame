@@ -7730,7 +7730,7 @@ PrefabInstance:
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3209991
+      value: 9.09
       objectReference: {fileID: 0}
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
@@ -7740,7 +7740,7 @@ PrefabInstance:
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.356018
+      value: -34.43
       objectReference: {fileID: 0}
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
@@ -7785,7 +7785,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1737609624688447893, guid: 9ab0974b27ce12f4f968f0990a053c79,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 883864107}
   m_SourcePrefab: {fileID: 100100000, guid: 9ab0974b27ce12f4f968f0990a053c79, type: 3}
 --- !u!4 &153588805 stripped
 Transform:
@@ -18690,7 +18694,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1737609624688447893, guid: 9ab0974b27ce12f4f968f0990a053c79,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1909626738}
   m_SourcePrefab: {fileID: 100100000, guid: 9ab0974b27ce12f4f968f0990a053c79, type: 3}
 --- !u!4 &402428659 stripped
 Transform:
@@ -39324,6 +39332,34 @@ Transform:
   - {fileID: 275210649}
   m_Father: {fileID: 1411184538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &883864102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1737609624688447893, guid: 9ab0974b27ce12f4f968f0990a053c79,
+    type: 3}
+  m_PrefabInstance: {fileID: 153588804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &883864107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883864102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c6c2094dfcedf4fad33c257eac60ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 1
+  _Health: 1
+  explosionEffect: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
+  explosionTimer: 0
+  timeToExplode: 0
+  explosionRadius: 10
+  explosionForce: 100
+  damage: 10
+  recoveryTime: 5
+  hasExploded: 1
 --- !u!1001 &886213493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52363,6 +52399,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1809916646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1075355631 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1737609624688447893, guid: 9ab0974b27ce12f4f968f0990a053c79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1153773618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1078637848
 GameObject:
   m_ObjectHideFlags: 0
@@ -55130,7 +55172,7 @@ PrefabInstance:
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.53479
+      value: 8.91
       objectReference: {fileID: 0}
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
@@ -55140,7 +55182,7 @@ PrefabInstance:
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.365356
+      value: -16.07
       objectReference: {fileID: 0}
     - target: {fileID: 1393558505522891567, guid: 9ab0974b27ce12f4f968f0990a053c79,
         type: 3}
@@ -55185,7 +55227,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1737609624688447893, guid: 9ab0974b27ce12f4f968f0990a053c79,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1153773624}
   m_SourcePrefab: {fileID: 100100000, guid: 9ab0974b27ce12f4f968f0990a053c79, type: 3}
 --- !u!4 &1153773619 stripped
 Transform:
@@ -55193,6 +55239,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1153773618}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1153773624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075355631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c6c2094dfcedf4fad33c257eac60ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 1
+  _Health: 1
+  explosionEffect: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
+  explosionTimer: 0
+  timeToExplode: 0
+  explosionRadius: 10
+  explosionForce: 100
+  damage: 10
+  recoveryTime: 5
+  hasExploded: 1
 --- !u!1 &1156940451
 GameObject:
   m_ObjectHideFlags: 0
@@ -91983,6 +92051,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1809916646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1909626733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1737609624688447893, guid: 9ab0974b27ce12f4f968f0990a053c79,
+    type: 3}
+  m_PrefabInstance: {fileID: 402428658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1909626738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909626733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c6c2094dfcedf4fad33c257eac60ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxHealth: 1
+  _Health: 1
+  explosionEffect: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
+  explosionTimer: 0
+  timeToExplode: 0
+  explosionRadius: 10
+  explosionForce: 100
+  damage: 10
+  recoveryTime: 5
+  hasExploded: 1
 --- !u!1 &1917916248
 GameObject:
   m_ObjectHideFlags: 0
