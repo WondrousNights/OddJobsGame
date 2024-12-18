@@ -276,7 +276,7 @@ public class PlayerGunHandler : MonoBehaviour
     //Will handle with events and possibly just despawning gun
     void Update()
     {
-        RagdollUpdate();
+        //RagdollUpdate();
     }
 
     private void RagdollUpdate() 

@@ -23,7 +23,7 @@ public class DestructableObject : MonoBehaviour, IDamageable
         _health = _maxHealth;
     }
 
-    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender)
+    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender, float recoveryTime)
     {
         _health -= damage;
         if (debug) Debug.Log(name + " took " + damage + " damage, current health: " + _health);
@@ -81,7 +81,7 @@ public class DestructableObject : MonoBehaviour, IDamageable
     }
 
 
-    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint)
+    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint, float recoveryTime)
     {
         throw new System.NotImplementedException();
     }

@@ -18,6 +18,10 @@ public partial class CheckTargetRangeAction : Action
 
     protected override Status OnUpdate()
     {
+        if(Target.Value == null)
+        {
+            return Status.Failure;
+        }
         if(Vector3.Distance(Target.Value.transform.position, Agent.Value.transform.position) <= Range.Value)
         {
             return Status.Success;

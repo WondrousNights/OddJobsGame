@@ -20,6 +20,8 @@ public class Local_PlayerInputController : MonoBehaviour
     public Local_PlayerHealthManager playerHealthManager;
     public Local_PlayerUI playerUI;
     
+    private PlayerGrenadeHandler grenadeHandler;
+    
     
     [SerializeField] WeaponSway weaponSway;
 
@@ -72,6 +74,7 @@ public class Local_PlayerInputController : MonoBehaviour
         playerStats = GetComponent<Local_PlayerStats>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
         playerUI = GetComponent<Local_PlayerUI>();
+        grenadeHandler = GetComponent<PlayerGrenadeHandler>();
         cc = GetComponent<CharacterController>();
 
 
@@ -218,8 +221,9 @@ public class Local_PlayerInputController : MonoBehaviour
         {
            gunHandler.Reload();
         }
-        
     }
+
+
     
     public void ProcessRagdoll(CallbackContext context)
     {
@@ -228,8 +232,17 @@ public class Local_PlayerInputController : MonoBehaviour
        
         if(context.performed)
         {
-            playerHealthManager.TakeDamageFromMelee(this.transform.position, 0, 100f, this.transform.position);
+            playerHealthManager.TakeDamageFromMelee(this.transform.position, 0, 100f, this.transform.position, 1f);
         }    
+    }
+
+    public void ProcessGrenadeThrow(CallbackContext context)
+    {
+        if(playerHealthManager.isRagdoll) return;
+        if(context.performed)
+        {
+            grenadeHandler.ThrowGrenade();
+        }
     }
 
     // public void ProcessSwitchGun(CallbackContext context)

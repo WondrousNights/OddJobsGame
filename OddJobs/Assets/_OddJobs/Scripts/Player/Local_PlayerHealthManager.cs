@@ -41,12 +41,12 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
         cameraController = GetComponent<Local_PlayerCameraController>();
     }
 
-    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender)
+    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender, float recoveryTime)
     {
         if(damageProtection) return;
         CurrentHealth -= damage;
        inputController.playerUI.UpdateHealthImage(CurrentHealth, MaxHealth);
-
+        timeToGetUp = recoveryTime;
 
          if(CurrentHealth <= 0)
         {
@@ -67,11 +67,12 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
     }
 
 
-    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint)
+    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint, float recoveryTime)
     {
         if(damageProtection) return;
         CurrentHealth -= damage;
 
+        timeToGetUp = recoveryTime;
 
        inputController.playerUI.UpdateHealthImage(CurrentHealth, MaxHealth);
 

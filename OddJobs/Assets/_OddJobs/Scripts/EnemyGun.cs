@@ -144,13 +144,13 @@ public class EnemyGun : EnemyWeapon
             // If the object hit has a damageable component, apply damage to it
             if(hit.transform.TryGetComponent(out IDamageable damageable))
             {
-                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ragdollForceMagnitude, hit.point, this.gameObject);
+                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ragdollForceMagnitude, hit.point, this.gameObject, recoveryTime);
             }
 
             // If the object hit has a damageable component in its parent, apply damage to it
             if(hit.transform.GetComponentInParent<IDamageable>() != null)
             {
-                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ragdollForceMagnitude, hit.point, this.gameObject);
+                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ragdollForceMagnitude, hit.point, this.gameObject, recoveryTime);
             }
         }
 

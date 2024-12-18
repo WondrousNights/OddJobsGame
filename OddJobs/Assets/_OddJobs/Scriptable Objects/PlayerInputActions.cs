@@ -143,6 +143,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowGrenade"",
+                    ""type"": ""Button"",
+                    ""id"": ""3adf81ea-dafd-4f9e-95c6-bdb9a20b00e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -475,6 +484,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""DropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1403d7f-7931-48d5-9eb4-38dd605b0689"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""ThrowGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7dbdb707-c96f-45b9-9726-45aa8e4d741d"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""ThrowGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -714,6 +745,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_OnFoot_SwitchItemNext = m_OnFoot.FindAction("SwitchItemNext", throwIfNotFound: true);
         m_OnFoot_SwitchItemPrevious = m_OnFoot.FindAction("SwitchItemPrevious", throwIfNotFound: true);
         m_OnFoot_DropItem = m_OnFoot.FindAction("DropItem", throwIfNotFound: true);
+        m_OnFoot_ThrowGrenade = m_OnFoot.FindAction("ThrowGrenade", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
@@ -804,6 +836,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_SwitchItemNext;
     private readonly InputAction m_OnFoot_SwitchItemPrevious;
     private readonly InputAction m_OnFoot_DropItem;
+    private readonly InputAction m_OnFoot_ThrowGrenade;
     public struct OnFootActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -821,6 +854,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @SwitchItemNext => m_Wrapper.m_OnFoot_SwitchItemNext;
         public InputAction @SwitchItemPrevious => m_Wrapper.m_OnFoot_SwitchItemPrevious;
         public InputAction @DropItem => m_Wrapper.m_OnFoot_DropItem;
+        public InputAction @ThrowGrenade => m_Wrapper.m_OnFoot_ThrowGrenade;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -869,6 +903,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @DropItem.started += instance.OnDropItem;
             @DropItem.performed += instance.OnDropItem;
             @DropItem.canceled += instance.OnDropItem;
+            @ThrowGrenade.started += instance.OnThrowGrenade;
+            @ThrowGrenade.performed += instance.OnThrowGrenade;
+            @ThrowGrenade.canceled += instance.OnThrowGrenade;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -912,6 +949,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @DropItem.started -= instance.OnDropItem;
             @DropItem.performed -= instance.OnDropItem;
             @DropItem.canceled -= instance.OnDropItem;
+            @ThrowGrenade.started -= instance.OnThrowGrenade;
+            @ThrowGrenade.performed -= instance.OnThrowGrenade;
+            @ThrowGrenade.canceled -= instance.OnThrowGrenade;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -1064,6 +1104,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSwitchItemNext(InputAction.CallbackContext context);
         void OnSwitchItemPrevious(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
+        void OnThrowGrenade(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

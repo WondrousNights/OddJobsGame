@@ -29,7 +29,7 @@ public partial class AmIRagdollAction : Action
         }
         else
         {
-            return Status.Running;
+            return Status.Failure;
         }
     }
 

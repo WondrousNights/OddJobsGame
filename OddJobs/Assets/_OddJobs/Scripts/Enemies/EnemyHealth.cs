@@ -68,9 +68,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
    
 
-    public void TakeDamageFromGun(Ray ray, float Damage, float force, Vector3 collisionPoint, GameObject sender)
+    public void TakeDamageFromGun(Ray ray, float Damage, float force, Vector3 collisionPoint, GameObject sender, float recoveryTime)
     {
-
+        timeToGetUp = recoveryTime;
         if(CurrentHealth == MaxHealth)
         {
             if(!sender.GetComponent<EnemyManager>())
@@ -83,7 +83,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
         CurrentHealth -= Damage;
 
-        HandleDamageResponse(ray, force, collisionPoint);
+        HandleDamageResponseGun(ray, force, collisionPoint);
 
 
         if(CurrentHealth <= 0)
@@ -107,7 +107,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-    void HandleDamageResponse(Ray ray, float force, Vector3 collisionPoint)
+    void HandleDamageResponseGun(Ray ray, float force, Vector3 collisionPoint)
     {
 
         if(!isDead)
@@ -125,6 +125,23 @@ public class EnemyHealth : MonoBehaviour, IDamageable
        Rigidbody hitRigidbody = FindHitRigidbody(collisionPoint);
 
        hitRigidbody.AddForceAtPosition(ray.direction * force, collisionPoint, ForceMode.Impulse);
+    }
+
+    void HandleDamageResponseMelee(Vector3 positionOfAttacker,float damage, float force, Vector3 collisionPoint)
+    {
+
+       
+
+
+        Vector3 forceDirection = this.transform.position - positionOfAttacker;
+                forceDirection.y = 1;
+                forceDirection.Normalize();
+
+        Vector3 forceAdjustment = force * forceDirection;
+
+
+        Rigidbody hitRigidbody = FindHitRigidbody(positionOfAttacker);
+        hitRigidbody.AddForceAtPosition(forceAdjustment, positionOfAttacker, ForceMode.Impulse);
     }
 
 
@@ -175,8 +192,32 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     
 
-    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint)
+    public void TakeDamageFromMelee(Vector3 positionOfAttacker, float damage, float hitForce, Vector3 collsionPoint, float recoveryTime)
     {
-        Debug.Log("Now implemented yet");
+       timeToGetUp = recoveryTime;
+         CurrentHealth -= damage;
+
+        if(CurrentHealth <= 0)
+        {
+            HandleDeath();
+        }
+
+        if(!isDead)
+        {
+            count = 0;
+
+            if(!isRagdoll)
+            {
+                ProcessRagdollAnimation();
+            }
+            
+        }
+        
+
+        HandleDamageResponseMelee(positionOfAttacker, damage, hitForce, collsionPoint);
+
+
+    
+
     }
 }

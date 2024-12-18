@@ -2468,6 +2468,8 @@ MonoBehaviour:
   - rid: 1428897912616911215
   - rid: 1428897917242704103
   - rid: 1428898050631008802
+  - rid: 1428898225524572809
+  - rid: 1428898225524572810
   NetcodeRunOnlyOnOwner: 0
   references:
     version: 2
@@ -2499,6 +2501,24 @@ MonoBehaviour:
           m_Value1: 12688264337396256119
         Name: MyAnim
         m_Value: {fileID: 7760775420330310051}
+    - rid: 1428898225524572809
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10209370547653530189
+          m_Value1: 6857398809553821744
+        Name: Shoot Time
+        m_Value: 1.55
+    - rid: 1428898225524572810
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior,
+        asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16519717168857801115
+          m_Value1: 10755538550837037671
+        Name: Reload Time
+        m_Value: 3.5
 --- !u!114 &5728820109581814239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2512,7 +2532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  distanceToSpot: 29.6
+  distanceToSpot: 8
   playerMask:
     serializedVersion: 2
     m_Bits: 15368
@@ -2605,11 +2625,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHostile: 1
-  reportToSquad: 0
-  squadDistance: 0
+  reportToSquad: 1
+  squadDistance: 27.3
   squadMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 524288
   hasConverstaion: 0
   gunGameobject: {fileID: 4365322074424816251}
   OnDamagedEvent:
@@ -6577,6 +6597,7 @@ MonoBehaviour:
   ragdollForceMagnitude: 100
   isAttacking: 0
   damage: 1
+  recoveryTime: 1
   ShootConfig: {fileID: 11400000, guid: 04ede1996902c244fa622dd6678d4d32, type: 2}
   TrailConfig: {fileID: 11400000, guid: d87c2951f687c234eadaba23e77f2ded, type: 2}
   ShootSystem: {fileID: 5200818090042638284}

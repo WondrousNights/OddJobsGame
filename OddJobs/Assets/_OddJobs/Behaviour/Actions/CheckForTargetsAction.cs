@@ -30,7 +30,7 @@ public partial class CheckForTargetsAction : Action
         }
         else
         {
-            return Status.Running;
+            return Status.Failure;
         }
         
     }

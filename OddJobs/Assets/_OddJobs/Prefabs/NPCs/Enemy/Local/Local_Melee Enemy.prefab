@@ -5702,7 +5702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  distanceToSpot: 25.22
+  distanceToSpot: 8
   playerMask:
     serializedVersion: 2
     m_Bits: 15368
@@ -5796,7 +5796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHostile: 1
   reportToSquad: 1
-  squadDistance: 14.82
+  squadDistance: 28.2
   squadMask:
     serializedVersion: 2
     m_Bits: 524288
@@ -6569,6 +6569,7 @@ MonoBehaviour:
   ragdollForceMagnitude: 500
   isAttacking: 0
   damage: 10
+  recoveryTime: 1
 --- !u!65 &1274079428114071193
 BoxCollider:
   m_ObjectHideFlags: 0

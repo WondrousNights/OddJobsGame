@@ -22,6 +22,7 @@ public class GunScriptableObject : ScriptableObject
     public TrailConfigScriptableObject TrailConfig;
 
     public int AmmoClipSize;
+    public float recoveryTime;
 
     private MonoBehaviour ActiveMonoBehaviour;
     private GameObject Model;
@@ -180,13 +181,13 @@ public class GunScriptableObject : ScriptableObject
             // If the object hit has a damageable component, apply damage to it
             if(hit.transform.TryGetComponent(out IDamageable damageable))
             {
-                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject);
+                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, recoveryTime);
             }
 
             // If the object hit has a damageable component in its parent, apply damage to it
             if(hit.transform.GetComponentInParent<IDamageable>() != null)
             {
-                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject);
+                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, recoveryTime);
             }
         }
 

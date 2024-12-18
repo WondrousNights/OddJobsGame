@@ -21,7 +21,7 @@ public class Local_PlayerCollisionManager : MonoBehaviour
 
             if(weapon.isAttacking)
             {
-                playerHealthManager.TakeDamageFromMelee(weapon.transform.position, weapon.damage, weapon.ragdollForceMagnitude, other.transform.position);
+                playerHealthManager.TakeDamageFromMelee(weapon.transform.position, weapon.damage, weapon.ragdollForceMagnitude, other.transform.position, weapon.recoveryTime);
             }
         }
     }
