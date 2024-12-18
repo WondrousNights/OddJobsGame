@@ -47,6 +47,7 @@ public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
         CurrentHealth -= damage;
        inputController.playerUI.UpdateHealthImage(CurrentHealth, MaxHealth);
 
+
          if(CurrentHealth <= 0)
         {
             HandleDeath();

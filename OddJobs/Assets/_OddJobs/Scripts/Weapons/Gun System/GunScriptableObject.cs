@@ -56,7 +56,7 @@ public class GunScriptableObject : ScriptableObject
         ShootSystem = null;
     }
 
-    public void Shoot(Transform shootPoint, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
+    public void Shoot(Transform shootPoint, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex, int playerLayer)
     {
         if (Time.time > ShootConfig.fireRate + LastShootTime)
         {
@@ -99,10 +99,11 @@ public class GunScriptableObject : ScriptableObject
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        ray.origin,
+                        shootPoint.transform.position,
                         hit.point,
                         hit,
-                        ray
+                        ray,
+                        playerLayer
                     )
                 );
             }
@@ -110,10 +111,11 @@ public class GunScriptableObject : ScriptableObject
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        ray.origin,
-                        ray.origin + (shootPoint.transform.forward * TrailConfig.MissDistance),
+                        shootPoint.transform.position,
+                        shootPoint.transform.position + (shootPoint.transform.forward * TrailConfig.MissDistance),
                         new RaycastHit(),
-                        ray
+                        ray,
+                        playerLayer
                     )
                 );
             }
@@ -124,7 +126,7 @@ public class GunScriptableObject : ScriptableObject
 
     
 
-    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Ray ray)
+    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Ray ray, int playerLayer)
     {
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
@@ -150,8 +152,10 @@ public class GunScriptableObject : ScriptableObject
         instance.transform.position = EndPoint;
 
         // if the bullet hit something, spawn a bullet hole and apply damage/force
-        if (hit.collider)
+        if (hit.collider && hit.collider.gameObject.layer != playerLayer)
         {
+
+            Debug.Log("I just hit : " + hit.collider.gameObject.name);
             // spawn hit particle effects, rotating it to face away from the surface it hit
             GameObject impactParticle = Instantiate(ShootConfig.impactParticle, hit.point, Quaternion.identity);
             impactParticle.transform.position = hit.point + (hit.normal * 0.01f);

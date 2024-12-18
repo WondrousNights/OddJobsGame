@@ -178,7 +178,8 @@ public class PlayerGunHandler : MonoBehaviour
                 playerInputController.shootPoint, 
                 weaponHolder.GetComponentInChildren<MuzzleFlash>(),
                 ammoHandler,
-                currentGunIndex
+                currentGunIndex,
+                playerInputController.playerLayer
                 );
 
                 // play shooting related effects

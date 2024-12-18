@@ -73,8 +73,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         if(CurrentHealth == MaxHealth)
         {
-            OnDamaged.Invoke(this, new OnDamagedEventArgs { Sender = sender});
-            targetDetector.currentTarget = sender;
+            if(!sender.GetComponent<EnemyManager>())
+            {
+                OnDamaged.Invoke(this, new OnDamagedEventArgs { Sender = sender});
+                targetDetector.currentTarget = sender;
+            }
+            
+            
         }
         CurrentHealth -= Damage;
 

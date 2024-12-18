@@ -57,6 +57,8 @@ public class Local_PlayerInputController : MonoBehaviour
 
     public LayerMask nohudLayerMask;
 
+    public int playerLayer;
+
     bool isSpawned = false;
 
     CharacterController cc;
@@ -281,7 +283,8 @@ public class Local_PlayerInputController : MonoBehaviour
         //Need to use getcomponents in children for this!!!
         if(playerInput.playerIndex == 0)
         {
-
+            playerLayer = 10;
+            gameObject.layer = 10;
             foreach (Transform child in myVisuals.transform)
             {
                 child.gameObject.layer = 10;
@@ -304,6 +307,8 @@ public class Local_PlayerInputController : MonoBehaviour
         
         if(playerInput.playerIndex == 1)
         {
+            playerLayer = 11;
+            gameObject.layer = 11;
             foreach (Transform child in myVisuals.transform)
             {
                 child.gameObject.layer = 11;

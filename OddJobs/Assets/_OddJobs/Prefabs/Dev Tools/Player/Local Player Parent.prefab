@@ -5573,7 +5573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1602475233978216253
 Transform:
   m_ObjectHideFlags: 0
@@ -7825,19 +7825,20 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   player1Mask:
     serializedVersion: 2
-    m_Bits: 2095359
+    m_Bits: 8386815
   player2Mask:
     serializedVersion: 2
-    m_Bits: 2094335
+    m_Bits: 8385791
   player3Mask:
     serializedVersion: 2
-    m_Bits: 2092287
+    m_Bits: 8383743
   player4Mask:
     serializedVersion: 2
-    m_Bits: 2088191
+    m_Bits: 8379647
   nohudLayerMask:
     serializedVersion: 2
-    m_Bits: 1850623
+    m_Bits: 2096383
+  bulletLayer: 0
 --- !u!114 &970160351578811567
 MonoBehaviour:
   m_ObjectHideFlags: 0
