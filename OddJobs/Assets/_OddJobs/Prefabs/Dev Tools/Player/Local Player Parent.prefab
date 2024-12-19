@@ -5017,7 +5017,7 @@ Camera:
     height: 1
   near clip plane: 0.05
   far clip plane: 275
-  field of view: 55.364017
+  field of view: 47.285194
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -7862,6 +7862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthManager: {fileID: 0}
   playerUI: {fileID: 0}
+  grenadeHandler: {fileID: 0}
   weaponSway: {fileID: 2067224874714771139}
   mycam: {fileID: 9094701647203173809}
   firstPersonCamPos: {fileID: 2207837780299864464}
@@ -7953,6 +7954,7 @@ MonoBehaviour:
   interactionLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  playerInputController: {fileID: 0}
   ammoHandler: {fileID: 8181365394615560530}
   gunHandler: {fileID: 197025337377271024}
   grabPoint: {fileID: 7469717405390868646}
