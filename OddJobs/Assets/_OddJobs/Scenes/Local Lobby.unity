@@ -2879,8 +2879,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2125615561}
-        m_TargetAssemblyTypeName: PlayerConfigurationManager, Assembly-CSharp
-        m_MethodName: HandlePlayerJoin
+        m_TargetAssemblyTypeName: LocalPlayerSplitScreenManager, Assembly-CSharp
+        m_MethodName: OnPlayerJoined
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2940,10 +2940,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2125615557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3602e622b25a6254db4f8eb1757153ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b5c05782c167b149a5f40d13bc19746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPlayers: 4
+  playerInputs: []
 --- !u!4 &6396995597561245
 Transform:
   m_ObjectHideFlags: 0
