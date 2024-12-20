@@ -8,7 +8,8 @@ public class Local_PlayerLook : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] PlayerInput playerInput;
-    [SerializeField] private float gamepadMultiplier = 100f;
+    [SerializeField] private float gamepadMultiplierX = 20f;
+    [SerializeField] private float gamepadMultiplierY = 20f;
     public float xSensitivity = 40f;
     public float ySensitivity = 40f;
     private float xRotation = 0f;
@@ -27,8 +28,8 @@ public class Local_PlayerLook : MonoBehaviour
 
         // Make controller sensitivity similar to mouse sensitivity
         if (playerInput.currentControlScheme == "Controller" || playerInput.currentControlScheme == "Gamepad") {
-            mouseX *= gamepadMultiplier;
-            mouseY *= gamepadMultiplier;
+            mouseX *= gamepadMultiplierX;
+            mouseY *= gamepadMultiplierY;
         }
 
         // Apply sensitivity

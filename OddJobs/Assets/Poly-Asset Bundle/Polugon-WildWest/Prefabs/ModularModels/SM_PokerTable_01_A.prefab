@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5203693427618187104}
   - component: {fileID: 3330711857843842769}
   - component: {fileID: 5118520770352755000}
+  - component: {fileID: 4030330236452947032}
+  - component: {fileID: 3274945422798254336}
   m_Layer: 0
   m_Name: SM_PokerTable_01_A
   m_TagString: Untagged
@@ -107,8 +109,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8566651, y: 0.6542259, z: 0.85666513}
-  m_Center: {x: -0.00000025331983, y: 0.32711294, z: 0.000030428171}
+  m_Size: {x: 0.8566651, y: 0.07216552, z: 0.85666513}
+  m_Center: {x: -0.00000023755983, y: 0.61814284, z: 0.000030407435}
 --- !u!54 &5118520770352755000
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5767964978772816828}
   serializedVersion: 4
-  m_Mass: 5.72
+  m_Mass: 23
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -136,3 +138,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4030330236452947032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767964978772816828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3772ba6af6415f1488818b75febc2405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioObject: {fileID: 11400000, guid: 80d650523e208974489d7a4553bfe8c8, type: 2}
+--- !u!65 &3274945422798254336
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767964978772816828}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.20662434, y: 0.66202414, z: 0.20662434}
+  m_Center: {x: -0.00000023755983, y: 0.3232129, z: 0.000030407435}
