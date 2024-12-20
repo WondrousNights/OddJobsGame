@@ -9,7 +9,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 {
     private List<PlayerConfiguration> playerConfigs;
     [SerializeField]
-    private int MaxPlayers = 2;
+    private int MaxPlayers = 4;
 
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -31,12 +31,13 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void HandlePlayerJoin(PlayerInput pi)
     {
         Debug.Log("player joined " + pi.playerIndex);
-        pi.transform.SetParent(transform);
 
         if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
         {
             playerConfigs.Add(new PlayerConfiguration(pi));
         }
+
+        SetUpSplitScreen();
     }
     
 
@@ -45,20 +46,21 @@ public class PlayerConfigurationManager : MonoBehaviour
         return playerConfigs;
     }
 
-/*
-    public void SetPlayerColor(int index, Material color)
+    public void SetUpSplitScreen()
     {
-        playerConfigs[index].playerMaterial = color;
-    }
-*/
-    public void ReadyPlayer(int index)
-    {
-        playerConfigs[index].isReady = true;
-        if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.isReady == true))
+
+        if(playerConfigs.Count == 1)
         {
-            SceneManager.LoadScene("SampleScene");
+            playerConfigs[0].Input.camera.rect = new Rect(0, 0f, 1, 1f);
+        }
+        if(playerConfigs.Count == 2)
+        {
+            playerConfigs[0].Input.camera.rect = new Rect(0, 0.5f, 1f, 0.5f);
+            playerConfigs[1].Input.camera.rect = new Rect(0, 0, 1, 0.5f);
         }
     }
+
+
 }
 
 public class PlayerConfiguration
@@ -71,6 +73,5 @@ public class PlayerConfiguration
 
     public PlayerInput Input { get; private set; }
     public int PlayerIndex { get; private set; }
-    public bool isReady { get; set; }
 
 }
