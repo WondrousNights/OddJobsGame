@@ -18,6 +18,7 @@ MonoBehaviour:
   playerSpread: {x: 0.3, y: 0.3, z: 0.3}
   enemySpread: {x: 0.1, y: 0.1, z: 0.1}
   fireRate: 0.06
+  bulletsPerShot: 1
   shootSfx: {fileID: 11400000, guid: 85f9c1ddc4d61c34faed3bd6c68b3fdb, type: 2}
   impactParticle: {fileID: 8882886379892811467, guid: 11be7a7ec34aee24da74bc872f633f7c,
     type: 3}
@@ -26,5 +27,6 @@ MonoBehaviour:
   maxRecoil: -0.31
   maxKickback: -0.005
   hitForce: 20
+  recoveryTime: 0.5
   reloadTime: 1
   Damage: 4

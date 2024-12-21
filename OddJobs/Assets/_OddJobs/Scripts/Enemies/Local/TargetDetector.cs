@@ -83,6 +83,7 @@ public class TargetDetector : MonoBehaviour {
                         return true;
                     }
                 }
+                Debug.DrawRay(ray.origin, ray.direction);
             }
         }
         return false;

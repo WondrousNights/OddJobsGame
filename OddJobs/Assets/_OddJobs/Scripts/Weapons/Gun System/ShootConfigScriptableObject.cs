@@ -16,6 +16,7 @@ public class ShootConfigScriptableObject : ScriptableObject
     public float maxRecoil;
     public float maxKickback;
     public float hitForce;
+    public float recoveryTime;
     public float reloadTime;
 
     public float Damage;
