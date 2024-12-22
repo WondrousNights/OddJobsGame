@@ -12,6 +12,7 @@ using Unity.VisualScripting;
 
 public class NPC_Interactable : Interactable
 {
+    [SerializeField] private bool useDefaultNPCPromptMessage = true;
 
     public ConversationManager conversationManager;
     NPCConversation conversation;
@@ -28,6 +29,8 @@ public class NPC_Interactable : Interactable
     
     void Start()
     {
+        if (useDefaultNPCPromptMessage) promptMessage = "Talk to " + gameObject.name;
+
         conversationManager = GetComponentInChildren<ConversationManager>();
         conversation = GetComponent<NPCConversation>();
         npcCollider = GetComponent<Collider>();
