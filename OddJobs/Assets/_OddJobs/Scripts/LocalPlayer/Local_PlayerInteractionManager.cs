@@ -46,7 +46,7 @@ public class Local_PlayerInteractionManager : MonoBehaviour
             if(hitInfo.collider.GetComponent<Interactable>() != null)
             {
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                playerUI.UpdateText(hitInfo.collider.GetComponent<NPC_Interactable>().promptMessage);
+                playerUI.UpdateText(hitInfo.collider.GetComponent<Interactable>().promptMessage);
 
 
                 //UI Interactions

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public bool isUI; // wtf does this do, need tooltip. is what UI? the prompt message? what UI where?
     public string promptMessage;
+    public bool isUI;
 
     public AudioObject sfxToPlay;
     
