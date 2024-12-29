@@ -698,6 +698,125 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ActiveRagdoll"",
+            ""id"": ""9862cc40-9dea-44cf-a1ad-a9ccc8826904"",
+            ""actions"": [
+                {
+                    ""name"": ""Forward"",
+                    ""type"": ""Button"",
+                    ""id"": ""f50c17d0-5766-4704-84a4-69bf63a2223a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Backward"",
+                    ""type"": ""Button"",
+                    ""id"": ""ece975d4-b1b4-4299-ae04-30ec18a9ae6c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b124cb9-683c-48f2-bcce-ecc086becb94"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ce55026-a03f-4b45-88d6-66a09b35a1bb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""470fb4d5-d076-42e0-8de3-297d84010584"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d1c20a13-5d90-4708-8204-5f282789f09f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Forward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""beb3e0b0-82ae-4e55-b73f-77997da81331"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59611f18-649a-4389-b9a3-28cb382e4357"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f9d4a1f-1c17-428a-ba4c-81658fe1bbe0"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Backward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc8e9bd4-fefb-45b4-8558-47a8d329fa8a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b95b966e-20ed-499c-ad3b-7cdb170406cf"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -756,12 +875,20 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
+        // ActiveRagdoll
+        m_ActiveRagdoll = asset.FindActionMap("ActiveRagdoll", throwIfNotFound: true);
+        m_ActiveRagdoll_Forward = m_ActiveRagdoll.FindAction("Forward", throwIfNotFound: true);
+        m_ActiveRagdoll_Backward = m_ActiveRagdoll.FindAction("Backward", throwIfNotFound: true);
+        m_ActiveRagdoll_Left = m_ActiveRagdoll.FindAction("Left", throwIfNotFound: true);
+        m_ActiveRagdoll_Right = m_ActiveRagdoll.FindAction("Right", throwIfNotFound: true);
+        m_ActiveRagdoll_Look = m_ActiveRagdoll.FindAction("Look", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_OnFoot.enabled, "This will cause a leak and performance issues, PlayerInputActions.OnFoot.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputActions.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_ActiveRagdoll.enabled, "This will cause a leak and performance issues, PlayerInputActions.ActiveRagdoll.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1071,6 +1198,84 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // ActiveRagdoll
+    private readonly InputActionMap m_ActiveRagdoll;
+    private List<IActiveRagdollActions> m_ActiveRagdollActionsCallbackInterfaces = new List<IActiveRagdollActions>();
+    private readonly InputAction m_ActiveRagdoll_Forward;
+    private readonly InputAction m_ActiveRagdoll_Backward;
+    private readonly InputAction m_ActiveRagdoll_Left;
+    private readonly InputAction m_ActiveRagdoll_Right;
+    private readonly InputAction m_ActiveRagdoll_Look;
+    public struct ActiveRagdollActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public ActiveRagdollActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Forward => m_Wrapper.m_ActiveRagdoll_Forward;
+        public InputAction @Backward => m_Wrapper.m_ActiveRagdoll_Backward;
+        public InputAction @Left => m_Wrapper.m_ActiveRagdoll_Left;
+        public InputAction @Right => m_Wrapper.m_ActiveRagdoll_Right;
+        public InputAction @Look => m_Wrapper.m_ActiveRagdoll_Look;
+        public InputActionMap Get() { return m_Wrapper.m_ActiveRagdoll; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActiveRagdollActions set) { return set.Get(); }
+        public void AddCallbacks(IActiveRagdollActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ActiveRagdollActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ActiveRagdollActionsCallbackInterfaces.Add(instance);
+            @Forward.started += instance.OnForward;
+            @Forward.performed += instance.OnForward;
+            @Forward.canceled += instance.OnForward;
+            @Backward.started += instance.OnBackward;
+            @Backward.performed += instance.OnBackward;
+            @Backward.canceled += instance.OnBackward;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+        }
+
+        private void UnregisterCallbacks(IActiveRagdollActions instance)
+        {
+            @Forward.started -= instance.OnForward;
+            @Forward.performed -= instance.OnForward;
+            @Forward.canceled -= instance.OnForward;
+            @Backward.started -= instance.OnBackward;
+            @Backward.performed -= instance.OnBackward;
+            @Backward.canceled -= instance.OnBackward;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+        }
+
+        public void RemoveCallbacks(IActiveRagdollActions instance)
+        {
+            if (m_Wrapper.m_ActiveRagdollActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IActiveRagdollActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ActiveRagdollActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ActiveRagdollActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ActiveRagdollActions @ActiveRagdoll => new ActiveRagdollActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1116,5 +1321,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
+    }
+    public interface IActiveRagdollActions
+    {
+        void OnForward(InputAction.CallbackContext context);
+        void OnBackward(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }
