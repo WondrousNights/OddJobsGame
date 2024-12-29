@@ -4,6 +4,7 @@ public class ActiveRagdollController : MonoBehaviour
 {
 
     [SerializeField] Rigidbody hips;
+    [SerializeField] Rigidbody head;
     [SerializeField] Rigidbody leftShin;
     [SerializeField] Rigidbody rightShin;
     [SerializeField] float speed;
@@ -11,15 +12,17 @@ public class ActiveRagdollController : MonoBehaviour
     [SerializeField] float constantDownwardForce;
 
 
+
+    Vector3 up = new Vector3(0, 1, 0);
     void Update()
     {
-       hips.AddForce(hips.transform.up * constantUpwardForce);
-
+       head.AddForce(up * constantUpwardForce);
+       hips.AddForce(up * constantUpwardForce);
        hips.AddForce(hips.transform.forward * speed);
        
 
-       leftShin.AddForce(leftShin.transform.up * constantDownwardForce);
-       rightShin.AddForce(rightShin.transform.up * constantDownwardForce);
+       leftShin.AddForce(-up * constantDownwardForce);
+       rightShin.AddForce(-up * constantDownwardForce);
         
     }
     
