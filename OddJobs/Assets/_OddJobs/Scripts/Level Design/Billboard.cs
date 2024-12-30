@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
  
-public class Billboard : MonoBehaviour
+public class BillboardMe : MonoBehaviour
 {
     public Camera m_Camera;
  
