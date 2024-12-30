@@ -15,6 +15,8 @@ public class Network_PlayerInputController : NetworkBehaviour
     private Network_PlayerGunHandler gunHandler;
     private Network_PlayerStats playerStats;
 
+    NetworkAnimationController networkAnimationController;
+
     [SerializeField] Camera mycam;
     [SerializeField] GameObject myVisuals;
     [SerializeField] GameObject myCanvas;
@@ -26,8 +28,6 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     private void Awake()
     {
-
-
         playerInput = new PlayerInputActions();
         onFoot = playerInput.OnFoot;
         onFoot.Enable();
@@ -36,25 +36,26 @@ public class Network_PlayerInputController : NetworkBehaviour
         look = GetComponent<Network_PlayerLook>();
         gunHandler = GetComponent<Network_PlayerGunHandler>();
         playerStats = GetComponent<Network_PlayerStats>();
+        networkAnimationController = GetComponent<NetworkAnimationController>();
 
 
         myListener = GetComponent<AudioListener>();
         //Event Subscription
 
-        playerStats.OnPlayerDeath += HandlePlayerDeathEvent;
-        playerStats.OnPlayerRevive += HandlePlayerReviveEvent;
+       // playerStats.OnPlayerDeath += HandlePlayerDeathEvent;
+        //playerStats.OnPlayerRevive += HandlePlayerReviveEvent;
         //Actions subscriptions
 
-        onFoot.Jump.performed += ctx => playerMovement.Jump();
-        onFoot.Shoot.performed += ctx => gunHandler.Shoot();
-        onFoot.Reload.performed += ctx => gunHandler.Reload();
+        onFoot.Jump.performed += ctx => HandleJump();
+        //onFoot.Shoot.performed += ctx => gunHandler.Shoot();
+        //onFoot.Reload.performed += ctx => gunHandler.Reload();
     }
 
 
 
     private void Start()
     {
-        NetworkManager.Singleton.SceneManager.OnSceneEvent += SetSpawn;
+        //NetworkManager.Singleton.SceneManager.OnSceneEvent += SetSpawn;
         Cursor.lockState = CursorLockMode.Locked;
         //Application.targetFrameRate = 60;
         //Camera Controls
@@ -70,11 +71,12 @@ public class Network_PlayerInputController : NetworkBehaviour
         {
 
             mycam.gameObject.SetActive(true);
-            myCanvas.gameObject.SetActive(true);
-            myVisuals.SetActive(false);
+            //myCanvas.gameObject.SetActive(true);
+            //myVisuals.SetActive(false);
         }
         else
         {
+            mycam.gameObject.SetActive(false);
             myListener.enabled = false;
         }
 
@@ -84,30 +86,27 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-
-        if (IsOwner && !playerStats.isDead)
-        {
-
-            if (hasSpawned)
-            {
-                Debug.Log("Spawn now moving");
-                playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
-            }
-            
-            playerMovement.ProcessAnimations(onFoot.Move.ReadValue<Vector2>());
-        }
-
+        if(!IsOwner) return;
+        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
     private void LateUpdate()
     {
-        if (!playerStats.isDead)
-        {
-            look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
-        }
+       if(!IsOwner) return;
+        playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
+          
+        networkAnimationController.ProcessVisuals(onFoot.Move.ReadValue<Vector2>());
+        
+    }
 
+
+    void HandleJump()
+    {
+        if(!IsOwner) return;
+        playerMovement.Jump();
+        networkAnimationController.ProcessJump();
     }
 
     private void HandlePlayerDeathEvent(object sender, EventArgs e)
@@ -142,7 +141,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     }
 
 
-    
+    /*
     void SetSpawn(SceneEvent sceneEvent)
     {
 
@@ -192,5 +191,6 @@ public class Network_PlayerInputController : NetworkBehaviour
     {
         hasSpawned = true;
     }
+    */
 
 }

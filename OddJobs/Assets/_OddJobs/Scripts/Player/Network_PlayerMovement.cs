@@ -11,20 +11,16 @@ public class Network_PlayerMovement : NetworkBehaviour
     public float gravity = -9.8f;
     public float jumpHeight = 3;
 
-    [SerializeField] NetworkAnimationController networkAnimationController;
-
-    Network_PlayerInputController inputController;
+ 
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        inputController = GetComponent<Network_PlayerInputController>();
         //networkAnimationController = GetComponentInChildren<NetworkAnimationController>();
     }
 
     public void ProcessMove(Vector2 input)
     {
-        if (!inputController.hasSpawned) return;
 
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
@@ -41,19 +37,16 @@ public class Network_PlayerMovement : NetworkBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
 
     }
-    public void ProcessAnimations(Vector2 input)
-    {
-        networkAnimationController.ProcessVisuals(input);
-    }
     
     public void Jump()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
 
         if (controller.isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
         }
+        
     }
 
 

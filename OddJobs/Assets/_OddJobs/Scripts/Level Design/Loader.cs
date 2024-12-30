@@ -10,8 +10,9 @@ public static class Loader
     public enum Scene
     { 
         Lobby,
-        Base,
-        Zone
+        Parkour,
+        Zone,
+
     
     }
     public static void Load(Scene targetScene)
