@@ -105,16 +105,12 @@ public class Local_PlayerInputController : MonoBehaviour
             mainCam.gameObject.SetActive(false);
         }
 
-        Spawn();
         SetLayers();
     }
 
-    void Spawn()
-    {
-        transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
-        isSpawned = true;
-        cc.enabled =  true;
-    }
+
+
+  
 
     void FixedUpdate()
     {

@@ -40,7 +40,6 @@ public class Network_PlayerMovement : NetworkBehaviour
     
     public void Jump()
     {
-        //if (!IsOwner) return;
 
         if (controller.isGrounded)
         {

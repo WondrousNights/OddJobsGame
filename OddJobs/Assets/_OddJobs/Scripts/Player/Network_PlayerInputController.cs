@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using RootMotion.Dynamics;
+using Unity.Cinemachine;
 public class Network_PlayerInputController : NetworkBehaviour
 {
     private PlayerInputActions playerInput;
@@ -18,11 +19,16 @@ public class Network_PlayerInputController : NetworkBehaviour
     NetworkAnimationController networkAnimationController;
 
     [SerializeField] Camera mycam;
-    [SerializeField] GameObject myVisuals;
-    [SerializeField] GameObject myCanvas;
+    [SerializeField] CinemachineCamera cinemachineCamera;
+    //[SerializeField] Cinemachine
+
+    //[SerializeField] GameObject myVisuals;
+    //[SerializeField] GameObject myCanvas;
 
     AudioListener myListener;
     public bool hasSpawned = false;
+
+    [SerializeField] BehaviourPuppet puppet;
 
     // float count = 0;
 
@@ -86,18 +92,31 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     }
 
+    public override void OnNetworkSpawn()
+    {
+       if(IsOwner)
+       {
+        cinemachineCamera.Priority = 1;
+       }
+       else
+       {
+        cinemachineCamera.Priority = 0;
+       }
+
+
+    }
     private void Update()
     {
-        if(!IsOwner) return;
+        if(!IsOwner || puppet.state == BehaviourPuppet.State.Unpinned) return;
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-       if(!IsOwner) return;
+       if(!IsOwner || puppet.state == BehaviourPuppet.State.Unpinned) return;
         playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
           
-        networkAnimationController.ProcessVisuals(onFoot.Move.ReadValue<Vector2>());
+        networkAnimationController.ProcessVisualsRpc(onFoot.Move.ReadValue<Vector2>());
         
     }
 
@@ -113,7 +132,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     {
         if (!IsOwner)
         {
-            myVisuals.SetActive(false);
+            //myVisuals.SetActive(false);
         }
         else {
             mycam.gameObject.SetActive(false);
@@ -126,7 +145,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     {
         if (!IsOwner)
         {
-            myVisuals.SetActive(true);
+            //myVisuals.SetActive(true);
         }
         else
         {
@@ -135,10 +154,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         }
 
     }
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-    }
+  
 
 
     /*
