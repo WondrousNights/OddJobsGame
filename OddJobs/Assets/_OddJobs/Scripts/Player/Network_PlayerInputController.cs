@@ -101,6 +101,7 @@ public class Network_PlayerInputController : NetworkBehaviour
        else
        {
         cinemachineCamera.Priority = 0;
+        GetComponent<AudioListener>().enabled = false;
        }
 
 

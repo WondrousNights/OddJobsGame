@@ -267,7 +267,7 @@ namespace RootMotion.Dynamics {
 		/// <summary>
 		/// If the distance from the muscle to its target is larger than this value, the character will be knocked out.
 		/// </summary>
-		[Range(0.001f, 10f)] public float knockOutDistance = 1f;
+		[Range(0.001f, float.PositiveInfinity)] public float knockOutDistance = 1f;
 
 		[Tooltip("Smaller value makes the muscles weaker when the puppet is knocked out.")]
 		/// <summary>

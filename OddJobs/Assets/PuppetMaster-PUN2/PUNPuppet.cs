@@ -42,28 +42,22 @@ public class PUNPuppet : NetworkBehaviour
             positions = new Vector3[syncRigidbodies.Length];
             rotations = new Vector3[syncRigidbodies.Length];
 
-            // Only the server instance will get event calls
-            if (IsHost)
+            // Only the owner instance will get event calls
+            if (IsOwner)
             {
                 puppet.onLoseBalance.unityEvent.AddListener(OnLoseBalance);
                 puppet.onGetUpProne.unityEvent.AddListener(OnGetUp);
                 puppet.onGetUpSupine.unityEvent.AddListener(OnGetUp);
-                name = "PUN Puppet " + "Host";
+                name = "PUN Puppet " + "Mine";
 
-                if(CanLoseBalance == false)
-                {
-                    puppet.knockOutDistance = Mathf.Infinity;
-                    puppet.canGetUp = false;
-                    puppet.canMoveTarget = false;
-                }
             }
             else
             {
-                // Make sure the remote puppet never loses balance on it's own, only the server has authority here
+                // Make sure that I can't change other person puppet.
                 puppet.knockOutDistance = Mathf.Infinity;
                 puppet.canGetUp = false;
                 puppet.canMoveTarget = false;
-                name = "PUN Puppet " + "Client";
+                name = "PUN Puppet " + "Not Mine";
             }
 
             puppetMaster.transform.parent = null;
@@ -72,26 +66,26 @@ public class PUNPuppet : NetworkBehaviour
         // Force instances on the client machines to lose balance
         void OnLoseBalance()
         {
-            if(!IsHost || !CanLoseBalance) return;
-            //LoseBalanceServerRpc();
+            if(!IsOwner) return;
+            LoseBalanceServerRpc();
         }
 
         // Force instances on the client machines to get up
         void OnGetUp()
         {
-            if(!IsHost || !CanLoseBalance) return;
-            //GetUpServerRpc();
+            if(!IsOwner) return;
+            GetUpServerRpc();
         }
 
         // Force instances on the client machines to lose balance
-        [Rpc(SendTo.NotServer)]
+        [Rpc(SendTo.NotMe)]
         void LoseBalanceServerRpc()
         {
             puppet.SetState(BehaviourPuppet.State.Unpinned);
         }
 
         // Force instances on the client machines to get up
-        [Rpc(SendTo.NotServer)]
+        [Rpc(SendTo.NotMe)]
         void GetUpServerRpc()
         {
            puppet.SetState(BehaviourPuppet.State.GetUp);
@@ -121,7 +115,7 @@ public class PUNPuppet : NetworkBehaviour
         // Rigidbody syncing
         void FixedUpdate()
         {
-            if (IsHost)
+            if (IsOwner)
             {
                 FixedUpdateLocal();
             }
@@ -198,8 +192,8 @@ public class PUNPuppet : NetworkBehaviour
             }
         }
 
-        // Syncing the positions, rotations and velocities of the Rigidbodies from the server to the clients.
-        [Rpc(SendTo.NotServer)]
+        // Syncing the positions, rotations and velocities of the Rigidbodies from the owner to the clients.
+        [Rpc(SendTo.NotMe)]
         void SyncRigidbodiesServerRpc(Vector3[] positions, Vector3[] rotations, Vector3[] velocities, Vector3[] angularVelocities, float syncBlend)
         {
 
@@ -221,8 +215,8 @@ public class PUNPuppet : NetworkBehaviour
         }
 
 
-        // Syncing only the velocities and angularVelocities of the Rigidbodies from the server to the clients.
-        [Rpc(SendTo.NotServer)]
+        // Syncing only the velocities and angularVelocities of the Rigidbodies from the owner to the clients.
+        [Rpc(SendTo.NotMe)]
         void SyncRigidbodyVelocitiesServerRpc(Vector3[] velocities, Vector3[] angularVelocities, float syncBlend)
         {
             if (this.positions.Length == 0) return; // Not initiated yet
