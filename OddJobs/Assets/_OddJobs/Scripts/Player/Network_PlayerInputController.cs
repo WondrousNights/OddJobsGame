@@ -18,14 +18,12 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     NetworkAnimationController networkAnimationController;
 
-    [SerializeField] Camera mycam;
+    public Camera mycam;
     [SerializeField] CinemachineCamera cinemachineCamera;
 
     [SerializeField] GameObject[] bodyRenders;
-    //[SerializeField] Cinemachine
-
-    //[SerializeField] GameObject myVisuals;
-    //[SerializeField] GameObject myCanvas;
+   
+    [SerializeField] GameObject myCanvas;
 
     AudioListener myListener;
     public bool hasSpawned = false;
@@ -77,14 +75,12 @@ public class Network_PlayerInputController : NetworkBehaviour
         }
         if (IsOwner)
         {
-
             mycam.gameObject.SetActive(true);
-            //myCanvas.gameObject.SetActive(true);
-            //myVisuals.SetActive(false);
         }
         else
         {
             mycam.gameObject.SetActive(false);
+            myCanvas.gameObject.SetActive(false);
             myListener.enabled = false;
         }
 

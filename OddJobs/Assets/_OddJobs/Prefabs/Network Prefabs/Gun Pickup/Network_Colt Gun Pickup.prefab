@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 877381504442452094}
   - component: {fileID: 4454293623991205836}
   - component: {fileID: 1994890418375652599}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Network_Colt Gun Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3612119023
+  GlobalObjectIdHash: 4160391466
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -166,7 +166,7 @@ MonoBehaviour:
   promptMessage: Pick Up Colt
   isUI: 0
   sfxToPlay: {fileID: 1994890418375652599}
-  gun: {fileID: 0}
+  gun: {fileID: 11400000, guid: 71f840c7000e80346927b731d270ac82, type: 2}
   autoPickup: 0
   ammoInClip: -1
 --- !u!82 &1994890418375652599
@@ -274,10 +274,100 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4701597409726743030}
     m_Modifications:
+    - target: {fileID: 785652942233887657, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087305157756781412, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103005151304550346, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259662703259355554, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522257604699277871, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164246021517420140, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311263115602912667, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2398071831712793237, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
         type: 3}
       propertyPath: m_Name
       value: Colt Single-Action Army
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398071831712793237, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891599047188455584, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939513501424857056, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348738799431540001, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500551340342406318, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782745073936666420, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913547640532565942, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761342503018332169, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776529474588406336, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893005538217471752, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271975930809815478, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7786663999717606290, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
         type: 3}
@@ -328,6 +418,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964286705551974724, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692861596060451779, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847588421730599352, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131684342030003411, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185577575222965367, guid: facb0ff8b880eaa4ca2aa70889b8e96f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

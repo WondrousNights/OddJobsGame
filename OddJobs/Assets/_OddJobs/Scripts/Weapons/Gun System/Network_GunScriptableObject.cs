@@ -17,8 +17,7 @@ public class Network_GunScriptableObject : ScriptableObject
     public GameObject ModelPrefab;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation;
-    public Vector3 leftHandIKPosition;
-    public Vector3 rightHandIKPosition;
+    
     public GameObject droppedModelPrefab;
 
     public ShootConfigScriptableObject ShootConfig;

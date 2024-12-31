@@ -9,7 +9,7 @@ public class Network_Interactable : NetworkBehaviour
 
     public AudioSource sfxToPlay;
     
-    public void BaseInteract(Local_PlayerInteractionManager playerInteracting)
+    public void BaseInteract(Network_PlayerInteractionManager playerInteracting)
     {
          if(sfxToPlay != null)
         {
@@ -19,7 +19,7 @@ public class Network_Interactable : NetworkBehaviour
 
     }
 
-    protected virtual void Interact(Local_PlayerInteractionManager playerInteracting)
+    protected virtual void Interact(Network_PlayerInteractionManager playerInteracting)
     {
 
     }
