@@ -8,16 +8,14 @@ public class NetworkAnimationController : NetworkBehaviour
     [SerializeField] Animator animator;
 
     Vector3 movement;
-    private void Start()
+   
+    [Rpc(SendTo.Everyone)]
+    public void ProcessVisualsRpc(Vector2 moveInput)
     {
-        animator = GetComponent<Animator>();
-    }
-    public void ProcessVisuals(Vector2 moveInput)
-    {
-        ProcessVisualsServerRpc(moveInput);
-        
+        //ProcessVisualsServerRpc(moveInput);
+        movement = new Vector3(moveInput.x, 0f, moveInput.y);
 
-
+        animator.SetFloat("speed", movement.magnitude);
         /*
         float velocityZ = Vector3.Dot(movement.normalized, forward.gameObject.transform.forward);
         float velocityX = Vector3.Dot(movement.normalized, forward.gameObject.transform.right);
@@ -29,18 +27,9 @@ public class NetworkAnimationController : NetworkBehaviour
         */
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    void ProcessVisualsServerRpc(Vector2 moveInput)
+    public void ProcessJump()
     {
-        ProcessVisualsClientRpc(moveInput);
-    }
-
-    [ClientRpc]
-    void ProcessVisualsClientRpc(Vector2 moveInput)
-    {
-        movement = new Vector3(moveInput.x, 0f, moveInput.y);
-
-        animator.SetFloat("speed", movement.magnitude);
+        animator.SetTrigger("jump");
     }
     
 }

@@ -12,7 +12,7 @@ public class Local_PlayerMovement : MonoBehaviour
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float jumpHeight = 3;
 
-    [SerializeField] Local_AnimationController localAnimationController;
+    //[SerializeField] Local_AnimationController localAnimationController;
 
     Local_PlayerInputController inputController;
 
@@ -47,7 +47,7 @@ public class Local_PlayerMovement : MonoBehaviour
     }
     public void ProcessAnimations(Vector2 input)
     {
-        localAnimationController.ProcessVisuals(input);
+        //localAnimationController.ProcessVisuals(input);
     }
     
     public void Jump()

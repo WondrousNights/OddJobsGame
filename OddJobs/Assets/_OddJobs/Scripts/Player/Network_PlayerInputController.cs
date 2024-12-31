@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using RootMotion.Dynamics;
+using Unity.Cinemachine;
 public class Network_PlayerInputController : NetworkBehaviour
 {
     private PlayerInputActions playerInput;
@@ -15,19 +16,24 @@ public class Network_PlayerInputController : NetworkBehaviour
     private Network_PlayerGunHandler gunHandler;
     private Network_PlayerStats playerStats;
 
+    NetworkAnimationController networkAnimationController;
+
     [SerializeField] Camera mycam;
-    [SerializeField] GameObject myVisuals;
-    [SerializeField] GameObject myCanvas;
+    [SerializeField] CinemachineCamera cinemachineCamera;
+    //[SerializeField] Cinemachine
+
+    //[SerializeField] GameObject myVisuals;
+    //[SerializeField] GameObject myCanvas;
 
     AudioListener myListener;
     public bool hasSpawned = false;
+
+    [SerializeField] BehaviourPuppet puppet;
 
     // float count = 0;
 
     private void Awake()
     {
-
-
         playerInput = new PlayerInputActions();
         onFoot = playerInput.OnFoot;
         onFoot.Enable();
@@ -36,25 +42,26 @@ public class Network_PlayerInputController : NetworkBehaviour
         look = GetComponent<Network_PlayerLook>();
         gunHandler = GetComponent<Network_PlayerGunHandler>();
         playerStats = GetComponent<Network_PlayerStats>();
+        networkAnimationController = GetComponent<NetworkAnimationController>();
 
 
         myListener = GetComponent<AudioListener>();
         //Event Subscription
 
-        playerStats.OnPlayerDeath += HandlePlayerDeathEvent;
-        playerStats.OnPlayerRevive += HandlePlayerReviveEvent;
+       // playerStats.OnPlayerDeath += HandlePlayerDeathEvent;
+        //playerStats.OnPlayerRevive += HandlePlayerReviveEvent;
         //Actions subscriptions
 
-        onFoot.Jump.performed += ctx => playerMovement.Jump();
-        onFoot.Shoot.performed += ctx => gunHandler.Shoot();
-        onFoot.Reload.performed += ctx => gunHandler.Reload();
+        onFoot.Jump.performed += ctx => HandleJump();
+        //onFoot.Shoot.performed += ctx => gunHandler.Shoot();
+        //onFoot.Reload.performed += ctx => gunHandler.Reload();
     }
 
 
 
     private void Start()
     {
-        NetworkManager.Singleton.SceneManager.OnSceneEvent += SetSpawn;
+        //NetworkManager.Singleton.SceneManager.OnSceneEvent += SetSpawn;
         Cursor.lockState = CursorLockMode.Locked;
         //Application.targetFrameRate = 60;
         //Camera Controls
@@ -70,11 +77,12 @@ public class Network_PlayerInputController : NetworkBehaviour
         {
 
             mycam.gameObject.SetActive(true);
-            myCanvas.gameObject.SetActive(true);
-            myVisuals.SetActive(false);
+            //myCanvas.gameObject.SetActive(true);
+            //myVisuals.SetActive(false);
         }
         else
         {
+            mycam.gameObject.SetActive(false);
             myListener.enabled = false;
         }
 
@@ -84,37 +92,48 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     }
 
-    private void FixedUpdate()
+    public override void OnNetworkSpawn()
     {
+       if(IsOwner)
+       {
+        cinemachineCamera.Priority = 1;
+       }
+       else
+       {
+        cinemachineCamera.Priority = 0;
+        GetComponent<AudioListener>().enabled = false;
+       }
 
-        if (IsOwner && !playerStats.isDead)
-        {
-
-            if (hasSpawned)
-            {
-                Debug.Log("Spawn now moving");
-                playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
-            }
-            
-            playerMovement.ProcessAnimations(onFoot.Move.ReadValue<Vector2>());
-        }
 
     }
-
-    private void LateUpdate()
+    private void Update()
     {
-        if (!playerStats.isDead)
-        {
-            look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
-        }
+        if(!IsOwner || puppet.state == BehaviourPuppet.State.Unpinned) return;
+        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+    }
 
+    private void FixedUpdate()
+    {
+       if(!IsOwner || puppet.state == BehaviourPuppet.State.Unpinned) return;
+        playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
+          
+        networkAnimationController.ProcessVisualsRpc(onFoot.Move.ReadValue<Vector2>());
+        
+    }
+
+
+    void HandleJump()
+    {
+        if(!IsOwner) return;
+        playerMovement.Jump();
+        networkAnimationController.ProcessJump();
     }
 
     private void HandlePlayerDeathEvent(object sender, EventArgs e)
     {
         if (!IsOwner)
         {
-            myVisuals.SetActive(false);
+            //myVisuals.SetActive(false);
         }
         else {
             mycam.gameObject.SetActive(false);
@@ -127,7 +146,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     {
         if (!IsOwner)
         {
-            myVisuals.SetActive(true);
+            //myVisuals.SetActive(true);
         }
         else
         {
@@ -136,13 +155,10 @@ public class Network_PlayerInputController : NetworkBehaviour
         }
 
     }
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-    }
+  
 
 
-    
+    /*
     void SetSpawn(SceneEvent sceneEvent)
     {
 
@@ -192,5 +208,6 @@ public class Network_PlayerInputController : NetworkBehaviour
     {
         hasSpawned = true;
     }
+    */
 
 }

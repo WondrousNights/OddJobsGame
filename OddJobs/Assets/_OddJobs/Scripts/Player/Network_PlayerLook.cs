@@ -12,24 +12,22 @@ public class Network_PlayerLook : NetworkBehaviour
     public float xSensitivity = 30f;
     public float ySensitivity = 30f;
 
-    Network_PlayerInputController inputController;
-
-    private void Start()
-    {
-        inputController = GetComponent<Network_PlayerInputController>();
-    }
+  
     public void ProcessLook(Vector2 input)
     {
-        if (!IsOwner) return;
-        if (!inputController.hasSpawned) return;
+        //if (!IsOwner) return;
+        // Scale input by screen resolution to make sensitivity consistent across resolutions
+        float mouseX = input.x / Screen.width;
+        float mouseY = input.y / Screen.height;
 
-        float mouseX = input.x;
-        float mouseY = input.y;
 
-        xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
-        xRotation = Mathf.Clamp(xRotation, -80, 80f);
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+    
 
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
+        // Apply sensitivity
+        xRotation -= mouseY * ySensitivity;
+        xRotation = Mathf.Clamp(xRotation, -85f, 85f);
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * (mouseX * xSensitivity));
+    
     }
 }
