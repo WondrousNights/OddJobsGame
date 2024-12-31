@@ -63,7 +63,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232013203587454740}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.409, z: 0.434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5166,7 +5166,6 @@ GameObject:
   - component: {fileID: 1055879276612891166}
   - component: {fileID: 8158258702167754821}
   - component: {fileID: 8089577361082498322}
-  - component: {fileID: 3666257309470978327}
   m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
@@ -5221,8 +5220,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 60
+  far clip plane: 500
+  field of view: 70
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -5284,38 +5283,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &3666257309470978327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6437341204219088732}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowDebugText: 0
-  ShowCameraFrustum: 1
-  IgnoreTimeScale: 0
-  WorldUpOverride: {fileID: 0}
-  ChannelMask: -1
-  UpdateMethod: 2
-  BlendUpdateMethod: 1
-  LensModeOverride:
-    Enabled: 0
-    DefaultMode: 2
-  DefaultBlend:
-    Style: 1
-    Time: 2
-    CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  CustomBlends: {fileID: 0}
 --- !u!1 &6609496415504684042
 GameObject:
   m_ObjectHideFlags: 0
@@ -6317,12 +6284,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1055879276612891166}
+  - {fileID: 5027902664893588590}
   - {fileID: 4029147071520808499}
   - {fileID: 2787616402306526040}
   - {fileID: 6252561681870953218}
-  - {fileID: 1055879276612891166}
   - {fileID: 7052742072318669511}
-  - {fileID: 5027902664893588590}
   m_Father: {fileID: 1845964357019532687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2240815464366263728
@@ -6367,7 +6334,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 1.74
   m_Radius: 0.26
-  m_SlopeLimit: 45
+  m_SlopeLimit: 55
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -6400,9 +6367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336ccdfe94d5479428cd7c155a77740e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  gravity: -9.8
-  jumpHeight: 1
+  speed: 4.22
+  gravity: -14
+  jumpHeight: 0.8
 --- !u!114 &4979974233196690573
 MonoBehaviour:
   m_ObjectHideFlags: 0
