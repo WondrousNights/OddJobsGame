@@ -124,8 +124,11 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     void HandleJump()
     {
-        if(!IsOwner) return;
-        playerMovement.Jump();
+        if(IsOwner)
+        {
+            playerMovement.Jump();
+            
+        }
         networkAnimationController.ProcessJump();
     }
 
