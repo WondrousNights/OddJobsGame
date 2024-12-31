@@ -20,6 +20,8 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     [SerializeField] Camera mycam;
     [SerializeField] CinemachineCamera cinemachineCamera;
+
+    [SerializeField] GameObject[] bodyRenders;
     //[SerializeField] Cinemachine
 
     //[SerializeField] GameObject myVisuals;
@@ -97,6 +99,13 @@ public class Network_PlayerInputController : NetworkBehaviour
        if(IsOwner)
        {
         cinemachineCamera.Priority = 1;
+        
+        foreach(GameObject go in bodyRenders)
+        {
+            go.layer = 15;
+        }
+
+
        }
        else
        {
@@ -124,11 +133,8 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     void HandleJump()
     {
-        if(IsOwner)
-        {
-            playerMovement.Jump();
-            
-        }
+        if(!IsOwner) return;
+        playerMovement.Jump();
         networkAnimationController.ProcessJump();
     }
 

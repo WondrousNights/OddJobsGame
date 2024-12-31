@@ -3930,7 +3930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Effectors:
-  - m_Transform: {fileID: 3254480622079037876}
+  - m_Transform: {fileID: 0}
     m_Style:
       shape: {fileID: 4300000, guid: c6793350c150f456688e39a81f97364a, type: 2}
       color: {r: 1, g: 0, b: 0, a: 0.5}
@@ -3938,7 +3938,7 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
-  - m_Transform: {fileID: 3254480622079037876}
+  - m_Transform: {fileID: 0}
     m_Style:
       shape: {fileID: 4300000, guid: c6793350c150f456688e39a81f97364a, type: 2}
       color: {r: 1, g: 0, b: 0, a: 0.5}
@@ -3946,7 +3946,7 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
-  - m_Transform: {fileID: 3254480622079037876}
+  - m_Transform: {fileID: 0}
     m_Style:
       shape: {fileID: 4300000, guid: c6793350c150f456688e39a81f97364a, type: 2}
       color: {r: 1, g: 0, b: 0, a: 0.5}
@@ -4825,7 +4825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 900269873
+  GlobalObjectIdHash: 4273355354
   InScenePlacedSourceGlobalObjectIdHash: 1780109901
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -5824,37 +5824,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3227736870742753421}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7648705698736779721
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3254480622079037876}
-  m_Layer: 0
-  m_Name: Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3254480622079037876
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7648705698736779721}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.5873314, y: 0.54133624, z: 0.39554453, w: 0.45336688}
-  m_LocalPosition: {x: 0.285, y: 1.35, z: 0.322}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6094423027711489280}
-  m_LocalEulerAnglesHint: {x: -185.987, y: -73.888, z: -89.837006}
 --- !u!1 &7794466327355255157
 GameObject:
   m_ObjectHideFlags: 0
@@ -5948,8 +5917,7 @@ Transform:
   m_LocalPosition: {x: 0.273736, y: 1.3249998, z: 0.32262015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3254480622079037876}
+  m_Children: []
   m_Father: {fileID: 2048181125228334574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8462252211166574900
@@ -5969,7 +5937,7 @@ MonoBehaviour:
     m_Root: {fileID: 8267358093902694649}
     m_Mid: {fileID: 5514639441847192784}
     m_Tip: {fileID: 297032252938978336}
-    m_Target: {fileID: 3254480622079037876}
+    m_Target: {fileID: 0}
     m_Hint: {fileID: 0}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
@@ -6408,8 +6376,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8162660796946343574}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.5768424e-10, y: 1.6999758, z: 0.010296847}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.6999763, z: 0.010296822}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6701,6 +6669,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mycam: {fileID: 8158258702167754821}
   cinemachineCamera: {fileID: 5862393390480029230}
+  bodyRenders:
+  - {fileID: 8162660796946343574}
+  - {fileID: 1462990137793490299}
   hasSpawned: 1
   puppet: {fileID: 487670572562031716}
 --- !u!114 &7981989253936816340
