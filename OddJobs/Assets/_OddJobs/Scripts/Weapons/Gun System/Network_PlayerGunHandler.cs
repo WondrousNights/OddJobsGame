@@ -35,7 +35,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     /// <summary>
     //GameObject ActiveGunGameObject;
     /// </summary>
-    private GunEffects gunEffects;
+    private Network_GunEffects gunEffects;
     private Network_PlayerInputController playerInputController;
     private PlayerAmmoHandler ammoHandler;
     private HeldItemInteraction heldItem;
@@ -44,7 +44,6 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     Quaternion targetRotation;
     public bool isReloading = false;
     public bool isEquipping = false; // not used
-
     public bool isHoldingObject = false;
 
 
@@ -78,8 +77,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }
         ActiveGun = Inventory[currentGunIndex];
         ActiveGun?.Spawn(weaponHolder, this);
-        //gunEffects = weaponHolder.GetComponentInChildren<GunEffects>();
-        //heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
+        gunEffects = weaponHolder.GetComponentInChildren<Network_GunEffects>();
+        // gunEffects.EquipEffect(); // should play automatically
+        // heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
         
         if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
             Reload();
@@ -89,9 +89,6 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
         //Spawn gameobject for everyone else
        SpawnVisualGunRpc(ActiveGun.Type);
-
-
-
     }
 
     [Rpc(SendTo.NotOwner)]
@@ -110,8 +107,6 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             }
         }
     }
-
-   
 
     public void DeEquipCurrentGun()
     {
@@ -213,11 +208,12 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             {
                 // shoot the gun
                 ActiveGun.Shoot(
-                playerInputController.mycam.transform, 
-                weaponHolder.GetComponentInChildren<MuzzleFlash>(),
-                ammoHandler,
-                currentGunIndex
+                    playerInputController.mycam.transform, 
+                    weaponHolder.GetComponentInChildren<MuzzleFlash>(),
+                    ammoHandler,
+                    currentGunIndex
                 );
+                gunEffects.ShootEffect();
 
                 // play shooting related effects
                 //gunEffects.KickbackAdjustment(0.1f);
@@ -254,6 +250,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
             UpdateAmmoText();
+            gunEffects.ReloadEffect();
             StartCoroutine(ReloadWaitTimer(ActiveGun.ShootConfig.reloadTime));
             //gunEffects.ReloadRotation(this);
         }
@@ -317,8 +314,4 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         yield return new WaitForSeconds(duration);
         isReloading = false;
     }
-
-
-
-
 }
