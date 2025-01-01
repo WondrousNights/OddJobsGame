@@ -201,7 +201,11 @@ public class LobbyManager : MonoBehaviour
                         RelayManager.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
                     }
 
-                    lobbyUI.SetActive(false);
+                    if(lobbyUI != null)
+                    {
+                        lobbyUI.SetActive(false);
+                    }
+                   
                 }
             }
 

@@ -21,7 +21,7 @@ public class Network_PlayerInteractionManager : NetworkBehaviour
     public Network_PlayerInputController playerInputController;
 
     public PlayerAmmoHandler ammoHandler;
-    public PlayerGunHandler gunHandler;
+    public Network_PlayerGunHandler gunHandler;
 
     public Transform grabPoint;
 
@@ -32,7 +32,7 @@ public class Network_PlayerInteractionManager : NetworkBehaviour
         playerUI = GetComponent<Network_PlayerUI>();
 
         ammoHandler = GetComponent<PlayerAmmoHandler>();
-        gunHandler = GetComponent<PlayerGunHandler>();
+        gunHandler = GetComponent<Network_PlayerGunHandler>();
     }
     
     void Update()
@@ -86,19 +86,16 @@ public class Network_PlayerInteractionManager : NetworkBehaviour
                 interact = false;
             }
         }
-    }
-
-    public void ProcessInteract(CallbackContext context)
-    {
-        
-        if(context.performed)
-        {
-            interact = true;
-        }
-        if(context.canceled)
+        else if(interact == true)
         {
             interact = false;
         }
+
+    }
+
+    public void ProcessInteract()
+    {
+        interact = true;
     }
 
     //UI Interactions

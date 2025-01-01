@@ -26,7 +26,7 @@ public class Network_PlayerUI : MonoBehaviour
         promptText.text = promptMessage;
     }
 
-    public void UpdateAmmoText(GunScriptableObject gun = null, int inClip = -1, int lightAmmoSupply = -1, int mediumAmmoSupply = -1, int heavyAmmoSupply = -1)
+    public void UpdateAmmoText(Network_GunScriptableObject gun = null, int inClip = -1, int lightAmmoSupply = -1, int mediumAmmoSupply = -1, int heavyAmmoSupply = -1)
     {
         if (gun)
         {

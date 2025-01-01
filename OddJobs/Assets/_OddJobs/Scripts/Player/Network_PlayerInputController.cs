@@ -14,7 +14,8 @@ public class Network_PlayerInputController : NetworkBehaviour
     private Network_PlayerMovement playerMovement;
     private Network_PlayerLook look;
     private Network_PlayerGunHandler gunHandler;
-    private Network_PlayerStats playerStats;
+    public Network_PlayerUI playerUI;
+    private Network_PlayerInteractionManager interactionManager;
 
     NetworkAnimationController networkAnimationController;
 
@@ -41,8 +42,9 @@ public class Network_PlayerInputController : NetworkBehaviour
         playerMovement = GetComponent<Network_PlayerMovement>();
         look = GetComponent<Network_PlayerLook>();
         gunHandler = GetComponent<Network_PlayerGunHandler>();
-        playerStats = GetComponent<Network_PlayerStats>();
+        playerUI = GetComponent<Network_PlayerUI>();
         networkAnimationController = GetComponent<NetworkAnimationController>();
+        interactionManager = GetComponent<Network_PlayerInteractionManager>();
 
 
         myListener = GetComponent<AudioListener>();
@@ -53,8 +55,9 @@ public class Network_PlayerInputController : NetworkBehaviour
         //Actions subscriptions
 
         onFoot.Jump.performed += ctx => HandleJump();
-        //onFoot.Shoot.performed += ctx => gunHandler.Shoot();
-        //onFoot.Reload.performed += ctx => gunHandler.Reload();
+        onFoot.Shoot.performed += ctx => gunHandler.ShootCurrentGun();
+        onFoot.Reload.performed += ctx => gunHandler.Reload();
+        onFoot.Interact.performed += ctx => interactionManager.ProcessInteract();
     }
 
 

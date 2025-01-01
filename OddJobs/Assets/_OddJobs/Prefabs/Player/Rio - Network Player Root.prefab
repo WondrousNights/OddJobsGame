@@ -5380,7 +5380,7 @@ GameObject:
   - component: {fileID: 4358006421114055178}
   - component: {fileID: 6455718281236540778}
   - component: {fileID: 4824555275679166104}
-  - component: {fileID: 5615761177997830115}
+  - component: {fileID: 4525879036870630180}
   m_Layer: 0
   m_Name: PlayerCanvass
   m_TagString: Untagged
@@ -5480,7 +5480,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5615761177997830115
+--- !u!114 &4525879036870630180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5489,13 +5489,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5166047660126150797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af012498671765e4eac81202d75f42f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d9af7f00b78d254e9651ba56fc7078d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
   spacing: 100
   showDuration: 2.2
-  playerGunHandler: {fileID: 0}
+  playerGunHandler: {fileID: 6696443871707122332}
   inventorySlotsParent: {fileID: 4889742523161242145}
   itemSlots:
   - {fileID: 4997831345619620681}
@@ -6155,7 +6155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6002740996205502926}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8219,6 +8219,8 @@ GameObject:
   - component: {fileID: 5041578014548170292}
   - component: {fileID: 879674902338673614}
   - component: {fileID: 1785905754379793663}
+  - component: {fileID: 6696443871707122332}
+  - component: {fileID: 683889417042771000}
   m_Layer: 3
   m_Name: Rio - Player
   m_TagString: Untagged
@@ -8308,6 +8310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6dbb1f9c55a9f345aea1861dbfc70d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUI: {fileID: 0}
   mycam: {fileID: 8158258702167754821}
   cinemachineCamera: {fileID: 5862393390480029230}
   bodyRenders:
@@ -8472,9 +8475,52 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerInputController: {fileID: 6901603176056389760}
-  ammoHandler: {fileID: 0}
-  gunHandler: {fileID: 0}
+  ammoHandler: {fileID: 683889417042771000}
+  gunHandler: {fileID: 6696443871707122332}
   grabPoint: {fileID: 0}
+--- !u!114 &6696443871707122332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256823946060716169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584613c37b528dd4a9933218b7f7bc6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  autoReload: 1
+  itemDropForce: 10
+  weaponHolder: {fileID: 4241306603108973277}
+  inventoryUI: {fileID: 4525879036870630180}
+  ActiveGun: {fileID: 0}
+  Inventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  currentGunIndex: 0
+  isReloading: 0
+  isEquipping: 0
+  isHoldingObject: 0
+  network_GunScriptableObjectList: {fileID: 11400000, guid: 43ad6fb1de8b4c447bedf20facee66fa,
+    type: 2}
+--- !u!114 &683889417042771000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256823946060716169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fda6de691e13fe49894f44a3c9e90b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightAmmo: 20
+  mediumAmmo: 0
+  heavyAmmo: 0
+  currentClipAmmo: 00000000000000000000000000000000000000000000000000000000
 --- !u!1 &8355159307227396980
 GameObject:
   m_ObjectHideFlags: 0

@@ -78,14 +78,14 @@ public class PUNPuppet : NetworkBehaviour
         }
 
         // Force instances on the client machines to lose balance
-        [Rpc(SendTo.NotMe)]
+        [Rpc(SendTo.NotOwner)]
         void LoseBalanceServerRpc()
         {
             puppet.SetState(BehaviourPuppet.State.Unpinned);
         }
 
         // Force instances on the client machines to get up
-        [Rpc(SendTo.NotMe)]
+        [Rpc(SendTo.NotOwner)]
         void GetUpServerRpc()
         {
            puppet.SetState(BehaviourPuppet.State.GetUp);
@@ -117,11 +117,11 @@ public class PUNPuppet : NetworkBehaviour
         {
             if (IsOwner)
             {
-                FixedUpdateLocal();
+                //FixedUpdateLocal();
             }
             else
             {
-                FixedUpdateRemote();
+                //FixedUpdateRemote();
             }
         }
 
@@ -193,7 +193,7 @@ public class PUNPuppet : NetworkBehaviour
         }
 
         // Syncing the positions, rotations and velocities of the Rigidbodies from the owner to the clients.
-        [Rpc(SendTo.NotMe)]
+        [Rpc(SendTo.Everyone)]
         void SyncRigidbodiesServerRpc(Vector3[] positions, Vector3[] rotations, Vector3[] velocities, Vector3[] angularVelocities, float syncBlend)
         {
 
@@ -216,7 +216,7 @@ public class PUNPuppet : NetworkBehaviour
 
 
         // Syncing only the velocities and angularVelocities of the Rigidbodies from the owner to the clients.
-        [Rpc(SendTo.NotMe)]
+        [Rpc(SendTo.Everyone)]
         void SyncRigidbodyVelocitiesServerRpc(Vector3[] velocities, Vector3[] angularVelocities, float syncBlend)
         {
             if (this.positions.Length == 0) return; // Not initiated yet

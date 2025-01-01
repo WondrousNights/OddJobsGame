@@ -15,9 +15,12 @@ public class Network_GunScriptableObject : ScriptableObject
     public AmmoType AmmoType;
     public string Name;
     public GameObject ModelPrefab;
+    public GameObject OtherPlayerModelPrefab;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation;
     
+    public Vector3 OtherPlayerGunSpawnPos;
+    public Vector3 OtherPlayerGunRotation;
     public GameObject droppedModelPrefab;
 
     public ShootConfigScriptableObject ShootConfig;
@@ -34,7 +37,6 @@ public class Network_GunScriptableObject : ScriptableObject
     private Transform parent;
 
 
-    [Rpc(SendTo.Everyone)]
     public void Spawn(Transform Parent, MonoBehaviour ActiveMonoBehaviour)
     {
         this.ActiveMonoBehaviour = ActiveMonoBehaviour;
@@ -59,15 +61,15 @@ public class Network_GunScriptableObject : ScriptableObject
         TrailPool.Clear();
         ShootSystem = null;
     }
-
-    public void Shoot(Transform shootPoint, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex, int playerLayer)
+    
+    public void Shoot(Transform shootPoint, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
     {
         if (Time.time > ShootConfig.fireRate + LastShootTime)
         {
             LastShootTime = Time.time;
             ShootSystem.Play();
             muzzleFlash.Play();
-            MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
+            //MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
             
             ammoHandler.currentClipAmmo[gunIndex] -= 1;
 
@@ -103,11 +105,10 @@ public class Network_GunScriptableObject : ScriptableObject
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        shootPoint.transform.position,
+                        ShootSystem.transform.position,
                         hit.point,
                         hit,
-                        ray,
-                        playerLayer
+                        ray
                     )
                 );
             }
@@ -115,11 +116,10 @@ public class Network_GunScriptableObject : ScriptableObject
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
-                        shootPoint.transform.position,
+                        ShootSystem.transform.position,
                         shootPoint.transform.position + (shootPoint.transform.forward * TrailConfig.MissDistance),
                         new RaycastHit(),
-                        ray,
-                        playerLayer
+                        ray
                     )
                 );
             }
@@ -130,7 +130,7 @@ public class Network_GunScriptableObject : ScriptableObject
 
     
     [Rpc(SendTo.Everyone)]
-    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Ray ray, int playerLayer)
+    private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Ray ray)
     {
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
@@ -156,7 +156,7 @@ public class Network_GunScriptableObject : ScriptableObject
         instance.transform.position = EndPoint;
 
         // if the bullet hit something, spawn a bullet hole and apply damage/force
-        if (hit.collider && hit.collider.gameObject.layer != playerLayer)
+        if (hit.collider)
         {
 
             Debug.Log("I just hit : " + hit.collider.gameObject.name);
@@ -200,7 +200,7 @@ public class Network_GunScriptableObject : ScriptableObject
         instance.gameObject.SetActive(false);
         TrailPool.Release(instance);
     }
-
+[Rpc(SendTo.Everyone)]
     private TrailRenderer CreateTrail()
     {
         GameObject instance = new GameObject("Bullet Trail");
