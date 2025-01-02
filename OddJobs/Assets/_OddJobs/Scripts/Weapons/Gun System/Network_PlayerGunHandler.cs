@@ -90,17 +90,14 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         UpdateAmmoText();
         inventoryUI.UpdateInventoryUI(Inventory);
 
-        //Spawn gameobject for everyone else
-       SpawnVisualGunRpc(ActiveGun.Type);
-
-
+        EquipGunVisualRpc(ActiveGun.Type);
 
     }
 
+    // spawn gun for other players
     [Rpc(SendTo.NotMe)]
-    void SpawnVisualGunRpc(GunType gunType)
+    void EquipGunVisualRpc(GunType gunType)
     {
-        
         if(visualGun != null) Destroy(visualGun);
         for(var i = 0; i < network_GunScriptableObjectList.GunScriptableObjectList.Count; i++)
         {
@@ -118,12 +115,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                 visualGun = Model;
 
                 magicalIK.DoMagicalIK(visualGun);
-                
             }
         }
     }
-
-   
 
     public void DeEquipCurrentGun()
     {
@@ -147,7 +141,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if(!IsOwner) return;
         if (ActiveGun) {
             // drop a pickup item for it
-            GameObject droppedModel = Instantiate(ActiveGun.droppedModelPrefab);
+            GameObject droppedModel = Instantiate(ActiveGun.DroppedPrefab);
             droppedModel.transform.position = weaponHolder.position;
             droppedModel.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), 0);
             droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoHandler.currentClipAmmo[currentGunIndex];
@@ -199,7 +193,6 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     }
 
 
-
     public void AddGunToInventory(Network_GunScriptableObject gun, int gunIndex, bool equipImmediately = true, GameObject pickupObject = null)
     {
         if(!IsOwner) return;
@@ -215,8 +208,6 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if(!IsOwner) return;
         if(isHoldingObject) return;
         if(ActiveGun == null) return;
-
-
 
         // if the gun has ammo in clip //I think this might be causing bugs?
         if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
@@ -250,11 +241,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                 // FAIL, NEED AMMO!
             }
         }
-
-
     }
-
- 
 
     [Rpc(SendTo.Everyone)]
     void ShootCurrentGunRpc()
@@ -270,7 +257,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if(ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
         {
             isReloading = true;
-            ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
+            ammoHandler.ReloadAmmo(ActiveGun.ClipSize, ActiveGun.AmmoType, currentGunIndex);
             UpdateAmmoText();
             StartCoroutine(ReloadWaitTimer(ActiveGun.ShootConfig.reloadTime));
             //gunEffects.ReloadRotation(this);
@@ -335,8 +322,4 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         yield return new WaitForSeconds(duration);
         isReloading = false;
     }
-
-
-
-
 }

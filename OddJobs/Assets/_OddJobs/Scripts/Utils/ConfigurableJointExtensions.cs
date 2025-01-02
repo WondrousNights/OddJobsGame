@@ -51,11 +51,12 @@ public static class ConfigurableJointExtensions
 		// Set target rotation to our newly calculated rotation
 		joint.targetRotation = resultRotation;
 	}
-	
-	/// <summary>
-	/// Adjust ConfigurableJoint settings to closely match CharacterJoint behaviour
-	/// </summary>
-	public static void SetupAsCharacterJoint (this ConfigurableJoint joint)
+
+    /// <summary>
+    /// Adjust ConfigurableJoint settings to closely match CharacterJoint behaviour
+    /// </summary>
+    [System.Obsolete]
+    public static void SetupAsCharacterJoint (this ConfigurableJoint joint)
 	{
 		joint.xMotion = ConfigurableJointMotion.Locked;
 		joint.yMotion = ConfigurableJointMotion.Locked;

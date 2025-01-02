@@ -12,19 +12,31 @@ public class OddDebug : EditorWindow
 
     void OnGUI()
     {
-        GUILayout.Label("Player Management", EditorStyles.boldLabel);
-
-        if (GUILayout.Button("Add New Player"))
+        if (GUILayout.Button("Play from Lobby"))
         {
-            var localPlayerManager = GameObject.Find("LocalPlayerManager");
-            if (localPlayerManager != null)
+            string scenePath = "Assets/_OddJobs/Scenes/Network_Scenes/Lobby.unity";
+            if (System.IO.File.Exists(scenePath))
             {
-                localPlayerManager.GetComponent<PlayerInputManager>().JoinPlayer();
+                UnityEditor.SceneManagement.EditorSceneManager.OpenScene(scenePath);
+                EditorApplication.isPlaying = true;
             }
             else
             {
-                Debug.LogError("No LocalPlayerManager found in scene. Please ensure one exists before adding players.");
+                Debug.LogError("Test scene not found at: " + scenePath);
             }
         }
+        
+        // if (GUILayout.Button("Add New Player"))
+        // {
+        //     var localPlayerManager = GameObject.Find("LocalPlayerManager");
+        //     if (localPlayerManager != null)
+        //     {
+        //         localPlayerManager.GetComponent<PlayerInputManager>().JoinPlayer();
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError("No LocalPlayerManager found in scene. Please ensure one exists before adding players.");
+        //     }
+        // }
     }
 }

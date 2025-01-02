@@ -49,6 +49,8 @@ namespace VertexFragment
         // Rendering
         // ---------------------------------------------------------------------------------
 
+        [System.Obsolete]
+
         public override void OnCameraSetup(CommandBuffer commandBuffer, ref RenderingData renderingData)
         {
             ShouldRender = FogVolumes.Exists(f => f.gameObject.activeInHierarchy);
@@ -72,6 +74,7 @@ namespace VertexFragment
             FogMaterialProperties.SetMatrix(ShaderIds.CameraNearPlaneCorners, renderingData.cameraData.camera.GetNearClipPlaneCornersMatrix());
         }
 
+        [System.Obsolete]
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             if (!ShouldRender)

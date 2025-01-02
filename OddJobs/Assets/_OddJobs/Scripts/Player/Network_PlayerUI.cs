@@ -31,7 +31,7 @@ public class Network_PlayerUI : MonoBehaviour
         if (gun)
         {
             currentItemText.text = gun.name;
-            ammoInClipText.text = inClip.ToString() + " / " + gun.AmmoClipSize;
+            ammoInClipText.text = inClip.ToString() + " / " + gun.ClipSize;
         }
         else
         {

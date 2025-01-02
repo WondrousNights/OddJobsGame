@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SoundPhysicsBody : MonoBehaviour
 {
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
     private Rigidbody _rb;
 
     [SerializeField] private AudioClip[] audioClips;
@@ -11,7 +11,7 @@ public class SoundPhysicsBody : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        if (!audioSource) audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody>();
     }
 

@@ -28,7 +28,7 @@ public class PUNPuppet : NetworkBehaviour
         private Vector3[] rotations = new Vector3[0];
         private bool syncFlag;
 
-        [SerializeField] bool CanLoseBalance = false;
+        // [SerializeField] bool CanLoseBalance = false;
 
         void Start()
         {
@@ -104,10 +104,10 @@ public class PUNPuppet : NetworkBehaviour
      
 
         // We have unparented PuppetMaster so make sure it doesn't remain when this character is destroyed.
-        void OnDestroy()
-        {
-            if (puppetMaster != null) Destroy(puppetMaster.gameObject);
-        }
+        // void OnDestroy()
+        // {
+        //     if (puppetMaster != null) Destroy(puppetMaster.gameObject);
+        // }
 
         // Returns true if puppet is fully pinned and no rigidbody syncing should be required
         private bool PuppetIsPinned()

@@ -9,7 +9,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 {
     private List<PlayerConfiguration> playerConfigs;
     [SerializeField]
-    private int MaxPlayers = 4;
+    // private int MaxPlayers = 4;
 
     public static PlayerConfigurationManager Instance { get; private set; }
 

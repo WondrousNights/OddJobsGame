@@ -116,6 +116,8 @@ namespace VertexFragment
         /// <param name="commandBuffer"></param>
         /// <param name="sourceHandle"></param>
         /// <param name="renderingData"></param>
+        [System.Obsolete]
+
         protected void BlitCopyOntoCamera(CommandBuffer commandBuffer, RTHandle sourceHandle, ref RenderingData renderingData)
         {
             BlitCopyMaterial.SetTexture(ShaderIds.BlitTexture, sourceHandle, RenderTextureSubElement.Color);
@@ -128,6 +130,8 @@ namespace VertexFragment
         /// <param name="commandBuffer"></param>
         /// <param name="sourceHandle"></param>
         /// <param name="renderingData"></param>
+        [System.Obsolete]
+
         protected void BlitBlendOntoCamera(CommandBuffer commandBuffer, RTHandle sourceHandle, ref RenderingData renderingData)
         {
             BlitBlendMaterial.SetTexture(ShaderIds.MainTex, sourceHandle, RenderTextureSubElement.Color);
@@ -140,6 +144,8 @@ namespace VertexFragment
         /// <param name="commandBuffer"></param>
         /// <param name="sourceHandle"></param>
         /// <param name="renderingData"></param>
+        [System.Obsolete]
+
         protected void BlitCopyDepthOntoCamera(CommandBuffer commandBuffer, RTHandle sourceHandle, ref RenderingData renderingData)
         {
             BlitDepthCopyMaterial.SetTexture(ShaderIds.MainTex, sourceHandle, RenderTextureSubElement.Depth);
@@ -159,6 +165,8 @@ namespace VertexFragment
         /// <param name="depthHandle"></param>
         /// <param name="geometry"></param>
         /// <param name="materialOverride"></param>
+        [System.Obsolete]
+
         protected void RasterizeColorAndDepthToCamera(CommandBuffer commandBuffer, ref RenderingData renderingData, RTHandle colorHandle, RTHandle depthHandle, BlitGeometry geometry = BlitGeometry.Triangle, Material materialOverride = null)
         {
             commandBuffer.SetRenderTarget(renderingData.cameraData.renderer.cameraColorTargetHandle, renderingData.cameraData.renderer.cameraDepthTargetHandle);
@@ -194,6 +202,8 @@ namespace VertexFragment
         /// <param name="mesh"></param>
         /// <param name="matrix"></param>
         /// <param name="materialOverride"></param>
+        [System.Obsolete]
+
         protected void RasterizeColorAndDepthToCamera(CommandBuffer commandBuffer, ref RenderingData renderingData, RTHandle colorHandle, RTHandle depthHandle, Mesh mesh, Matrix4x4? matrix = null, Material materialOverride = null)
         {
             commandBuffer.SetRenderTarget(renderingData.cameraData.renderer.cameraColorTargetHandle, renderingData.cameraData.renderer.cameraDepthTargetHandle);
