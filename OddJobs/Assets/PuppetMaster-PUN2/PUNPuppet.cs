@@ -51,7 +51,7 @@ public class PUNPuppet : NetworkBehaviour
                 name = "PUN Puppet " + "Mine";
 
                 //My bullets cant hit my body
-                puppetMaster.transform.gameObject.SetActive(false);
+                //puppetMaster.transform.gameObject.SetActive(false);
                 puppetMaster.gameObject.layer = 16;
                 Transform[] ragdollBits = puppetMaster.GetComponentsInChildren<Transform>();
                 foreach(Transform go in ragdollBits)
