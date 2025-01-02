@@ -36,6 +36,8 @@ public class Network_GunScriptableObject : ScriptableObject
 
     private Transform parent;
 
+    public LayerMask BulletCollisionMask;
+
 
     public void Spawn(Transform Parent, MonoBehaviour ActiveMonoBehaviour)
     {
@@ -50,9 +52,10 @@ public class Network_GunScriptableObject : ScriptableObject
         
         ShootSystem = Model.GetComponentInChildren<ParticleSystem>();
 
-
         parent = Parent;
     }
+
+   
 
     public void Despawn()
     {
@@ -61,17 +64,17 @@ public class Network_GunScriptableObject : ScriptableObject
         TrailPool.Clear();
         ShootSystem = null;
     }
-    
-    public void Shoot(Transform shootPoint, MuzzleFlash muzzleFlash, PlayerAmmoHandler ammoHandler, int gunIndex)
+
+    public void Shoot(Transform shootPoint)
     {
         if (Time.time > ShootConfig.fireRate + LastShootTime)
         {
             LastShootTime = Time.time;
             ShootSystem.Play();
-            muzzleFlash.Play();
             //MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
             
-            ammoHandler.currentClipAmmo[gunIndex] -= 1;
+        
+            
 
 
             for(int i = 0; i < ShootConfig.bulletsPerShot; i++)
@@ -98,10 +101,11 @@ public class Network_GunScriptableObject : ScriptableObject
 
           
             RaycastHit hit;
+            
 
 
         
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, BulletCollisionMask))
             {
                 ActiveMonoBehaviour.StartCoroutine(
                     PlayTrail(
@@ -128,12 +132,14 @@ public class Network_GunScriptableObject : ScriptableObject
         }
     }
 
+
     
-    [Rpc(SendTo.Everyone)]
+
     private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit hit, Ray ray)
     {
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
+        instance.gameObject.layer = 8;
         instance.transform.position = StartPoint;
         yield return null; // avoid position carry-over from last frame if reused
 
@@ -200,10 +206,10 @@ public class Network_GunScriptableObject : ScriptableObject
         instance.gameObject.SetActive(false);
         TrailPool.Release(instance);
     }
-[Rpc(SendTo.Everyone)]
     private TrailRenderer CreateTrail()
     {
         GameObject instance = new GameObject("Bullet Trail");
+        instance.gameObject.layer = 8;
         TrailRenderer trail = instance.AddComponent<TrailRenderer>();
         trail.colorGradient = TrailConfig.Color;
         trail.material = TrailConfig.Material;

@@ -491,6 +491,8 @@ namespace RootMotion.Dynamics {
 		private bool hasCollidedSinceGetUp;
         private float lastCollisionTime;
 
+		public bool CanLoseBalance;
+
 		protected override void OnInitiate() {
 			foreach (CollisionResistanceMultiplier crm in collisionResistanceMultipliers) {
 				if (crm.layers == 0) {
@@ -531,7 +533,7 @@ namespace RootMotion.Dynamics {
 			hipsForward = Quaternion.Inverse(puppetMaster.muscles[0].transform.rotation) * puppetMaster.targetRoot.forward;
 			hipsUp = Quaternion.Inverse(puppetMaster.muscles[0].transform.rotation) * puppetMaster.targetRoot.up;
 			
-			state = State.Unpinned;
+			if(CanLoseBalance) state = State.Unpinned;
 
 			eventsEnabled = true;
 		}
@@ -553,7 +555,7 @@ namespace RootMotion.Dynamics {
 
 			bool e = eventsEnabled;
 			eventsEnabled = false;
-			if (unpinned) SetState(State.Unpinned);
+			if (unpinned && CanLoseBalance) SetState(State.Unpinned);
 			else SetState(State.Puppet);
 			eventsEnabled = e;
 		}
@@ -574,7 +576,7 @@ namespace RootMotion.Dynamics {
 		}
 
 		public override void KillEnd() {
-			SetState(State.Unpinned);
+			if(CanLoseBalance) SetState(State.Unpinned);
 		}
 
 		public override void Resurrect() {
@@ -592,7 +594,7 @@ namespace RootMotion.Dynamics {
 		}
 
 		protected override void OnDeactivate() {
-			state = State.Unpinned;
+			if(CanLoseBalance) state = State.Unpinned;
 		}
 
 		protected override void OnFixedUpdate(float deltaTime) {
@@ -690,7 +692,7 @@ namespace RootMotion.Dynamics {
 
                     if (hasCollidedSinceGetUp && !m.state.isDisconnected && !puppetMaster.isBlending && offset > 0f && pinW <= pinWeightThreshold && offset > props.knockOutDistance * knockOutDistanceSqr * stateMlp) {
 						if (state != State.GetUp || getUpTargetFixed) {
-							SetState(State.Unpinned);
+							if(CanLoseBalance) SetState(State.Unpinned);
 						}
 						return;
 					}
