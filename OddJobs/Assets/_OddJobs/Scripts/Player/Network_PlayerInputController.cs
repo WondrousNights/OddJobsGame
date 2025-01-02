@@ -10,6 +10,7 @@ public class Network_PlayerInputController : NetworkBehaviour
 {
     private PlayerInputActions playerInput;
     private PlayerInputActions.OnFootActions onFoot;
+    private CharacterController characterController;
 
     private Network_PlayerMovement playerMovement;
     private Network_PlayerLook look;
@@ -39,6 +40,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         onFoot = playerInput.OnFoot;
         onFoot.Enable();
 
+        characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<Network_PlayerMovement>();
         look = GetComponent<Network_PlayerLook>();
         gunHandler = GetComponent<Network_PlayerGunHandler>();
@@ -80,11 +82,13 @@ public class Network_PlayerInputController : NetworkBehaviour
         if (IsOwner)
         {
             mycam.gameObject.SetActive(true);
+            
         }
         else
         {
             mycam.gameObject.SetActive(false);
             myCanvas.gameObject.SetActive(false);
+            characterController.enabled = false;
             myListener.enabled = false;
         }
 
