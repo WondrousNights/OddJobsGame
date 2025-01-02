@@ -55,7 +55,7 @@ public class Network_GunScriptableObject : ScriptableObject
         parent = Parent;
     }
 
-   
+
 
     public void Despawn()
     {

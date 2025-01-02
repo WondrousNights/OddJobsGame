@@ -21,16 +21,9 @@ public partial class AmIRagdollAction : Action
     protected override Status OnUpdate()
     {
 
-        Ragdoll.Value = enemyHealth.GetIsRagdoll();
-
-        if(Ragdoll.Value == true)
-        {
-            return Status.Success;
-        }
-        else
-        {
-            return Status.Failure;
-        }
+       
+        return Status.Failure;
+        
     }
 
     protected override void OnEnd()

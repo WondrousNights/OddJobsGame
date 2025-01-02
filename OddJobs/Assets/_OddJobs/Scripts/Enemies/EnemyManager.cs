@@ -23,8 +23,11 @@ public class EnemyManager : MonoBehaviour
 
 
     bool isDead = false;
+
+    /*
     void Start()
     {
+        
         enemyHealth = GetComponent<EnemyHealth>();
         enemyHealth.OnDeath += HandleDeath;
         enemyHealth.OnDamaged += OnDamaged;
@@ -44,6 +47,7 @@ public class EnemyManager : MonoBehaviour
         {
             gunGameobject.SetActive(false);
         }
+        
     }
 
     private void OnDamaged(object sender, EnemyHealth.OnDamagedEventArgs e)
@@ -112,5 +116,7 @@ public class EnemyManager : MonoBehaviour
            
         }
     }
+
+    */
 
 }
