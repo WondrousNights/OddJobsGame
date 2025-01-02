@@ -54,6 +54,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         //playerStats.OnPlayerRevive += HandlePlayerReviveEvent;
         //Actions subscriptions
 
+        
         onFoot.Jump.performed += ctx => HandleJump();
         onFoot.Shoot.performed += ctx => gunHandler.ShootCurrentGun();
         onFoot.Reload.performed += ctx => gunHandler.Reload();

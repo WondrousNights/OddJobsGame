@@ -35,7 +35,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     /// <summary>
     //GameObject ActiveGunGameObject;
     /// </summary>
-    private Network_GunEffects gunEffects;
+    private GunEffects gunEffects;
     private Network_PlayerInputController playerInputController;
     private PlayerAmmoHandler ammoHandler;
     private HeldItemInteraction heldItem;
@@ -44,6 +44,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     Quaternion targetRotation;
     public bool isReloading = false;
     public bool isEquipping = false; // not used
+
     public bool isHoldingObject = false;
 
 
@@ -77,9 +78,8 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }
         ActiveGun = Inventory[currentGunIndex];
         ActiveGun?.Spawn(weaponHolder, this);
-        gunEffects = weaponHolder.GetComponentInChildren<Network_GunEffects>();
-        // gunEffects.EquipEffect(); // should play automatically
-        // heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
+        //gunEffects = weaponHolder.GetComponentInChildren<GunEffects>();
+        //heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
         
         if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
             Reload();
@@ -89,6 +89,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
         //Spawn gameobject for everyone else
        SpawnVisualGunRpc(ActiveGun.Type);
+
+
+
     }
 
     [Rpc(SendTo.NotOwner)]
@@ -100,13 +103,14 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             if(network_GunScriptableObjectList.GunScriptableObjectList[i].Type == gunType)
             {
                 //Spawn shit here
-                GameObject Model = Instantiate(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerModelPrefab);
-                Model.transform.SetParent(gameObject.transform, false);
-                Model.transform.localPosition = network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunSpawnPos;
-                Model.transform.localRotation = Quaternion.Euler(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunRotation);
+
+                ActiveGun = network_GunScriptableObjectList.GunScriptableObjectList[i];
+                ActiveGun?.Spawn(gameObject.transform, this);
             }
         }
     }
+
+   
 
     public void DeEquipCurrentGun()
     {
@@ -192,6 +196,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         EquipGunFromInventory(gunIndex);
     }
 
+  
     public void ShootCurrentGun()
     {
         if(!IsOwner) return;
@@ -207,14 +212,8 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             if (!isReloading)
             {
                 // shoot the gun
-                ActiveGun.Shoot(
-                    playerInputController.mycam.transform, 
-                    weaponHolder.GetComponentInChildren<MuzzleFlash>(),
-                    ammoHandler,
-                    currentGunIndex
-                );
-                gunEffects.ShootEffect();
-
+                
+                ShootCurrentGunRpc();
                 // play shooting related effects
                 //gunEffects.KickbackAdjustment(0.1f);
                 UpdateAmmoText();
@@ -238,6 +237,16 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                 // FAIL, NEED AMMO!
             }
         }
+
+
+    }
+
+ 
+
+    [Rpc(SendTo.Everyone)]
+    void ShootCurrentGunRpc()
+    {
+        ActiveGun.Shoot(playerInputController.mycam.transform);
     }
 
     public void Reload()
@@ -250,7 +259,6 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.AmmoClipSize, ActiveGun.AmmoType, currentGunIndex);
             UpdateAmmoText();
-            gunEffects.ReloadEffect();
             StartCoroutine(ReloadWaitTimer(ActiveGun.ShootConfig.reloadTime));
             //gunEffects.ReloadRotation(this);
         }
@@ -314,4 +322,8 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         yield return new WaitForSeconds(duration);
         isReloading = false;
     }
+
+
+
+
 }
