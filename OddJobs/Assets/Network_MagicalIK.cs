@@ -11,6 +11,8 @@ public class Network_MagicalIK : MonoBehaviour
     public void DoMagicalIK(GameObject gun)
     {
         rightHandIk.data.target = gun.transform;
+
+        //Gun.getcomponent IK position, then set the target to that, will fix it super easy.
         rigBuilder.Build();
     }
 }

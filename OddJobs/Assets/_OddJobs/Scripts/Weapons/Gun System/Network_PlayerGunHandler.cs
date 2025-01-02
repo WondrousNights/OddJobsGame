@@ -101,6 +101,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     void SpawnVisualGunRpc(GunType gunType)
     {
         
+        if(visualGun != null) Destroy(visualGun);
         for(var i = 0; i < network_GunScriptableObjectList.GunScriptableObjectList.Count; i++)
         {
             if(network_GunScriptableObjectList.GunScriptableObjectList[i].Type == gunType)
