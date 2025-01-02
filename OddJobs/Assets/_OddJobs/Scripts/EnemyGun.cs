@@ -51,10 +51,7 @@ public class EnemyGun : EnemyWeapon
                         -ShootConfig.enemySpread.y,
                         ShootConfig.enemySpread.y
                     ),
-                    Random.Range(
-                        -ShootConfig.enemySpread.z,
-                        ShootConfig.enemySpread.z
-                    )
+                    0
                 );
             shootDirection.Normalize();
           

@@ -209,17 +209,13 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if(isHoldingObject) return;
         if(ActiveGun == null) return;
 
-        // if the gun has ammo in clip //I think this might be causing bugs?
+        // if the gun has ammo in clip
+        // I think this might be causing bugs?
         if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
         {
-            // and we're not reloading
             if (!isReloading)
             {
-                // shoot the gun
-                
                 ShootCurrentGunRpc();
-                // play shooting related effects
-                //gunEffects.KickbackAdjustment(0.1f);
                 UpdateAmmoText();
             }
         }
