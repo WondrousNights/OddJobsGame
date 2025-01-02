@@ -49,9 +49,12 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
 
     [SerializeField] Network_GunScriptableObjectList network_GunScriptableObjectList;
+    GameObject visualGun;
+    Network_MagicalIK magicalIK;
 
     private void Start()
     {
+        magicalIK = GetComponent<Network_MagicalIK>();
         playerInputController = GetComponent<Network_PlayerInputController>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
         ammoHandler = GetComponent<PlayerAmmoHandler>();
@@ -94,10 +97,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
     }
 
-    [Rpc(SendTo.NotOwner)]
+    [Rpc(SendTo.NotMe)]
     void SpawnVisualGunRpc(GunType gunType)
     {
         
+        if(visualGun != null) Destroy(visualGun);
         for(var i = 0; i < network_GunScriptableObjectList.GunScriptableObjectList.Count; i++)
         {
             if(network_GunScriptableObjectList.GunScriptableObjectList[i].Type == gunType)
@@ -105,7 +109,16 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                 //Spawn shit here
 
                 ActiveGun = network_GunScriptableObjectList.GunScriptableObjectList[i];
-                ActiveGun?.Spawn(gameObject.transform, this);
+
+                GameObject Model = Instantiate(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerModelPrefab);
+                Model.transform.SetParent(gameObject.transform, false);
+                Model.transform.localPosition = network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunSpawnPos;
+                Model.transform.localRotation = Quaternion.Euler(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunRotation);
+
+                visualGun = Model;
+
+                magicalIK.DoMagicalIK(visualGun);
+                
             }
         }
     }

@@ -3475,7 +3475,7 @@ MonoBehaviour:
   solverIterationCount: 6
   visualizeTargetPose: 1
   mappingWeight: 1
-  pinWeight: 1
+  pinWeight: 0.72
   muscleWeight: 1
   muscleSpring: 100
   muscleDamper: 0
@@ -4448,15 +4448,15 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.01
+  far clip plane: 2
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 81920
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6908,7 +6908,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.14
   far clip plane: 500
   field of view: 70
   orthographic: 0
@@ -6916,7 +6916,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8142079
+    m_Bits: 8142335
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8221,6 +8221,7 @@ GameObject:
   - component: {fileID: 1785905754379793663}
   - component: {fileID: 6696443871707122332}
   - component: {fileID: 683889417042771000}
+  - component: {fileID: 8239950682523481734}
   m_Layer: 3
   m_Name: Rio - Player
   m_TagString: Untagged
@@ -8411,9 +8412,9 @@ MonoBehaviour:
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -8522,6 +8523,21 @@ MonoBehaviour:
   mediumAmmo: 0
   heavyAmmo: 0
   currentClipAmmo: 00000000000000000000000000000000000000000000000000000000
+--- !u!114 &8239950682523481734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256823946060716169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc1b162764e71649a665daee6b48ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHandIk: {fileID: 8462252211166574900}
+  leftHandIk: {fileID: 859655221417827745}
+  rigBuilder: {fileID: 5041578014548170292}
 --- !u!1 &8355159307227396980
 GameObject:
   m_ObjectHideFlags: 0
