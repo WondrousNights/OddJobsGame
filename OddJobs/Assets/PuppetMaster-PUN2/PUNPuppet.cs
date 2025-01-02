@@ -50,6 +50,15 @@ public class PUNPuppet : NetworkBehaviour
                 puppet.onGetUpSupine.unityEvent.AddListener(OnGetUp);
                 name = "PUN Puppet " + "Mine";
 
+                //My bullets cant hit my body
+                
+                puppetMaster.gameObject.layer = 16;
+                Transform[] ragdollBits = puppetMaster.GetComponentsInChildren<Transform>();
+                foreach(Transform go in ragdollBits)
+                {
+                    go.gameObject.layer = 16;
+                }
+                
             }
             else
             {
@@ -57,6 +66,7 @@ public class PUNPuppet : NetworkBehaviour
                 puppet.knockOutDistance = Mathf.Infinity;
                 puppet.canGetUp = false;
                 puppet.canMoveTarget = false;
+                puppet.CanLoseBalance = false;
                 name = "PUN Puppet " + "Not Mine";
             }
 
@@ -117,11 +127,11 @@ public class PUNPuppet : NetworkBehaviour
         {
             if (IsOwner)
             {
-                //FixedUpdateLocal();
+                FixedUpdateLocal();
             }
             else
             {
-                //FixedUpdateRemote();
+                FixedUpdateRemote();
             }
         }
 
@@ -193,7 +203,7 @@ public class PUNPuppet : NetworkBehaviour
         }
 
         // Syncing the positions, rotations and velocities of the Rigidbodies from the owner to the clients.
-        [Rpc(SendTo.Everyone)]
+        [Rpc(SendTo.NotMe)]
         void SyncRigidbodiesServerRpc(Vector3[] positions, Vector3[] rotations, Vector3[] velocities, Vector3[] angularVelocities, float syncBlend)
         {
 
@@ -216,7 +226,7 @@ public class PUNPuppet : NetworkBehaviour
 
 
         // Syncing only the velocities and angularVelocities of the Rigidbodies from the owner to the clients.
-        [Rpc(SendTo.Everyone)]
+        [Rpc(SendTo.NotMe)]
         void SyncRigidbodyVelocitiesServerRpc(Vector3[] velocities, Vector3[] angularVelocities, float syncBlend)
         {
             if (this.positions.Length == 0) return; // Not initiated yet

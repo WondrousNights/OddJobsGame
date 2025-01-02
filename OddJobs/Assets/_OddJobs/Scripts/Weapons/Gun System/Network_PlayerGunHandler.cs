@@ -103,10 +103,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             if(network_GunScriptableObjectList.GunScriptableObjectList[i].Type == gunType)
             {
                 //Spawn shit here
-                GameObject Model = Instantiate(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerModelPrefab);
-                Model.transform.SetParent(gameObject.transform, false);
-                Model.transform.localPosition = network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunSpawnPos;
-                Model.transform.localRotation = Quaternion.Euler(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunRotation);
+
+                ActiveGun = network_GunScriptableObjectList.GunScriptableObjectList[i];
+                ActiveGun?.Spawn(gameObject.transform, this);
             }
         }
     }
@@ -197,6 +196,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         EquipGunFromInventory(gunIndex);
     }
 
+  
     public void ShootCurrentGun()
     {
         if(!IsOwner) return;
@@ -212,13 +212,8 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             if (!isReloading)
             {
                 // shoot the gun
-                ActiveGun.Shoot(
-                playerInputController.mycam.transform, 
-                weaponHolder.GetComponentInChildren<MuzzleFlash>(),
-                ammoHandler,
-                currentGunIndex
-                );
-
+                
+                ShootCurrentGunRpc();
                 // play shooting related effects
                 //gunEffects.KickbackAdjustment(0.1f);
                 UpdateAmmoText();
@@ -242,6 +237,16 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                 // FAIL, NEED AMMO!
             }
         }
+
+
+    }
+
+ 
+
+    [Rpc(SendTo.Everyone)]
+    void ShootCurrentGunRpc()
+    {
+        ActiveGun.Shoot(playerInputController.mycam.transform);
     }
 
     public void Reload()
