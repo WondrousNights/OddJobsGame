@@ -3439,7 +3439,7 @@ Transform:
   m_GameObject: {fileID: 3436429001241656173}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8042,7 +8042,7 @@ Transform:
   m_GameObject: {fileID: 8199753395359187141}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8105,7 +8105,7 @@ Transform:
   m_GameObject: {fileID: 8256823946060716169}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8374,6 +8374,9 @@ MonoBehaviour:
   isHoldingObject: 0
   network_GunScriptableObjectList: {fileID: 11400000, guid: 43ad6fb1de8b4c447bedf20facee66fa,
     type: 2}
+  BulletCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &683889417042771000
 MonoBehaviour:
   m_ObjectHideFlags: 0
