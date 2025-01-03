@@ -30,7 +30,8 @@ public class Network_PlayerInputController : NetworkBehaviour
     AudioListener myListener;
     public bool hasSpawned = false;
 
-    [SerializeField] BehaviourPuppet puppet;
+    [SerializeField] PuppetMaster puppetMaster;
+
 
     // float count = 0;
 
@@ -79,10 +80,19 @@ public class Network_PlayerInputController : NetworkBehaviour
                 mainCam.gameObject.SetActive(false);
             }
         }
+
+
+
         if (IsOwner)
         {
             mycam.gameObject.SetActive(true);
-            
+            gameObject.layer = 15;
+
+            foreach(GameObject go in bodyRenders)
+            {
+            go.layer = 15;
+            }
+
         }
         else
         {
@@ -92,42 +102,18 @@ public class Network_PlayerInputController : NetworkBehaviour
             myListener.enabled = false;
         }
 
-
-
-
-
     }
 
-    public override void OnNetworkSpawn()
-    {
-       if(IsOwner)
-       {
-        cinemachineCamera.Priority = 1;
-        
-        foreach(GameObject go in bodyRenders)
-        {
-            go.layer = 15;
-        }
-
-
-       }
-       else
-       {
-        cinemachineCamera.Priority = 0;
-        GetComponent<AudioListener>().enabled = false;
-       }
-
-
-    }
+    
     private void Update()
     {
-        if(!IsOwner || puppet.state == BehaviourPuppet.State.Unpinned) return;
+        if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
     private void FixedUpdate()
     {
-       if(!IsOwner || puppet.state == BehaviourPuppet.State.Unpinned) return;
+       if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
         playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
           
         networkAnimationController.ProcessVisualsRpc(onFoot.Move.ReadValue<Vector2>());
@@ -137,7 +123,7 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     void HandleJump()
     {
-        if(!IsOwner) return;
+        if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
         playerMovement.Jump();
         networkAnimationController.ProcessJump();
     }

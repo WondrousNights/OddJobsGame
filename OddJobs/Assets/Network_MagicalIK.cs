@@ -15,4 +15,12 @@ public class Network_MagicalIK : MonoBehaviour
         //Gun.getcomponent IK position, then set the target to that, will fix it super easy.
         rigBuilder.Build();
     }
+
+    public void UndoMagicalIk()
+    {
+        rightHandIk.data.target = null;
+        leftHandIk.data.target = null;
+
+        rigBuilder.Build();
+    }
 }

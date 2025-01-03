@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
+using Quaternion = UnityEngine.Quaternion; 
 
 [DisallowMultipleComponent]
 
@@ -52,6 +55,8 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     GameObject visualGun;
     Network_MagicalIK magicalIK;
 
+    [SerializeField] public LayerMask BulletCollisionMask;
+
     private void Start()
     {
         magicalIK = GetComponent<Network_MagicalIK>();
@@ -71,6 +76,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }
     }
 
+    /* Inventory Functionality */ 
     public void EquipGunFromInventory(int index = -1, Network_GunScriptableObject gun = null)
     {
         if(!IsOwner) return;
@@ -80,14 +86,14 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             currentGunIndex = index;
         }
         ActiveGun = Inventory[currentGunIndex];
-        ActiveGun?.Spawn(weaponHolder, this);
+        ActiveGun?.Spawn(weaponHolder);
         //gunEffects = weaponHolder.GetComponentInChildren<GunEffects>();
         //heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
         
         if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
             Reload();
 
-        UpdateAmmoText();
+        //UpdateAmmoText();
         inventoryUI.UpdateInventoryUI(Inventory);
 
         EquipGunVisualRpc(ActiveGun.Type);
@@ -119,12 +125,22 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }
     }
 
+
+    //Destroy gun for other players
+    [Rpc(SendTo.NotMe)]
+    void DeEquipVisualGunRpc()
+    {
+        magicalIK.UndoMagicalIk();
+        if(visualGun != null) Destroy(visualGun);
+    }
+
     public void DeEquipCurrentGun()
     {
         if(!IsOwner) return;
         if (ActiveGun) 
         {
             ActiveGun.Despawn();
+            DeEquipVisualGunRpc();
         }
         if (gunEffects)
         {
@@ -140,6 +156,8 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     {
         if(!IsOwner) return;
         if (ActiveGun) {
+
+            /* This needs to an rpc */
             // drop a pickup item for it
             GameObject droppedModel = Instantiate(ActiveGun.DroppedPrefab);
             droppedModel.transform.position = weaponHolder.position;
@@ -156,7 +174,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             ActiveGun = null;
             ammoHandler.currentClipAmmo[currentGunIndex] = 0;
 
-            UpdateAmmoText();
+            //UpdateAmmoText();
             inventoryUI.UpdateInventoryUI(Inventory);
         }    
     }
@@ -202,7 +220,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         EquipGunFromInventory(gunIndex);
     }
 
-  
+
+
+  /* Gun Functionality */ 
+
+
     public void ShootCurrentGun()
     {
         if(!IsOwner) return;
@@ -215,8 +237,28 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         {
             if (!isReloading)
             {
-                ShootCurrentGunRpc();
-                UpdateAmmoText();
+                for(int i = 0; i < ActiveGun.ShootConfig.bulletsPerShot; i++)
+                {
+                    Vector3 spread = new Vector3(
+                    Random.Range(
+                        -ActiveGun.ShootConfig.playerSpread.x,
+                        ActiveGun.ShootConfig.playerSpread.x
+                    ),
+                    Random.Range(
+                        -ActiveGun.ShootConfig.playerSpread.y,
+                        ActiveGun.ShootConfig.playerSpread.y
+                    ), 0
+                    );
+
+                    Ray ray = new Ray(playerInputController.mycam.transform.position, playerInputController.mycam.transform.forward);
+                    
+                    //We need to change bullet spread
+                    ray.origin += spread;
+
+                    ShootRpc(ray);
+                }
+
+                //UpdateAmmoText();
             }
         }
         else
@@ -239,11 +281,6 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }
     }
 
-    [Rpc(SendTo.Everyone)]
-    void ShootCurrentGunRpc()
-    {
-        ActiveGun.Shoot(playerInputController.mycam.transform);
-    }
 
     public void Reload()
     {
@@ -254,7 +291,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         {
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.ClipSize, ActiveGun.AmmoType, currentGunIndex);
-            UpdateAmmoText();
+            //UpdateAmmoText();
             StartCoroutine(ReloadWaitTimer(ActiveGun.ShootConfig.reloadTime));
             //gunEffects.ReloadRotation(this);
         }
@@ -265,57 +302,90 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         
     }
 
-    public void SwitchWeaponNext()
-    {
-        if(!IsOwner) return;
-        if (debug) Debug.Log("Switching to next weapon");
-
-        currentGunIndex++;
-        if (currentGunIndex >= Inventory.Length) currentGunIndex = 0;
-
-        // if the index has no gun in it, find the next gun in the inventory
-        if (Inventory[currentGunIndex] == null)
-        {
-            for (int i = 0; i < Inventory.Length; i++)
-            {
-                if (Inventory[i] != null) { currentGunIndex = i; break; }
-            }
-        }
-
-        EquipGunFromInventory(currentGunIndex);
-        inventoryUI.UpdateInventoryUI(Inventory);
-    }
-    public void SwitchWeaponPrevious()
-    {
-        if(!IsOwner) return;
-        if (debug) Debug.Log("Switching to previous weapon");
-        
-        currentGunIndex--;
-        if (currentGunIndex < 0) currentGunIndex = Inventory.Length - 1;
-
-        // if the index has no gun in it, find the previous gun in the inventory
-        if (Inventory[currentGunIndex] == null)
-        {
-            for (int i = Inventory.Length - 1; i >= 0; i--)
-            {
-                if (Inventory[i] != null) { currentGunIndex = i; break; }
-            }
-        }
-
-        EquipGunFromInventory(currentGunIndex);
-        inventoryUI.UpdateInventoryUI(Inventory);
-    }
-
-    // TODO: this should really be consolidated into a general UI update function
-    public void UpdateAmmoText()
-    {
-        if(!IsOwner) return;
-        playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
-    }
 
     IEnumerator ReloadWaitTimer(float duration)
     {
         yield return new WaitForSeconds(duration);
         isReloading = false;
     }
+
+
+    /* Shoot functionality */
+
+    [Rpc(SendTo.Everyone)]
+    public void ShootRpc(Ray ray)
+    {
+        
+        RaycastHit hit;
+
+        //Add Bullet Spread
+                
+                // bullet hit something!
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    // if the bullet hit something
+                    if (hit.transform)
+                    {
+                        
+                        GameObject impactParticle = Instantiate(ActiveGun.ShootConfig.impactParticle, hit.point, Quaternion.identity);
+                        impactParticle.transform.position = hit.point + (hit.normal * 0.01f);
+                        if (hit.normal != Vector3.zero) impactParticle.transform.rotation = Quaternion.LookRotation(-hit.normal);
+                        Destroy(impactParticle, 10f);
+
+                        // spawn bullet hole decal
+                        GameObject bulletHoleDecal = Instantiate(ActiveGun.ShootConfig.bulletHoleDecal, hit.point, Quaternion.identity);
+                        bulletHoleDecal.transform.position = hit.point + (hit.normal * 0.01f);
+                        bulletHoleDecal.transform.parent = hit.collider.transform; // make the bullethole decal move with the thing it hit
+                        Quaternion normalRotation = Quaternion.LookRotation(-hit.normal); // Create rotation that faces away from the surface
+                        bulletHoleDecal.transform.rotation = normalRotation * Quaternion.Euler(0, 0, Random.Range(0, 360)); // Add random rotation around that
+                        Destroy(bulletHoleDecal, 60f);
+        
+
+                        // elias: note to self, need to use hit.transform here instead of hit.collider because the collider is not always the parent of the object hit
+                        // If the object hit has a rigidbody, apply a force to it
+                        if (hit.transform.GetComponent<Rigidbody>())
+                        {
+                            hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * ActiveGun.ShootConfig.hitForce, hit.point, ForceMode.Impulse);
+                        }
+                        Debug.Log("A player just hit : " + hit.collider.gameObject.name);
+
+
+                        // We are going to switch to doing damage to rigidbodies
+
+                        /*
+                        // If the object hit has a damageable component, apply damage to it
+                        if(hit.transform.TryGetComponent(out IDamageable damageable))
+                        {
+                            //damageable.TakeDamageFromGun(ray, ActiveGun.ShootConfig.Damage, ActiveGun.ShootConfig.hitForce, hit.point, ActiveGun.parent.gameObject, ShootConfig.recoveryTime);
+                        }
+
+                        // If the object hit has a damageable component in its parent, apply damage to it
+                        if(hit.transform.GetComponentInParent<IDamageable>() != null)
+                        {
+                            //hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, ShootConfig.recoveryTime);
+                        }
+                        */
+                    }
+                }
+                // bullet did not hit something. 
+                else
+                {
+                    // ActiveMonoBehaviour.StartCoroutine(
+                    //     PlayTrail(
+                    //         ShootSystem.transform.position,
+                    //         shootPoint.transform.position + (shootPoint.transform.forward * TrailConfig.MissDistance),
+                    //         new RaycastHit(),
+                    //         ray
+                    //     )
+                    // );
+                }
+            
+
+    }
+
+ 
+
+
 }
+
+
