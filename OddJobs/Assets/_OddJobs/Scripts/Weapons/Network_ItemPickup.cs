@@ -29,7 +29,7 @@ public class Network_ItemPickup : Network_Interactable
 
     private void Start() {
         if (ammoInClip == -1) {
-            ammoInClip = gun.AmmoClipSize;
+            ammoInClip = gun.ClipSize;
         }
     }
 }
