@@ -254,13 +254,13 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                     //We need to change bullet spread
                     ray.origin += spread;
 
-                    ShootRpc(ray);
+                    Shoot(ray);
                 }
 
                 //UpdateAmmoText();
             }
 
-            
+
         if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
         {
             
@@ -316,10 +316,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
     /* Shoot functionality */
 
-    [Rpc(SendTo.Everyone)]
-    public void ShootRpc(Ray ray)
+    public void Shoot(Ray ray)
     {
-        
+        Debug.Log("I just shot my gun");
         RaycastHit hit;
 
         //Add Bullet Spread
@@ -331,6 +330,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                     if (hit.transform)
                     {
                         
+                        HitEffectRpc(hit.transform.name);
+
+                        /*
                         GameObject impactParticle = Instantiate(ActiveGun.ShootConfig.impactParticle, hit.point, Quaternion.identity);
                         impactParticle.transform.position = hit.point + (hit.normal * 0.01f);
                         if (hit.normal != Vector3.zero) impactParticle.transform.rotation = Quaternion.LookRotation(-hit.normal);
@@ -351,7 +353,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                         {
                             hit.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * ActiveGun.ShootConfig.hitForce, hit.point, ForceMode.Impulse);
                         }
-                        Debug.Log("A player just hit : " + hit.collider.gameObject.name);
+                        */
 
 
                         // We are going to switch to doing damage to rigidbodies
@@ -385,6 +387,12 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                 }
             
 
+    }
+
+    [Rpc(SendTo.Everyone)]
+    void HitEffectRpc(string name)
+    {
+        Debug.Log("A player just hit" + name);
     }
 
  
