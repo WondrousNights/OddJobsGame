@@ -14,30 +14,41 @@ public class Network_GunScriptableObject : ScriptableObject
     public GunType Type;
     public AmmoType AmmoType;
     public string Name;
+    public Vector3 playerSpread = new Vector3(0.01f, 0.01f);
+    public Vector3 enemySpread = new Vector3(0.09f, 0.09f);
+    public bool automaticFire = false;
+    public float fireRate = 0.25f;
+    public int bulletsPerShot = 1;
+    public float Damage;
+    public int ClipSize;
+    public float hitForce = 400;
     public GameObject ModelPrefab;
     public GameObject OtherPlayerModelPrefab;
     public Transform ShootPoint;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation = new Vector3(0, 90, 0);
-    
     public Vector3 OtherPlayerGunSpawnPos;
     public Vector3 OtherPlayerGunRotation;
     public GameObject DroppedPrefab;
-
     public ShootConfigScriptableObject ShootConfig;
-
-    public int ClipSize;
+    public LayerMask BulletCollisionMask;
+    public LayerMask hitMask;
+    public float range = Mathf.Infinity;
+    public AudioObject shootSfx;
+    public GameObject impactParticle;
+    public GameObject bulletHoleDecal;
+    public float maxRecoil;
+    public float maxKickback;
+    public float recoveryTime;
+    public float reloadTime;
 
     private GameObject Model;
     private float LastShootTime;
     private ParticleSystem ShootSystem;
     private ObjectPool<TrailRenderer> TrailPool;
-
     private Transform parent;
 
-    public LayerMask BulletCollisionMask;
-
-    public int AmmoClipSize;
+    
 
 
     public void Spawn(Transform Parent)
