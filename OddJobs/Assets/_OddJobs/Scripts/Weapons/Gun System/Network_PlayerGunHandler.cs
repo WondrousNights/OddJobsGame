@@ -405,6 +405,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         
         
         limb.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hitPoint, ForceMode.Impulse);
+        limb.DoDamage();
         
         
                
