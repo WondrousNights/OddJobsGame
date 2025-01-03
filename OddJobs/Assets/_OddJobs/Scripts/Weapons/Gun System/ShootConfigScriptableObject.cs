@@ -8,6 +8,7 @@ public class ShootConfigScriptableObject : ScriptableObject
     public LayerMask hitMask;
     public Vector2 playerSpread = new Vector3(0.01f, 0.01f);
     public Vector2 enemySpread = new Vector3(0.09f, 0.09f);
+    public bool automaticFire = false;
     public float fireRate = 0.25f;
     public int bulletsPerShot = 1;
     public AudioObject shootSfx;

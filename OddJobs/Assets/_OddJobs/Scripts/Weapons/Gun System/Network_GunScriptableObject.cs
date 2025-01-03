@@ -14,12 +14,6 @@ public class Network_GunScriptableObject : ScriptableObject
     public GunType Type;
     public AmmoType AmmoType;
     public string Name;
-    public Vector3 playerSpread = new Vector3(0.01f, 0.01f);
-    public Vector3 enemySpread = new Vector3(0.09f, 0.09f);
-    public bool automaticFire = false;
-    public float fireRate = 0.25f;
-    public int bulletsPerShot = 1;
-    public float Damage;
     public int ClipSize;
     public float hitForce = 400;
     public GameObject ModelPrefab;
@@ -32,15 +26,6 @@ public class Network_GunScriptableObject : ScriptableObject
     public GameObject DroppedPrefab;
     public ShootConfigScriptableObject ShootConfig;
     public LayerMask BulletCollisionMask;
-    public LayerMask hitMask;
-    public float range = Mathf.Infinity;
-    public AudioObject shootSfx;
-    public GameObject impactParticle;
-    public GameObject bulletHoleDecal;
-    public float maxRecoil;
-    public float maxKickback;
-    public float recoveryTime;
-    public float reloadTime;
 
     private GameObject Model;
     private float LastShootTime;
