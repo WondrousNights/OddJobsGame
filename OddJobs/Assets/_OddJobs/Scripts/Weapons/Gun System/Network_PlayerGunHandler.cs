@@ -230,12 +230,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if(!IsOwner) return;
         if(isHoldingObject) return;
         if(ActiveGun == null) return;
-
+        Debug.Log("I just shot my gun");
         // if the gun has ammo in clip
         // I think this might be causing bugs?
-        if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
-        {
-            if (!isReloading)
+
+        if (!isReloading)
             {
                 for(int i = 0; i < ActiveGun.ShootConfig.bulletsPerShot; i++)
                 {
@@ -260,6 +259,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
                 //UpdateAmmoText();
             }
+
+            
+        if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
+        {
+            
         }
         else
         {
