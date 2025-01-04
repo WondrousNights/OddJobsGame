@@ -223,6 +223,47 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         EquipGunFromInventory(gunIndex);
     }
 
+    public void SwitchWeaponNext()
+    {
+        if (debug) Debug.Log("Switching to next weapon");
+
+        currentGunIndex++;
+        if (currentGunIndex >= Inventory.Length) currentGunIndex = 0;
+
+        // if the index has no gun in it, find the next gun in the inventory
+        if (Inventory[currentGunIndex] == null)
+        {
+            for (int i = 0; i < Inventory.Length; i++)
+            {
+                if (Inventory[i] != null) { currentGunIndex = i; break; }
+            }
+        }
+
+        EquipGunFromInventory(currentGunIndex);
+        inventoryUI.UpdateInventoryUI(Inventory);
+    }
+    public void SwitchWeaponPrevious()
+    {
+        if (debug) Debug.Log("Switching to previous weapon");
+        
+        currentGunIndex--;
+        if (currentGunIndex < 0) currentGunIndex = Inventory.Length - 1;
+
+        // if the index has no gun in it, find the previous gun in the inventory
+        if (Inventory[currentGunIndex] == null)
+        {
+            for (int i = Inventory.Length - 1; i >= 0; i--)
+            {
+                if (Inventory[i] != null) { currentGunIndex = i; break; }
+            }
+        }
+
+        EquipGunFromInventory(currentGunIndex);
+        inventoryUI.UpdateInventoryUI(Inventory);
+    }
+
+
+
 
 
   /* Gun Functionality */ 

@@ -52,14 +52,15 @@ public class Network_GunScriptableObject : ScriptableObject
     }
 
    
-
+    
     public void Despawn()
     {
         // We do a bunch of other stuff on the same frame, so we really want it to be immediately destroyed, not at Unity's convenience.
 
-        TrailPool.Clear();
+        
         ShootSystem = null;
+        Destroy(Model);
     }
-
+    
     
 }

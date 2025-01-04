@@ -62,6 +62,8 @@ public class Network_PlayerInputController : NetworkBehaviour
         onFoot.Shoot.performed += ctx => gunHandler.ShootCurrentGun();
         onFoot.Reload.performed += ctx => gunHandler.Reload();
         onFoot.Interact.performed += ctx => interactionManager.ProcessInteract();
+        onFoot.SwitchItemNext.performed += ctx => gunHandler.SwitchWeaponNext();
+        onFoot.SwitchItemPrevious.performed += ctx => gunHandler.SwitchWeaponPrevious();
     }
 
 
