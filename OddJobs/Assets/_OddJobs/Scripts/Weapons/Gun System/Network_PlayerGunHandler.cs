@@ -134,7 +134,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     void DeEquipVisualGunRpc()
     {
         magicalIK.UndoMagicalIk();
-        if(visualGun != null) Destroy(visualGun);
+        if(visualGun != null)
+        {
+            Destroy(visualGun);
+            visualGun = null;
+        } 
     }
 
     public void DeEquipCurrentGun()
@@ -155,22 +159,14 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     }
 
 
-    public void DropCurrentGunRpc()
+    public void DropCurrentGun()
     {
         if(!IsOwner) return;
         if (ActiveGun) {
 
             /* This needs to an rpc */
             // drop a pickup item for it
-            GameObject droppedModel = Instantiate(ActiveGun.DroppedPrefab);
-            droppedModel.transform.position = weaponHolder.position;
-            droppedModel.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), 0);
-            droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoHandler.currentClipAmmo[currentGunIndex];
-
-            // add throwing force to the weapon
-            Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
-            rb.AddForce(weaponHolder.forward * itemDropForce, ForceMode.VelocityChange);
-            
+            DropGunRpc();
             // remove the gun from the inventory
             DeEquipCurrentGun();
             Inventory[currentGunIndex] = null;
@@ -180,6 +176,24 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             UpdateAmmoText();
             inventoryUI.UpdateInventoryUI(Inventory);
         }    
+    }
+
+    [Rpc(SendTo.Server)]
+    public void DropGunRpc()
+    {
+        var droppedModel = Instantiate(ActiveGun.DroppedPrefab);
+        var instanceNetworkObject = droppedModel.GetComponent<NetworkObject>();
+        instanceNetworkObject.Spawn();
+
+        
+        droppedModel.transform.position = weaponHolder.position;
+        droppedModel.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), 0);
+        droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoHandler.currentClipAmmo[currentGunIndex];
+
+        // add throwing force to the weapon
+        Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
+        rb.AddForce(weaponHolder.forward * itemDropForce, ForceMode.VelocityChange);
+            
     }
 
     public void PickupGun(Network_GunScriptableObject gun, GameObject pickupObject)
@@ -204,7 +218,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         } 
         else
         {
-            DropCurrentGunRpc(); // throw current weapon
+            DropCurrentGun(); // throw current weapon
             AddGunToInventory(gun, currentGunIndex, true, pickupObject); // add the gun to the inventory
         }
 
