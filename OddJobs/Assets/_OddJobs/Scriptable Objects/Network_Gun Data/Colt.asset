@@ -15,19 +15,20 @@ MonoBehaviour:
   Type: 0
   AmmoType: 0
   Name: 'Colt '
+  ClipSize: 6
+  hitForce: 400
   ModelPrefab: {fileID: 8052361516213400974, guid: 73825cc6853e1cd488595bec0d7116e4,
     type: 3}
   OtherPlayerModelPrefab: {fileID: 4493838317462728473, guid: d746c3600a1b45446a8b2851c128e3ce,
     type: 3}
+  ShootPoint: {fileID: 0}
   SpawnPoint: {x: 0.136, y: -0.5, z: 1}
   SpawnRotation: {x: 0, y: 90, z: 0}
   OtherPlayerGunSpawnPos: {x: 0, y: 1.4, z: 0.5}
   OtherPlayerGunRotation: {x: 0, y: 90, z: 0}
-  droppedModelPrefab: {fileID: 4452104846799766470, guid: 214ed46581792cf46bd6a7c4320b1a52,
+  DroppedPrefab: {fileID: 4452104846799766470, guid: 214ed46581792cf46bd6a7c4320b1a52,
     type: 3}
   ShootConfig: {fileID: 11400000, guid: 779bef79cd3d2314b81b601fc08446c2, type: 2}
-  TrailConfig: {fileID: 11400000, guid: fe86c54f2f2f9344e9e4fa2f79bda734, type: 2}
-  AmmoClipSize: 6
   BulletCollisionMask:
     serializedVersion: 2
     m_Bits: 8142335

@@ -95,7 +95,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
             Reload();
 
-        //UpdateAmmoText();
+        UpdateAmmoText();
         inventoryUI.UpdateInventoryUI(Inventory);
 
         EquipGunVisualRpc(ActiveGun.Type);
@@ -176,7 +176,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             ActiveGun = null;
             ammoHandler.currentClipAmmo[currentGunIndex] = 0;
 
-            //UpdateAmmoText();
+            UpdateAmmoText();
             inventoryUI.UpdateInventoryUI(Inventory);
         }    
     }
@@ -237,54 +237,64 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
         if (!isReloading)
             {
-                for(int i = 0; i < ActiveGun.ShootConfig.bulletsPerShot; i++)
+
+                if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
                 {
-                    Vector3 spread = new Vector3(
-                    Random.Range(
-                        -ActiveGun.ShootConfig.playerSpread.x,
-                        ActiveGun.ShootConfig.playerSpread.x
-                    ),
-                    Random.Range(
-                        -ActiveGun.ShootConfig.playerSpread.y,
-                        ActiveGun.ShootConfig.playerSpread.y
-                    ), 0
-                    );
-
-                    Ray ray = new Ray(playerInputController.mycam.transform.position, playerInputController.mycam.transform.forward);
                     
-                    //We need to change bullet spread
-                    ray.origin += spread;
+                    for(int i = 0; i < ActiveGun.ShootConfig.bulletsPerShot; i++)
+                    {
+                        Vector3 spread = new Vector3(
+                        Random.Range(
+                            -ActiveGun.ShootConfig.playerSpread.x,
+                            ActiveGun.ShootConfig.playerSpread.x
+                        ),
+                        Random.Range(
+                            -ActiveGun.ShootConfig.playerSpread.y,
+                            ActiveGun.ShootConfig.playerSpread.y
+                        ), 0
+                        );
 
-                    Shoot(ray);
-                }
-                gunEffects.ShootEffect();
+                        Ray ray = new Ray(playerInputController.mycam.transform.position, playerInputController.mycam.transform.forward);
+                        
+                        //We need to change bullet spread
+                        ray.origin += spread;
 
-                //UpdateAmmoText();
-            }
+                        Shoot(ray);
 
-
-        if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
-        {
-            
-        }
-        else
-        {
-            // if we have ammo to reload and auto reload is enabled, reload the gun
-            if (ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
-            {
-                if (autoReload && !isReloading) {
-                    Reload();
+                    }
+                    ammoHandler.currentClipAmmo[currentGunIndex] -= 1;
+                    gunEffects.ShootEffect();
+                    UpdateAmmoText();
                 }
                 else
                 {
-                    // FAIL, NEED TO RELOAD!
-                }
-            }
-            else
-            {
+            // if we have ammo to reload and auto reload is enabled, reload the gun
+                    if (ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
+                    {
+                        if (autoReload && !isReloading) {
+                        Reload();
+                        }
+                        else
+                        {
+                        // FAIL, NEED TO RELOAD!
+                        }
+                    }
+                    else
+                    {
                 // FAIL, NEED AMMO!
+                    }
             }
-        }
+            }
+
+
+        
+    }
+
+    [Rpc(SendTo.NotMe)]
+    void GunEffectsRpc()
+    {
+        visualGun.GetComponent<Network_GunEffects>();
+        //playsfx;
     }
 
 
@@ -297,9 +307,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         {
             isReloading = true;
             ammoHandler.ReloadAmmo(ActiveGun.ClipSize, ActiveGun.AmmoType, currentGunIndex);
-            //UpdateAmmoText();
+            UpdateAmmoText();
             StartCoroutine(ReloadWaitTimer(ActiveGun.ShootConfig.reloadTime));
-            //gunEffects.ReloadRotation(this);
+            gunEffects.ReloadEffect();
         }
         else
         {
@@ -412,8 +422,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }                      
     }
 
- 
-
+  // TODO: this should really be consolidated into a general UI update function
+    public void UpdateAmmoText()
+    {
+        playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
+    }
 
 }
 

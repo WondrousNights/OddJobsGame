@@ -10,10 +10,14 @@ public class Network_ItemPickup : Network_Interactable
     // [SerializeField] private int timeToRespawn = -1;
     // [Tooltip("Set to -1 to never respawn")]
 
-    
+    bool isPickedUp = false;
+
+
     protected override void Interact(Network_PlayerInteractionManager playerInteracting)
     {
+        if(isPickedUp) return;
         playerInteracting.GetComponent<Network_PlayerGunHandler>().PickupGun(gun, gameObject);
+        isPickedUp = true;
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
