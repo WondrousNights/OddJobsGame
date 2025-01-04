@@ -10,9 +10,29 @@ public class Network_MagicalIK : MonoBehaviour
 
     public void DoMagicalIK(GameObject gun)
     {
-        rightHandIk.data.target = gun.transform;
+        Network_GunIkHandler ikHandler = gun.GetComponent<Network_GunIkHandler>();
+
+        if(ikHandler.oneHanded)
+        {
+            rightHandIk.data.target = ikHandler.rightHandIKTarget;
+        }
+        else
+        {
+            leftHandIk.data.target = ikHandler.leftHandIKTarget;
+            rightHandIk.data.target = ikHandler.rightHandIKTarget;
+        }
+
+        
 
         //Gun.getcomponent IK position, then set the target to that, will fix it super easy.
+        rigBuilder.Build();
+    }
+
+    public void UndoMagicalIk()
+    {
+        rightHandIk.data.target = null;
+        leftHandIk.data.target = null;
+
         rigBuilder.Build();
     }
 }

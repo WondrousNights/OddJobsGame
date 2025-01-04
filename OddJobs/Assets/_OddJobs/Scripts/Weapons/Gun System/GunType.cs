@@ -4,5 +4,6 @@ public enum GunType
     Shotgun,
     AK74,
     Uzi,
+    VPO
 
 }

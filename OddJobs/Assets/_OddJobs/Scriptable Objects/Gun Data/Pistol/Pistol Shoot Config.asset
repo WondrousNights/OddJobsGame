@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec70632dd0990a34c8e0b78d8b1c3560, type: 3}
   m_Name: Pistol Shoot Config
   m_EditorClassIdentifier: 
+  Damage: 3
   hitMask:
     serializedVersion: 2
     m_Bits: 0
-  playerSpread: {x: 0.01, y: 0.01, z: 0.01}
-  enemySpread: {x: 0.1, y: 0.1, z: 0.1}
-  fireRate: 0.25
+  playerSpread: {x: 0.01, y: 0.01}
+  enemySpread: {x: 0.1, y: 0.1}
+  automaticFire: 0
+  fireRate: 0.5
   bulletsPerShot: 1
   shootSfx: {fileID: 11400000, guid: 85f9c1ddc4d61c34faed3bd6c68b3fdb, type: 2}
   impactParticle: {fileID: 8882886379892811467, guid: 11be7a7ec34aee24da74bc872f633f7c,
@@ -26,7 +28,7 @@ MonoBehaviour:
     type: 3}
   maxRecoil: -0.31
   maxKickback: -0.005
-  hitForce: 40
+  hitForce: 450.1
   recoveryTime: 1
   reloadTime: 1
-  Damage: 3
+  range: 0
