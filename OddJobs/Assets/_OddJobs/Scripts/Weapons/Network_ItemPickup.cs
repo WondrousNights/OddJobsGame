@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class Network_ItemPickup : Network_Interactable
 {
+
+    [SerializeField] bool isWeapon;
+    [SerializeField] bool isAmmo;
+
     [SerializeField] Network_GunScriptableObject gun;
+    [SerializeField] AmmoType ammoType;
+    [SerializeField] int amountOfAmmo;
     [SerializeField] private bool autoPickup = false;
     public int ammoInClip = -1;
     [Tooltip("Set to -1 to use the gun's default ammo clip size")]
@@ -13,11 +19,22 @@ public class Network_ItemPickup : Network_Interactable
     bool isPickedUp = false;
 
 
+
+
     protected override void Interact(Network_PlayerInteractionManager playerInteracting)
     {
-        if(isPickedUp) return;
-        playerInteracting.GetComponent<Network_PlayerGunHandler>().PickupGun(gun, gameObject);
-        isPickedUp = true;
+        if(isWeapon)
+        {
+            if(isPickedUp) return;
+            playerInteracting.GetComponent<Network_PlayerGunHandler>().PickupGun(gun, gameObject);
+            isPickedUp = true;
+        }
+        if(isAmmo)
+        {
+            playerInteracting.ammoHandler.AddAmmo(ammoType, amountOfAmmo);
+            DestoryItemRpc();
+        }
+        
     }
 
     [Rpc(SendTo.Everyone, RequireOwnership = false)]
@@ -32,8 +49,15 @@ public class Network_ItemPickup : Network_Interactable
     }
 
     private void Start() {
-        if (ammoInClip == -1) {
+
+        if(isWeapon)
+        {
+            if (ammoInClip == -1) {
             ammoInClip = gun.ClipSize;
+            }
         }
+     
     }
+
+   
 }

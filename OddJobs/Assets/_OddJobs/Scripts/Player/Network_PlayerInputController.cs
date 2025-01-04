@@ -105,6 +105,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         }
 
     }
+    
 
     
     private void Update()
