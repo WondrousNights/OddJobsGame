@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06fcebcf82009747a27e57031fdba5b, type: 3}
+  m_Name: VPO
+  m_EditorClassIdentifier: 
+  Type: 4
+  AmmoType: 0
+  Name: VPO
+  ClipSize: 12
+  hitForce: 400
+  ModelPrefab: {fileID: 8052361516213400974, guid: 79ae0df5e3a05144290a731eebb6674f,
+    type: 3}
+  OtherPlayerModelPrefab: {fileID: 4493838317462728473, guid: 6152817af721ff14d8c400fbc3048b58,
+    type: 3}
+  ShootPoint: {fileID: 0}
+  SpawnPoint: {x: 0.248, y: -0.222, z: 0.458}
+  SpawnRotation: {x: 0, y: 90, z: 0}
+  OtherPlayerGunSpawnPos: {x: 0.136, y: 1.32, z: 0.768}
+  OtherPlayerGunRotation: {x: 0, y: 90, z: 0}
+  DroppedPrefab: {fileID: 1560585282704323227, guid: 5255d168a6c78054abb7172b134e77ca,
+    type: 3}
+  ShootConfig: {fileID: 11400000, guid: b1258facc04f96649a514a249a36fb73, type: 2}
+  BulletCollisionMask:
+    serializedVersion: 2
+    m_Bits: 8142335
