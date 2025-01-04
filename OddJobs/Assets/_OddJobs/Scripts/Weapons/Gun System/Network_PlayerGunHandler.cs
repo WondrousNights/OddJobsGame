@@ -65,6 +65,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         playerInputController = GetComponent<Network_PlayerInputController>();
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
         ammoHandler = GetComponent<PlayerAmmoHandler>();
+        inventoryUI = GetComponentInChildren<Network_InventoryUI>();
 
         Network_GunScriptableObject gun = Inventory[0];
 
