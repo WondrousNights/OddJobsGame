@@ -9,6 +9,7 @@ public class Network_PuppetController : NetworkBehaviour
 
     [SerializeField] int playerPuppetLayer;
 
+    [SerializeField] bool isPlayerPuppet;
 
     void Awake()
     {
@@ -18,18 +19,26 @@ public class Network_PuppetController : NetworkBehaviour
 
     void Start()
     {
-        if(IsOwner)
+        if(isPlayerPuppet)
         {
+            if(IsOwner)
+             {
             for (int i = 0; i < puppetColliders.Length; i++)
             {
                 puppetColliders[i].gameObject.layer = playerPuppetLayer;
             }
 
             puppetMaster.name = "My Puppet";
+            }
+            else
+            {
+            puppetMaster.name = "Other Puppet";
+            }
         }
         else
         {
-            puppetMaster.name = "Other Player Puppet";
+            puppetMaster.name = "Enemy Puppet";
         }
+        
     }
 }

@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &603801610394127823
 GameObject:
@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 0.5
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &1200171863935867847
 GameObject:
@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 0.5
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &1210996041810668995
 GameObject:
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &1286575354683109975
 GameObject:
@@ -2207,7 +2207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &1847053718418465204
 GameObject:
@@ -2472,7 +2472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &1989492169764089528
 GameObject:
@@ -2727,7 +2727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &2089219983076294013
 GameObject:
@@ -3172,7 +3172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 0.5
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &2884608265240222529
 GameObject:
@@ -4337,7 +4337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 0.5
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &3926189428311066842
 GameObject:
@@ -5092,7 +5092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &4978623505969390720
 GameObject:
@@ -6267,6 +6267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPuppetLayer: 16
+  isPlayerPuppet: 1
 --- !u!1 &6072802168447037876
 GameObject:
   m_ObjectHideFlags: 0
@@ -6596,7 +6597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 10
+  damageMultiplier: 2
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &6213177167293907232
 GameObject:
@@ -7253,7 +7254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &6911229471390018654
 GameObject:
@@ -7877,7 +7878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &8102802409616175012
 GameObject:
@@ -8078,7 +8079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 20
+  damageMultiplier: 2
   healthManager: {fileID: 8175215838274446698}
 --- !u!1 &8127576118844270406
 GameObject:
@@ -8679,6 +8680,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puppetMaster: {fileID: 916229968975009829}
+  isPlayer: 1
+  playerUI: {fileID: 879674902338673614}
 --- !u!1 &8355159307227396980
 GameObject:
   m_ObjectHideFlags: 0

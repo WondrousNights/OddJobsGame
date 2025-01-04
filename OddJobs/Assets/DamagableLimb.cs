@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class DamagableLimb : NetworkBehaviour
 {
-    [SerializeField] int damageMultiplier;
+    [SerializeField] float damageMultiplier;
     [SerializeField] Network_HealthManager healthManager;
     
 
-    public void DoDamage()
+    public void DoDamage(float damage)
     {
-        healthManager.DoDamage(damageMultiplier);
+        float damageToDeal = damage * damageMultiplier;
+        healthManager.DoDamage(damageToDeal);
     }
 }

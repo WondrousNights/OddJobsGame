@@ -10,6 +10,7 @@ public partial class IsRagdollCondition : Condition
     [SerializeReference] public BlackboardVariable<bool> Ragdoll;
 
     EnemyHealth enemyHealth;
+    
     public override bool IsTrue()
     {
         return true;

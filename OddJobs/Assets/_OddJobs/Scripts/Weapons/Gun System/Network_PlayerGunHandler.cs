@@ -404,7 +404,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                         if(hit.transform.GetComponent<DamagableLimb>())
                         {
                             var limb = hit.transform.GetComponent<DamagableLimb>();
-                            HitLimbRpc(hit.transform.name, ray,ActiveGun.ShootConfig.hitForce, hit.point, hit.normal, limb);
+                            HitLimbRpc(hit.transform.name, ray,ActiveGun.ShootConfig.hitForce, hit.point, hit.normal, limb, ActiveGun.ShootConfig.Damage);
                         }
 
                     
@@ -444,7 +444,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
 
     [Rpc(SendTo.Everyone)]
-    void HitLimbRpc(string name, Ray ray, float hitForce, Vector3 hitPoint, Vector3 hitNormal, NetworkBehaviourReference damageableLimb)
+    void HitLimbRpc(string name, Ray ray, float hitForce, Vector3 hitPoint, Vector3 hitNormal, NetworkBehaviourReference damageableLimb, float damage)
     {
 
         if (damageableLimb.TryGet(out DamagableLimb limb))
@@ -473,7 +473,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         
         
         limb.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hitPoint, ForceMode.Impulse);
-        limb.DoDamage();
+        limb.DoDamage(damage);
         
         
                

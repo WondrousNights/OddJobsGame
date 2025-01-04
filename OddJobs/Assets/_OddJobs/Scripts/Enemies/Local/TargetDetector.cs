@@ -12,6 +12,11 @@ public class TargetDetector : MonoBehaviour {
 
     [SerializeField] float fieldOfView = 85;
 
+    public event EventHandler OnFoundTarget;
+
+    [SerializeField] Transform eyePos;
+    [SerializeField] LayerMask playerLayerMask;
+
     void Update()
     {
         if(!checkForTargets) return;
@@ -42,6 +47,7 @@ public class TargetDetector : MonoBehaviour {
             if (closesetCollider != null)
             {
                 currentTarget = closesetCollider.gameObject;
+                OnFoundTarget?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -73,17 +79,13 @@ public class TargetDetector : MonoBehaviour {
             float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
             if(angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
             {
-                Ray ray = new Ray(transform.position, targetDirection);
-                RaycastHit hitInfo = new RaycastHit();
-
-                if(Physics.Raycast(ray, out hitInfo))
+                Ray ray = new Ray(eyePos.position, targetDirection);
+                RaycastHit hitInfo;
+                if(Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerLayerMask))
                 {
-                    if(hitInfo.transform.gameObject == currentTarget)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-                Debug.DrawRay(ray.origin, ray.direction);
+                Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
             }
         }
         return false;

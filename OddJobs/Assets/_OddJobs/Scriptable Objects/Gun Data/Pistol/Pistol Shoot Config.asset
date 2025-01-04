@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec70632dd0990a34c8e0b78d8b1c3560, type: 3}
   m_Name: Pistol Shoot Config
   m_EditorClassIdentifier: 
-  Damage: 3
+  Damage: 5
   hitMask:
     serializedVersion: 2
     m_Bits: 0
   playerSpread: {x: 0.01, y: 0.01}
-  enemySpread: {x: 0.1, y: 0.1}
+  enemySpread: {x: 0.25, y: 0.25}
   automaticFire: 0
   fireRate: 0.5
   bulletsPerShot: 1
