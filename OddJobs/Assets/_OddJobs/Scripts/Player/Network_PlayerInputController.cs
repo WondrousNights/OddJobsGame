@@ -31,6 +31,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     public bool hasSpawned = false;
 
     [SerializeField] PuppetMaster puppetMaster;
+    [SerializeField] GameObject conversationManager;
 
 
     // float count = 0;
@@ -102,6 +103,7 @@ public class Network_PlayerInputController : NetworkBehaviour
             myCanvas.gameObject.SetActive(false);
             characterController.enabled = false;
             myListener.enabled = false;
+            Destroy(conversationManager);
         }
 
     }

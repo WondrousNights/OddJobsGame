@@ -32,8 +32,8 @@ public class NPC_Interactable : Interactable
         conversation = GetComponent<NPCConversation>();
         npcCollider = GetComponent<Collider>();
 
-        conversationManager.OnConversationStarted += ConversationStart;
-        conversationManager.OnConversationEnded += ConversationEnd;
+        //conversationManager.OnConversationStarted += ConversationStart;
+        //conversationManager.OnConversationEnded += ConversationEnd;
 
         if (uiBoxCollider) uiBoxCollider.enabled = false;
     }

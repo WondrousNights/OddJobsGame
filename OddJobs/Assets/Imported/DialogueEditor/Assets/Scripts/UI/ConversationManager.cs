@@ -21,12 +21,13 @@ namespace DialogueEditor
 
         private const float TRANSITION_TIME = 0.2f; // Transition time for fades
 
+        public static ConversationManager Instance { get; private set; }
 
         public delegate void ConversationStartEvent();
         public delegate void ConversationEndEvent();
 
-        public ConversationStartEvent OnConversationStarted;
-        public ConversationEndEvent OnConversationEnded;
+        public static ConversationStartEvent OnConversationStarted;
+        public static ConversationEndEvent OnConversationEnded;
 
         // User-Facing options
         // Drawn by custom inspector
@@ -87,7 +88,13 @@ namespace DialogueEditor
 
         private void Awake()
         {
-          
+            // Destroy myself if I am not the singleton
+            if (Instance != null && Instance != this)
+            {
+                GameObject.Destroy(this.gameObject);
+            }
+            Instance = this;
+
             m_uiOptions = new List<UIConversationButton>();
 
             NpcIcon.sprite = BlankSprite;
@@ -95,7 +102,10 @@ namespace DialogueEditor
             TurnOffUI();
         }
 
-      
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
 
         private void Update()
         {
@@ -142,6 +152,7 @@ namespace DialogueEditor
             TurnOnUI();
             m_currentSpeech = m_conversation.Root;
             SetState(eState.TransitioningDialogueBoxOn);
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void EndConversation()
@@ -150,6 +161,8 @@ namespace DialogueEditor
 
             if (OnConversationEnded != null)
                 OnConversationEnded.Invoke();
+            
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void SelectNextOption()
@@ -181,13 +194,6 @@ namespace DialogueEditor
 
             UIConversationButton button = m_uiOptions[m_currentSelectedIndex];
             button.OnButtonPressed();
-        }
-
-        // hotkey one of the options
-        public void PressOption(int index)
-        {
-            m_currentSelectedIndex = index;
-            PressSelectedOption();
         }
 
         public void AlertHover(UIConversationButton button)
@@ -750,7 +756,6 @@ namespace DialogueEditor
         private UIConversationButton CreateButton()
         {
             UIConversationButton button = GameObject.Instantiate(ButtonPrefab, OptionsPanel);
-            button.myConversationManager = this;
             m_uiOptions.Add(button);
             return button;
         }

@@ -20,10 +20,6 @@ namespace DialogueEditor
             End
         }
 
-
-        //Init
-        public ConversationManager myConversationManager;
-
         // Getters
         public eButtonType ButtonType { get { return m_buttonType; } }
 
@@ -93,24 +89,24 @@ namespace DialogueEditor
         //--------------------------------------
         // Input Events
         //--------------------------------------
-        
+
         public void OnHover(bool hovering)
         {
-            if (myConversationManager.AllowMouseInteraction) { return; }
+            if (!ConversationManager.Instance.AllowMouseInteraction) { return; }
 
             if (hovering)
             {
-                myConversationManager.AlertHover(this);
+                ConversationManager.Instance.AlertHover(this);
             }
             else
             {
-                myConversationManager.AlertHover(null);
+                ConversationManager.Instance.AlertHover(null);
             }
         }
 
         public void OnClick()
         {
-            if (myConversationManager.AllowMouseInteraction) { return; }
+            if (!ConversationManager.Instance.AllowMouseInteraction) { return; }
 
             DoClickBehaviour();
         }
@@ -217,15 +213,15 @@ namespace DialogueEditor
             switch (m_buttonType)
             {
                 case eButtonType.Speech:
-                    myConversationManager.SpeechSelected(m_node as SpeechNode);
+                    ConversationManager.Instance.SpeechSelected(m_node as SpeechNode);
                     break;
 
                 case eButtonType.Option:
-                    myConversationManager.OptionSelected(m_node as OptionNode);
+                    ConversationManager.Instance.OptionSelected(m_node as OptionNode);
                     break;
 
                 case eButtonType.End:
-                    myConversationManager.EndButtonSelected();
+                    ConversationManager.Instance.EndButtonSelected();
                     break;
             }
         }

@@ -23,6 +23,6 @@ public class NPCUI_Interactable : Interactable
     }
     public void PressOption(int index)
     {
-        conversationManager.PressOption(index);
+        //conversationManager.PressOption(index);
     }
 }
