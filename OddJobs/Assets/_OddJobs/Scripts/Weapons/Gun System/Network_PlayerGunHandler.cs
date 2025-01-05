@@ -294,58 +294,56 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         // I think this might be causing bugs?
 
         if (!isReloading)
+        {
+
+            if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
             {
-
-                if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
+                for(int i = 0; i < ActiveGun.ShootConfig.bulletsPerShot; i++)
                 {
+                    Vector3 spread = new Vector3(
+                    Random.Range(
+                        -ActiveGun.ShootConfig.playerSpread.x,
+                        ActiveGun.ShootConfig.playerSpread.x
+                    ),
+                    Random.Range(
+                        -ActiveGun.ShootConfig.playerSpread.y,
+                        ActiveGun.ShootConfig.playerSpread.y
+                    ), 0
+                    );
+
+                    Ray ray = new Ray(playerInputController.mycam.transform.position, playerInputController.mycam.transform.forward);
                     
-                    for(int i = 0; i < ActiveGun.ShootConfig.bulletsPerShot; i++)
-                    {
-                        Vector3 spread = new Vector3(
-                        Random.Range(
-                            -ActiveGun.ShootConfig.playerSpread.x,
-                            ActiveGun.ShootConfig.playerSpread.x
-                        ),
-                        Random.Range(
-                            -ActiveGun.ShootConfig.playerSpread.y,
-                            ActiveGun.ShootConfig.playerSpread.y
-                        ), 0
-                        );
+                    //We need to change bullet spread
+                    ray.origin += spread;
 
-                        Ray ray = new Ray(playerInputController.mycam.transform.position, playerInputController.mycam.transform.forward);
-                        
-                        //We need to change bullet spread
-                        ray.origin += spread;
+                    Shoot(ray);
 
-                        Shoot(ray);
-
-                    }
-                    ammoHandler.currentClipAmmo[currentGunIndex] -= 1;
-                    gunEffects.ShootEffect();
-                    UpdateAmmoText();
                 }
-                else
+                ammoHandler.currentClipAmmo[currentGunIndex] -= 1;
+                gunEffects.ShootEffect();
+                UpdateAmmoText();
+            }
+            else
+            {
+                // if we have ammo to reload and auto reload is enabled, reload the gun
+                if (ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
                 {
-            // if we have ammo to reload and auto reload is enabled, reload the gun
-                    if (ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
-                    {
-                        if (autoReload && !isReloading) {
+                    if (autoReload && !isReloading) {
                         Reload();
-                        }
-                        else
-                        {
-                        // FAIL, NEED TO RELOAD!
-                        }
                     }
                     else
                     {
-                // FAIL, NEED AMMO!
+                        // FAIL, NEED TO RELOAD!
+                        gunEffects.CantShootEffect();
                     }
+                }
+                else
+                {
+                    // FAIL, NO AMMO!
+                    gunEffects.CantShootEffect();
+                }
             }
-            }
-
-
-        
+        }
     }
 
     [Rpc(SendTo.NotMe)]
