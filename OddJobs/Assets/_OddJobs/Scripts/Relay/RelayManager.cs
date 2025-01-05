@@ -26,7 +26,7 @@ public static class RelayManager
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             NetworkManager.Singleton.StartHost();
 
-            Loader.LoadNetwork(Loader.Scene.Level_Shootin_Minigame);
+            Loader.LoadNetwork(Loader.Scene.Network_DesertLevel);
             return joinCode;
         }
         catch(RelayServiceException e) {

@@ -12,7 +12,8 @@ public static class Loader
         Lobby,
         Parkour,
         Zone,
-        Level_Shootin_Minigame
+        Level_Shootin_Minigame,
+        Network_DesertLevel
 
     
     }
