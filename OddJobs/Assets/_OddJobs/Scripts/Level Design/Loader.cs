@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public static class Loader 
 {
-
+    //Add new levels here
     public enum Scene
     { 
         Lobby,
@@ -14,8 +14,6 @@ public static class Loader
         Zone,
         Level_Shootin_Minigame,
         Network_DesertLevel
-
-    
     }
     public static void Load(Scene targetScene)
     {

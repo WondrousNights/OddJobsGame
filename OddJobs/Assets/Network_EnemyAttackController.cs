@@ -92,8 +92,6 @@ public class Network_EnemyAttackController : NetworkBehaviour
         
         limb.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hitPoint, ForceMode.Impulse);
         limb.DoDamage(damage);
-        
-        
                
         }                      
     }
