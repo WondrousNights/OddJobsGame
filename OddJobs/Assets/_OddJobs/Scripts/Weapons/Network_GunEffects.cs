@@ -40,10 +40,15 @@ public class Network_GunEffects : MonoBehaviour
         // elias: this is mad hacky but it works lol.
     }
 
+    private void Awake() {
+        
+        equipSound.Play();
+    }
+
+    //  not used, animator plays automatically
     public void EquipEffect()
     {
         animator.SetTrigger("Equip");
-        equipSound.Play();
     }
 
     public void ShootEffect()
