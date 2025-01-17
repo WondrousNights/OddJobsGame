@@ -8571,7 +8571,8 @@ MonoBehaviour:
   myCanvas: {fileID: 5166047660126150797}
   hasSpawned: 1
   puppetMaster: {fileID: 916229968975009829}
-  conversationManager: {fileID: 0}
+  conversationManagerGO: {fileID: 3151595500184989250}
+  inConversation: 0
 --- !u!114 &7981989253936816340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9174,6 +9175,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network_ConversationManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3900108755196472086, guid: 4fb590a69aa986c4c94f2821f15d16b2,
+        type: 3}
+      propertyPath: AllowMouseInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3900108755196472087, guid: 4fb590a69aa986c4c94f2821f15d16b2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -9282,6 +9288,12 @@ PrefabInstance:
 --- !u!224 &3151595500050226904 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3900108755196472087, guid: 4fb590a69aa986c4c94f2821f15d16b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2135637883834791375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3151595500184989250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3900108755062758285, guid: 4fb590a69aa986c4c94f2821f15d16b2,
     type: 3}
   m_PrefabInstance: {fileID: 2135637883834791375}
   m_PrefabAsset: {fileID: 0}

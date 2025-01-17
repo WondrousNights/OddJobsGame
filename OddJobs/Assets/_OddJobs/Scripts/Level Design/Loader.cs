@@ -12,8 +12,8 @@ public static class Loader
         Lobby,
         Parkour,
         Zone,
-        Level_Shootin_Minigame,
-        Network_DesertLevel
+        Network_DesertLevel,
+        Network_Valley
     }
     public static void Load(Scene targetScene)
     {

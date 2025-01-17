@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using RootMotion.Dynamics;
 using Unity.Cinemachine;
+using DialogueEditor;
 public class Network_PlayerInputController : NetworkBehaviour
 {
     private PlayerInputActions playerInput;
@@ -31,7 +32,11 @@ public class Network_PlayerInputController : NetworkBehaviour
     public bool hasSpawned = false;
 
     [SerializeField] PuppetMaster puppetMaster;
-    [SerializeField] GameObject conversationManager;
+    [SerializeField] GameObject conversationManagerGO;
+    ConversationManager conversationManager;
+
+
+    public bool inConversation;
 
 
     // float count = 0;
@@ -49,6 +54,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         playerUI = GetComponent<Network_PlayerUI>();
         networkAnimationController = GetComponent<NetworkAnimationController>();
         interactionManager = GetComponent<Network_PlayerInteractionManager>();
+        conversationManager = conversationManagerGO.GetComponent<ConversationManager>();
 
 
         myListener = GetComponent<AudioListener>();
@@ -103,7 +109,7 @@ public class Network_PlayerInputController : NetworkBehaviour
             myCanvas.gameObject.SetActive(false);
             characterController.enabled = false;
             myListener.enabled = false;
-            Destroy(conversationManager);
+            Destroy(conversationManagerGO);
         }
 
     }
@@ -112,13 +118,19 @@ public class Network_PlayerInputController : NetworkBehaviour
     
     private void Update()
     {
+       
         if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
+        if(conversationManager.IsConversationActive) return;
+        else { Cursor.lockState = CursorLockMode.Locked;}
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
     private void FixedUpdate()
     {
+        
        if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
+        if(conversationManager.IsConversationActive) return;
+
         playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
           
         networkAnimationController.ProcessVisualsRpc(onFoot.Move.ReadValue<Vector2>());

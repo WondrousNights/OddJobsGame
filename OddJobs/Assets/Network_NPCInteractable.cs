@@ -14,6 +14,7 @@ public class Network_NPCInteractable : Network_Interactable
     protected override void Interact(Network_PlayerInteractionManager playerInteracting)
     {
        ConversationManager.Instance.StartConversation(myConversation);
+       
 
     }
 
