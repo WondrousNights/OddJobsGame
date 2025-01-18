@@ -75,6 +75,13 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     private void Start()
     {
+
+        if(!IsOwner)
+        {
+            puppetMaster.mode = PuppetMaster.Mode.Disabled;
+            Invoke("SetPuppetActive", 3f);
+        }
+
         NetworkManager.Singleton.SceneManager.OnSceneEvent += SetSpawn;
         Cursor.lockState = CursorLockMode.Locked;
         //Application.targetFrameRate = 60;
@@ -211,6 +218,17 @@ public class Network_PlayerInputController : NetworkBehaviour
         hasSpawned = true;
         puppetMaster.mode = PuppetMaster.Mode.Active;
         healthManager.Respawn();
+
+        if(!IsOwner)
+        {
+            puppetMaster.mode = PuppetMaster.Mode.Disabled;
+            Invoke("SetPuppetActive", 3f);
+        }
+    }
+
+    void SetPuppetActive()
+    {
+        puppetMaster.mode = PuppetMaster.Mode.Active;
     }
 
   
