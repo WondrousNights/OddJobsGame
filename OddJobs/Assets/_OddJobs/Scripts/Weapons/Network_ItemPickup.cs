@@ -6,6 +6,7 @@ public class Network_ItemPickup : Network_Interactable
 
     [SerializeField] bool isWeapon;
     [SerializeField] bool isAmmo;
+    [SerializeField] bool isObjective;
 
     [SerializeField] Network_GunScriptableObject gun;
     [SerializeField] AmmoType ammoType;
@@ -17,6 +18,7 @@ public class Network_ItemPickup : Network_Interactable
     // [Tooltip("Set to -1 to never respawn")]
 
     bool isPickedUp = false;
+    [SerializeField] Network_LevelManager levelManager;
 
 
 
@@ -32,6 +34,11 @@ public class Network_ItemPickup : Network_Interactable
         if(isAmmo)
         {
             playerInteracting.ammoHandler.AddAmmo(ammoType, amountOfAmmo);
+            DestoryItemRpc();
+        }
+        if(isObjective)
+        {
+            levelManager.AddWaterRpc();
             DestoryItemRpc();
         }
         

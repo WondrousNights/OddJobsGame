@@ -18,6 +18,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     private Network_PlayerGunHandler gunHandler;
     public Network_PlayerUI playerUI;
     private Network_PlayerInteractionManager interactionManager;
+    private Network_HealthManager healthManager;
 
     NetworkAnimationController networkAnimationController;
 
@@ -36,9 +37,6 @@ public class Network_PlayerInputController : NetworkBehaviour
     ConversationManager conversationManager;
 
 
-    public bool inConversation;
-
-
     // float count = 0;
 
     private void Awake()
@@ -55,6 +53,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         networkAnimationController = GetComponent<NetworkAnimationController>();
         interactionManager = GetComponent<Network_PlayerInteractionManager>();
         conversationManager = conversationManagerGO.GetComponent<ConversationManager>();
+        healthManager = GetComponent<Network_HealthManager>();
 
 
         myListener = GetComponent<AudioListener>();
@@ -74,10 +73,9 @@ public class Network_PlayerInputController : NetworkBehaviour
     }
 
 
-
     private void Start()
     {
-        //NetworkManager.Singleton.SceneManager.OnSceneEvent += SetSpawn;
+        NetworkManager.Singleton.SceneManager.OnSceneEvent += SetSpawn;
         Cursor.lockState = CursorLockMode.Locked;
         //Application.targetFrameRate = 60;
         //Camera Controls
@@ -119,7 +117,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     {
        
         if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
-        if(conversationManager.IsConversationActive) return;
+        if(conversationManager.IsConversationActive || !hasSpawned) return;
         else { Cursor.lockState = CursorLockMode.Locked;}
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
@@ -128,7 +126,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     {
         
        if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
-        if(conversationManager.IsConversationActive) return;
+        if(conversationManager.IsConversationActive || !hasSpawned) return;
 
         playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
           
@@ -139,7 +137,7 @@ public class Network_PlayerInputController : NetworkBehaviour
 
     void HandleJump()
     {
-        if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
+        if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead || !hasSpawned) return;
         playerMovement.Jump();
         networkAnimationController.ProcessJump();
     }
@@ -173,7 +171,7 @@ public class Network_PlayerInputController : NetworkBehaviour
   
 
 
-    /*
+    
     void SetSpawn(SceneEvent sceneEvent)
     {
 
@@ -181,40 +179,29 @@ public class Network_PlayerInputController : NetworkBehaviour
         {
             Debug.Log("Spawn at pos");
 
-            SetSpawnServerRpc();
+            SetSpawnRpc();
 
         }
 
         if (sceneEvent.SceneEventType == SceneEventType.Unload)
         {
-            SetHasSpawnedFalseServerRpc();
+            SetHasSpawnedFalseRpc();
         }
 
     }
-    [ServerRpc]
-    void SetSpawnServerRpc()
-    {
-        SetSpawnClientRpc();
-    }
-
-    [ClientRpc]
-    void SetSpawnClientRpc()
+    
+    [Rpc(SendTo.Everyone)]
+    void SetSpawnRpc()
     {
         Transform spawnPos = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         this.gameObject.transform.position = spawnPos.position;
         Debug.Log(spawnPos.position);
-        Invoke("SetSpawnTrue", 1f);
+        puppetMaster.mode = PuppetMaster.Mode.Disabled;
+        Invoke("SetSpawnTrue", 2f);
     }
 
-    [ServerRpc]
-    void SetHasSpawnedFalseServerRpc()
-    {
-        hasSpawned = false;
-        SetHasSpawnedFalseClientRpc();
-    }
-
-    [ClientRpc]
-    void SetHasSpawnedFalseClientRpc()
+    [Rpc(SendTo.Everyone)]
+    void SetHasSpawnedFalseRpc()
     {
         hasSpawned = false;
     }
@@ -222,7 +209,11 @@ public class Network_PlayerInputController : NetworkBehaviour
     void SetSpawnTrue()
     {
         hasSpawned = true;
+        puppetMaster.mode = PuppetMaster.Mode.Active;
+        healthManager.Respawn();
     }
-    */
+
+  
+    
 
 }

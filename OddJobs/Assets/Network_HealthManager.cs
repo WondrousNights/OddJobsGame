@@ -28,6 +28,15 @@ public class Network_HealthManager : NetworkBehaviour
             {
                 GetComponent<BehaviorGraphAgent>().End();
             }
+
+            if(isPlayer)
+            {
+                Network_LevelManager levelManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<Network_LevelManager>();
+                if(levelManager != null)
+                {
+                    levelManager.CheckIfAllPlayersDeadRpc();
+                }
+            }
         }
 
         if(isPlayer)
@@ -36,4 +45,11 @@ public class Network_HealthManager : NetworkBehaviour
         }
     }
 
+    public void Respawn()
+    {
+        isDead = false;
+        health = 100;
+        puppetMaster.state = PuppetMaster.State.Alive;
+        playerUI.UpdateHealthImage(health, 100f);
+    }
 }
