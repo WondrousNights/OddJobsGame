@@ -109,7 +109,7 @@ public class Network_PlayerInputController : NetworkBehaviour
             myCanvas.gameObject.SetActive(false);
             characterController.enabled = false;
             myListener.enabled = false;
-            Destroy(conversationManagerGO);
+            //Destroy(conversationManagerGO);
         }
 
     }
