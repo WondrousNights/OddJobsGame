@@ -4698,7 +4698,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1787573140}
         m_TargetAssemblyTypeName: Van_LevelLoader, Assembly-CSharp
-        m_MethodName: LoadLevel
+        m_MethodName: LoadLevelRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12873,7 +12873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 2
-  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":254,"yPos":188},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"Valley","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":-7,"yPos":215},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Where
+  json: '{"Options":[{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":267.5,"yPos":184},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"Valley","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1}],"EditorInfo":{"isRoot":true,"xPos":6.5,"yPos":211},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Where
     do you want to go?","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Van","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: 
@@ -12889,7 +12889,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1787573140}
         m_TargetAssemblyTypeName: Van_LevelLoader, Assembly-CSharp
-        m_MethodName: LoadLevel
+        m_MethodName: LoadLevelRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
