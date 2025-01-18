@@ -91,7 +91,7 @@ namespace DialogueEditor
             // Destroy myself if I am not the singleton
             if (Instance != null && Instance != this)
             {
-                GameObject.Destroy(this.gameObject);
+                //GameObject.Destroy(this.gameObject);
             }
             Instance = this;
 
