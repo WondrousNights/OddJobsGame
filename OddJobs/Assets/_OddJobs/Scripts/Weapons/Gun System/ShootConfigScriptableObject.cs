@@ -1,4 +1,4 @@
-using AlmenaraGames;
+//using AlmenaraGames;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Shoot Config", menuName = "Guns/Shoot Config", order = 2)]
@@ -11,7 +11,7 @@ public class ShootConfigScriptableObject : ScriptableObject
     public bool automaticFire = false;
     public float fireRate = 0.25f;
     public int bulletsPerShot = 1;
-    public AudioObject shootSfx;
+    //public AudioObject shootSfx;
     public GameObject impactParticle;
     public GameObject bulletHoleDecal;
 

@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Numerics;
-using AlmenaraGames;
+//using AlmenaraGames;
 using UnityEngine;
 using UnityEngine.Pool;
 using Vector3 = UnityEngine.Vector3;
@@ -63,7 +63,7 @@ public class GunScriptableObject : ScriptableObject
             LastShootTime = Time.time;
             ShootSystem.Play();
             muzzleFlash.Play();
-            MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
+            //MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
             
             ammoHandler.currentClipAmmo[gunIndex] -= 1;
 

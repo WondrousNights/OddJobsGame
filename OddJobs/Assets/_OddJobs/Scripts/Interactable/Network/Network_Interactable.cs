@@ -1,4 +1,4 @@
-using AlmenaraGames;
+//using AlmenaraGames;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,10 +11,12 @@ public class Network_Interactable : NetworkBehaviour
     
     public void BaseInteract(Network_PlayerInteractionManager playerInteracting)
     {
+        /*
          if(sfxToPlay != null)
         {
             sfxToPlay.Play();
         }
+        */
         Interact(playerInteracting);
 
     }

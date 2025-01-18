@@ -1,9 +1,9 @@
 using UnityEngine;
-using AlmenaraGames;
+//using AlmenaraGames;
 
 public class SoundPhysicsBodyMulti : MonoBehaviour
 {
-    [SerializeField] private AudioObject audioObject;
+    //[SerializeField] private AudioObject audioObject;
     private Rigidbody rb;
 
     private void Awake()
@@ -21,8 +21,8 @@ public class SoundPhysicsBodyMulti : MonoBehaviour
     {
         // volume based on velocity of object at the time of collision
         var volume = rb.linearVelocity.sqrMagnitude * 0.01f + 0.01f;
-        audioObject.volume = volume;
+        //audioObject.volume = volume;
         
-        MultiAudioManager.PlayAudioObject(audioObject, transform.position);
+        //MultiAudioManager.PlayAudioObject(audioObject, transform.position);
     }
 }

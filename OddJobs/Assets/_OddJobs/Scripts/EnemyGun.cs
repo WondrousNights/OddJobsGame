@@ -1,5 +1,5 @@
 using System.Collections;
-using AlmenaraGames;
+//using AlmenaraGames;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -36,7 +36,7 @@ public class EnemyGun : EnemyWeapon
             LastShootTime = Time.time;
             ShootSystem.Play();
             muzzleFlash.Play();
-            MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, gameObject.transform.position);
+            //MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, gameObject.transform.position);
 
 
             for(int i = 0; i < ShootConfig.bulletsPerShot; i++)

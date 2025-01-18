@@ -1,4 +1,4 @@
-using AlmenaraGames;
+//using AlmenaraGames;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
@@ -6,14 +6,16 @@ public class Interactable : MonoBehaviour
     public string promptMessage;
     public bool isUI;
 
-    public AudioObject sfxToPlay;
+    //public AudioObject sfxToPlay;
     
     public void BaseInteract(Local_PlayerInteractionManager playerInteracting)
     {
-         if(sfxToPlay != null)
+        /*
+        if(sfxToPlay != null)
         {
-            MultiAudioManager.PlayAudioObject(sfxToPlay, this.transform);
+            //MultiAudioManager.PlayAudioObject(sfxToPlay, this.transform);
         }
+        */
         Interact(playerInteracting);
 
     }
