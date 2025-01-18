@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace DialogueEditor
 {
-    public class ConversationManager : MonoBehaviour
+    public class ConversationManager : NetworkBehaviour
     {
         private enum eState
         {
@@ -86,25 +87,33 @@ namespace DialogueEditor
         // Awake, Start, Destroy, Update
         //--------------------------------------
 
-        private void Awake()
-        {
-            // Destroy myself if I am not the singleton
-            if (Instance != null && Instance != this)
-            {
-                //GameObject.Destroy(this.gameObject);
-            }
-            Instance = this;
+        public override void OnNetworkSpawn()
+        {  
+            Debug.Log("Am I the owner of this convo manager?" + IsOwner);
+                if(IsOwner)
+                {
+                    Instance = this;
 
-            m_uiOptions = new List<UIConversationButton>();
+                    m_uiOptions = new List<UIConversationButton>();
 
-            NpcIcon.sprite = BlankSprite;
-            DialogueText.text = "";
-            TurnOffUI();
+                    NpcIcon.sprite = BlankSprite;
+                    DialogueText.text = "";
+                    TurnOffUI();
+                }
+                else
+                {
+                    GameObject.Destroy(this.gameObject);
+                }
+                
         }
 
         private void OnDestroy()
         {
+            if(IsOwner)
+            {
             Instance = null;
+            }
+
         }
 
         private void Update()

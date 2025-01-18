@@ -4,18 +4,30 @@ using UnityEngine;
 public class Network_NPCInteractable : Network_Interactable
 {
 
-    NPCConversation myConversation;
+    [SerializeField] NPCConversation myConversation;
 
     void Start()
     {
-        myConversation = GetComponent<NPCConversation>();
+        if(myConversation == null)
+        {
+            myConversation = GetComponent<NPCConversation>();
+        }
+        
     }
         
     protected override void Interact(Network_PlayerInteractionManager playerInteracting)
     {
-       ConversationManager.Instance.StartConversation(myConversation);
-       
 
+        if(ConversationManager.Instance == null)
+        {
+            Debug.Log("Conversation Manager Instance is Null");
+        }
+        else
+        {
+        ConversationManager.Instance.StartConversation(myConversation);
+        }
+
+       
     }
 
 }
