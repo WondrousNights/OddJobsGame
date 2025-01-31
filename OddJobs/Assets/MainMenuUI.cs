@@ -1,16 +1,71 @@
+using System;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] GameObject continueButton;
+
+
     void Start()
     {
-        
+        if(GetPlayerSave() == false)
+        {
+            continueButton.SetActive(false);
+        }
+        Authenticate();
     }
 
-    // Update is called once per frame
-    void Update()
+    private bool GetPlayerSave()
     {
+        int saveGame = PlayerPrefs.GetInt("GameStarted");
+
+        if(saveGame == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
+    async void Authenticate()
+    {
+         await UnityServices.InitializeAsync();
+
+         AuthenticationService.Instance.SignedIn += () => {
+            // do nothing
+            Debug.Log("Signed in! " + AuthenticationService.Instance.PlayerId);
+
+            //RefreshLobbyList();
+        };
+
+        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+    }
+
+    public void StartNewGame()
+    {
+        int gameSave = PlayerPrefs.GetInt("GameStarted");
+
+        if(gameSave > 0)
+        {
+            //Restart Game
+            PlayerPrefs.SetInt("WaterCount", 0);
+            PlayerPrefs.SetInt("WaterFromExtraction", 0);
+        }
         
+        //Setup New Game
+        PlayerPrefs.SetInt("GameStarted", 1);
+
+        LobbyManager.Instance.CreateLobby();
+    }
+
+    public void ContinueGame()
+    {
+        LobbyManager.Instance.CreateLobby();
     }
 }

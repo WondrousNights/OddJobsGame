@@ -12,14 +12,18 @@ public class WaterLevelManager : NetworkBehaviour
     {
         if(IsHost)
         {
+            
+            
+
+            //waterCount += PlayerPrefs.GetInt("WaterFromExtraction");
+            //PlayerPrefs.SetInt("WaterFromExtraction", 0);
+            //waterCount -= 1;
+
+            //PlayerPrefs.SetInt("WaterCount", waterCount);
+
             waterCount = PlayerPrefs.GetInt("WaterCount");
-
-            waterCount += PlayerPrefs.GetInt("WaterFromExtraction");
-            PlayerPrefs.SetInt("WaterFromExtraction", 0);
-            waterCount -= 1;
-
-            PlayerPrefs.SetInt("WaterCount", waterCount);
             SetWaterCountTextRpc(waterCount);
+            
         }
     }
 

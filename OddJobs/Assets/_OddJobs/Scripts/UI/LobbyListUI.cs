@@ -9,24 +9,20 @@ public class LobbyListUI : MonoBehaviour
 {
     [SerializeField] private Transform lobbySingleTemplate;
     [SerializeField] private Transform container;
-    [SerializeField] private Button refreshButton;
-    [SerializeField] private Button createButton;
 
     private void Start()
     {
         LobbyManager.Instance.OnLobbyListChanged += LobbyManager_OnLobbyListChanged;
         LobbyManager.Instance.OnJoinedLobby += LobbyManager_OnJoinedLobby;
-        createButton.onClick.AddListener(CreateLobbyButtonClick);
+
+        
     }
 
- 
-    private void CreateLobbyButtonClick()
+    void OnEnable()
     {
-        createButton.onClick.AddListener(() => {
-            LobbyManager.Instance.CreateLobby();
-            this.gameObject.SetActive(false);
-        });
+        LobbyManager.Instance.RefreshLobbyList();
     }
+
     private void LobbyManager_OnJoinedLobby(object sender, LobbyManager.LobbyEventArgs e)
     {
         gameObject.SetActive(false);

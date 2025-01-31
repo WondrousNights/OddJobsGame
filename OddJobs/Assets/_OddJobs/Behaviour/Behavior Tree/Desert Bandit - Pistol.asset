@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
-  m_Name: Desert Bandit - Pistol Blackboard Editor
+  m_Name: Desert Bandit - Pistol Blackboard
   m_EditorClassIdentifier: 
   AssetID:
     m_Value0: 8388598692082839961
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
-  m_Name: Desert Bandit - Pistol Blackboard Editor
+  m_Name: Desert Bandit - Pistol Blackboard
   m_EditorClassIdentifier: 
   VersionTimestamp: 638728060544723267
   AssetID:
@@ -155,6 +155,7 @@ MonoBehaviour:
   - rid: 93523783557317527
   m_VersionTimestamp: 638728060543894896
   m_DebugInfo: {fileID: 1135761019805281699}
+  m_RuntimeGraph: {fileID: 0}
   AssetID:
     m_Value0: 8388598692082839961
     m_Value1: 17845616003654105034
@@ -355,6 +356,7 @@ MonoBehaviour:
       Tooltip: 
     NamedChildren: []
   m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: -9171772746312040059}
   m_CommandBuffer:
     m_Commands: []
   references:
@@ -1722,7 +1724,7 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 8388598692082839961
           m_Value1: 17845616003654105034
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: 1135761019805281699}
         Root:
           rid: 93524082799411313
         BlackboardReference:

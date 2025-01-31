@@ -54,13 +54,10 @@ public class LobbyManager : MonoBehaviour
         Instance = this;
         
     }
-    public async void Authenticate(string playerName)
+    public async void Authenticate()
     {
-        this.playerName = playerName + UnityEngine.Random.Range(1,100);
-        InitializationOptions initializationOptions = new InitializationOptions();
-        initializationOptions.SetProfile(playerName);
 
-        await UnityServices.InitializeAsync(initializationOptions);
+        if(AuthenticationService.Instance.IsSignedIn) return;
 
         AuthenticationService.Instance.SignedIn += () => {
             // do nothing
@@ -95,6 +92,8 @@ public class LobbyManager : MonoBehaviour
             hostLobby = lobby;
             joinedLobby = lobby;
             Debug.Log("Created lobby with 4 players with code : " + lobby.LobbyCode);
+
+            StartGame();
         }
         catch {
             Debug.Log("Lobby was no created");
