@@ -15,6 +15,7 @@ public class MainMenuUI : MonoBehaviour
         {
             continueButton.SetActive(false);
         }
+
         Authenticate();
     }
 
@@ -44,7 +45,8 @@ public class MainMenuUI : MonoBehaviour
             //RefreshLobbyList();
         };
 
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+        if(!AuthenticationService.Instance.IsSignedIn) await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 
     public void StartNewGame()

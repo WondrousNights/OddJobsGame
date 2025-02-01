@@ -35,6 +35,7 @@ public class Network_PlayerInputController : NetworkBehaviour
     [SerializeField] PuppetMaster puppetMaster;
     [SerializeField] GameObject conversationManagerGO;
     ConversationManager conversationManager;
+    Player_MenuHandler menuHandler;
 
 
     // float count = 0;
@@ -54,6 +55,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         interactionManager = GetComponent<Network_PlayerInteractionManager>();
         conversationManager = conversationManagerGO.GetComponent<ConversationManager>();
         healthManager = GetComponent<Network_HealthManager>();
+        menuHandler = GetComponent<Player_MenuHandler>();
 
 
         myListener = GetComponent<AudioListener>();
@@ -70,6 +72,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         onFoot.Interact.performed += ctx => interactionManager.ProcessInteract();
         onFoot.SwitchItemNext.performed += ctx => gunHandler.SwitchWeaponNext();
         onFoot.SwitchItemPrevious.performed += ctx => gunHandler.SwitchWeaponPrevious();
+        onFoot.Menu.performed += ctx => menuHandler.OnMenuButtonClicked();
     }
 
 
@@ -125,6 +128,7 @@ public class Network_PlayerInputController : NetworkBehaviour
        
         if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
         if(conversationManager.IsConversationActive || !hasSpawned) return;
+        if(menuHandler.MenuOpen) return;
         else { Cursor.lockState = CursorLockMode.Locked;}
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
@@ -134,7 +138,7 @@ public class Network_PlayerInputController : NetworkBehaviour
         
        if(!IsOwner || puppetMaster.state == PuppetMaster.State.Dead) return;
         if(conversationManager.IsConversationActive || !hasSpawned) return;
-
+        if(menuHandler.MenuOpen) return;
         playerMovement.ProcessMove(onFoot.Move.ReadValue<Vector2>());
           
         networkAnimationController.ProcessVisualsRpc(onFoot.Move.ReadValue<Vector2>());

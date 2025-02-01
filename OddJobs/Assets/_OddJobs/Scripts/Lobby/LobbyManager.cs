@@ -25,8 +25,10 @@ public class LobbyManager : MonoBehaviour
 
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
     // public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
-    // public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
+    //public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
     // public event EventHandler<LobbyEventArgs> OnLobbyGameModeChanged;
+
+    ILobbyEvents m_LobbyEvents;
 
     public Lobby GetJoinedLobby()
     {
@@ -91,6 +93,7 @@ public class LobbyManager : MonoBehaviour
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync("Lobby", 4, createLobbyOptions);
             hostLobby = lobby;
             joinedLobby = lobby;
+            
             Debug.Log("Created lobby with 4 players with code : " + lobby.LobbyCode);
 
             StartGame();
@@ -99,6 +102,12 @@ public class LobbyManager : MonoBehaviour
             Debug.Log("Lobby was no created");
         }
       
+    }
+
+    private void OnLobbyDeleted()
+    {
+        RelayManager.LeaveRelay();
+        Loader.Load(Loader.Scene.Menu);
     }
 
     public async void ListLobbies()
@@ -140,9 +149,30 @@ public class LobbyManager : MonoBehaviour
         {
             Player = player
         });
+        var callbacks = new LobbyEventCallbacks();
+        callbacks.KickedFromLobby += OnKickedFromLobby;
+        callbacks.LobbyDeleted += OnKickedFromLobby;
+        m_LobbyEvents = await Lobbies.Instance.SubscribeToLobbyEventsAsync(joinedLobby.Id, callbacks);
 
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
     }
+
+    private void OnKickedFromLobby()
+    {
+    // These events will never trigger again, so let’s remove it.
+    this.m_LobbyEvents = null;
+    // Refresh the UI in some way
+    
+
+    if(joinedLobby != null)
+    {
+        LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+    }
+    RelayManager.LeaveRelay();
+    Loader.Load(Loader.Scene.Menu);
+    
+    }
+
 
     public async void QuickJoinLobby()
     {
@@ -249,12 +279,19 @@ public class LobbyManager : MonoBehaviour
     {
         try
         {
-
             if (hostLobby != null)
             {
-                MigrateLobbyHost();
+                await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
+                Loader.Load(Loader.Scene.Menu);
+                RelayManager.LeaveRelay();
             }
-            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+            else
+            {
+                await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+                Loader.Load(Loader.Scene.Menu);
+                RelayManager.LeaveRelay();
+            }
+           
         }
         catch
         {
@@ -302,5 +339,14 @@ public class LobbyManager : MonoBehaviour
     public bool IsLobbyHost()
     {
         return joinedLobby != null && joinedLobby.HostId == AuthenticationService.Instance.PlayerId;
+    }
+
+    void OnApplicationQuit()
+    {
+        if(hostLobby != null)
+        {
+             LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
+             RelayManager.LeaveRelay();
+        }
     }
 }

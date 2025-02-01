@@ -9,7 +9,7 @@ public static class Loader
     //Add new levels here
     public enum Scene
     { 
-        Lobby,
+        Menu,
         Parkour,
         Zone,
         Network_DesertLevel,

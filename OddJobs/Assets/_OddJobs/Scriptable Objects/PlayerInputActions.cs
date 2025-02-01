@@ -152,6 +152,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""77c58ef7-97d0-4032-add4-2de585bd0008"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -504,6 +513,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Controller"",
                     ""action"": ""ThrowGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df34a85c-296b-424c-9321-0b02dc81899a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -865,6 +885,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_OnFoot_SwitchItemPrevious = m_OnFoot.FindAction("SwitchItemPrevious", throwIfNotFound: true);
         m_OnFoot_DropItem = m_OnFoot.FindAction("DropItem", throwIfNotFound: true);
         m_OnFoot_ThrowGrenade = m_OnFoot.FindAction("ThrowGrenade", throwIfNotFound: true);
+        m_OnFoot_Menu = m_OnFoot.FindAction("Menu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
@@ -964,6 +985,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_SwitchItemPrevious;
     private readonly InputAction m_OnFoot_DropItem;
     private readonly InputAction m_OnFoot_ThrowGrenade;
+    private readonly InputAction m_OnFoot_Menu;
     public struct OnFootActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -982,6 +1004,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @SwitchItemPrevious => m_Wrapper.m_OnFoot_SwitchItemPrevious;
         public InputAction @DropItem => m_Wrapper.m_OnFoot_DropItem;
         public InputAction @ThrowGrenade => m_Wrapper.m_OnFoot_ThrowGrenade;
+        public InputAction @Menu => m_Wrapper.m_OnFoot_Menu;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1033,6 +1056,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ThrowGrenade.started += instance.OnThrowGrenade;
             @ThrowGrenade.performed += instance.OnThrowGrenade;
             @ThrowGrenade.canceled += instance.OnThrowGrenade;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -1079,6 +1105,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ThrowGrenade.started -= instance.OnThrowGrenade;
             @ThrowGrenade.performed -= instance.OnThrowGrenade;
             @ThrowGrenade.canceled -= instance.OnThrowGrenade;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -1310,6 +1339,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSwitchItemPrevious(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
         void OnThrowGrenade(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
