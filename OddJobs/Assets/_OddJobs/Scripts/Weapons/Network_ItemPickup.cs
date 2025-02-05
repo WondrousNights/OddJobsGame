@@ -23,17 +23,17 @@ public class Network_ItemPickup : Network_Interactable
 
 
 
-    protected override void Interact(Network_PlayerInteractionManager playerInteracting)
+    protected override void Interact(PlayerManager playerManager)
     {
         if(isWeapon)
         {
             if(isPickedUp) return;
-            playerInteracting.GetComponent<Network_PlayerGunHandler>().PickupGun(gun, gameObject);
+            //playerInteracting.GetComponent<Network_PlayerGunHandler>().PickupGun(gun, gameObject);
             isPickedUp = true;
         }
         if(isAmmo)
         {
-            playerInteracting.ammoHandler.AddAmmo(ammoType, amountOfAmmo);
+            //playerInteracting.ammoHandler.AddAmmo(ammoType, amountOfAmmo);
             DestoryItemRpc();
         }
         if(isObjective)
@@ -51,8 +51,8 @@ public class Network_ItemPickup : Network_Interactable
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (autoPickup && collision.gameObject.GetComponent<Network_PlayerInteractionManager>())
-            Interact(collision.gameObject.GetComponent<Network_PlayerInteractionManager>());
+        //if (autoPickup && collision.gameObject.GetComponent<Network_PlayerInteractionManager>())
+            //Interact(collision.gameObject.GetComponent<Network_PlayerInteractionManager>());
     }
 
     private void Start() {

@@ -58,6 +58,8 @@ namespace DialogueEditor
         // Default values
         public Sprite BlankSprite;
 
+        PlayerManager playerManager;
+
         // Getter properties
         public bool IsConversationActive
         {
@@ -89,6 +91,7 @@ namespace DialogueEditor
 
         public override void OnNetworkSpawn()
         {  
+            playerManager = GetComponentInParent<PlayerManager>();
             Debug.Log("Am I the owner of this convo manager?" + IsOwner);
                 if(IsOwner)
                 {
@@ -161,7 +164,8 @@ namespace DialogueEditor
             TurnOnUI();
             m_currentSpeech = m_conversation.Root;
             SetState(eState.TransitioningDialogueBoxOn);
-            Cursor.lockState = CursorLockMode.None;
+
+            playerManager.currentPlayerState = PlayerManager.PlayerState.InMenu;
         }
 
         public void EndConversation()
@@ -171,7 +175,7 @@ namespace DialogueEditor
             if (OnConversationEnded != null)
                 OnConversationEnded.Invoke();
             
-            Cursor.lockState = CursorLockMode.None;
+            playerManager.currentPlayerState = PlayerManager.PlayerState.Active;
         }
 
         public void SelectNextOption()

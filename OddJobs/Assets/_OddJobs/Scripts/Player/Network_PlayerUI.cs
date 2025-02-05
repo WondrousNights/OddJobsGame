@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class Network_PlayerUI : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI promptText;
+  
+    public TextMeshProUGUI promptText;
 
     [SerializeField]
     private Image healthImage;

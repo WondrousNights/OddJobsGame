@@ -1,15 +1,19 @@
 using UnityEngine;
 using RootMotion.Dynamics;
 using Unity.Netcode;
+using System.Collections;
 
 public class Network_PuppetController : NetworkBehaviour
 {
     private PuppetMaster puppetMaster;
     private Collider[] puppetColliders = new Collider[0];
-
     [SerializeField] int playerPuppetLayer;
-
     [SerializeField] bool isPlayerPuppet;
+
+    [SerializeField] Transform puppetRootBone;
+    [SerializeField] Transform animatorRootBone;
+
+    bool checkPuppet = true;
 
     void Awake()
     {
@@ -40,5 +44,24 @@ public class Network_PuppetController : NetworkBehaviour
             puppetMaster.name = "Enemy Puppet";
         }
         
+    }
+
+    void Update()
+    {
+        if(IsOwner) return;
+        if(!checkPuppet) return;
+        if(Vector3.Distance(puppetRootBone.position, animatorRootBone.position) >= 5f)
+        {
+            puppetMaster.state = PuppetMaster.State.Dead;
+            Invoke("ResetPuppet", 1f);
+            checkPuppet = false;
+
+        }
+    }
+
+    void ResetPuppet()
+    {
+        puppetMaster.state = PuppetMaster.State.Alive;
+        checkPuppet = true;
     }
 }

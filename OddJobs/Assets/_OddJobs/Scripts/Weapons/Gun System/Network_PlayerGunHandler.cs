@@ -58,6 +58,8 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
     [SerializeField] public LayerMask BulletCollisionMask;
 
+    PlayerManager playerManager;
+
 
     private void Start()
     {
@@ -66,6 +68,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         playerHealthManager = GetComponent<Local_PlayerHealthManager>();
         ammoHandler = GetComponent<PlayerAmmoHandler>();
         inventoryUI = GetComponentInChildren<Network_InventoryUI>();
+        playerManager = GetComponent<PlayerManager>();
 
         Network_GunScriptableObject gun = Inventory[0];
 
@@ -311,7 +314,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
                     ), 0
                     );
 
-                    Ray ray = new Ray(playerInputController.mycam.transform.position, playerInputController.mycam.transform.forward);
+                    Ray ray = new Ray(playerManager.playerController.cam.transform.position, playerManager.playerController.cam.transform.forward);
                     
                     //We need to change bullet spread
                     ray.origin += spread;
@@ -478,10 +481,11 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }                      
     }
 
+    
   // TODO: this should really be consolidated into a general UI update function
     public void UpdateAmmoText()
     {
-        playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
+        //playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
     }
 
 }

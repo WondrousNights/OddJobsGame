@@ -15,7 +15,7 @@ public class Network_NPCInteractable : Network_Interactable
         
     }
         
-    protected override void Interact(Network_PlayerInteractionManager playerInteracting)
+    protected override void Interact(PlayerManager player)
     {
 
         if(ConversationManager.Instance == null)
@@ -25,6 +25,7 @@ public class Network_NPCInteractable : Network_Interactable
         else
         {
         ConversationManager.Instance.StartConversation(myConversation);
+        player.currentPlayerState = PlayerManager.PlayerState.InMenu;
         }
 
        
