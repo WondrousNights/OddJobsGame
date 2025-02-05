@@ -6,6 +6,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using System;
+using Unity.Netcode;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -54,8 +55,19 @@ public class LobbyManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+
+        NetworkManager.Singleton.OnClientStopped += OnServerStopped;
+        NetworkManager.Singleton.OnServerStopped += OnServerStopped;
         
     }
+
+    private void OnServerStopped(bool obj)
+    {
+        LeaveLobby();
+        RelayManager.LeaveRelay();
+        Loader.Load(Loader.Scene.Menu);
+    }
+
     public async void Authenticate()
     {
 
@@ -73,6 +85,8 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
+       
+        
         LobbyHeartbeat();
         HandleLobbyPollForUpdates();
     }
@@ -347,6 +361,7 @@ public class LobbyManager : MonoBehaviour
         {
              LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
              RelayManager.LeaveRelay();
+             NetworkManager.Singleton.Shutdown();
         }
     }
 }
