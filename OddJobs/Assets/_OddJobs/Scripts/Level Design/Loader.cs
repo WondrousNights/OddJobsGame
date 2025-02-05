@@ -10,9 +10,7 @@ public static class Loader
     public enum Scene
     { 
         Menu,
-        Parkour,
-        Zone,
-        Network_DesertLevel,
+        Base,
         Network_Valley
     }
     public static void Load(Scene targetScene)

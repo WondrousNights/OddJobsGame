@@ -10,7 +10,7 @@ public class Travel : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Loader.LoadNetwork(Loader.Scene.Zone);
+            Loader.LoadNetwork(Loader.Scene.Base);
         }
     }
 }

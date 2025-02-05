@@ -56,7 +56,7 @@ public class MainMenuUI : MonoBehaviour
         if(gameSave > 0)
         {
             //Restart Game
-            PlayerPrefs.SetInt("WaterCount", 0);
+            PlayerPrefs.SetInt("GuildPrestige", 0);
             PlayerPrefs.SetInt("WaterFromExtraction", 0);
         }
         

@@ -2,11 +2,11 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
-public class WaterLevelManager : NetworkBehaviour
+public class GuildPrestigeManager : NetworkBehaviour
 {
-    public int waterCount;
+    public int guildPrestige;
 
-    [SerializeField] private TMP_Text waterCountText;
+    [SerializeField] private TMP_Text guildPrestigeText;
 
     void Start()
     {
@@ -21,8 +21,9 @@ public class WaterLevelManager : NetworkBehaviour
 
             //PlayerPrefs.SetInt("WaterCount", waterCount);
 
-            waterCount = PlayerPrefs.GetInt("WaterCount");
-            SetWaterCountTextRpc(waterCount);
+            guildPrestige = PlayerPrefs.GetInt("GuildPrestige");
+
+            SetWaterCountTextRpc(0);
             
         }
     }
@@ -30,6 +31,6 @@ public class WaterLevelManager : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     void SetWaterCountTextRpc(int count)
     {
-        waterCountText.text = "Water Count: " + count;
+        guildPrestigeText.text = "Guild Presitge " + count;
     }
 }

@@ -38,7 +38,7 @@ public class Network_LevelManager : NetworkBehaviour
         {
             waterBarrelCount = 0;
             PlayerPrefs.SetInt("WaterFromExtraction", waterBarrelCount);
-            Loader.LoadNetwork(Loader.Scene.Network_DesertLevel);
+            Loader.LoadNetwork(Loader.Scene.Base);
         }
 
     }

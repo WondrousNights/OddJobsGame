@@ -12,6 +12,6 @@ public class Van_LevelLoader : NetworkBehaviour
     [Rpc(SendTo.Server, RequireOwnership = false)]
     public void LoadExtractRpc()
     {
-        Loader.LoadNetwork(Loader.Scene.Network_DesertLevel);
+        Loader.LoadNetwork(Loader.Scene.Base);
     }
 }
