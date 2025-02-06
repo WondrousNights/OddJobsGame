@@ -23,6 +23,8 @@ public class PlayerManager : NetworkBehaviour
     public PlayerController playerController;
     public NetworkAnimationController networkAnimationController;
     public Player_UIManager playerUIManager;
+    public Network_WeaponInventory weaponInventory;
+    public Network_PlayerWeaponHandler weaponHandler;
 
     Network_HealthManager healthManager;
 
@@ -42,18 +44,9 @@ public class PlayerManager : NetworkBehaviour
         networkAnimationController = GetComponent<NetworkAnimationController>();
         healthManager = GetComponent<Network_HealthManager>();
         playerUIManager = GetComponentInChildren<Player_UIManager>();
-        /*
-        characterController = GetComponent<CharacterController>();
-        playerMovement = GetComponent<Network_PlayerMovement>();
-        look = GetComponent<Network_PlayerLook>();
-        gunHandler = GetComponent<Network_PlayerGunHandler>();
-        playerUI = GetComponent<Network_PlayerUI>();
-        
-        interactionManager = GetComponent<Network_PlayerInteractionManager>();
-        conversationManager = conversationManagerGO.GetComponent<ConversationManager>();
-       
-        menuHandler = GetComponent<Player_MenuHandler>();
-        */
+        weaponInventory = GetComponent<Network_WeaponInventory>();
+        weaponHandler = GetComponent<Network_PlayerWeaponHandler>();
+
     }
 
 

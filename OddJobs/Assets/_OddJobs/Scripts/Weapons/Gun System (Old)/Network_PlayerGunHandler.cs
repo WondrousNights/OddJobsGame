@@ -85,28 +85,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     }
 
     /* Inventory Functionality 
-    public void EquipGunFromInventory(int index = -1, Network_GunScriptableObject gun = null)
-    {
-        if(!IsOwner) return;
-        DeEquipCurrentGun();
-
-        if (index != -1) {
-            currentGunIndex = index;
-        }
-        ActiveGun = Inventory[currentGunIndex];
-        ActiveGun?.Spawn(weaponHolder);
-        gunEffects = weaponHolder.GetComponentInChildren<Network_GunEffects>();
-        //heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
-        
-        if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
-            Reload();
-
-        UpdateAmmoText();
-        inventoryUI.UpdateInventoryUI(Inventory);
-
-        EquipGunVisualRpc(ActiveGun.Type);
-
-    }
+    
 
     // spawn gun for other players
     [Rpc(SendTo.NotMe)]
@@ -203,46 +182,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
             
     }
 
-    public void PickupGun(Network_GunScriptableObject gun, GameObject pickupObject)
-    {
-        if(!IsOwner) return;
-        // find the next empty slot in the inventory
-        int nextFreeIndex = -1;
-        for (int i = 0; i < Inventory.Length; i++)
-        {
-            if (Inventory[i] == null)
-            {
-                if (debug) Debug.Log(Inventory[i]);
-                nextFreeIndex = i;
-                break;
-            }
-        }
-
-        // if there's an empty slot, add the gun to the inventory there
-        if (nextFreeIndex != -1)
-        {
-            AddGunToInventory(gun, nextFreeIndex, true, pickupObject);
-        } 
-        else
-        {
-            DropCurrentGun(); // throw current weapon
-            AddGunToInventory(gun, currentGunIndex, true, pickupObject); // add the gun to the inventory
-        }
-
-        pickupObject.GetComponent<Network_ItemPickup>().DestoryItemRpc();
-
-        if (debug) Debug.Log("Picked up gun: " + gun.name);
-    }
 
 
-    public void AddGunToInventory(Network_GunScriptableObject gun, int gunIndex, bool equipImmediately = true, GameObject pickupObject = null)
-    {
-        if(!IsOwner) return;
-        Inventory[gunIndex] = gun;
-        if (pickupObject) ammoHandler.currentClipAmmo[gunIndex] = pickupObject.GetComponent<Network_ItemPickup>().ammoInClip;
-        // if (equipImmediately) 
-        EquipGunFromInventory(gunIndex);
-    }
+   
 
     public void SwitchWeaponNext()
     {

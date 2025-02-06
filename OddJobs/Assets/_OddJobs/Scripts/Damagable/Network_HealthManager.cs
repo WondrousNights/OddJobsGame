@@ -11,7 +11,6 @@ public class Network_HealthManager : NetworkBehaviour
     [SerializeField] PuppetMaster puppetMaster;
 
     [SerializeField] bool isPlayer = false;
-    [SerializeField] Network_PlayerUI playerUI;
 
     public bool isDead = false;
 
@@ -39,10 +38,7 @@ public class Network_HealthManager : NetworkBehaviour
             }
         }
 
-        if(isPlayer)
-        {
-            playerUI.UpdateHealthImage(health, 100f);
-        }
+
     }
 
     public void Respawn()
@@ -50,6 +46,6 @@ public class Network_HealthManager : NetworkBehaviour
         isDead = false;
         health = 100;
         puppetMaster.state = PuppetMaster.State.Alive;
-        playerUI.UpdateHealthImage(health, 100f);
+        //playerUI.UpdateHealthImage(health, 100f);
     }
 }

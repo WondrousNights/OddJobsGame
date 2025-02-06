@@ -1,34 +1,12 @@
-using System.Collections;
-using System.Numerics;
-//using AlmenaraGames;
 using UnityEngine;
-using UnityEngine.Pool;
-using Vector3 = UnityEngine.Vector3;
-using Quaternion = UnityEngine.Quaternion;
-using Unity.Netcode;
-using Vector2 = UnityEngine.Vector2;
 
-[CreateAssetMenu(fileName = "GunProperties", menuName = "Guns/GunProperties", order = 0)]
-public class Network_GunProperties : ScriptableObject
+[CreateAssetMenu(fileName = "WeaponProperties", menuName = "Weapons/GunProperties", order = 0)]
+public class Network_GunProperties : Network_WeaponProperties
 {
-    [Header("Gun Settings")]
-    public GunType Type;
-    public AmmoType AmmoType;
-    public string Name;
-
-    
-    public int ClipSize;
-    public GameObject ModelPrefab;
-    public Vector3 PlayerGunSpawnPoint;
-    public Vector3 PlayerGunSpawnRotation;
-    public Vector3 VisuaGunSpawnPos;
-    public Vector3 VisualGunRotation;
-    public Transform ShootPoint;
-    public GameObject DroppedPrefab;
-    public LayerMask BulletCollisionMask;
-
-
     [Header("Shoot Settings")]
+    public LayerMask BulletCollisionMask;
+    public AmmoType AmmoType;
+    public int ClipSize;
     public float Damage;
     public LayerMask hitMask;
     public Vector2 playerSpread = new Vector3(0.01f, 0.01f);
@@ -48,5 +26,4 @@ public class Network_GunProperties : ScriptableObject
     [Header("Audio Settings")]
     public AudioClip shootSfx;
     public AudioClip reloadSfx;
-    
 }

@@ -9026,6 +9026,8 @@ MonoBehaviour:
   playerController: {fileID: 0}
   networkAnimationController: {fileID: 0}
   playerUIManager: {fileID: 0}
+  weaponInventory: {fileID: 0}
+  weaponHandler: {fileID: 0}
   puppetMaster: {fileID: 916229968975009829}
   myCanvas: {fileID: 5166047660126150797}
   myListener: {fileID: 869086352663897682}
@@ -9099,7 +9101,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   puppetMaster: {fileID: 916229968975009829}
   isPlayer: 1
-  playerUI: {fileID: 0}
   isDead: 0
 --- !u!114 &8239950682523481734
 MonoBehaviour:
@@ -9142,7 +9143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be41c458a5d8c44580ab8c1387f6766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
+  ShowTopMostFoldoutHeaderGroup: 1
+  gunHolder: {fileID: 1055879276612891166}
+  Inventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  debug: 1
 --- !u!1 &8355159307227396980
 GameObject:
   m_ObjectHideFlags: 0

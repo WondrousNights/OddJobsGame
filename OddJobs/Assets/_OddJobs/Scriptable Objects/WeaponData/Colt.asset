@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9fba482493ed34880fd4a520675a45, type: 3}
+  m_Name: Colt
+  m_EditorClassIdentifier: 
+  Name: Colt
+  ModelPrefab: {fileID: 8052361516213400974, guid: 73825cc6853e1cd488595bec0d7116e4,
+    type: 3}
+  PlayerSpawnPoint: {x: 0.189, y: -0.199, z: 0.515}
+  PlayerSpawnRotation: {x: 0, y: 80.823, z: -13.827}
+  VisuaSpawnPos: {x: 0, y: 0, z: 0}
+  VisualRotation: {x: 0, y: 0, z: 0}
+  DroppedPrefab: {fileID: 0}
+  FirePoint: {fileID: 0}
+  BulletCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  AmmoType: 0
+  ClipSize: 0
+  Damage: 0
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerSpread: {x: 0.01, y: 0.01}
+  enemySpread: {x: 0.09, y: 0.09}
+  automaticFire: 0
+  fireRate: 0.25
+  bulletsPerShot: 1
+  impactParticle: {fileID: 0}
+  bulletHoleDecal: {fileID: 0}
+  maxRecoil: 0
+  maxKickback: 0
+  hitForce: 0
+  recoveryTime: 0
+  reloadTime: 0
+  range: 0
+  shootSfx: {fileID: 0}
+  reloadSfx: {fileID: 0}

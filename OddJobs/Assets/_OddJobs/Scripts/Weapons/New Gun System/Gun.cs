@@ -3,32 +3,8 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
-    [SerializeField] Network_GunProperties gunProperties;
 
-    GameObject model;
-
-    void Start()
-    {
-        
-    }
-
-    protected override void DropWeapon()
-    {
-        
-    }
-
-    protected override void PickupWeapon()
-    {
-        
-    }
-
-    protected override void SpawnWeapon(Transform parent, Vector3 position, Vector3 rotation)
-    {
-        model = Instantiate(gunProperties.ModelPrefab);
-        model.transform.SetParent(parent, false);
-        model.transform.localPosition = position;
-        model.transform.localRotation = Quaternion.Euler(rotation);
-    }
+    
 
     protected override void UpdateUI()
     {
@@ -37,7 +13,7 @@ public class Gun : Weapon
 
     public override void UseWeapon(Ray ray)
     {
-        if(!IsOwner) return;
+
         Shoot(ray);
     }
 
@@ -48,7 +24,7 @@ public class Gun : Weapon
         //Add Bullet Spread
                 
                 // bullet hit something!
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, gunProperties.BulletCollisionMask))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, weaponProperties.BulletCollisionMask))
                 {
                     // if the bullet hit something
                     if (hit.transform)
