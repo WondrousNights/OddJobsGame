@@ -35,9 +35,9 @@ public class Explodable : MonoBehaviour, IDamageable
     public bool hasExploded = false;
     
 
-    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender, float recoveryTime)
+    public void TakeDamage()
     {
-
+        /*
         if(explodeOnHit)
         {
             if(_Health <= 0) return;
@@ -55,7 +55,7 @@ public class Explodable : MonoBehaviour, IDamageable
         {
             explosionTimer = true;
         }
-        
+        */
     }
 
     private void Explode()
@@ -93,7 +93,7 @@ public class Explodable : MonoBehaviour, IDamageable
                     }
                     else
                     {
-                        damageable.TakeDamageFromMelee(transform.position, damage, explosionForce, gameObject.transform.position, recoveryTime);
+                        //damageable.TakeDamageFromMelee(transform.position, damage, explosionForce, gameObject.transform.position, recoveryTime);
                     }
 
                 }

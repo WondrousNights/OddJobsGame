@@ -23,10 +23,10 @@ public class DestructableObject : MonoBehaviour, IDamageable
         _health = _maxHealth;
     }
 
-    public void TakeDamageFromGun(Ray ray, float damage, float hitForce, Vector3 collisionPoint, GameObject sender, float recoveryTime)
+    public void TakeDamage()
     {
-        _health -= damage;
-        if (debug) Debug.Log(name + " took " + damage + " damage, current health: " + _health);
+        //_health -= damage;
+        //if (debug) Debug.Log(name + " took " + damage + " damage, current health: " + _health);
 
         // rb.AddForceAtPosition(ray.direction * hitForce, collisionPoint, ForceMode.Impulse);
     }

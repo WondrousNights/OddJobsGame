@@ -68,8 +68,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
    
 
-    public void TakeDamageFromGun(Ray ray, float Damage, float force, Vector3 collisionPoint, GameObject sender, float recoveryTime)
+    public void TakeDamage()
     {
+        /*
         timeToGetUp = recoveryTime;
         if(CurrentHealth == MaxHealth)
         {
@@ -90,7 +91,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             HandleDeath();
         }
-
+    */
     
 
   

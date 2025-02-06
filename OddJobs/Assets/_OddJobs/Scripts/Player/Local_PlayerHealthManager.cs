@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class Local_PlayerHealthManager : MonoBehaviour, IDamageable
+public class Local_PlayerHealthManager : MonoBehaviour
 {
     [SerializeField] private bool debugLogs = false;
     public bool isRagdoll;

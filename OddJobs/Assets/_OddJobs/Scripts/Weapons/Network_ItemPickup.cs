@@ -8,7 +8,7 @@ public class Network_ItemPickup : Network_Interactable
     [SerializeField] bool isAmmo;
     [SerializeField] bool isObjective;
 
-    [SerializeField] Network_GunScriptableObject gun;
+    //[SerializeField] Network_GunScriptableObject gun;
     [SerializeField] AmmoType ammoType;
     [SerializeField] int amountOfAmmo;
     [SerializeField] private bool autoPickup = false;
@@ -60,7 +60,7 @@ public class Network_ItemPickup : Network_Interactable
         if(isWeapon)
         {
             if (ammoInClip == -1) {
-            ammoInClip = gun.ClipSize;
+            //ammoInClip = gun.ClipSize;
             }
         }
      

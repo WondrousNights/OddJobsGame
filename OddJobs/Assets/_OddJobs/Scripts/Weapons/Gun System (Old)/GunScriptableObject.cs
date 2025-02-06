@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 using Vector3 = UnityEngine.Vector3;
 using Quaternion = UnityEngine.Quaternion;
 
-[CreateAssetMenu(fileName = "Gun", menuName = "Guns/Gun", order = 0)]
+[CreateAssetMenu(fileName = "GunProperties", menuName = "Guns/GunProperties", order = 0)]
 public class GunScriptableObject : ScriptableObject
 {
     
@@ -180,13 +180,13 @@ public class GunScriptableObject : ScriptableObject
             // If the object hit has a damageable component, apply damage to it
             if(hit.transform.TryGetComponent(out IDamageable damageable))
             {
-                damageable.TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, ShootConfig.recoveryTime);
+               // damageable.TakeDamage(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, ShootConfig.recoveryTime);
             }
 
             // If the object hit has a damageable component in its parent, apply damage to it
             if(hit.transform.GetComponentInParent<IDamageable>() != null)
             {
-                hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, ShootConfig.recoveryTime);
+                //hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, ShootConfig.recoveryTime);
             }
         }
 

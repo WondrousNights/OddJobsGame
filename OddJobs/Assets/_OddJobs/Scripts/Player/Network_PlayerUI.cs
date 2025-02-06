@@ -18,7 +18,7 @@ public class Network_PlayerUI : MonoBehaviour
 
     private void Awake()
     {
-        UpdateAmmoText(null);
+        //UpdateAmmoText(null);
     }   
 
     public void UpdateText(string promptMessage)
@@ -26,8 +26,9 @@ public class Network_PlayerUI : MonoBehaviour
         promptText.text = promptMessage;
     }
 
-    public void UpdateAmmoText(Network_GunScriptableObject gun = null, int inClip = -1, int lightAmmoSupply = -1, int mediumAmmoSupply = -1, int heavyAmmoSupply = -1)
+    public void UpdateAmmoText(Weapon weapon, int inClip = -1, int lightAmmoSupply = -1, int mediumAmmoSupply = -1, int heavyAmmoSupply = -1)
     {
+        /*
         if (gun)
         {
             currentItemText.text = gun.name;
@@ -41,6 +42,7 @@ public class Network_PlayerUI : MonoBehaviour
         lightAmmoSupplyText.text = "Light ammo: " + lightAmmoSupply.ToString();
         mediumAmmoSupplyText.text = "Medium ammo: " + mediumAmmoSupply.ToString();
         heavyAmmoSupplyText.text = "Heavy ammo: " + heavyAmmoSupply.ToString();
+        */
     }
 
     public void UpdateHealthImage(float currentHealth, float MaxHealth)

@@ -16,8 +16,8 @@ public class Network_PlayerInteractionManager : NetworkBehaviour
  
     private Network_PlayerInputController playerInputController;
     private PlayerManager playerManager;
+    private Player_UIManager uiManager;
 
-    private Network_PlayerUI uiManager;
     Camera cam;
 
 
@@ -35,7 +35,7 @@ public class Network_PlayerInteractionManager : NetworkBehaviour
     void Update()
     {
         if(!IsOwner) return;
-        uiManager.UpdateText(string.Empty);
+        uiManager.UpdateInteractText(string.Empty);
 
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hitInfo;
@@ -45,7 +45,7 @@ public class Network_PlayerInteractionManager : NetworkBehaviour
             if(hitInfo.collider.GetComponent<Network_Interactable>() != null)
             {
                 Network_Interactable interactable = hitInfo.collider.GetComponent<Network_Interactable>();
-                uiManager.UpdateText(hitInfo.collider.GetComponent<Network_Interactable>().promptMessage);
+                uiManager.UpdateInteractText(hitInfo.collider.GetComponent<Network_Interactable>().promptMessage);
            
                 if(interact)
                 {
@@ -61,9 +61,15 @@ public class Network_PlayerInteractionManager : NetworkBehaviour
 
     }
 
-    public void ProcessInteract()
+    void ProcessInteract()
     {
         interact = true;
+        Invoke("ResetInteract", 0.1f);
+    }
+
+    void ResetInteract()
+    {
+        interact = false;
     }
 
 

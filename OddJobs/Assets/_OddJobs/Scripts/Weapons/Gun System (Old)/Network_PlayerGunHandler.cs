@@ -18,6 +18,8 @@ using Unity.Netcode.Components;
 //Most of this handled client side
 public class Network_PlayerGunHandler : NetworkBehaviour
 {
+
+    /*
     [SerializeField]
     private bool debug = false;
     [SerializeField]
@@ -82,7 +84,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         }
     }
 
-    /* Inventory Functionality */ 
+    /* Inventory Functionality 
     public void EquipGunFromInventory(int index = -1, Network_GunScriptableObject gun = null)
     {
         if(!IsOwner) return;
@@ -167,7 +169,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
         if(!IsOwner) return;
         if (ActiveGun) {
 
-            /* This needs to an rpc */
+            /* This needs to an rpc 
             // drop a pickup item for it
             DropGunRpc(ammoHandler.currentClipAmmo[currentGunIndex]);
             // remove the gun from the inventory
@@ -285,7 +287,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
 
 
 
-  /* Gun Functionality */ 
+  /* Gun Functionality 
 
 
     public void ShootCurrentGun()
@@ -385,62 +387,9 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     }
 
 
-    /* Shoot functionality */
+    /* Shoot functionality 
 
-    public void Shoot(Ray ray)
-    {
-        RaycastHit hit;
-
-        //Add Bullet Spread
-                
-                // bullet hit something!
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, BulletCollisionMask))
-                {
-                    // if the bullet hit something
-                    if (hit.transform)
-                    {
-
-                        
-
-                        if(hit.transform.GetComponent<DamagableLimb>())
-                        {
-                            var limb = hit.transform.GetComponent<DamagableLimb>();
-                            HitLimbRpc(hit.transform.name, ray,ActiveGun.ShootConfig.hitForce, hit.point, hit.normal, limb, ActiveGun.ShootConfig.Damage);
-                        }
-
-                    
-                        // We are going to switch to doing damage to rigidbodies
-
-                        /*
-                        // If the object hit has a damageable component, apply damage to it
-                        if(hit.transform.TryGetComponent(out IDamageable damageable))
-                        {
-                            //damageable.TakeDamageFromGun(ray, ActiveGun.ShootConfig.Damage, ActiveGun.ShootConfig.hitForce, hit.point, ActiveGun.parent.gameObject, ShootConfig.recoveryTime);
-                        }
-
-                        // If the object hit has a damageable component in its parent, apply damage to it
-                        if(hit.transform.GetComponentInParent<IDamageable>() != null)
-                        {
-                            //hit.transform.GetComponentInParent<IDamageable>().TakeDamageFromGun(ray, ShootConfig.Damage, ShootConfig.hitForce, hit.point, parent.gameObject, ShootConfig.recoveryTime);
-                        }
-                        */
-                    }
-                }
-                // bullet did not hit something. 
-                else
-                {
-                    // ActiveMonoBehaviour.StartCoroutine(
-                    //     PlayTrail(
-                    //         ShootSystem.transform.position,
-                    //         shootPoint.transform.position + (shootPoint.transform.forward * TrailConfig.MissDistance),
-                    //         new RaycastHit(),
-                    //         ray
-                    //     )
-                    // );
-                }
-            
-
-    }
+    
 
 
 
@@ -487,7 +436,7 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     {
         //playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
     }
-
+*/
 }
 
 

@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Network_EnemyAttackController : NetworkBehaviour
 {
-    [SerializeField] Network_GunScriptableObject enemyGun;
+    
+    //[SerializeField] Network_GunScriptableObject enemyGun;
 
     [SerializeField] LayerMask shootMask;
     
@@ -18,6 +19,7 @@ public class Network_EnemyAttackController : NetworkBehaviour
 
     public void Attack()
     {
+        /*
         if(healthManager.isDead) return;
         
          for(int i = 0; i < enemyGun.ShootConfig.bulletsPerShot; i++)
@@ -56,6 +58,7 @@ public class Network_EnemyAttackController : NetworkBehaviour
 
                 }
         }
+        */
     }
 
  
@@ -64,7 +67,7 @@ public class Network_EnemyAttackController : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     void HitLimbRpc(string name, Ray ray, float hitForce, Vector3 hitPoint, Vector3 hitNormal, NetworkBehaviourReference damageableLimb, float damage)
     {
-
+        /*
         if (damageableLimb.TryGet(out DamagableLimb limb))
         {
            Debug.Log("An enemy just hit" + name);
@@ -93,6 +96,7 @@ public class Network_EnemyAttackController : NetworkBehaviour
         limb.transform.GetComponent<Rigidbody>().AddForceAtPosition(ray.direction * hitForce, hitPoint, ForceMode.Impulse);
         limb.DoDamage(damage);
                
-        }                      
+        }
+        */                     
     }
 }

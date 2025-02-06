@@ -22,7 +22,7 @@ public class PlayerManager : NetworkBehaviour
     //Access Scripts
     public PlayerController playerController;
     public NetworkAnimationController networkAnimationController;
-    public Network_PlayerUI playerUIManager;
+    public Player_UIManager playerUIManager;
 
     Network_HealthManager healthManager;
 
@@ -41,7 +41,7 @@ public class PlayerManager : NetworkBehaviour
         playerController =  GetComponent<PlayerController>();
         networkAnimationController = GetComponent<NetworkAnimationController>();
         healthManager = GetComponent<Network_HealthManager>();
-        playerUIManager = GetComponent<Network_PlayerUI>();
+        playerUIManager = GetComponentInChildren<Player_UIManager>();
         /*
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<Network_PlayerMovement>();
