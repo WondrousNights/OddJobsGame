@@ -13,4 +13,6 @@ public abstract class Weapon : MonoBehaviour
     public abstract void ShootEffects();
     public abstract void Reload();
     public abstract void DestroyWeapon();
+    public abstract void HideWeapon();
+    public abstract void ShowWeapon();
 }

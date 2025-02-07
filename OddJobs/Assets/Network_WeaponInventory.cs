@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,8 +7,9 @@ public class Network_WeaponInventory : NetworkBehaviour
 {
     [SerializeField] Transform gunHolder;
     [SerializeField] Weapon[] Inventory;
+    [SerializeField] Weapon[] VisualInventory;
     [SerializeField] Network_GunScriptableObjectList PossibleWeaponsList;
-    private int currentWeaponIndex = 0;
+    [SerializeField] int currentWeaponIndex = 0;
     [SerializeField] Weapon activeWeapon;
     [SerializeField]  Weapon activeWeaponVisual;
 
@@ -60,27 +62,26 @@ public class Network_WeaponInventory : NetworkBehaviour
         newWeapon.transform.localPosition = weaponProperties.PlayerSpawnPoint;
         newWeapon.transform.localRotation = Quaternion.Euler(weaponProperties.PlayerSpawnRotation);
 
-        PickupWeaponRpc(newWeapon.transform.position, newWeapon.transform.rotation.eulerAngles, newWeapon.weaponProperties.type);
+        
   
         // if there's an empty slot, add the gun to the inventory there
         if (nextFreeIndex != -1)
         {
             AddWeaponToInventory(newWeapon, nextFreeIndex);
-  
+            PickupWeaponRpc(newWeapon.transform.position, newWeapon.transform.rotation.eulerAngles, newWeapon.weaponProperties.type, nextFreeIndex);
         } 
         else
         {
             DropCurrentGun(); // throw current weapon
             AddWeaponToInventory(newWeapon, currentWeaponIndex); // add the gun to the inventory
+            PickupWeaponRpc(newWeapon.transform.position, newWeapon.transform.rotation.eulerAngles, newWeapon.weaponProperties.type, currentWeaponIndex);
         }
         if (debug) Debug.Log("Picked up gun: " + weaponProperties.name);
     }
 
     [Rpc(SendTo.Everyone)]
-    public void PickupWeaponRpc(Vector3 position, Vector3 rotation, WeaponType type)
+    public void PickupWeaponRpc(Vector3 position, Vector3 rotation, WeaponType type, int index)
     {
-
-
         for(var i = 0; i < PossibleWeaponsList.WeaponPropertiesList.Count; i++)
         {
             if(PossibleWeaponsList.WeaponPropertiesList[i].type == type)
@@ -96,13 +97,15 @@ public class Network_WeaponInventory : NetworkBehaviour
 
                 activeWeaponVisual = Model.GetComponent<Weapon>();
 
+                AddWeaponToVisualInventory(activeWeaponVisual, index);
+
                 magicalIK.DoMagicalIK(activeWeaponVisual);
             }
         }
 
         if(IsOwner)
         {
-            activeWeaponVisual.gameObject.SetActive(false);
+            //activeWeaponVisual.gameObject.SetActive(false);
         }
     }
 
@@ -110,8 +113,14 @@ public class Network_WeaponInventory : NetworkBehaviour
     {
         if(!IsOwner) return;
         Inventory[weaponIndex] = weapon;
-       
-        activeWeapon = weapon;
+
+        EquipGunFromInventory(weaponIndex);
+    }
+
+    public void AddWeaponToVisualInventory(Weapon weapon, int weaponIndex)
+    {
+        if(!IsOwner) return;
+        VisualInventory[weaponIndex] = weapon;
     }
 
     public void EquipGunFromInventory(int index = -1)
@@ -123,63 +132,66 @@ public class Network_WeaponInventory : NetworkBehaviour
             currentWeaponIndex = index;
         }
         
-        activeWeapon = Inventory[currentWeaponIndex];
+        activeWeapon = Inventory[index];
+        activeWeaponVisual = VisualInventory[index];
 
-        if(activeWeapon != null) activeWeapon.gameObject.SetActive(true);
+        if(activeWeapon != null) activeWeapon.ShowWeapon();
+        if(activeWeaponVisual != null) activeWeaponVisual.ShowWeapon();
+    }
+
+    public void DeEquipCurrentGun()
+    {
+        if(!IsOwner) return;
+        if (activeWeapon) 
+        {
+            Debug.Log("Hiding weapon!");
+            activeWeapon.HideWeapon();
+            DeEquipVisualGunRpc();
+        }
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void DeEquipVisualGunRpc()
+    {
+        if(activeWeaponVisual) activeWeaponVisual.HideWeapon();
     }
 
     public void DropCurrentGun()
     {
         if(!IsOwner) return;
         if(activeWeapon == null) return;
-        DropGunRpc(0);
+        DropGunRpc(activeWeapon.weaponProperties.type);
         activeWeapon.DestroyWeapon();
         activeWeaponVisual.DestroyWeapon();
     }
 
-    [Rpc(SendTo.Everyone)]
-    public void DropGunRpc(int ammoInClip)
+    [Rpc(SendTo.Server)]
+    public void DropGunRpc(WeaponType type)
     {
-        var droppedModel = Instantiate(activeWeapon.weaponProperties.DroppedPrefab);
-        //droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoInClip;
+        for(var i = 0; i < PossibleWeaponsList.WeaponPropertiesList.Count; i++)
+        {
+            if(PossibleWeaponsList.WeaponPropertiesList[i].type == type)
+            {
+                //Spawn shit here
+                 var droppedModel = Instantiate(PossibleWeaponsList.WeaponPropertiesList[i].DroppedPrefab);
+                //droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoInClip;
 
-        var instanceNetworkObject = droppedModel.GetComponent<NetworkObject>();
-        instanceNetworkObject.Spawn();
+                var instanceNetworkObject = droppedModel.GetComponent<NetworkObject>();
+                instanceNetworkObject.Spawn();
 
-        droppedModel.transform.position = gunHolder.position + (Vector3.forward * 2);
-        droppedModel.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), 0);
+                droppedModel.transform.position = gunHolder.position + (Vector3.forward * 2);
+                droppedModel.transform.rotation = Quaternion.Euler(UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360), 0);
        
-        // add throwing force to the weapon
-        Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
-        rb.AddForce(gunHolder.forward * itemDropForce, ForceMode.VelocityChange);
+                // add throwing force to the weapon
+                Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
+                rb.AddForce(gunHolder.forward * itemDropForce, ForceMode.VelocityChange);
+            }
+        }
+       
             
     }
 
-     public void DeEquipCurrentGun()
-    {
-        if(!IsOwner) return;
-        if (activeWeapon) 
-        {
-            activeWeapon.gameObject.SetActive(false);
-            DeEquipVisualGunRpc();
-        }
-
-        /*
-        if (gunEffects)
-        {
-            gunEffects.gameObject.SetActive(false);
-            Destroy(gunEffects.gameObject);
-        }
-        
-        inventoryUI.UpdateInventoryUI(Inventory);
-        */
-    }
-
-    [Rpc(SendTo.Everyone)]
-    private void DeEquipVisualGunRpc()
-    {
-        activeWeaponVisual.gameObject.SetActive(false);
-    }
+ 
 
     public void SwitchWeaponNext()
     {

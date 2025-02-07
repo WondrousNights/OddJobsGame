@@ -9149,8 +9149,14 @@ MonoBehaviour:
   Inventory:
   - {fileID: 0}
   - {fileID: 0}
+  VisualInventory:
+  - {fileID: 0}
+  - {fileID: 0}
   PossibleWeaponsList: {fileID: 11400000, guid: 43ad6fb1de8b4c447bedf20facee66fa,
     type: 2}
+  currentWeaponIndex: 0
+  activeWeapon: {fileID: 0}
+  activeWeaponVisual: {fileID: 0}
   debug: 1
 --- !u!114 &2097030539353935713
 MonoBehaviour:

@@ -71,4 +71,14 @@ public class Gun : Weapon
         Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
         gunEffects.ReloadEffect();
     }
+
+    public override void HideWeapon()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public override void ShowWeapon()
+    {
+        gameObject.SetActive(true);
+    }
 }
