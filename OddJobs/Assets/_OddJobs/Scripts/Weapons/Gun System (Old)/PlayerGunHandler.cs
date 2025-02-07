@@ -76,8 +76,8 @@ public class PlayerGunHandler : MonoBehaviour
         gunEffects = weaponHolder.GetComponentInChildren<GunEffects>();
         heldItem = weaponHolder.GetComponentInChildren<HeldItemInteraction>();
         
-        if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
-            Reload();
+        //if (ammoHandler.currentClipAmmo[currentGunIndex] == 0)
+            //Reload();
 
         UpdateAmmoText();
         inventoryUI.UpdateInventoryUI(Inventory);
@@ -105,7 +105,7 @@ public class PlayerGunHandler : MonoBehaviour
             GameObject droppedModel = Instantiate(ActiveGun.droppedModelPrefab);
             droppedModel.transform.position = weaponHolder.position;
             droppedModel.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), 0);
-            droppedModel.GetComponent<ItemPickup>().ammoInClip = ammoHandler.currentClipAmmo[currentGunIndex];
+            //droppedModel.GetComponent<ItemPickup>().ammoInClip = ammoHandler.currentClipAmmo[currentGunIndex];
 
             // add throwing force to the weapon
             Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
@@ -115,7 +115,7 @@ public class PlayerGunHandler : MonoBehaviour
             DeEquipCurrentGun();
             Inventory[currentGunIndex] = null;
             ActiveGun = null;
-            ammoHandler.currentClipAmmo[currentGunIndex] = 0;
+            //ammoHandler.currentClipAmmo[currentGunIndex] = 0;
 
             UpdateAmmoText();
             inventoryUI.UpdateInventoryUI(Inventory);
@@ -155,7 +155,7 @@ public class PlayerGunHandler : MonoBehaviour
     public void AddGunToInventory(GunScriptableObject gun, int gunIndex, bool equipImmediately = true, GameObject pickupObject = null)
     {
         Inventory[gunIndex] = gun;
-        if (pickupObject) ammoHandler.currentClipAmmo[gunIndex] = pickupObject.GetComponent<ItemPickup>().ammoInClip;
+        //if (pickupObject) ammoHandler.currentClipAmmo[gunIndex] = pickupObject.GetComponent<ItemPickup>().ammoInClip;
         // if (equipImmediately) 
         EquipGunFromInventory(gunIndex);
     }
@@ -166,7 +166,7 @@ public class PlayerGunHandler : MonoBehaviour
         if(ActiveGun == null || playerInputController.playerHealthManager.isRagdoll) return;
 
 
-
+        /*
         // if the gun has ammo in clip //I think this might be causing bugs?
         if(ammoHandler.currentClipAmmo[currentGunIndex] > 0)
         {
@@ -205,12 +205,14 @@ public class PlayerGunHandler : MonoBehaviour
                 // FAIL, NEED AMMO!
             }
         }
+        */
     }
 
     public void Reload()
     {
         if(!ActiveGun) return;
 
+        /*
         if(ammoHandler.HasAmmoToReload(ActiveGun.AmmoType))
         {
             isReloading = true;
@@ -222,6 +224,7 @@ public class PlayerGunHandler : MonoBehaviour
         {
             // Debug.Log("No AMMO! PLAY SFX TO NOTIFY PLAYER");
         }
+        */
         
     }
 
@@ -267,7 +270,7 @@ public class PlayerGunHandler : MonoBehaviour
     // TODO: this should really be consolidated into a general UI update function
     public void UpdateAmmoText()
     {
-        playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
+        //playerInputController.playerUI.UpdateAmmoText(ActiveGun, ammoHandler.currentClipAmmo[currentGunIndex], ammoHandler.lightAmmo, ammoHandler.mediumAmmo, ammoHandler.heavyAmmo);
     }
 
 

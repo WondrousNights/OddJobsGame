@@ -25,11 +25,11 @@ public class PlayerManager : NetworkBehaviour
     public Player_UIManager playerUIManager;
     public Network_WeaponInventory weaponInventory;
     public Network_PlayerWeaponHandler weaponHandler;
+    public PlayerAmmoHandler ammoHandler;
 
     Network_HealthManager healthManager;
 
     //Random Shit
-
     [Header("Set in Inspector")]
     public PuppetMaster puppetMaster;
     [SerializeField] GameObject myCanvas;
@@ -46,6 +46,7 @@ public class PlayerManager : NetworkBehaviour
         playerUIManager = GetComponentInChildren<Player_UIManager>();
         weaponInventory = GetComponent<Network_WeaponInventory>();
         weaponHandler = GetComponent<Network_PlayerWeaponHandler>();
+        ammoHandler = GetComponent<PlayerAmmoHandler>();
 
     }
 

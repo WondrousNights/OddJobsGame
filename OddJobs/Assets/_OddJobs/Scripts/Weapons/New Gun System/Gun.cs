@@ -64,9 +64,9 @@ public class Gun : Weapon
         Destroy(this.gameObject);
     }
 
-    public override void Reload()
+    public override void Reload(int ammoToReload)
     {
-        ammoInClip = weaponProperties.ClipSize;
+        ammoInClip += ammoToReload;
 
         Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
         gunEffects.ReloadEffect();

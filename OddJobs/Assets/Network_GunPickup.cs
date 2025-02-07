@@ -7,7 +7,7 @@ public class Network_GunPickup : Network_ItemPickup
 
     protected override void Interact(PlayerManager playerManager)
     {
-        playerManager.weaponInventory.PickupWeapon(weaponProperties);
+        playerManager.weaponInventory.PickupWeapon(weaponProperties, ammoInClip);
       
         base.Interact(playerManager);
         DestoryItemRpc();

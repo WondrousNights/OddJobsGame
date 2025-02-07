@@ -12,7 +12,7 @@ public abstract class Weapon : MonoBehaviour
     public abstract void UseWeapon(Ray ray);
     protected abstract void UpdateUI();
     public abstract void ShootEffects();
-    public abstract void Reload();
+    public abstract void Reload(int AmmoToReload);
     public abstract void DestroyWeapon();
     public abstract void HideWeapon();
     public abstract void ShowWeapon();

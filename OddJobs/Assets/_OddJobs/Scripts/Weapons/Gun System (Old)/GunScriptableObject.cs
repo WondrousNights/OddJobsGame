@@ -65,7 +65,7 @@ public class GunScriptableObject : ScriptableObject
             muzzleFlash.Play();
             //MultiAudioManager.PlayAudioObject(ShootConfig.shootSfx, parent);
             
-            ammoHandler.currentClipAmmo[gunIndex] -= 1;
+            //ammoHandler.currentClipAmmo[gunIndex] -= 1;
 
 
             for(int i = 0; i < ShootConfig.bulletsPerShot; i++)

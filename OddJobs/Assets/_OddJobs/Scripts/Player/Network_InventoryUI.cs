@@ -18,12 +18,13 @@ public class Network_InventoryUI : MonoBehaviour
         //HideInventorySlots();
     }
 
-    public void UpdateInventoryUI(Weapon[] inventory, int currentGunIndex)
+    public void UpdateInventoryUI(Weapon[] inventory, int currentGunIndex, int totalAmmo)
     {
         if (debug) Debug.Log("Updating inventory UI");
 
         for (int i = 0; i < itemSlots.Length; i++)
         {
+            Debug.Log("I is: " + i);
             if (debug) Debug.Log(inventory[i]);
             if (inventory[i] == null) {
                 itemSlots[i].SetActive(false);
@@ -31,10 +32,20 @@ public class Network_InventoryUI : MonoBehaviour
             else {
                 itemSlots[i].SetActive(true);
 
+                
                 Image slotImage = itemSlots[i].GetComponentInChildren<Image>();
                 if (slotImage) slotImage.sprite = inventory[i].weaponProperties.Sprite;
                 
-                UpdateAmmoText(inventory, currentGunIndex);
+                UpdateAmmoText(inventory, currentGunIndex, totalAmmo);
+
+                if(i != currentGunIndex)
+                {
+                    slotImage.color = Color.black;
+                }
+                else
+                {
+                    slotImage.color = Color.white;
+                }
             }
         }
 
@@ -45,11 +56,22 @@ public class Network_InventoryUI : MonoBehaviour
         //Invoke(nameof(HideInventorySlots), showDuration);
     }
 
-    public void UpdateAmmoText(Weapon[] inventory, int currentGunIndex)
+    public void UpdateAmmoText(Weapon[] inventory, int currentGunIndex, int totalAmmo)
     {
-        TMP_Text ammoText = itemSlots[currentGunIndex].GetComponentInChildren<TMP_Text>();
-
-        ammoText.text = inventory[currentGunIndex].ammoInClip + "/" + inventory[currentGunIndex].weaponProperties.ClipSize;
+        for(var i = 0; i < inventory.Length; i++)
+        {
+            if(i == currentGunIndex)
+            {
+                TMP_Text ammoText = itemSlots[currentGunIndex].GetComponentInChildren<TMP_Text>();
+                ammoText.text = inventory[currentGunIndex].ammoInClip + "/" + totalAmmo;
+            }
+            else
+            {
+                TMP_Text ammoText = itemSlots[i].GetComponentInChildren<TMP_Text>();
+                ammoText.text = "";
+            }
+        }
+        
     }
 
     private IEnumerator LerpInventoryPosition()

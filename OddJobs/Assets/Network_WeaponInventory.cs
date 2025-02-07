@@ -18,6 +18,7 @@ public class Network_WeaponInventory : NetworkBehaviour
     Network_MagicalIK magicalIK;
     Network_PlayerInputController playerInputController;
     Network_InventoryUI inventoryUI;
+    [HideInInspector] public PlayerAmmoHandler ammoHandler;
 
     float itemDropForce = 2f;
 
@@ -26,6 +27,7 @@ public class Network_WeaponInventory : NetworkBehaviour
         magicalIK = GetComponent<Network_MagicalIK>();
         playerInputController = GetComponent<Network_PlayerInputController>();
         inventoryUI = GetComponentInChildren<Network_InventoryUI>();
+        ammoHandler = GetComponent<PlayerAmmoHandler>();
 
         playerInputController.onFoot.DropItem.performed += ctx => DropCurrentGun();
         playerInputController.onFoot.SwitchItemNext.performed += ctx => SwitchWeaponNext();
@@ -44,7 +46,7 @@ public class Network_WeaponInventory : NetworkBehaviour
     }
 
    
-    public void PickupWeapon(Network_WeaponProperties weaponProperties)
+    public void PickupWeapon(Network_WeaponProperties weaponProperties, int ammoInClip)
     {
         if(!IsOwner) return;
         // find the next empty slot in the inventory
@@ -63,6 +65,12 @@ public class Network_WeaponInventory : NetworkBehaviour
         newWeapon.transform.SetParent(gunHolder);
         newWeapon.transform.localPosition = weaponProperties.PlayerSpawnPoint;
         newWeapon.transform.localRotation = Quaternion.Euler(weaponProperties.PlayerSpawnRotation);
+
+        if(ammoInClip < 0)
+        {
+            ammoInClip = 0;
+        }
+        newWeapon.ammoInClip = ammoInClip;
 
         
   
@@ -117,7 +125,7 @@ public class Network_WeaponInventory : NetworkBehaviour
         Inventory[weaponIndex] = weapon;
 
         EquipGunFromInventory(weaponIndex);
-        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
+        Invoke(nameof(UpdateInventoryUI), 0.1f);
     }
 
     public void AddWeaponToVisualInventory(Weapon weapon, int weaponIndex)
@@ -163,15 +171,15 @@ public class Network_WeaponInventory : NetworkBehaviour
     {
         if(!IsOwner) return;
         if(activeWeapon == null) return;
-        DropGunRpc(activeWeapon.weaponProperties.type);
+        DropGunRpc(activeWeapon.weaponProperties.type, activeWeapon.ammoInClip);
         activeWeapon.DestroyWeapon();
         activeWeaponVisual.DestroyWeapon();
 
-        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
+        Invoke(nameof(UpdateInventoryUI), 0.1f);
     }
 
     [Rpc(SendTo.Server)]
-    public void DropGunRpc(WeaponType type)
+    public void DropGunRpc(WeaponType type, int ammoInClip)
     {
         for(var i = 0; i < PossibleWeaponsList.WeaponPropertiesList.Count; i++)
         {
@@ -179,7 +187,7 @@ public class Network_WeaponInventory : NetworkBehaviour
             {
                 //Spawn shit here
                  var droppedModel = Instantiate(PossibleWeaponsList.WeaponPropertiesList[i].DroppedPrefab);
-                //droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoInClip;
+                droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoInClip;
 
                 var instanceNetworkObject = droppedModel.GetComponent<NetworkObject>();
                 instanceNetworkObject.Spawn();
@@ -215,7 +223,7 @@ public class Network_WeaponInventory : NetworkBehaviour
         }
 
         EquipGunFromInventory(currentWeaponIndex);
-        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
+        Invoke(nameof(UpdateInventoryUI), 0.1f);
     }
     public void SwitchWeaponPrevious()
     {
@@ -233,16 +241,20 @@ public class Network_WeaponInventory : NetworkBehaviour
             }
         }
 
+
         EquipGunFromInventory(currentWeaponIndex);
-        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
+        Invoke(nameof(UpdateInventoryUI), 0.1f);
     }
 
 
     public void UpdateAmmoText()
     {
-        inventoryUI.UpdateAmmoText(Inventory, currentWeaponIndex);
+        inventoryUI.UpdateAmmoText(Inventory, currentWeaponIndex, ammoHandler.TotalAmmo(Inventory[currentWeaponIndex].weaponProperties.AmmoType));
     }
 
-    
+    public void UpdateInventoryUI()
+    {
+        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex, ammoHandler.TotalAmmo(Inventory[currentWeaponIndex].weaponProperties.AmmoType));
+    }
 
 }
