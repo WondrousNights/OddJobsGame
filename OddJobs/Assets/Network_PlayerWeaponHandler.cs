@@ -14,6 +14,7 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
         weaponInventory = GetComponent<Network_WeaponInventory>();
 
         inputController.onFoot.Shoot.performed += ctx => Fire();
+        inputController.onFoot.Reload.performed += ctx => Reload();
     }
 
     void Fire()
@@ -28,6 +29,26 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
 
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             currentWeapon.UseWeapon(ray);
+            currentWeapon.ShootEffects();
+            FireRpc();
+        }
+    }
+
+    [Rpc(SendTo.Everyone)]
+    void FireRpc()
+    {
+        Weapon visualWeapon = weaponInventory.GetCurrentVisualWeapon();
+        visualWeapon.ShootEffects();
+
+    }
+
+    void Reload()
+    {
+        Weapon currentWeapon = weaponInventory.GetCurrentWeapon();
+        if(currentWeapon != null)
+        {
+
+            currentWeapon.Reload();
         }
     }
 }

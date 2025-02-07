@@ -59,7 +59,7 @@ public class PlayerController : NetworkBehaviour
 
     void ProcessMove(Vector2 input)
     {
-
+        if (!IsOwner) return;
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
@@ -78,7 +78,7 @@ public class PlayerController : NetworkBehaviour
     
     void Jump()
     {
-
+        if(!IsOwner) return;
         if (controller.isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
@@ -89,7 +89,7 @@ public class PlayerController : NetworkBehaviour
 
     void ProcessLook(Vector2 input)
     {
-        //if (!IsOwner) return;
+        if (!IsOwner) return;
         // Scale input by screen resolution to make sensitivity consistent across resolutions
         float mouseX = input.x / Screen.width;
         float mouseY = input.y / Screen.height;

@@ -11299,6 +11299,7 @@ GameObject:
   - component: {fileID: 6260556213341705396}
   - component: {fileID: 2901445170638394435}
   - component: {fileID: 8253009077205460637}
+  - component: {fileID: 7613457476768078098}
   m_Layer: 14
   m_Name: Colt Single-Action Army - Player Weapon
   m_TagString: Untagged
@@ -11390,6 +11391,21 @@ MonoBehaviour:
   Model: {fileID: 0}
   OtherModel: {fileID: 0}
   weaponProperties: {fileID: 11400000, guid: 55b027b34f739ab4cb6ca95d25b1058b, type: 2}
+--- !u!114 &7613457476768078098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8052361516213400974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69f4369d6cc58946bd2a4d4155c87ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oneHanded: 1
+  leftHandIKTarget: {fileID: 5166943824048139577}
+  rightHandIKTarget: {fileID: 5166943824048139577}
 --- !u!1 &8110206791888149429
 GameObject:
   m_ObjectHideFlags: 0

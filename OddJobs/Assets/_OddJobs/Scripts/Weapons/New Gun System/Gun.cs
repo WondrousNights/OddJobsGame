@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
-
-    
+    int ammoInClip;
 
     protected override void UpdateUI()
     {
@@ -13,12 +12,12 @@ public class Gun : Weapon
 
     public override void UseWeapon(Ray ray)
     {
-
         Shoot(ray);
     }
 
     protected void Shoot(Ray ray)
     {
+        if(ammoInClip <= 0) return;
         RaycastHit hit;
 
         //Add Bullet Spread
@@ -29,6 +28,7 @@ public class Gun : Weapon
                     // if the bullet hit something
                     if (hit.transform)
                     {
+                        Debug.Log(transform.name);
                         // We are going to switch to doing damage to rigidbodies
                         // If the object hit has a damageable component, apply damage to it
                         if(hit.transform.TryGetComponent(out IDamageable damageable))
@@ -53,5 +53,22 @@ public class Gun : Weapon
 
     }
 
-    
+    public override void ShootEffects()
+    {
+        Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
+        gunEffects.ShootEffect();
+    }
+
+    public override void DestroyWeapon()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public override void Reload()
+    {
+        ammoInClip = weaponProperties.ClipSize;
+
+        Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
+        gunEffects.ReloadEffect();
+    }
 }

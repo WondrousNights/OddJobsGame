@@ -10,7 +10,7 @@ using Quaternion = UnityEngine.Quaternion;
 public class GunScriptableObject : ScriptableObject
 {
     
-    public GunType Type;
+    public WeaponType Type;
     public AmmoType AmmoType;
     public string Name;
     public GameObject ModelPrefab;

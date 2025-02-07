@@ -10,4 +10,7 @@ public abstract class Weapon : MonoBehaviour
     public Network_GunProperties weaponProperties;
     public abstract void UseWeapon(Ray ray);
     protected abstract void UpdateUI();
+    public abstract void ShootEffects();
+    public abstract void Reload();
+    public abstract void DestroyWeapon();
 }

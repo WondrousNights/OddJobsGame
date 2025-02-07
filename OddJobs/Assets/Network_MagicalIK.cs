@@ -8,9 +8,9 @@ public class Network_MagicalIK : MonoBehaviour
 
     [SerializeField] RigBuilder rigBuilder;
 
-    public void DoMagicalIK(GameObject gun)
+    public void DoMagicalIK(Weapon weapon)
     {
-        Network_GunIkHandler ikHandler = gun.GetComponent<Network_GunIkHandler>();
+        Network_GunIkHandler ikHandler = weapon.gameObject.GetComponent<Network_GunIkHandler>();
 
         if(ikHandler.oneHanded)
         {

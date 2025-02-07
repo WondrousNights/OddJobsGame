@@ -87,143 +87,23 @@ public class Network_PlayerGunHandler : NetworkBehaviour
     /* Inventory Functionality 
     
 
-    // spawn gun for other players
-    [Rpc(SendTo.NotMe)]
-    void EquipGunVisualRpc(GunType gunType)
-    {
-        if(visualGun != null) Destroy(visualGun);
-        for(var i = 0; i < network_GunScriptableObjectList.GunScriptableObjectList.Count; i++)
-        {
-            if(network_GunScriptableObjectList.GunScriptableObjectList[i].Type == gunType)
-            {
-                //Spawn shit here
-
-                ActiveGun = network_GunScriptableObjectList.GunScriptableObjectList[i];
-
-                GameObject Model = Instantiate(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerModelPrefab);
-                Model.transform.SetParent(gameObject.transform, false);
-                Model.transform.localPosition = network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunSpawnPos;
-                Model.transform.localRotation = Quaternion.Euler(network_GunScriptableObjectList.GunScriptableObjectList[i].OtherPlayerGunRotation);
-
-                visualGun = Model;
-
-                magicalIK.DoMagicalIK(visualGun);
-            }
-        }
-    }
+  
 
 
-    //Destroy gun for other players
-    [Rpc(SendTo.NotMe)]
-    void DeEquipVisualGunRpc()
-    {
-        magicalIK.UndoMagicalIk();
-        if(visualGun != null)
-        {
-            Destroy(visualGun);
-            visualGun = null;
-        } 
-    }
-
-    public void DeEquipCurrentGun()
-    {
-        if(!IsOwner) return;
-        if (ActiveGun) 
-        {
-            ActiveGun.Despawn();
-            DeEquipVisualGunRpc();
-        }
-        if (gunEffects)
-        {
-            gunEffects.gameObject.SetActive(false);
-            Destroy(gunEffects.gameObject);
-        }
-        
-        inventoryUI.UpdateInventoryUI(Inventory);
-    }
+    
 
 
-    public void DropCurrentGun()
-    {
-        if(!IsOwner) return;
-        if (ActiveGun) {
-
-            /* This needs to an rpc 
-            // drop a pickup item for it
-            DropGunRpc(ammoHandler.currentClipAmmo[currentGunIndex]);
-            // remove the gun from the inventory
-            DeEquipCurrentGun();
-            Inventory[currentGunIndex] = null;
-            ActiveGun = null;
-            ammoHandler.currentClipAmmo[currentGunIndex] = 0;
-
-            UpdateAmmoText();
-            inventoryUI.UpdateInventoryUI(Inventory);
-        }    
-    }
-
-    [Rpc(SendTo.Server)]
-    public void DropGunRpc(int ammoInClip)
-    {
-        var droppedModel = Instantiate(ActiveGun.DroppedPrefab);
-        droppedModel.GetComponent<Network_ItemPickup>().ammoInClip = ammoInClip;
-
-        var instanceNetworkObject = droppedModel.GetComponent<NetworkObject>();
-        instanceNetworkObject.Spawn();
 
 
-        droppedModel.transform.position = weaponHolder.position;
-        droppedModel.transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), 0);
-       
+    
 
-        // add throwing force to the weapon
-        Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
-        rb.AddForce(weaponHolder.forward * itemDropForce, ForceMode.VelocityChange);
-            
-    }
+   
 
 
 
    
 
-    public void SwitchWeaponNext()
-    {
-        if (debug) Debug.Log("Switching to next weapon");
-
-        currentGunIndex++;
-        if (currentGunIndex >= Inventory.Length) currentGunIndex = 0;
-
-        // if the index has no gun in it, find the next gun in the inventory
-        if (Inventory[currentGunIndex] == null)
-        {
-            for (int i = 0; i < Inventory.Length; i++)
-            {
-                if (Inventory[i] != null) { currentGunIndex = i; break; }
-            }
-        }
-
-        EquipGunFromInventory(currentGunIndex);
-        inventoryUI.UpdateInventoryUI(Inventory);
-    }
-    public void SwitchWeaponPrevious()
-    {
-        if (debug) Debug.Log("Switching to previous weapon");
-        
-        currentGunIndex--;
-        if (currentGunIndex < 0) currentGunIndex = Inventory.Length - 1;
-
-        // if the index has no gun in it, find the previous gun in the inventory
-        if (Inventory[currentGunIndex] == null)
-        {
-            for (int i = Inventory.Length - 1; i >= 0; i--)
-            {
-                if (Inventory[i] != null) { currentGunIndex = i; break; }
-            }
-        }
-
-        EquipGunFromInventory(currentGunIndex);
-        inventoryUI.UpdateInventoryUI(Inventory);
-    }
+    
 
 
 

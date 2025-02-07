@@ -11,6 +11,7 @@ public class MainMenuUI : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         if(GetPlayerSave() == false)
         {
             continueButton.SetActive(false);

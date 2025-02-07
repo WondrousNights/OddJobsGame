@@ -1,9 +1,4 @@
-public enum GunType
+public enum WeaponType
 {
-    Pistol,
-    Shotgun,
-    AK74,
-    Uzi,
-    VPO
-
+    Colt
 }

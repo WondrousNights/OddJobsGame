@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Colt
   m_EditorClassIdentifier: 
   Name: Colt
+  type: 0
   ModelPrefab: {fileID: 8052361516213400974, guid: 73825cc6853e1cd488595bec0d7116e4,
     type: 3}
   PlayerSpawnPoint: {x: 0.189, y: -0.199, z: 0.515}
   PlayerSpawnRotation: {x: 0, y: 80.823, z: -13.827}
-  VisuaSpawnPos: {x: 0, y: 0, z: 0}
-  VisualRotation: {x: 0, y: 0, z: 0}
-  DroppedPrefab: {fileID: 0}
+  VisuaSpawnPos: {x: 0.1819736, y: 1.353, z: 0.557164}
+  VisualRotation: {x: 0, y: 80.823, z: 3.991}
+  DroppedPrefab: {fileID: 4452104846799766470, guid: 214ed46581792cf46bd6a7c4320b1a52,
+    type: 3}
   FirePoint: {fileID: 0}
   BulletCollisionMask:
     serializedVersion: 2

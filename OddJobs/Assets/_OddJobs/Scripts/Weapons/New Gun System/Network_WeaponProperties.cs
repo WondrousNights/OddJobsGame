@@ -13,6 +13,7 @@ public abstract class Network_WeaponProperties : ScriptableObject
 {
     [Header("Weapon Settings")]
     public string Name;
+    public WeaponType type;
     public GameObject ModelPrefab;
     public Vector3 PlayerSpawnPoint;
     public Vector3 PlayerSpawnRotation;
