@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,17 +9,16 @@ public class Network_InventoryUI : MonoBehaviour
     [SerializeField] private bool debug = false;
     [SerializeField] private float spacing = 100f;
     [SerializeField] private float showDuration = 2.2f;
-    [SerializeField] private Network_PlayerGunHandler playerGunHandler;
     [SerializeField] private GameObject inventorySlotsParent;
     [SerializeField] private GameObject[] itemSlots;
     [Tooltip("if we ever increase inventory size we have to manually update this")]
 
     private void Start()
     {
-        HideInventorySlots();
+        //HideInventorySlots();
     }
 
-    public void UpdateInventoryUI(Weapon[] inventory)
+    public void UpdateInventoryUI(Weapon[] inventory, int currentGunIndex)
     {
         if (debug) Debug.Log("Updating inventory UI");
 
@@ -31,31 +31,25 @@ public class Network_InventoryUI : MonoBehaviour
             else {
                 itemSlots[i].SetActive(true);
 
-                TMPro.TextMeshProUGUI slotText = itemSlots[i].GetComponentInChildren<TMPro.TextMeshProUGUI>();
-                //if (slotText) slotText.text = inventory[i].name;
+                Image slotImage = itemSlots[i].GetComponentInChildren<Image>();
+                if (slotImage) slotImage.sprite = inventory[i].weaponProperties.Sprite;
                 
-                Image slotBG = itemSlots[i].GetComponent<Image>();
-                if (slotBG)
-                {
-                    /*
-                    if (playerGunHandler.currentGunIndex == i)
-                    {
-                        slotBG.color = new Color(slotBG.color.r, slotBG.color.g, slotBG.color.b, 1f);
-                    }
-                    else
-                    {
-                        slotBG.color = new Color(slotBG.color.r, slotBG.color.g, slotBG.color.b, 0.2f);
-                    }
-                    */
-                }
+                UpdateAmmoText(inventory, currentGunIndex);
             }
         }
 
-        StartCoroutine(LerpInventoryPosition());
+        //StartCoroutine(LerpInventoryPosition());
 
-        CancelInvoke(nameof(HideInventorySlots));
-        ShowInventorySlots();
-        Invoke(nameof(HideInventorySlots), showDuration);
+        //CancelInvoke(nameof(HideInventorySlots));
+        //ShowInventorySlots();
+        //Invoke(nameof(HideInventorySlots), showDuration);
+    }
+
+    public void UpdateAmmoText(Weapon[] inventory, int currentGunIndex)
+    {
+        TMP_Text ammoText = itemSlots[currentGunIndex].GetComponentInChildren<TMP_Text>();
+
+        ammoText.text = inventory[currentGunIndex].ammoInClip + "/" + inventory[currentGunIndex].weaponProperties.ClipSize;
     }
 
     private IEnumerator LerpInventoryPosition()

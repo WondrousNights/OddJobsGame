@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
-    int ammoInClip;
+    
 
     protected override void UpdateUI()
     {
@@ -17,7 +17,7 @@ public class Gun : Weapon
 
     protected void Shoot(Ray ray)
     {
-        if(ammoInClip <= 0) return;
+        
         RaycastHit hit;
 
         //Add Bullet Spread
@@ -49,7 +49,7 @@ public class Gun : Weapon
                     //     )
                     // );
                 }
-            
+        ammoInClip -= 1;
 
     }
 

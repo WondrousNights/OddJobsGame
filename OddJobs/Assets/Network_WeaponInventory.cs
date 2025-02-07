@@ -17,6 +17,7 @@ public class Network_WeaponInventory : NetworkBehaviour
 
     Network_MagicalIK magicalIK;
     Network_PlayerInputController playerInputController;
+    Network_InventoryUI inventoryUI;
 
     float itemDropForce = 2f;
 
@@ -24,6 +25,7 @@ public class Network_WeaponInventory : NetworkBehaviour
     {
         magicalIK = GetComponent<Network_MagicalIK>();
         playerInputController = GetComponent<Network_PlayerInputController>();
+        inventoryUI = GetComponentInChildren<Network_InventoryUI>();
 
         playerInputController.onFoot.DropItem.performed += ctx => DropCurrentGun();
         playerInputController.onFoot.SwitchItemNext.performed += ctx => SwitchWeaponNext();
@@ -115,6 +117,7 @@ public class Network_WeaponInventory : NetworkBehaviour
         Inventory[weaponIndex] = weapon;
 
         EquipGunFromInventory(weaponIndex);
+        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
     }
 
     public void AddWeaponToVisualInventory(Weapon weapon, int weaponIndex)
@@ -163,6 +166,8 @@ public class Network_WeaponInventory : NetworkBehaviour
         DropGunRpc(activeWeapon.weaponProperties.type);
         activeWeapon.DestroyWeapon();
         activeWeaponVisual.DestroyWeapon();
+
+        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
     }
 
     [Rpc(SendTo.Server)]
@@ -210,7 +215,7 @@ public class Network_WeaponInventory : NetworkBehaviour
         }
 
         EquipGunFromInventory(currentWeaponIndex);
-        //inventoryUI.UpdateInventoryUI(Inventory);
+        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
     }
     public void SwitchWeaponPrevious()
     {
@@ -229,7 +234,13 @@ public class Network_WeaponInventory : NetworkBehaviour
         }
 
         EquipGunFromInventory(currentWeaponIndex);
-        //inventoryUI.UpdateInventoryUI(Inventory);
+        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex);
+    }
+
+
+    public void UpdateAmmoText()
+    {
+        inventoryUI.UpdateAmmoText(Inventory, currentWeaponIndex);
     }
 
     

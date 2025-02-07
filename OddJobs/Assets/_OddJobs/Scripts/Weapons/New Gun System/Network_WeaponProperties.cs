@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Numerics;
-//using AlmenaraGames;
 using UnityEngine;
-using UnityEngine.Pool;
 using Vector3 = UnityEngine.Vector3;
-using Quaternion = UnityEngine.Quaternion;
-using Unity.Netcode;
-using Vector2 = UnityEngine.Vector2;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "WeaponProperties", menuName = "Weapons/WeaponProperties", order = 0)]
 public abstract class Network_WeaponProperties : ScriptableObject
 {
     [Header("Weapon Settings")]
     public string Name;
+    public Sprite Sprite;
     public WeaponType type;
     public GameObject ModelPrefab;
     public Vector3 PlayerSpawnPoint;

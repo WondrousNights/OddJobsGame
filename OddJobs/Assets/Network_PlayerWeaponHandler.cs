@@ -25,12 +25,16 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
         Weapon currentWeapon = weaponInventory.GetCurrentWeapon();
         if(currentWeapon != null)
         {
-            Debug.Log("I just shot my weapon");
-
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-            currentWeapon.UseWeapon(ray);
-            currentWeapon.ShootEffects();
-            FireRpc();
+            if(currentWeapon.ammoInClip > 0)
+            {
+                currentWeapon.UseWeapon(ray);
+                currentWeapon.ShootEffects();
+                weaponInventory.UpdateAmmoText();
+                FireRpc();
+            }
+            
+            
         }
     }
 
@@ -47,8 +51,19 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
         Weapon currentWeapon = weaponInventory.GetCurrentWeapon();
         if(currentWeapon != null)
         {
-
             currentWeapon.Reload();
+            weaponInventory.UpdateAmmoText();
+        }
+    }
+
+    void ReloadRpc()
+    {
+        Weapon visualWeapon = weaponInventory.GetCurrentVisualWeapon();
+        if(visualWeapon != null)
+        {
+            //Need to change this to reload effects
+            //visualWeapon.Reload();
+            
         }
     }
 }
