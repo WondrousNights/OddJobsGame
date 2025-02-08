@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-public class DestructableObject : MonoBehaviour, IDamageable
+public class DestructableObject : MonoBehaviour
 {
     [SerializeField] private GameObject brokenObjectPrefab;
     [SerializeField] private float breakForce = 2;

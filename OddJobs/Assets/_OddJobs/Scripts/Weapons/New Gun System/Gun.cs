@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
-    
 
     protected override void UpdateUI()
     {
@@ -18,39 +17,34 @@ public class Gun : Weapon
     protected void Shoot(Ray ray)
     {
         
-        RaycastHit hit;
+        LastShootTime = Time.time;
 
-        //Add Bullet Spread
-                
+            for(int i = 0; i < weaponProperties.bulletsPerShot; i++)
+            {
+                RaycastHit hit;
                 // bullet hit something!
+
+                ray.direction += (Random.insideUnitSphere * weaponProperties.bulletSpread).normalized;
+
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, weaponProperties.BulletCollisionMask))
                 {
                     // if the bullet hit something
-                    if (hit.transform)
+                    Debug.Log(hit.transform.name);
+                    if(hit.transform.TryGetComponent(out IDamageable damageable))
                     {
-                        Debug.Log(transform.name);
-                        // We are going to switch to doing damage to rigidbodies
-                        // If the object hit has a damageable component, apply damage to it
-                        if(hit.transform.TryGetComponent(out IDamageable damageable))
-                        {
-                            damageable.TakeDamage();
-                        }
+                        damageable.TakeDamageRpc(weaponProperties.Damage, weaponProperties.hitForce, ray, hit.point);
                     }
+                    
                 }
                 // bullet did not hit something. 
                 else
                 {
-                    // ActiveMonoBehaviour.StartCoroutine(
-                    //     PlayTrail(
-                    //         ShootSystem.transform.position,
-                    //         shootPoint.transform.position + (shootPoint.transform.forward * TrailConfig.MissDistance),
-                    //         new RaycastHit(),
-                    //         ray
-                    //     )
-                    // );
+                    Debug.Log("Raycast hit nothing");
                 }
-        ammoInClip -= 1;
 
+
+            }
+            ammoInClip -= 1;
     }
 
     public override void ShootEffects()
@@ -68,6 +62,12 @@ public class Gun : Weapon
     {
         ammoInClip += ammoToReload;
 
+        Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
+        gunEffects.ReloadEffect();
+    }
+
+    public override void ReloadEffects()
+    {
         Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
         gunEffects.ReloadEffect();
     }

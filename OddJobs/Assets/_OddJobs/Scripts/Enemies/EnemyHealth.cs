@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Vector3 = UnityEngine.Vector3;
 
-public class EnemyHealth : MonoBehaviour, IDamageable
+public class EnemyHealth : MonoBehaviour
 {
 
     [SerializeField]

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Explodable : MonoBehaviour, IDamageable
+public class Explodable : MonoBehaviour
 {
     [SerializeField]
     private float _MaxHealth = 1;

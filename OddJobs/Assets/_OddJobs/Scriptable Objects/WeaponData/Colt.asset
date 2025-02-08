@@ -23,18 +23,13 @@ MonoBehaviour:
   VisualRotation: {x: 0, y: 80.823, z: 3.991}
   DroppedPrefab: {fileID: 4452104846799766470, guid: 214ed46581792cf46bd6a7c4320b1a52,
     type: 3}
-  FirePoint: {fileID: 0}
   BulletCollisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8273403
   AmmoType: 0
   ClipSize: 6
-  Damage: 0
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 0
-  playerSpread: {x: 0.01, y: 0.01}
-  enemySpread: {x: 0.09, y: 0.09}
+  Damage: 8.94
+  bulletSpread: 0
   automaticFire: 0
   fireRate: 0.25
   bulletsPerShot: 1
@@ -42,7 +37,7 @@ MonoBehaviour:
   bulletHoleDecal: {fileID: 0}
   maxRecoil: 0
   maxKickback: 0
-  hitForce: 0
+  hitForce: 100.2
   recoveryTime: 0
   reloadTime: 0
   range: 0

@@ -115,7 +115,7 @@ public class Network_WeaponInventory : NetworkBehaviour
 
         if(IsOwner)
         {
-            //activeWeaponVisual.gameObject.SetActive(false);
+            activeWeaponVisual.gameObject.SetActive(false);
         }
     }
 
@@ -147,7 +147,7 @@ public class Network_WeaponInventory : NetworkBehaviour
         activeWeaponVisual = VisualInventory[index];
 
         if(activeWeapon != null) activeWeapon.ShowWeapon();
-        if(activeWeaponVisual != null) activeWeaponVisual.ShowWeapon();
+        if(activeWeaponVisual != null && !IsOwner) activeWeaponVisual.ShowWeapon();
     }
 
     public void DeEquipCurrentGun()

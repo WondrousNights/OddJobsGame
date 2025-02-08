@@ -15,7 +15,6 @@ public abstract class Network_WeaponProperties : ScriptableObject
     public Vector3 VisuaSpawnPos;
     public Vector3 VisualRotation;
     public GameObject DroppedPrefab;
-    public Transform FirePoint;
     
 
     public Weapon Spawn()
