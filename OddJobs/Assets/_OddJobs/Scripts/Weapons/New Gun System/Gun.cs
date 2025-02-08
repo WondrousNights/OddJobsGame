@@ -3,11 +3,8 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
+    bool active;
 
-    protected override void UpdateUI()
-    {
-        
-    }
 
     public override void UseWeapon(Ray ray)
     {
@@ -49,6 +46,7 @@ public class Gun : Weapon
 
     public override void ShootEffects()
     {
+        if(!active) return;
         Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
         gunEffects.ShootEffect();
     }
@@ -68,6 +66,7 @@ public class Gun : Weapon
 
     public override void ReloadEffects()
     {
+        if(!active) return;
         Network_GunEffects gunEffects = GetComponent<Network_GunEffects>();
         gunEffects.ReloadEffect();
     }
@@ -75,10 +74,12 @@ public class Gun : Weapon
     public override void HideWeapon()
     {
         gameObject.SetActive(false);
+        active = false;
     }
 
     public override void ShowWeapon()
     {
         gameObject.SetActive(true);
+        active = true;
     }
 }

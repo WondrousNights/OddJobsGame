@@ -11,7 +11,6 @@ public abstract class Weapon : MonoBehaviour
     [HideInInspector] public float LastShootTime;
     public Network_GunProperties weaponProperties;
     public abstract void UseWeapon(Ray ray);
-    protected abstract void UpdateUI();
     public abstract void ShootEffects();
     public abstract void Reload(int AmmoToReload);
     public abstract void DestroyWeapon();
