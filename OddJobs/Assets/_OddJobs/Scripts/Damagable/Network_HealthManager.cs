@@ -3,7 +3,7 @@ using Unity.Behavior;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Network_HealthManager : NetworkBehaviour
+public class Network_HealthManager : NetworkBehaviour, IDamageable
 {
 
     float health = 100;
@@ -11,12 +11,23 @@ public class Network_HealthManager : NetworkBehaviour
     [SerializeField] PuppetMaster puppetMaster;
 
     [SerializeField] bool isPlayer = false;
-
+    PlayerManager playerManager;
     public bool isDead = false;
 
-    public void DoDamage(float damage)
+    void Start()
+    {
+        if(isPlayer)
+        {
+            playerManager = GetComponent<PlayerManager>();
+        }
+    }
+
+    public void TakeDamageRpc(float damage, float hitForce, Ray ray, Vector3 vector3)
     {
         health -= damage;
+
+        if(isPlayer) playerManager.playerUIManager.UpdateHealthBar(damage, 100f);
+
 
         if(health <= 0)
         {
@@ -46,6 +57,6 @@ public class Network_HealthManager : NetworkBehaviour
         isDead = false;
         health = 100;
         puppetMaster.state = PuppetMaster.State.Alive;
-        //playerUI.UpdateHealthImage(health, 100f);
+        
     }
 }

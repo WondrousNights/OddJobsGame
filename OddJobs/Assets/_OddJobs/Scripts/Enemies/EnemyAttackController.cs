@@ -1,14 +1,24 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class EnemyAttackController : MonoBehaviour
+public class EnemyAttackController : NetworkBehaviour
 {
 
-    [SerializeField] EnemyWeapon weapon;
+    [SerializeField] Weapon weapon;
+    [SerializeField] Transform shootPoint;
 
-    public void AttackEvent()
+    void Start()
     {
-        //Debug.Log("Attack event fired!");
-        weapon.BaseAttack();
+        weapon.ShowWeapon();
+    }
+    
+    [Rpc(SendTo.Everyone)]
+    public void AttackEventRpc()
+    {
+        Ray ray = new Ray(shootPoint.position, shootPoint.forward);
+        Debug.Log("Attack event fired!");
+        weapon.UseWeapon(ray);
+        weapon.ShootEffects();
     }
     
    

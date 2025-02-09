@@ -18,9 +18,7 @@ public class DamagableLimb : NetworkBehaviour, IDamageable
     {
         Debug.Log("Dealt damage to limb");
         float damageToDeal = damage * damageMultiplier;
-        healthManager.DoDamage(damageToDeal);
-
-        
+        healthManager.TakeDamageRpc(damageToDeal, hitForce, ray, hitPosition);
 
         rb.AddForceAtPosition(ray.direction * hitForce, hitPosition, ForceMode.Impulse);
     }

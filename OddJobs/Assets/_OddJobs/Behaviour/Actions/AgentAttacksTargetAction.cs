@@ -11,20 +11,18 @@ public partial class AgentAttacksTargetAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
 
-    Network_EnemyAttackController enemyAttackController;
-    TargetDetector targetDetector;
+    EnemyAttackController enemyAttackController;
 
     protected override Status OnStart()
     {
-        enemyAttackController = Agent.Value.GetComponent<Network_EnemyAttackController>();
-        targetDetector = Agent.Value.GetComponent<TargetDetector>();
+        enemyAttackController = Agent.Value.GetComponent<EnemyAttackController>();
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
         Agent.Value.transform.LookAt(Target.Value.transform);
-        enemyAttackController.Attack();
+        enemyAttackController.AttackEventRpc();
         
         return Status.Success;
     }

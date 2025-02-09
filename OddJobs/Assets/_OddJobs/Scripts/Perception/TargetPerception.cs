@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class VisionPerception : MonoBehaviour, IPerception
+public class TargetPerception : MonoBehaviour, IPerception
 {
 
     [SerializeField] List<GameObject> previousTargetsICanSee = new List<GameObject>();
@@ -12,6 +12,7 @@ public class VisionPerception : MonoBehaviour, IPerception
     [SerializeField] List<GameObject> targetsInRange = new List<GameObject>();
     [SerializeField] List<GameObject> targetsICanSee = new List<GameObject>();
     [SerializeField] GameObject closestTarget;
+    [SerializeField] GameObject lastClosestTarget;
 
     [SerializeField] float distanceToSpot;
     [SerializeField] LayerMask perceptionMask;
@@ -34,8 +35,9 @@ public class VisionPerception : MonoBehaviour, IPerception
 
             if (newClosest != closestTarget)
             {
-            closestTarget = newClosest;
-            perceptionManager.InvokePerceptionEvent("OnClosestTargetChanged", closestTarget);
+                perceptionManager.InvokePerceptionEvent("OnCurrentTargetLostVisual", closestTarget);
+                closestTarget = newClosest;
+                perceptionManager.InvokePerceptionEvent("OnClosestTargetChanged", closestTarget);
             }
 
             DetectTargetChanges();
@@ -109,11 +111,16 @@ public class VisionPerception : MonoBehaviour, IPerception
             Ray ray = new Ray(lookPos.position, targetDirection.normalized);
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo, distanceToSpot, perceptionMask))
+            if (Physics.Raycast(ray, out hitInfo, distanceToSpot))
             {
                 if (hitInfo.collider.gameObject == target) // Ensure it's the target
                 {
                     return true;
+                }
+                else
+                {
+                    //Debug.Log($"[Vision] Target blocked by: {hitInfo.collider.gameObject.name}");
+                    return false;
                 }
             }
             Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
@@ -124,5 +131,10 @@ public class VisionPerception : MonoBehaviour, IPerception
     public void SetManager(Enemy_PerceptionManager perceptionManager)
     {
         this.perceptionManager = perceptionManager;
+    }
+
+    public void StartPerception()
+    {
+       
     }
 }

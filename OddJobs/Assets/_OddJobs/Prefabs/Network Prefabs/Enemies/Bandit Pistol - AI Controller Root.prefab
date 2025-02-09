@@ -4252,6 +4252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2106752697427880952}
   - component: {fileID: 958566215465592340}
+  - component: {fileID: 3515155063337331438}
   m_Layer: 19
   m_Name: Perceptions
   m_TagString: Untagged
@@ -4290,13 +4291,32 @@ MonoBehaviour:
   targetsInRange: []
   targetsICanSee: []
   closestTarget: {fileID: 0}
-  distanceToSpot: 10
+  lastClosestTarget: {fileID: 0}
+  distanceToSpot: 23
   perceptionMask:
     serializedVersion: 2
-    m_Bits: 327688
-  fieldOfView: 85
+    m_Bits: 360456
+  fieldOfView: 124.6
   lookPos: {fileID: 4908384475596219296}
   perceptionUpdateInterval: 0.2
+--- !u!114 &3515155063337331438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880285933054623638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08870ac78e9930e449ff4c5459ea0a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 5
+  gridExtent: 5
+  spacingX: 1.5
+  spacingZ: 1.5
+  updateThreshold: 1
+  validPositions: []
 --- !u!1 &6964520425458838057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4977,6 +4997,7 @@ GameObject:
   - component: {fileID: 4612810430734180626}
   - component: {fileID: 541206810934483059}
   - component: {fileID: 6319467837393364491}
+  - component: {fileID: 224590307201780440}
   m_Layer: 19
   m_Name: Bandit - AI Controller
   m_TagString: Untagged
@@ -5002,6 +5023,7 @@ Transform:
   - {fileID: 4055726051542155944}
   - {fileID: 4908384475596219296}
   - {fileID: 2106752697427880952}
+  - {fileID: 3858874763837182086}
   m_Father: {fileID: 1285366037357654876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2120865654394698589
@@ -5154,6 +5176,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perceptionsParent: {fileID: 6880285933054623638}
+--- !u!114 &224590307201780440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651373894021703699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5773f2e6fccd84288d25a660c071b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  weapon: {fileID: 7345988937880830610}
+  shootPoint: {fileID: 4908384475596219296}
 --- !u!1 &7662776720095739075
 GameObject:
   m_ObjectHideFlags: 0
@@ -6526,3 +6563,89 @@ Transform:
   - {fileID: 5391752344906054069}
   m_Father: {fileID: 7447372896682102346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1691847142528902159
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1482494941995388621}
+    m_Modifications:
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.221
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.759
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7259021
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.68779814
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 86.912
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8052361516213400974, guid: 73825cc6853e1cd488595bec0d7116e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Colt Single-Action Army - Player Weapon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 73825cc6853e1cd488595bec0d7116e4, type: 3}
+--- !u!4 &3858874763837182086 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1691847142528902159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7345988937880830610 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8253009077205460637, guid: 73825cc6853e1cd488595bec0d7116e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1691847142528902159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874a8efe543bd2c44b1598cff7df7915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

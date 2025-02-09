@@ -59,9 +59,11 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
             int ammoToReload = weaponInventory.ammoHandler.AmmoToReload(currentWeapon.weaponProperties.AmmoType, currentWeapon.ammoInClip, currentWeapon.weaponProperties.ClipSize);
             currentWeapon.Reload(ammoToReload);
             weaponInventory.UpdateAmmoText();
+            ReloadRpc();
         }
     }
-
+    
+    [Rpc(SendTo.Everyone)]
     void ReloadRpc()
     {
         Weapon visualWeapon = weaponInventory.GetCurrentVisualWeapon();

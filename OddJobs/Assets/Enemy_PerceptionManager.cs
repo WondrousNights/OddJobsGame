@@ -17,19 +17,28 @@ public class Enemy_PerceptionManager : MonoBehaviour
         behaviorGraph = GetComponent<BehaviorGraphAgent>();
         perceptions = perceptionsParent.GetComponents<IPerception>();
 
-        foreach(IPerception perception in perceptions)
-        {
-            perception.SetManager(this);
-        }
 
+
+        RegisterPerceptionEvent<GameObject>("OnCurrentTargetLostVisual", HandleTargetLostVisual);
         RegisterPerceptionEvent<GameObject>("OnClosestTargetChanged", HandleClosestTargetChanged);
         RegisterPerceptionEvent<GameObject>("OnTargetSpotted", HandleTargetSpotted);
         RegisterPerceptionEvent<GameObject>("OnTargetLost", HandleTargetLost);
+
+        RegisterPerceptionEvent<List<Vector3>>("OnNavigationPerception", HandleNavigationPerception);
+
+        foreach(IPerception perception in perceptions)
+        {
+            perception.SetManager(this);
+            perception.StartPerception();
+        }
     }
 
 
 
+
     //Event Handlers
+
+    /* Target Perception */
     private void HandleTargetSpotted(GameObject target)
     {
         Debug.Log($"[PerceptionManager] Target spotted: {target.name}");
@@ -46,7 +55,18 @@ public class Enemy_PerceptionManager : MonoBehaviour
         Debug.Log($"[PerceptionManager] New closest target: {target?.name ?? "None"}");
     }
 
+    private void HandleTargetLostVisual(GameObject target)
+    {
+        behaviorGraph.BlackboardReference.SetVariableValue("LastTarget", target);
+    }
 
+
+    /* Navigation Perception */
+    private void HandleNavigationPerception(List<Vector3> viablePositions)
+    {
+        behaviorGraph.BlackboardReference.SetVariableValue("ViablePositions", viablePositions);
+
+    }
 
 
 
