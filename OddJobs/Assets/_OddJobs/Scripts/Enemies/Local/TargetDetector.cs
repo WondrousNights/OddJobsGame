@@ -8,8 +8,6 @@ public class TargetDetector : MonoBehaviour {
 
     [SerializeField] LayerMask playerMask;
 
-    [SerializeField] bool checkForTargets = true;
-
     [SerializeField] float fieldOfView = 85;
 
     public event EventHandler OnFoundTarget;
@@ -19,7 +17,6 @@ public class TargetDetector : MonoBehaviour {
 
     void Update()
     {
-        if(!checkForTargets) return;
         CheckForTarget();
         CanSeeTarget();
 

@@ -24,6 +24,7 @@ public partial class DoesAgentHaveTargetAction : Action
         }
         else
         {
+            Debug.Log("I have a target!!");
             return Status.Success;
         }
         
