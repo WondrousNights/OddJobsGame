@@ -6,10 +6,6 @@ using UnityEngine;
 public class VisionPerception : MonoBehaviour, IPerception
 {
 
-    public event Action<GameObject> OnTargetSpotted;
-    public event Action<GameObject> OnTargetLost;
-    public event Action<GameObject> OnClosestTargetChanged;
-
     [SerializeField] List<GameObject> previousTargetsICanSee = new List<GameObject>();
 
 
@@ -25,6 +21,8 @@ public class VisionPerception : MonoBehaviour, IPerception
     [SerializeField] private float perceptionUpdateInterval = 0.2f;
     private float perceptionTimer = 0f;
 
+    Enemy_PerceptionManager perceptionManager;
+
     public void UpdatePerception()
     {
         perceptionTimer += Time.deltaTime;
@@ -37,7 +35,7 @@ public class VisionPerception : MonoBehaviour, IPerception
             if (newClosest != closestTarget)
             {
             closestTarget = newClosest;
-            OnClosestTargetChanged?.Invoke(closestTarget);
+            perceptionManager.InvokePerceptionEvent("OnClosestTargetChanged", closestTarget);
             }
 
             DetectTargetChanges();
@@ -52,13 +50,13 @@ public class VisionPerception : MonoBehaviour, IPerception
         foreach (GameObject obj in targetsICanSee)
         {
             if (!previousTargetsICanSee.Contains(obj)) // New target spotted
-                OnTargetSpotted?.Invoke(obj);  
+                perceptionManager.InvokePerceptionEvent("OnTargetSpotted", obj);
         }
 
         foreach (GameObject obj in previousTargetsICanSee)
         {
             if (!targetsICanSee.Contains(obj)) // Target lost
-                OnTargetLost?.Invoke(obj); 
+                perceptionManager.InvokePerceptionEvent("OnTargetLost", obj);
         }
 
         previousTargetsICanSee = new List<GameObject>(targetsICanSee);
@@ -123,4 +121,8 @@ public class VisionPerception : MonoBehaviour, IPerception
         return false;
     }
 
+    public void SetManager(Enemy_PerceptionManager perceptionManager)
+    {
+        this.perceptionManager = perceptionManager;
+    }
 }

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public interface IPerception
 {
+    void SetManager(Enemy_PerceptionManager perceptionManager);
     void UpdatePerception();
-    public event Action<GameObject> OnTargetSpotted;
-    public event Action<GameObject> OnTargetLost;
-    public event Action<GameObject> OnClosestTargetChanged;
 }
