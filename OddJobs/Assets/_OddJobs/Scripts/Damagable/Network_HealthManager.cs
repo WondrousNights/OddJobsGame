@@ -1,3 +1,4 @@
+using System;
 using RootMotion.Dynamics;
 using Unity.Behavior;
 using Unity.Netcode;
@@ -12,7 +13,10 @@ public class Network_HealthManager : NetworkBehaviour
 
     [SerializeField] bool isPlayer = false;
     PlayerManager playerManager;
+    Enemy_Manager enemyManager;
     public bool isDead = false;
+
+    public event Action<Ray> OnDamageTaken;
 
     void Start()
     {
@@ -20,11 +24,16 @@ public class Network_HealthManager : NetworkBehaviour
         {
             playerManager = GetComponent<PlayerManager>();
         }
+        else
+        {
+            enemyManager = GetComponent<Enemy_Manager>();
+        }
     }
 
     public void TakeDamageRpc(float damage, float hitForce, Ray ray, Vector3 vector3)
     {
         health -= damage;
+        OnDamageTaken?.Invoke(ray);
 
         if(isPlayer) playerManager.playerUIManager.UpdateHealthBar(health, 100f);
 
@@ -35,7 +44,8 @@ public class Network_HealthManager : NetworkBehaviour
 
             if(!isPlayer)
             {
-                GetComponent<BehaviorGraphAgent>().End();
+                enemyManager.HandleDeath();
+                
             }
 
             if(isPlayer)
@@ -57,5 +67,12 @@ public class Network_HealthManager : NetworkBehaviour
         health = 100;
         puppetMaster.state = PuppetMaster.State.Alive;
         
+    }
+
+    [Rpc(SendTo.Everyone)]
+    public void IncreaseHealthRpc(float amount)
+    {
+        health += amount;
+        if(isPlayer) playerManager.playerUIManager.UpdateHealthBar(health, 100f);
     }
 }

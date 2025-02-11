@@ -6,10 +6,14 @@ public class EnemyAttackController : NetworkBehaviour
 
     [SerializeField] Weapon weapon;
     [SerializeField] Transform shootPoint;
+    Enemy_Manager enemy_Manager;
 
     void Start()
     {
+        enemy_Manager = GetComponent<Enemy_Manager>();
         weapon.ShowWeapon();
+
+        enemy_Manager.OnDeath += DisableWeapon;
     }
     
     [Rpc(SendTo.Everyone)]
@@ -17,8 +21,17 @@ public class EnemyAttackController : NetworkBehaviour
     {
         Ray ray = new Ray(shootPoint.position, shootPoint.forward);
         Debug.Log("Attack event fired!");
-        weapon.UseWeapon(ray, false);
-        weapon.ShootEffects();
+        if (Time.time > weapon.weaponProperties.fireRate + weapon.LastShootTime)
+        {
+            weapon.UseWeapon(ray, false);
+            weapon.ShootEffects();
+        }
+       
+    }
+
+    void DisableWeapon()
+    {
+        weapon.HideWeapon();
     }
     
    

@@ -3,37 +3,44 @@ using UnityEngine;
 
 public static class PositionEvaluator 
 {
-    private static float EvaluatePosition(Vector3 position, Vector3 enemyPos)
+
+    private static float EvaluatePosition(Vector3 position, Vector3 enemyPos, EnemyPersonality enemyPersonality)
     {
         float score = 0f;
 
         // 🔹 1. Distance to Enemy (Prefer Mid-Range)
         float distance = Vector3.Distance(position, enemyPos);
-        score += Mathf.Exp(-Mathf.Pow((distance - 15f) / 10f , 2)) * 30f; // Gaussian falloff
+        score += Mathf.Exp(-Mathf.Pow((distance - enemyPersonality.OptimalDistance) / enemyPersonality.DistanceTolerance , 2)) * 30f; // Gaussian falloff
+
+        Debug.DrawRay(position + Vector3.up, (enemyPos - position).normalized * distance, Color.green);
+
+        bool lineCast = Physics.Linecast(position + Vector3.up, enemyPos + Vector3.up, out RaycastHit hitInfo, enemyPersonality.CoverMask);
 
         // 🔹 2. Cover Bonus
-        if (Physics.Linecast(position, enemyPos))
+        if (lineCast)
         {
-            score += 110f; // High score for cover
+            //Debug.Log($"Position {position} has great cover!! Hit: {hitInfo.collider.name} at {hitInfo.collider.transform.position}");
+            score += enemyPersonality.CoverScore; // High score for cover
+            
         }
 
         // 🔹 3. Line of Sight to Enemy (Higher if visible)
-        if (!Physics.Linecast(position, enemyPos))
+        if (!lineCast)
         {
-            score += 20f; // Encourage good attack spots
+            score += enemyPersonality.LineOfSightScore; // Encourage good attack spots
         }
 
         return score;
     }
 
-    public static Vector3 ChooseBestPosition(List<Vector3> positions, Vector3 enemyPos)
+    public static Vector3 ChooseBestPosition(List<Vector3> positions, Vector3 enemyPos, EnemyPersonality enemyPersonality)
     {
         Vector3 bestPosition = positions[0];
         float bestScore = float.MinValue;
 
         foreach (var pos in positions)
         {
-            float score = EvaluatePosition(pos, enemyPos);
+            float score = EvaluatePosition(pos, enemyPos, enemyPersonality);
 
             if (score > bestScore)
             {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class TargetPerception : MonoBehaviour, IPerception
@@ -15,7 +16,8 @@ public class TargetPerception : MonoBehaviour, IPerception
     [SerializeField] GameObject lastClosestTarget;
 
     [SerializeField] float distanceToSpot;
-    [SerializeField] LayerMask perceptionMask;
+    [SerializeField] LayerMask targetMask;
+    [SerializeField] LayerMask sightMask;
     [SerializeField] float fieldOfView = 85;
     [SerializeField] Transform lookPos;
 
@@ -73,7 +75,7 @@ public class TargetPerception : MonoBehaviour, IPerception
     public void CheckForTargetsInRange()
     {
         targetsInRange.Clear();  // Prevent duplicates
-        Collider[] visibleTargets = Physics.OverlapSphere(transform.position, distanceToSpot, perceptionMask);
+        Collider[] visibleTargets = Physics.OverlapSphere(transform.position, distanceToSpot, targetMask);
 
         foreach (Collider col in visibleTargets)
         {
@@ -102,28 +104,30 @@ public class TargetPerception : MonoBehaviour, IPerception
 
     bool CanSeeTarget(GameObject target)
     {
-        Vector3 targetDirection = target.transform.position - lookPos.position;
+        Vector3 dirToPlayer = target.transform.position + Vector3.up - lookPos.position;
+        float angleToPlayer = Vector3.Angle(dirToPlayer, transform.forward);
+        Ray rayDebug = new Ray(lookPos.position, dirToPlayer);
+        Debug.DrawRay(rayDebug.origin, rayDebug.direction * distanceToSpot, Color.red);
 
-        float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
-
-        if (angleToPlayer <= fieldOfView * 0.5f)
+        if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
         {
-            Ray ray = new Ray(lookPos.position, targetDirection.normalized);
-            RaycastHit hitInfo;
+            Ray ray = new Ray(lookPos.position, dirToPlayer);
+            RaycastHit hitInfo = new RaycastHit();
 
-            if (Physics.Raycast(ray, out hitInfo, distanceToSpot))
+            if (Physics.Raycast(ray, out hitInfo, distanceToSpot, sightMask))
             {
-                if (hitInfo.collider.gameObject == target) // Ensure it's the target
+                if (hitInfo.transform.gameObject == target) // Ensure it's the target
                 {
+                    //Debug.Log($"[Vision] I can see my target");
                     return true;
                 }
                 else
                 {
-                    //Debug.Log($"[Vision] Target blocked by: {hitInfo.collider.gameObject.name}");
+                   
                     return false;
                 }
             }
-            Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
+            
         }
         return false;
     }

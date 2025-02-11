@@ -26,8 +26,7 @@ public class PlayerManager : NetworkBehaviour
     public Network_WeaponInventory weaponInventory;
     public Network_PlayerWeaponHandler weaponHandler;
     public PlayerAmmoHandler ammoHandler;
-
-    Network_HealthManager healthManager;
+    public Network_HealthManager healthManager;
 
     //Random Shit
     [Header("Set in Inspector")]

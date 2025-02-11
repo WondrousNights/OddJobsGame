@@ -24,6 +24,6 @@ public class Player_UIManager : MonoBehaviour
     }
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
-        healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, Mathf.Clamp01(currentHealth / maxHealth), Time.deltaTime * 10);
+        healthImage.fillAmount = currentHealth / maxHealth;
     }
 }

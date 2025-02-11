@@ -11,6 +11,9 @@ public class Enemy_PerceptionManager : MonoBehaviour
     private Dictionary<string, Action<object>> perceptionEvents = new Dictionary<string, Action<object>>();
 
     BehaviorGraphAgent behaviorGraph;
+
+    [SerializeField] LayerMask squadMask;
+    [SerializeField] LayerMask playerMask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,8 +26,11 @@ public class Enemy_PerceptionManager : MonoBehaviour
         RegisterPerceptionEvent<GameObject>("OnClosestTargetChanged", HandleClosestTargetChanged);
         RegisterPerceptionEvent<GameObject>("OnTargetSpotted", HandleTargetSpotted);
         RegisterPerceptionEvent<GameObject>("OnTargetLost", HandleTargetLost);
+        RegisterPerceptionEvent<GameObject>("OnEnemySpottedTarget", HandleEnemySpottedTarget);
 
         RegisterPerceptionEvent<List<Vector3>>("OnNavigationPerception", HandleNavigationPerception);
+
+        RegisterPerceptionEvent<Ray>("OnDamageTaken", HandleDamageTaken);
 
         foreach(IPerception perception in perceptions)
         {
@@ -52,13 +58,30 @@ public class Enemy_PerceptionManager : MonoBehaviour
     private void HandleClosestTargetChanged(GameObject target)
     {
         behaviorGraph.BlackboardReference.SetVariableValue("ClosestTarget", target);
+
+        AlertNearbyAllies(target);
         Debug.Log($"[PerceptionManager] New closest target: {target?.name ?? "None"}");
     }
 
     private void HandleTargetLostVisual(GameObject target)
     {
         behaviorGraph.BlackboardReference.SetVariableValue("LastTarget", target);
+        //behaviorGraph.BlackboardReference.SetVariableValue("LastTargetPos", target.transform.position);
     }
+    
+    private void HandleEnemySpottedTarget(GameObject target)
+    {
+        bool hasCurrentTarget = behaviorGraph.BlackboardReference.GetVariableValue<GameObject>("CurrentTarget", out GameObject currentTarget);
+        bool hasLastTarget = behaviorGraph.BlackboardReference.GetVariableValue<GameObject>("LastTarget", out GameObject lastTarget);
+
+        if(currentTarget == null && lastTarget == null)
+        {
+            Debug.Log("Going in for backup!");
+            behaviorGraph.BlackboardReference.SetVariableValue("LastTarget", target);
+            //behaviorGraph.BlackboardReference.SetVariableValue("LastTargetPos", target.transform.position);
+        }
+    }
+
 
 
     /* Navigation Perception */
@@ -69,6 +92,24 @@ public class Enemy_PerceptionManager : MonoBehaviour
     }
 
 
+    //Damage Perception
+    private void HandleDamageTaken(Ray ray)
+    {
+        Collider[] players = Physics.OverlapSphere(ray.origin, 1f, playerMask);
+
+        foreach(Collider col in players)
+        {
+
+            PlayerManager player = col.GetComponent<PlayerManager>();
+            if(player != null)
+            {
+                behaviorGraph.BlackboardReference.SetVariableValue("LastTarget", player.gameObject);
+            }
+        
+        }
+
+        
+    }
 
 
     // Update is called once per frame
@@ -93,4 +134,25 @@ public class Enemy_PerceptionManager : MonoBehaviour
             action(data);
         }
     }
+
+    void AlertNearbyAllies(GameObject target)
+    {
+        float alertRadius = 1000f;  // How far allies can hear the alert
+        Collider[] nearbyAllies = Physics.OverlapSphere(transform.position, alertRadius, squadMask);
+
+        foreach(Collider col in nearbyAllies)
+        {
+            if(col.gameObject == this.gameObject) continue;
+
+            Enemy_PerceptionManager allyPerception = col.GetComponent<Enemy_PerceptionManager>();
+            if(allyPerception != null)
+            {
+                allyPerception.InvokePerceptionEvent("OnEnemySpottedTarget", target);
+            }
+        
+        }
+    }
+
+
+
 }

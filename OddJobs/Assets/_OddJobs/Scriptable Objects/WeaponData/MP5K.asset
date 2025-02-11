@@ -25,11 +25,12 @@ MonoBehaviour:
     type: 3}
   BulletCollisionMask:
     serializedVersion: 2
-    m_Bits: 8371707
+    m_Bits: 16760315
   AmmoType: 0
   ClipSize: 24
   Damage: 5
-  bulletSpread: 0
+  playerBulletSpread: 0
+  enemyBulletSpread: 0
   automaticFire: 1
   fireRate: 0.1
   bulletsPerShot: 1

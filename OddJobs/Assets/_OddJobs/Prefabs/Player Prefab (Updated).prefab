@@ -7471,7 +7471,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8158719
+    m_Bits: 16547327
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -9051,12 +9051,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   controller: {fileID: 6472176170120578079}
-  speed: 5
+  speed: 6
   gravity: -9.8
   jumpHeight: 1
   cam: {fileID: 8158258702167754821}
-  xSensitivity: 30
-  ySensitivity: 30
+  xSensitivity: 50
+  ySensitivity: 50
 --- !u!114 &3757912328881618997
 MonoBehaviour:
   m_ObjectHideFlags: 0
