@@ -17,7 +17,7 @@ public class EnemyAttackController : NetworkBehaviour
     {
         Ray ray = new Ray(shootPoint.position, shootPoint.forward);
         Debug.Log("Attack event fired!");
-        weapon.UseWeapon(ray);
+        weapon.UseWeapon(ray, false);
         weapon.ShootEffects();
     }
     

@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
     PlayerManager playerManager;
 
     [SerializeField] Transform shootpoint;
+
+    bool isFiring = false;
+
+    Weapon currentWeapon;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,16 +20,29 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
         weaponInventory = GetComponent<Network_WeaponInventory>();
         playerManager = GetComponent<PlayerManager>();
 
-        inputController.onFoot.Shoot.performed += ctx => Fire();
+        weaponInventory.OnActiveWeaponChanged += HandleWeaponChange;
+
+        inputController.onFoot.Shoot.performed += ctx => {isFiring = true;};
+        inputController.onFoot.Shoot.canceled += ctx => {isFiring = false;};
         inputController.onFoot.Reload.performed += ctx => Reload();
+
+    }
+
+    private void HandleWeaponChange()
+    {
+        currentWeapon = weaponInventory.GetCurrentWeapon();
+    }
+
+    void Update()
+    {
+        if(isFiring) Fire();
     }
 
     void Fire()
     {
         if(!IsOwner) return;
         if(playerManager.currentPlayerState == PlayerManager.PlayerState.InMenu) return;   
-
-        Weapon currentWeapon = weaponInventory.GetCurrentWeapon();
+        
         if(currentWeapon != null)
         {
             Ray ray = new Ray(shootpoint.transform.position, shootpoint.transform.forward);
@@ -32,7 +50,7 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
             {
                 if (Time.time > currentWeapon.weaponProperties.fireRate + currentWeapon.LastShootTime)
                 {
-                    currentWeapon.UseWeapon(ray);
+                    currentWeapon.UseWeapon(ray, true);
                     currentWeapon.ShootEffects();
                     weaponInventory.UpdateAmmoText();
                     FireRpc();
@@ -74,4 +92,6 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
             
         }
     }
+
+
 }

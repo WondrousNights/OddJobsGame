@@ -102,7 +102,7 @@ public class TargetPerception : MonoBehaviour, IPerception
 
     bool CanSeeTarget(GameObject target)
     {
-        Vector3 targetDirection = target.transform.position - transform.position;
+        Vector3 targetDirection = target.transform.position - lookPos.position;
 
         float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
 

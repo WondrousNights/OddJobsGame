@@ -1,17 +1,19 @@
+using System.Numerics;
 using Unity.Netcode;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class Gun : Weapon
 {
     bool active;
 
 
-    public override void UseWeapon(Ray ray)
+    public override void UseWeapon(Ray ray, bool isPlayer)
     {
-        Shoot(ray);
+        Shoot(ray, isPlayer);
     }
 
-    protected void Shoot(Ray ray)
+    protected void Shoot(Ray ray, bool isPlayer)
     {
         
         LastShootTime = Time.time;
@@ -20,8 +22,11 @@ public class Gun : Weapon
             {
                 RaycastHit hit;
                 // bullet hit something!
-
-                ray.direction += (Random.insideUnitSphere * weaponProperties.bulletSpread).normalized;
+                Vector3 spread;
+                if(isPlayer) spread = Random.insideUnitCircle * weaponProperties.playerBulletSpread;
+                else { spread = Random.insideUnitCircle * weaponProperties.enemyBulletSpread;; }
+                UnityEngine.Quaternion spreadRotation = UnityEngine.Quaternion.Euler(spread.y, spread.x, 0);
+                ray.direction = spreadRotation * ray.direction; 
 
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, weaponProperties.BulletCollisionMask))
                 {

@@ -22,6 +22,8 @@ public class Network_WeaponInventory : NetworkBehaviour
 
     float itemDropForce = 2f;
 
+    public event Action OnActiveWeaponChanged;
+
     void Start()
     {
         magicalIK = GetComponent<Network_MagicalIK>();
@@ -145,6 +147,7 @@ public class Network_WeaponInventory : NetworkBehaviour
         
         activeWeapon = Inventory[index];
         activeWeaponVisual = VisualInventory[index];
+        OnActiveWeaponChanged?.Invoke();
 
         if(activeWeapon != null) activeWeapon.ShowWeapon();
         if(activeWeaponVisual != null && !IsOwner) activeWeaponVisual.ShowWeapon();
@@ -197,7 +200,7 @@ public class Network_WeaponInventory : NetworkBehaviour
        
                 // add throwing force to the weapon
                 Rigidbody rb = droppedModel.GetComponent<Rigidbody>();
-                rb.AddForce(gunHolder.forward * itemDropForce, ForceMode.VelocityChange);
+                rb.AddForce(transform.forward * itemDropForce, ForceMode.VelocityChange);
             }
         }
        

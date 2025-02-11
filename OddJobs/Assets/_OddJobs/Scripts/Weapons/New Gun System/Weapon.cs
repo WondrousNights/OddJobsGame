@@ -10,7 +10,7 @@ public abstract class Weapon : MonoBehaviour
     [HideInInspector] public int ammoInClip;
     [HideInInspector] public float LastShootTime;
     public Network_GunProperties weaponProperties;
-    public abstract void UseWeapon(Ray ray);
+    public abstract void UseWeapon(Ray ray, bool isPlayer);
     public abstract void ShootEffects();
     public abstract void Reload(int AmmoToReload);
     public abstract void DestroyWeapon();

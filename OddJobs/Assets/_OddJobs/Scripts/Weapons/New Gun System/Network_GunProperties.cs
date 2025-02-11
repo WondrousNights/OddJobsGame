@@ -8,7 +8,8 @@ public class Network_GunProperties : Network_WeaponProperties
     public AmmoType AmmoType;
     public int ClipSize;
     public float Damage;
-    public float bulletSpread = 0;
+    public float playerBulletSpread;
+    public float enemyBulletSpread;
     public bool automaticFire = false;
     public float fireRate = 0.25f;
     public int bulletsPerShot = 1;

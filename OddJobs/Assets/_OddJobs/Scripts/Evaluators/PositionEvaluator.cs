@@ -9,12 +9,12 @@ public static class PositionEvaluator
 
         // 🔹 1. Distance to Enemy (Prefer Mid-Range)
         float distance = Vector3.Distance(position, enemyPos);
-        score += Mathf.Clamp(30f - distance, 0, 30f); // Favor 10-30m range
+        score += Mathf.Exp(-Mathf.Pow((distance - 15f) / 10f , 2)) * 30f; // Gaussian falloff
 
         // 🔹 2. Cover Bonus
         if (Physics.Linecast(position, enemyPos))
         {
-            score += 100f; // High score for cover
+            score += 110f; // High score for cover
         }
 
         // 🔹 3. Line of Sight to Enemy (Higher if visible)

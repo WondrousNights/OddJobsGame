@@ -47,6 +47,6 @@ public class Network_PlayerUI : MonoBehaviour
 
     public void UpdateHealthImage(float currentHealth, float MaxHealth)
     {
-        healthImage.fillAmount = currentHealth / MaxHealth;
+        healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, Mathf.Clamp01(currentHealth / 100f), Time.deltaTime * 10);
     }
 }

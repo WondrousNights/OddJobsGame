@@ -3,7 +3,7 @@ using Unity.Behavior;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Network_HealthManager : NetworkBehaviour, IDamageable
+public class Network_HealthManager : NetworkBehaviour
 {
 
     float health = 100;
@@ -26,8 +26,7 @@ public class Network_HealthManager : NetworkBehaviour, IDamageable
     {
         health -= damage;
 
-        if(isPlayer) playerManager.playerUIManager.UpdateHealthBar(damage, 100f);
-
+        if(isPlayer) playerManager.playerUIManager.UpdateHealthBar(health, 100f);
 
         if(health <= 0)
         {

@@ -534,7 +534,7 @@ Transform:
   m_GameObject: {fileID: 472059682727941880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.485, z: 0.311}
+  m_LocalPosition: {x: 0, y: 1.381, z: 0.311}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4292,11 +4292,11 @@ MonoBehaviour:
   targetsICanSee: []
   closestTarget: {fileID: 0}
   lastClosestTarget: {fileID: 0}
-  distanceToSpot: 23
+  distanceToSpot: 26.4
   perceptionMask:
     serializedVersion: 2
-    m_Bits: 360456
-  fieldOfView: 124.6
+    m_Bits: 32776
+  fieldOfView: 132.2
   lookPos: {fileID: 4908384475596219296}
   perceptionUpdateInterval: 0.2
 --- !u!114 &3515155063337331438
@@ -6574,17 +6574,17 @@ PrefabInstance:
     - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.221
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.55
+      value: 1.282
       objectReference: {fileID: 0}
     - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.759
+      value: 0.552
       objectReference: {fileID: 0}
     - target: {fileID: 2519724564310520969, guid: 73825cc6853e1cd488595bec0d7116e4,
         type: 3}

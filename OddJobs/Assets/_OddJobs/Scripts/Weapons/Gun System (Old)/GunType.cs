@@ -1,4 +1,5 @@
 public enum WeaponType
 {
-    Colt
+    Colt,
+    MP5K
 }

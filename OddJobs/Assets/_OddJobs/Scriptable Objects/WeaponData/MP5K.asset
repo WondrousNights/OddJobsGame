@@ -10,35 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af9fba482493ed34880fd4a520675a45, type: 3}
-  m_Name: Colt
+  m_Name: MP5K
   m_EditorClassIdentifier: 
-  Name: Colt
-  Sprite: {fileID: 21300000, guid: 732401aa0e04dae42a6cd5e652912834, type: 3}
-  type: 0
-  ModelPrefab: {fileID: 8052361516213400974, guid: 73825cc6853e1cd488595bec0d7116e4,
+  Name: MP5K
+  Sprite: {fileID: 21300000, guid: 4e075ddaf9ee67042a79dc3a86253999, type: 3}
+  type: 1
+  ModelPrefab: {fileID: 8052361516213400974, guid: 9170f22227f51c94eb9322743b6765fb,
     type: 3}
-  PlayerSpawnPoint: {x: 0.189, y: -0.199, z: 0.515}
+  PlayerSpawnPoint: {x: 0.31, y: -0.32, z: 0.515}
   PlayerSpawnRotation: {x: 0, y: 80.823, z: -13.827}
   VisuaSpawnPos: {x: 0.1819736, y: 1.353, z: 0.557164}
   VisualRotation: {x: 0, y: 80.823, z: 3.991}
-  DroppedPrefab: {fileID: 6114859138642703412, guid: e3372a01c15a36747bd474d63a631b44,
+  DroppedPrefab: {fileID: 6623321381192089758, guid: 89fee99beac96094790f39f2387c148b,
     type: 3}
   BulletCollisionMask:
     serializedVersion: 2
     m_Bits: 8371707
   AmmoType: 0
-  ClipSize: 6
-  Damage: 8.94
-  playerBulletSpread: 0
-  enemyBulletSpread: 1
-  automaticFire: 0
-  fireRate: 0.25
+  ClipSize: 24
+  Damage: 5
+  bulletSpread: 0
+  automaticFire: 1
+  fireRate: 0.1
   bulletsPerShot: 1
   impactParticle: {fileID: 0}
   bulletHoleDecal: {fileID: 0}
   maxRecoil: 0
   maxKickback: 0
-  hitForce: 100.2
+  hitForce: 66
   recoveryTime: 0
   reloadTime: 0
   range: 0
