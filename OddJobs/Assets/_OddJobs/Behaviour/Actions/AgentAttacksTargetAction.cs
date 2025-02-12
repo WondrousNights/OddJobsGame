@@ -24,7 +24,7 @@ public partial class AgentAttacksTargetAction : Action
         Agent.Value.transform.LookAt(Target.Value.transform);
         enemyAttackController.AttackEventRpc();
         
-        return Status.Success;
+        return Status.Running;
     }
 
     protected override void OnEnd()

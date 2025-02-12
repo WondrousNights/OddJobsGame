@@ -27,12 +27,9 @@ public partial class FindRandomPointAndMoveToItAction : Action
 
     bool runningToTarget = false;
 
-    TargetDetector targetDetector;
-
     protected override Status OnStart()
     {
         navMeshAgent = Agent.Value.GetComponent<NavMeshAgent>(); 
-        targetDetector = Agent.Value.GetComponent<TargetDetector>();
 
         startPos = Agent.Value.transform.position;
         newTarget = RandomNavmeshLocation(Range.Value);
@@ -59,11 +56,7 @@ public partial class FindRandomPointAndMoveToItAction : Action
             }
             m_Animator.SetFloat(AnimatorSpeedParam, navMeshAgent.velocity.magnitude);
         }
-        if(targetDetector.currentTarget != null)
-        {
-            return Status.Success;
-        }
-
+        
         return Status.Running;
     }
 

@@ -10,35 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af9fba482493ed34880fd4a520675a45, type: 3}
-  m_Name: MP5K
+  m_Name: Double Deuce
   m_EditorClassIdentifier: 
-  Name: MP5K
-  Sprite: {fileID: 21300000, guid: 4e075ddaf9ee67042a79dc3a86253999, type: 3}
-  type: 1
-  ModelPrefab: {fileID: 8052361516213400974, guid: 9170f22227f51c94eb9322743b6765fb,
+  Name: Double Deuce
+  Sprite: {fileID: 21300000, guid: 9d804e8aeee26f64f8d3981f19381a02, type: 3}
+  type: 2
+  ModelPrefab: {fileID: 8052361516213400974, guid: 26c89d3d316ec07438530e08ab3bc40f,
     type: 3}
-  PlayerSpawnPoint: {x: 0.31, y: -0.32, z: 0.515}
+  PlayerSpawnPoint: {x: 0.26, y: -0.23, z: 0.49}
   PlayerSpawnRotation: {x: 0, y: 80.823, z: -13.827}
   VisuaSpawnPos: {x: 0.1819736, y: 1.353, z: 0.557164}
   VisualRotation: {x: 0, y: 80.823, z: 3.991}
-  DroppedPrefab: {fileID: 6623321381192089758, guid: 89fee99beac96094790f39f2387c148b,
+  DroppedPrefab: {fileID: 2488782372159847759, guid: a543041e53b0f064caa369ec9641dfe1,
     type: 3}
   BulletCollisionMask:
     serializedVersion: 2
     m_Bits: 16760315
-  AmmoType: 0
-  ClipSize: 24
-  Damage: 3
-  playerBulletSpread: 0
-  enemyBulletSpread: 2
-  automaticFire: 1
-  fireRate: 0.1
-  bulletsPerShot: 1
+  AmmoType: 2
+  ClipSize: 2
+  Damage: 10
+  playerBulletSpread: 2
+  enemyBulletSpread: 4
+  automaticFire: 0
+  fireRate: 0.7
+  bulletsPerShot: 6
   impactParticle: {fileID: 0}
   bulletHoleDecal: {fileID: 0}
   maxRecoil: 0
   maxKickback: 0
-  hitForce: 66
+  hitForce: 233.1
   recoveryTime: 0
   reloadTime: 0
   range: 0
