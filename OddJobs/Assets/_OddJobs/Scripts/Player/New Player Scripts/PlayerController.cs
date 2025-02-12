@@ -35,12 +35,16 @@ public class PlayerController : NetworkBehaviour
         playerManager = GetComponent<PlayerManager>();
 
         currentActions = inputController.onFoot;
+        
+
   
     }
 
     void Start()
     {
         inputController.onFoot.Jump.performed += ctx => Jump();
+        inputController.onFoot.Aim.performed += ctx => Aim();
+        inputController.onFoot.Aim.canceled += ctx => UnAim();
     }
 
 
@@ -103,5 +107,14 @@ public class PlayerController : NetworkBehaviour
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * (mouseX * xSensitivity));
     
+    }
+
+    void Aim()
+    {
+        cam.fieldOfView = 50f;
+    }
+    void UnAim()
+    {
+        cam.fieldOfView = 70f;
     }
 }

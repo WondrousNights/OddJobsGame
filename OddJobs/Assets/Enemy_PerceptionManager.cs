@@ -137,7 +137,7 @@ public class Enemy_PerceptionManager : MonoBehaviour
 
     void AlertNearbyAllies(GameObject target)
     {
-        float alertRadius = 75f;  // How far allies can hear the alert
+        float alertRadius = 50f;  // How far allies can hear the alert
         Collider[] nearbyAllies = Physics.OverlapSphere(transform.position, alertRadius, squadMask);
 
         foreach(Collider col in nearbyAllies)
