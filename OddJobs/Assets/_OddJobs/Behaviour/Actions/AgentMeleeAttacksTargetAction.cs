@@ -5,8 +5,8 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Agent Attacks Target", story: "[Agent] Attacks [Target]", category: "Action", id: "b67b44b7e3c94d0ceabe9df995c8070d")]
-public partial class AgentAttacksTargetAction : Action
+[NodeDescription(name: "Agent Melee attacks Target", story: "[Agent] melee attacks [target]", category: "Action", id: "65be3749b7ca038107127b4dedc1e963")]
+public partial class AgentMeleeAttacksTargetAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
@@ -22,9 +22,8 @@ public partial class AgentAttacksTargetAction : Action
     protected override Status OnUpdate()
     {
         Agent.Value.transform.LookAt(Target.Value.transform);
-        enemyAttackController.ShootEventRpc();
-        
-        return Status.Running;
+        enemyAttackController.MeleeEventRpc();
+        return Status.Success;
     }
 
     protected override void OnEnd()

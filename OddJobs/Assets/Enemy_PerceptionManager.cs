@@ -47,12 +47,12 @@ public class Enemy_PerceptionManager : MonoBehaviour
     /* Target Perception */
     private void HandleTargetSpotted(GameObject target)
     {
-        Debug.Log($"[PerceptionManager] Target spotted: {target.name}");
+       // Debug.Log($"[PerceptionManager] Target spotted: {target.name}");
     }
 
     private void HandleTargetLost(GameObject target)
     {
-        Debug.Log($"[PerceptionManager] Target lost: {target.name}");
+       // Debug.Log($"[PerceptionManager] Target lost: {target.name}");
     }
 
     private void HandleClosestTargetChanged(GameObject target)
@@ -60,7 +60,7 @@ public class Enemy_PerceptionManager : MonoBehaviour
         behaviorGraph.BlackboardReference.SetVariableValue("ClosestTarget", target);
 
         AlertNearbyAllies(target);
-        Debug.Log($"[PerceptionManager] New closest target: {target?.name ?? "None"}");
+        //Debug.Log($"[PerceptionManager] New closest target: {target?.name ?? "None"}");
     }
 
     private void HandleTargetLostVisual(GameObject target)
@@ -76,7 +76,7 @@ public class Enemy_PerceptionManager : MonoBehaviour
 
         if(currentTarget == null && lastTarget == null)
         {
-            Debug.Log("Going in for backup!");
+            //Debug.Log("Going in for backup!");
             behaviorGraph.BlackboardReference.SetVariableValue("LastTarget", target);
             //behaviorGraph.BlackboardReference.SetVariableValue("LastTargetPos", target.transform.position);
         }

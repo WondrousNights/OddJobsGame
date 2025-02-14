@@ -17,16 +17,29 @@ public class EnemyAttackController : NetworkBehaviour
     }
     
     [Rpc(SendTo.Everyone)]
-    public void AttackEventRpc()
+    public void ShootEventRpc()
     {
+        if(enemy_Manager.isDead) return;
         Ray ray = new Ray(shootPoint.position, shootPoint.forward);
         Debug.Log("Attack event fired!");
-        if (Time.time > weapon.weaponProperties.fireRate + weapon.LastShootTime)
+        if (Time.time > weapon.gunProperties.fireRate + weapon.LastShootTime)
         {
             weapon.UseWeapon(ray, false);
             weapon.ShootEffects();
         }
        
+    }
+
+    [Rpc(SendTo.Everyone)]
+    public void MeleeEventRpc()
+    {
+        if(enemy_Manager.isDead) return;
+        Ray ray = new Ray(shootPoint.position, shootPoint.forward);
+        Debug.Log("Attack event fired!");
+
+            weapon.UseWeapon(ray, false);
+            weapon.ShootEffects();
+        
     }
 
     void DisableWeapon()

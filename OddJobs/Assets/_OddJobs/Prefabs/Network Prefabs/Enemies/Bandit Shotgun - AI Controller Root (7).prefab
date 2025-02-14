@@ -210,7 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &182466975557624508
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &479727522415551645
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,12 +522,12 @@ GameObject:
   - component: {fileID: 585753215016316142}
   - component: {fileID: 4290904652375528824}
   - component: {fileID: 1247706709364473916}
-  - component: {fileID: 7063870153972736151}
   - component: {fileID: 4014483863363564135}
   - component: {fileID: 417661790941351641}
   - component: {fileID: 1773840570772466279}
   - component: {fileID: 1020205260986355357}
   - component: {fileID: 7236632989088047908}
+  - component: {fileID: 6137013147439627897}
   m_Layer: 19
   m_Name: Bandit - AI Controller
   m_TagString: Untagged
@@ -641,22 +641,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7063870153972736151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785052187900627723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9402b41b6f0354385bcdf25f7f98cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  puppetMaster: {fileID: 3915122072572996949}
-  isPlayer: 0
-  isDead: 0
 --- !u!114 &4014483863363564135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +746,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6137013147439627897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785052187900627723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd18d9fbf5914c4f90ffbdec2a887d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  health: 100
+  MaxHealth: 100
+  puppetMaster: {fileID: 3915122072572996949}
+  isDead: 0
 --- !u!1 &802303861015639753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &1066092735200460252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,7 +1454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &1789571435391210362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &1815020314988076887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &2023118032793120714
 GameObject:
   m_ObjectHideFlags: 0
@@ -2414,7 +2415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &2588859578508477300
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,7 +3202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &2988061191768267309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3630,8 +3631,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  damageMultiplier: 10
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &3775194072134230425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,7 +4556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &5605219172321146335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4647,7 +4648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab922a8a6e076424d9bd1c1782b15184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &5692493055416947820
 GameObject:
   m_ObjectHideFlags: 0
@@ -4922,7 +4923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &6262250261530064850
 GameObject:
   m_ObjectHideFlags: 0
@@ -5213,7 +5214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 910876612
+  GlobalObjectIdHash: 832000476
   InScenePlacedSourceGlobalObjectIdHash: 3445361919
   DeferredDespawnTick: 0
   Ownership: 1
@@ -5491,7 +5492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &7374703621446200907
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,7 +5727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &8139686697911714115
 GameObject:
   m_ObjectHideFlags: 0
@@ -6224,7 +6225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &8599357249568648130
 GameObject:
   m_ObjectHideFlags: 0
@@ -6524,7 +6525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damageMultiplier: 5
-  healthManager: {fileID: 7063870153972736151}
+  healthManager: {fileID: 6137013147439627897}
 --- !u!1 &8864109598551297130
 GameObject:
   m_ObjectHideFlags: 0

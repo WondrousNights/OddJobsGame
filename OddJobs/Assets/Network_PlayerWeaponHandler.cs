@@ -48,7 +48,7 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
             Ray ray = new Ray(shootpoint.transform.position, shootpoint.transform.forward);
             if(currentWeapon.ammoInClip > 0)
             {
-                if (Time.time > currentWeapon.weaponProperties.fireRate + currentWeapon.LastShootTime)
+                if (Time.time > currentWeapon.gunProperties.fireRate + currentWeapon.LastShootTime)
                 {
                     currentWeapon.UseWeapon(ray, true);
                     currentWeapon.ShootEffects();
@@ -74,7 +74,7 @@ public class Network_PlayerWeaponHandler : NetworkBehaviour
         Weapon currentWeapon = weaponInventory.GetCurrentWeapon();
         if(currentWeapon != null)
         {
-            int ammoToReload = weaponInventory.ammoHandler.AmmoToReload(currentWeapon.weaponProperties.AmmoType, currentWeapon.ammoInClip, currentWeapon.weaponProperties.ClipSize);
+            int ammoToReload = weaponInventory.ammoHandler.AmmoToReload(currentWeapon.gunProperties.AmmoType, currentWeapon.ammoInClip, currentWeapon.gunProperties.ClipSize);
             currentWeapon.Reload(ammoToReload);
             weaponInventory.UpdateAmmoText();
             ReloadRpc();

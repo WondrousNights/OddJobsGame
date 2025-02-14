@@ -80,13 +80,13 @@ public class Network_WeaponInventory : NetworkBehaviour
         if (nextFreeIndex != -1)
         {
             AddWeaponToInventory(newWeapon, nextFreeIndex);
-            PickupWeaponRpc(newWeapon.transform.position, newWeapon.transform.rotation.eulerAngles, newWeapon.weaponProperties.type, nextFreeIndex);
+            PickupWeaponRpc(newWeapon.transform.position, newWeapon.transform.rotation.eulerAngles, newWeapon.gunProperties.type, nextFreeIndex);
         } 
         else
         {
             DropCurrentGun(); // throw current weapon
             AddWeaponToInventory(newWeapon, currentWeaponIndex); // add the gun to the inventory
-            PickupWeaponRpc(newWeapon.transform.position, newWeapon.transform.rotation.eulerAngles, newWeapon.weaponProperties.type, currentWeaponIndex);
+            PickupWeaponRpc(newWeapon.transform.position, newWeapon.transform.rotation.eulerAngles, newWeapon.gunProperties.type, currentWeaponIndex);
         }
         if (debug) Debug.Log("Picked up gun: " + weaponProperties.name);
     }
@@ -174,7 +174,7 @@ public class Network_WeaponInventory : NetworkBehaviour
     {
         if(!IsOwner) return;
         if(activeWeapon == null) return;
-        DropGunRpc(activeWeapon.weaponProperties.type, activeWeapon.ammoInClip);
+        DropGunRpc(activeWeapon.gunProperties.type, activeWeapon.ammoInClip);
         activeWeapon.DestroyWeapon();
         activeWeaponVisual.DestroyWeapon();
 
@@ -252,12 +252,12 @@ public class Network_WeaponInventory : NetworkBehaviour
 
     public void UpdateAmmoText()
     {
-        inventoryUI.UpdateAmmoText(Inventory, currentWeaponIndex, ammoHandler.TotalAmmo(Inventory[currentWeaponIndex].weaponProperties.AmmoType));
+        inventoryUI.UpdateAmmoText(Inventory, currentWeaponIndex, ammoHandler.TotalAmmo(Inventory[currentWeaponIndex].gunProperties.AmmoType));
     }
 
     public void UpdateInventoryUI()
     {
-        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex, ammoHandler.TotalAmmo(Inventory[currentWeaponIndex].weaponProperties.AmmoType));
+        inventoryUI.UpdateInventoryUI(Inventory, currentWeaponIndex, ammoHandler.TotalAmmo(Inventory[currentWeaponIndex].gunProperties.AmmoType));
     }
 
 }

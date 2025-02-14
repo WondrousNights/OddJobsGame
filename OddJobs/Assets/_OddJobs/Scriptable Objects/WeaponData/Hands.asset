@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c9bd83933f5124083fe66ece8eadb1, type: 3}
+  m_Name: Hands
+  m_EditorClassIdentifier: 
+  Name: Hands
+  Sprite: {fileID: 0}
+  type: 3
+  ModelPrefab: {fileID: 0}
+  PlayerSpawnPoint: {x: 0, y: 0, z: 0}
+  PlayerSpawnRotation: {x: 0, y: 0, z: 0}
+  VisuaSpawnPos: {x: 0, y: 0, z: 0}
+  VisualRotation: {x: 0, y: 0, z: 0}
+  DroppedPrefab: {fileID: 0}
+  range: 2
+  damage: 50
+  hitForce: 250

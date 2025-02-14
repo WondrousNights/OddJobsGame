@@ -34,7 +34,7 @@ public class Network_InventoryUI : MonoBehaviour
 
                 
                 Image slotImage = itemSlots[i].GetComponentInChildren<Image>();
-                if (slotImage) slotImage.sprite = inventory[i].weaponProperties.Sprite;
+                if (slotImage) slotImage.sprite = inventory[i].gunProperties.Sprite;
                 
                 UpdateAmmoText(inventory, currentGunIndex, totalAmmo);
 

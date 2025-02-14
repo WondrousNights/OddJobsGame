@@ -18,23 +18,23 @@ public class Gun : Weapon
         
         LastShootTime = Time.time;
 
-            for(int i = 0; i < weaponProperties.bulletsPerShot; i++)
+            for(int i = 0; i < gunProperties.bulletsPerShot; i++)
             {
                 RaycastHit hit;
                 // bullet hit something!
                 Vector3 spread;
-                if(isPlayer) spread = Random.insideUnitCircle * weaponProperties.playerBulletSpread;
-                else { spread = Random.insideUnitCircle * weaponProperties.enemyBulletSpread;; }
+                if(isPlayer) spread = Random.insideUnitCircle * gunProperties.playerBulletSpread;
+                else { spread = Random.insideUnitCircle * gunProperties.enemyBulletSpread;; }
                 UnityEngine.Quaternion spreadRotation = UnityEngine.Quaternion.Euler(spread.y, spread.x, 0);
                 ray.direction = spreadRotation * ray.direction; 
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, weaponProperties.BulletCollisionMask))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, gunProperties.BulletCollisionMask))
                 {
                     // if the bullet hit something
                     Debug.Log(hit.transform.name);
                     if(hit.transform.TryGetComponent(out IDamageable damageable))
                     {
-                        damageable.TakeDamageRpc(weaponProperties.Damage, weaponProperties.hitForce, ray, hit.point);
+                        damageable.TakeDamageRpc(gunProperties.Damage, gunProperties.hitForce, ray, hit.point);
                     }
                     
                 }
