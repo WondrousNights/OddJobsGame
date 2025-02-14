@@ -9720,7 +9720,7 @@ NavMeshAgent:
   m_Acceleration: 49.81
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -51339,6 +51339,7 @@ GameObject:
   - component: {fileID: 2566083444315971572}
   - component: {fileID: 2566083444315971574}
   - component: {fileID: 2566083444315971573}
+  - component: {fileID: 2566083444315971575}
   m_Layer: 17
   m_Name: Base HumanRFoot
   m_TagString: Untagged
@@ -51358,6 +51359,7 @@ GameObject:
   - component: {fileID: 3312264253845706912}
   - component: {fileID: 3312264253845706914}
   - component: {fileID: 3312264253845706913}
+  - component: {fileID: 3312264253845706915}
   m_Layer: 17
   m_Name: Base HumanLLegCalf
   m_TagString: Untagged
@@ -51428,6 +51430,7 @@ GameObject:
   - component: {fileID: 3989546061024526575}
   - component: {fileID: 3989546061024526577}
   - component: {fileID: 3989546061024526576}
+  - component: {fileID: 3989546061024526578}
   m_Layer: 17
   m_Name: Base HumanLArmForearm
   m_TagString: Untagged
@@ -51447,6 +51450,7 @@ GameObject:
   - component: {fileID: 6195574577624127306}
   - component: {fileID: 6195574577624127308}
   - component: {fileID: 6195574577624127307}
+  - component: {fileID: 6195574577624127309}
   m_Layer: 17
   m_Name: Base HumanRThigh
   m_TagString: Untagged
@@ -51482,6 +51486,7 @@ GameObject:
   - component: {fileID: 6697741322207334444}
   - component: {fileID: 6697741322207334446}
   - component: {fileID: 6697741322207334445}
+  - component: {fileID: 6697741322207334447}
   m_Layer: 17
   m_Name: Base HumanLLegThigh
   m_TagString: Untagged
@@ -51501,6 +51506,7 @@ GameObject:
   - component: {fileID: 3095270378286883494}
   - component: {fileID: 3095270378286883496}
   - component: {fileID: 3095270378286883495}
+  - component: {fileID: 3095270378286883497}
   m_Layer: 17
   m_Name: Base HumanPelvis
   m_TagString: Untagged
@@ -51520,6 +51526,7 @@ GameObject:
   - component: {fileID: 8195457672396871466}
   - component: {fileID: 8195457672396871465}
   - component: {fileID: 8195457672396871464}
+  - component: {fileID: 8195457672396871467}
   m_Layer: 17
   m_Name: Base HumanHead
   m_TagString: Untagged
@@ -51632,6 +51639,7 @@ GameObject:
   - component: {fileID: 1841581597625685826}
   - component: {fileID: 2077893249911785922}
   - component: {fileID: 2077893249911785921}
+  - component: {fileID: 2077893249911785923}
   m_Layer: 17
   m_Name: Base HumanLLegFoot
   m_TagString: Untagged
@@ -51768,6 +51776,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2077893249911785923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077893249911785920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!4 &2191792333616746305
 Transform:
   m_ObjectHideFlags: 0
@@ -52080,6 +52103,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2566083444315971575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597747401640718978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1 &2656270106570506997
 GameObject:
   m_ObjectHideFlags: 0
@@ -52092,6 +52130,7 @@ GameObject:
   - component: {fileID: 3660009024802073850}
   - component: {fileID: 3660009024802073849}
   - component: {fileID: 3660009024802073848}
+  - component: {fileID: 3660009024802073851}
   m_Layer: 17
   m_Name: Base HumanLArmPalm
   m_TagString: Untagged
@@ -52283,6 +52322,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.37399507, y: 0.17046048, z: 0.28410077}
   m_Center: {x: -0.10263304, y: 0.024854697, z: -0.0000012181699}
+--- !u!114 &3095270378286883497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836615893552871264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1 &3117839698442695379
 GameObject:
   m_ObjectHideFlags: 0
@@ -52295,6 +52349,7 @@ GameObject:
   - component: {fileID: 3117839698442695380}
   - component: {fileID: 3117839698442695382}
   - component: {fileID: 3117839698442695381}
+  - component: {fileID: 3117839698442695383}
   m_Layer: 17
   m_Name: Base HumanRArmUpperarm
   m_TagString: Untagged
@@ -52454,6 +52509,21 @@ CapsuleCollider:
   m_Height: 0.29231867
   m_Direction: 0
   m_Center: {x: -0.13287316, y: -0.0000038184235, z: 0.0000016801054}
+--- !u!114 &3117839698442695383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117839698442695379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!4 &3312264253845706911
 Transform:
   m_ObjectHideFlags: 0
@@ -52622,6 +52692,21 @@ CapsuleCollider:
   m_Height: 0.48070326
   m_Direction: 0
   m_Center: {x: -0.21850094, y: 0.0000052340324, z: -0.000003321446}
+--- !u!114 &3312264253845706915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718708696876434826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1 &3332047394360036832
 GameObject:
   m_ObjectHideFlags: 0
@@ -52653,6 +52738,7 @@ GameObject:
   - component: {fileID: 3355302367184683068}
   - component: {fileID: 3355302367184683070}
   - component: {fileID: 3355302367184683069}
+  - component: {fileID: 3355302367184683071}
   m_Layer: 17
   m_Name: Base HumanRArmForearm
   m_TagString: Untagged
@@ -52812,6 +52898,21 @@ CapsuleCollider:
   m_Height: 0.30032513
   m_Direction: 0
   m_Center: {x: -0.13651164, y: 0.0000093719, z: -0.0000024507754}
+--- !u!114 &3355302367184683071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355302367184683067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1 &3554214973703093570
 GameObject:
   m_ObjectHideFlags: 0
@@ -52995,6 +53096,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3660009024802073851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2656270106570506997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1 &3899574040770998903
 GameObject:
   m_ObjectHideFlags: 0
@@ -53181,6 +53297,21 @@ CapsuleCollider:
   m_Height: 0.3003258
   m_Direction: 0
   m_Center: {x: -0.13650219, y: -0.0000068210074, z: 0.0000034365798}
+--- !u!114 &3989546061024526578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477319741584341282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!4 &4186319177314871288
 Transform:
   m_ObjectHideFlags: 0
@@ -53909,6 +54040,7 @@ GameObject:
   - component: {fileID: 5542661683203336107}
   - component: {fileID: 5542661683203336109}
   - component: {fileID: 5542661683203336108}
+  - component: {fileID: 5542661683203336110}
   m_Layer: 17
   m_Name: Base HumanRCalf
   m_TagString: Untagged
@@ -54068,6 +54200,21 @@ CapsuleCollider:
   m_Height: 0.48068848
   m_Direction: 0
   m_Center: {x: -0.21850017, y: -0.000010913761, z: 0.0000084449985}
+--- !u!114 &5542661683203336110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542661683203336106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!33 &5718998929286382647
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -54094,6 +54241,7 @@ GameObject:
   - component: {fileID: 7849909226030773234}
   - component: {fileID: 7849909226030773233}
   - component: {fileID: 7849909226030773232}
+  - component: {fileID: 7849909226030773235}
   m_Layer: 17
   m_Name: Base HumanRArmPalm
   m_TagString: Untagged
@@ -54269,6 +54417,21 @@ CapsuleCollider:
   m_Height: 0.4322346
   m_Direction: 0
   m_Center: {x: -0.19646928, y: 0.000004430389, z: -0.000003453344}
+--- !u!114 &6195574577624127309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548363270408477994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!23 &6341471196831878117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54482,6 +54645,21 @@ CapsuleCollider:
   m_Height: 0.43223372
   m_Direction: 0
   m_Center: {x: -0.1964701, y: 0.0000030021765, z: -0.0000028945506}
+--- !u!114 &6697741322207334447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696191642873695395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1 &7478079059091730656
 GameObject:
   m_ObjectHideFlags: 0
@@ -54494,6 +54672,7 @@ GameObject:
   - component: {fileID: 7478079059091730657}
   - component: {fileID: 7478079059091730659}
   - component: {fileID: 7478079059091730658}
+  - component: {fileID: 7478079059091730660}
   m_Layer: 17
   m_Name: Base HumanSpine2
   m_TagString: Untagged
@@ -54651,6 +54830,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4265166, y: 0.21307553, z: 0.35512584}
   m_Center: {x: -0.19368586, y: 0.00845644, z: 0.000007608707}
+--- !u!114 &7478079059091730660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478079059091730656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1 &7532005086092215687
 GameObject:
   m_ObjectHideFlags: 0
@@ -54663,6 +54857,7 @@ GameObject:
   - component: {fileID: 7532005086092215688}
   - component: {fileID: 7532005086092215690}
   - component: {fileID: 7532005086092215689}
+  - component: {fileID: 7532005086092215691}
   m_Layer: 17
   m_Name: Base HumanLArmUpperarm
   m_TagString: Untagged
@@ -54822,6 +55017,21 @@ CapsuleCollider:
   m_Height: 0.2923165
   m_Direction: 0
   m_Center: {x: -0.13286653, y: -0.000011827795, z: 0.0000044908393}
+--- !u!114 &7532005086092215691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532005086092215687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!1001 &7626536047279478411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55063,6 +55273,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7849909226030773235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931361789025204121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 1
+  healthManager: {fileID: 428706809}
 --- !u!4 &8138451400276858248
 Transform:
   m_ObjectHideFlags: 0
@@ -55267,6 +55492,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8195457672396871467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840469243301432674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db939372327694f8d757ede69e3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  damageMultiplier: 5
+  healthManager: {fileID: 428706809}
 --- !u!1001 &8559476652533706649
 PrefabInstance:
   m_ObjectHideFlags: 0

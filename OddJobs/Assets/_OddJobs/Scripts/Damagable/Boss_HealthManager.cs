@@ -27,5 +27,10 @@ public class Boss_HealthManager : Enemy_HealthManager
         bossHealthUI.fillAmount = health / MaxHealth;
     }
 
+    public override void TakeDamageRpc(float damage, float hitForce, Ray ray, Vector3 vector3)
+    {
+        base.TakeDamageRpc(damage, hitForce, ray, vector3);
+    }
+
 
 }
