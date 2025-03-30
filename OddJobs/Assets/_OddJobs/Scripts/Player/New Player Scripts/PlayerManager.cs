@@ -122,7 +122,7 @@ public class PlayerManager : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     void SetHasSpawnedFalseRpc()
     {
-        hasSpawned = false;
+        //hasSpawned = false; Why is this here?
     }
 
     void SetSpawnTrue()

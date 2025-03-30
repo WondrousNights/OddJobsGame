@@ -24,14 +24,14 @@ public class Gun : Weapon
                 // bullet hit something!
                 Vector3 spread;
                 if(isPlayer) spread = Random.insideUnitCircle * gunProperties.playerBulletSpread;
-                else { spread = Random.insideUnitCircle * gunProperties.enemyBulletSpread;; }
+                else { spread = Random.insideUnitCircle * gunProperties.enemyBulletSpread; }
                 UnityEngine.Quaternion spreadRotation = UnityEngine.Quaternion.Euler(spread.y, spread.x, 0);
                 ray.direction = spreadRotation * ray.direction; 
 
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, gunProperties.BulletCollisionMask))
                 {
                     // if the bullet hit something
-                    Debug.Log(hit.transform.name);
+                    //Debug.Log(hit.transform.name);
                     if(hit.transform.TryGetComponent(out IDamageable damageable))
                     {
                         damageable.TakeDamageRpc(gunProperties.Damage, gunProperties.hitForce, ray, hit.point);

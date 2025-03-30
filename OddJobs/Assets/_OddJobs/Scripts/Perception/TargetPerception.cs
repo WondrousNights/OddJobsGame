@@ -43,7 +43,7 @@ public class TargetPerception : MonoBehaviour, IPerception
             }
 
             DetectTargetChanges();
-            perceptionTimer = 0f; // Reset timer
+            perceptionTimer = 0f; 
         }
         
         
@@ -53,13 +53,13 @@ public class TargetPerception : MonoBehaviour, IPerception
     {
         foreach (GameObject obj in targetsICanSee)
         {
-            if (!previousTargetsICanSee.Contains(obj)) // New target spotted
+            if (!previousTargetsICanSee.Contains(obj)) 
                 perceptionManager.InvokePerceptionEvent("OnTargetSpotted", obj);
         }
 
         foreach (GameObject obj in previousTargetsICanSee)
         {
-            if (!targetsICanSee.Contains(obj)) // Target lost
+            if (!targetsICanSee.Contains(obj)) 
                 perceptionManager.InvokePerceptionEvent("OnTargetLost", obj);
         }
 
@@ -74,7 +74,7 @@ public class TargetPerception : MonoBehaviour, IPerception
 
     public void CheckForTargetsInRange()
     {
-        targetsInRange.Clear();  // Prevent duplicates
+        targetsInRange.Clear();  
         Collider[] visibleTargets = Physics.OverlapSphere(transform.position, distanceToSpot, targetMask);
 
         foreach (Collider col in visibleTargets)
@@ -85,7 +85,7 @@ public class TargetPerception : MonoBehaviour, IPerception
 
     public void CheckForTargetsICanSee()
     {
-        targetsICanSee.Clear(); // Prevents stale data
+        targetsICanSee.Clear(); 
         foreach (GameObject obj in targetsInRange)
         {
             if (CanSeeTarget(obj))
@@ -116,7 +116,7 @@ public class TargetPerception : MonoBehaviour, IPerception
 
             if (Physics.Raycast(ray, out hitInfo, distanceToSpot, sightMask))
             {
-                if (hitInfo.transform.gameObject == target) // Ensure it's the target
+                if (hitInfo.transform.gameObject == target) 
                 {
                     //Debug.Log($"[Vision] I can see my target");
                     return true;

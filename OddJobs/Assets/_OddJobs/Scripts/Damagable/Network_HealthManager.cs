@@ -12,6 +12,7 @@ public class Network_HealthManager : NetworkBehaviour
     public PuppetMaster puppetMaster;
     public bool isDead = false;
     public event Action<Ray> OnDamageTaken;
+    public event Action<float, float> OnRespawn;
 
     void Start()
     {
@@ -46,6 +47,7 @@ public class Network_HealthManager : NetworkBehaviour
     {
         isDead = false;
         health = MaxHealth;
+        OnRespawn?.Invoke(health, MaxHealth);
         puppetMaster.state = PuppetMaster.State.Alive;
         
     }

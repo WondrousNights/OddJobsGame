@@ -8,15 +8,15 @@ public static class PositionEvaluator
     {
         float score = 0f;
 
-        // 🔹 1. Distance to Enemy (Prefer Mid-Range)
+        //What is my distance to enemy?
         float distance = Vector3.Distance(position, enemyPos);
-        score += Mathf.Exp(-Mathf.Pow((distance - enemyPersonality.OptimalDistance) / enemyPersonality.DistanceTolerance , 2)) * 30f; // Gaussian falloff
+        score += Mathf.Exp(-Mathf.Pow((distance - enemyPersonality.OptimalDistance) / enemyPersonality.DistanceTolerance , 2)) * 30f; // Gaussian falloff : I got this code from ChatGPT
 
         Debug.DrawRay(position + Vector3.up, (enemyPos - position).normalized * distance, Color.green);
 
         bool lineCast = Physics.Linecast(position + Vector3.up, enemyPos + Vector3.up, out RaycastHit hitInfo, enemyPersonality.CoverMask);
 
-        // 🔹 2. Cover Bonus
+        //Cover Bonus
         if (lineCast)
         {
             //Debug.Log($"Position {position} has great cover!! Hit: {hitInfo.collider.name} at {hitInfo.collider.transform.position}");
@@ -24,10 +24,10 @@ public static class PositionEvaluator
             
         }
 
-        // 🔹 3. Line of Sight to Enemy (Higher if visible)
+        //Line of Sight to Player
         if (!lineCast)
         {
-            score += enemyPersonality.LineOfSightScore; // Encourage good attack spots
+            score += enemyPersonality.LineOfSightScore; 
         }
 
         return score;
